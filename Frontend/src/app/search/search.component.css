@@ -1,0 +1,38 @@
+body {
+    font-family: Arial;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 70%;
+    background: #f1f1f1;
+  }
+  
+  form.example button {
+    float: left;
+    width: 30%;
+    padding: 10px;
+    background: #f1f1f1;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+  }
+  
+  form.example button:hover {
+    background: #949697;
+  }
+  
+  form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
