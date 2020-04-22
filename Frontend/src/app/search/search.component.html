@@ -84,52 +84,86 @@
                         <div class="col-6 col-12-xsmall">
                             <input type="text" name="pisac" id="pisac" value="" placeholder="Pisac">
                         </div>
+                        <div class="col-6 col-12-xsmall">
+                            <input type="number" name="godina" id="godina" value="" placeholder="Godina izdavanja">
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <input type="text" name="izdKuca" id="izdKuca" value="" placeholder="Izdavacka kuca">
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <input type="text" value="Period radnje:" readonly>
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <input type="date" name="period" id="period" placeholder="Period radnje">
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <input type="text" name="motiv" id="motiv" value="" placeholder="Motiv knjige">
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <input type="text" name="pouka" id="pouka" value="" placeholder="Pouka">
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <input type="number" name="uzrast" id="uzrast" value="" placeholder="Za uzrast">
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <select name="category" id="category">
+                                <option value="">- Književni stil -</option>
+                                <option *ngFor='let style of styles' >{{style.name}}</option>
+                            </select>
+                        </div>
+                        
                         <!-- Break -->
+                        <div class="col-6 col-12-xsmall">
+                            <h4>Dodani likovi</h4>
+                            <ul  class="alt" id="likovi">
+
+                            </ul>
+                        </div>
+                        <div class="col-3 col-12-xsmall">
+                            <input type="text" name="lik" id="lik" placeholder="Dodaj lika...">
+                        </div>
+                        <div class="col-3 col-12-xsmall">
+                            <li class="button primary fit" (click)="dodajLika()">Dodaj</li>                        
+                        </div>
+                            <!-- Break -->
                         <div class="col-12">
                             <select name="category" id="category">
                                 <option value="">- Žanr -</option>
-                                <option value="alpha">Option alpha</option>
-                                <option value="beta">Option beta</option>
-                                <option value="gamma">Option gamma</option>
-                                <option value="delta">Option delta</option>
-                                <option value="epsilon">Option epsilon</option>
-                                <option value="zeta">Option zeta</option>
-                                <option value="eta">Option eta</option>
-                                <option value="theta">Option theta</option>
+                                <option *ngFor='let genre of genres' >{{genre.name}}</option>
                             </select>
                         </div>
-                            <!-- Break -->
-                            <div class="col-4 col-12-small">
-                                <input type="radio" id="radio-alpha" name="radio" checked="">
-                                <label for="radio-alpha">Radio alpha</label>
-                            </div>
-                            <div class="col-4 col-12-small">
-                                <input type="radio" id="radio-beta" name="radio">
-                                <label for="radio-beta">Radio beta</label>
-                            </div>
-                            <div class="col-4 col-12-small">
-                                <input type="radio" id="radio-gamma" name="radio">
-                                <label for="radio-gamma">Radio gamma</label>
-                            </div>
-                            <!-- Break -->
-                            <div class="col-6 col-12-small">
-                                <input type="checkbox" id="checkbox-alpha" name="checkbox">
-                                <label for="checkbox-alpha">Checkbox alpha</label>
-                            </div>
-                            <div class="col-6 col-12-small">
-                                <input type="checkbox" id="checkbox-beta" name="checkbox" checked="">
-                                <label for="checkbox-beta">Checkbox beta</label>
-                            </div>
-                        
-                            <!-- Break -->
-                            <div class="col-12">
-                                <ul class="actions">
-                                    <li><input type="submit" value="Pretraži" class="primary"></li>
-                                    <li><input type="reset" value="Obriši sve"></li>
-                                </ul>
-                            </div>
+                        <!-- Break -->
+                        <!-- <div class="col-4 col-12-small">
+                            <input type="radio" id="radio-alpha" name="radio" checked="">
+                            <label for="radio-alpha">Radio alpha</label>
                         </div>
-                    </form>
+                        <div class="col-4 col-12-small">
+                            <input type="radio" id="radio-beta" name="radio">
+                            <label for="radio-beta">Radio beta</label>
+                        </div>
+                         <div class="col-4 col-12-small">
+                            <input type="radio" id="radio-gamma" name="radio">
+                            <label for="radio-gamma">Radio gamma</label>
+                        </div> -->
+                        <!-- Break 
+                        <div class="col-6 col-12-small">
+                            <input type="checkbox" id="checkbox-alpha" name="checkbox">
+                            <label for="checkbox-alpha">Checkbox alpha</label>
+                        </div> -->
+                        <div class="col-6 col-12-small">
+                            <input type="checkbox" id="dostupno" name="dostupno" checked="">
+                            <label for="dostupno">Dostupna</label>
+                        </div>
+                    
+                        <!-- Break -->
+                        <div class="col-12">
+                            <ul class="actions">
+                                <li><input type="submit" value="Pretraži" class="primary"></li>
+                                <li><input type="reset" value="Obriši sve"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
 </section>

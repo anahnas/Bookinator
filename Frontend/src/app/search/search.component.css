@@ -6,7 +6,7 @@ body {
     box-sizing: border-box;
   }
   
-  form.example input[type=text] {
+  form.example input[type=text]{
     padding: 10px;
     font-size: 17px;
     border: 1px solid grey;
@@ -14,7 +14,16 @@ body {
     width: 70%;
     background: #f1f1f1;
   }
-  
+
+  input[type=number], input[type=date]{
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 100%;
+    background: #f1f1f1;
+  }
+
   form.example button {
     float: left;
     width: 30%;
