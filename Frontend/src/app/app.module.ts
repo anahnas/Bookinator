@@ -4,16 +4,26 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
+import { SearchComponent } from './search/search.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { HeadingComponent } from './heading/heading.component';
+import { SearchService } from './search/search.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SearchComponent,
+    WelcomeComponent,
+    HeadingComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot([
-      { path: '', pathMatch: 'full', component: AppComponent },
+      { path: 'search', component: SearchComponent},
+      { path: 'welcome', component: WelcomeComponent},
+      { path: '', redirectTo:'welcome', pathMatch: 'full' },
+      { path: '**', redirectTo:'welcome', pathMatch: 'full' }
     ])
   ],
   providers: [],
