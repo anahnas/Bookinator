@@ -2,7 +2,7 @@
     <div class="inner">
         <div class="content">
             <h3>Ostavite recenziju</h3>
-                <form method="post" action="#">
+                <form method="post" action="#" #form>
                     <div class="row gtr-uniform" #content>
                         <div class="col-12">
                             <textarea name="recenzija" id="recenzija" placeholder="Vaše mišljenje..." rows="6"></textarea>
@@ -11,11 +11,11 @@
                         <div class="col-12">
                             <select name="category" id="category">
                                 <option value="">- Ocena -</option>
-                                <option value="alpha">5</option>
-                                <option value="beta">4</option>
-                                <option value="gamma">3</option>
-                                <option value="delta">2</option>
-                                <option value="epsilon">1</option>
+                                <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
                             </select>
                         </div>
                         <!-- 
@@ -48,19 +48,11 @@
                             <a (click)="generateTagInfo($event);" class="button primary fit">Dodajte informacije o knjizi</a>
                         </div>
                         
-                        <!--<div class="row gtr-uniform">
-                            <div class="col-12 col-6-xsmall">
-                                <input type="text" name="tag" id="tag" value="" placeholder="Tag">
-                            </div>
-                            <div class="col-12 col-6-xsmall">
-                                <input type="text" name="info" id="info" value="" placeholder="Informacija">
-                            </div>
-                        </div>-->
-                        
                         <div id = "actionButtons" #actionButtons class="col-12 ">
                             <ul class="actions">
-                                <li><input type="submit" value="Submit Form" class="primary"></li>
-                                <li><input type="reset" value="Reset"></li>
+                                <li><input type="submit" value="Pošalji" class="primary"></li>
+                                <!--<li><input type="reset" value="Obriši sve"></li>-->
+                                <li><a (click)="reset($event)" class="button">Obriši sve</a></li>
                             </ul>
                         </div>
                     </div>
