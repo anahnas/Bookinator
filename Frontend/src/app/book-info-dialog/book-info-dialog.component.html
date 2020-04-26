@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>{{data.name}}, {{data.authorName}}</h1>
+<div mat-dialog-content>
+  <p >Informacije</p>
+  <mat-form-field  *ngFor="let tag in tags">
+    <mat-label>{{tag.name}}</mat-label>
+    <mat-label >{{tag.value}}</mat-label>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Poništi</button>
+  <button mat-button [mat-dialog-close]="data" >Iznajmi</button>
+</div>
