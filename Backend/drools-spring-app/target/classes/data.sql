@@ -1,0 +1,1 @@
+insert into book(id,avaivable_no,rating) values(1,1,0)
