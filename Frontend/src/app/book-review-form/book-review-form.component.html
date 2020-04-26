@@ -1,0 +1,70 @@
+<section id="main" class="wrapper">
+    <div class="inner">
+        <div class="content">
+            <h3>Ostavite recenziju</h3>
+                <form method="post" action="#">
+                    <div class="row gtr-uniform" #content>
+                        <div class="col-12">
+                            <textarea name="recenzija" id="recenzija" placeholder="Vaše mišljenje..." rows="6"></textarea>
+                        </div>
+                        <!-- Break -->
+                        <div class="col-12">
+                            <select name="category" id="category">
+                                <option value="">- Ocena -</option>
+                                <option value="alpha">5</option>
+                                <option value="beta">4</option>
+                                <option value="gamma">3</option>
+                                <option value="delta">2</option>
+                                <option value="epsilon">1</option>
+                            </select>
+                        </div>
+                        <!-- 
+                        <div class="col-4 col-12-small">
+                            <input type="radio" id="radio-alpha" name="radio" checked="">
+                            <label for="radio-alpha">Radio alpha</label>
+                        </div>
+                        <div class="col-4 col-12-small">
+                            <input type="radio" id="radio-beta" name="radio">
+                            <label for="radio-beta">Radio beta</label>
+                        </div>
+                        <div class="col-4 col-12-small">
+                            <input type="radio" id="radio-gamma" name="radio">
+                            <label for="radio-gamma">Radio gamma</label>
+                        </div>
+                        <div class="col-6 col-12-small">
+                            <input type="checkbox" id="checkbox-alpha" name="checkbox">
+                            <label for="checkbox-alpha">Checkbox alpha</label>
+                        </div>
+                        <div class="col-6 col-12-small">
+                            <input type="checkbox" id="checkbox-beta" name="checkbox" checked="">
+                            <label for="checkbox-beta">Checkbox beta</label>
+                        </div>
+                        
+                        <div class="col-12">
+                            <textarea name="textarea" id="textarea" placeholder="Alpha beta gamma delta" rows="6"></textarea>
+                        </div>
+                         -->
+                         <div class="col-12 col-12-small">
+                            <a (click)="generateTagInfo($event);" class="button primary fit">Dodajte informacije o knjizi</a>
+                        </div>
+                        
+                        <!--<div class="row gtr-uniform">
+                            <div class="col-12 col-6-xsmall">
+                                <input type="text" name="tag" id="tag" value="" placeholder="Tag">
+                            </div>
+                            <div class="col-12 col-6-xsmall">
+                                <input type="text" name="info" id="info" value="" placeholder="Informacija">
+                            </div>
+                        </div>-->
+                        
+                        <div id = "actionButtons" #actionButtons class="col-12 ">
+                            <ul class="actions">
+                                <li><input type="submit" value="Submit Form" class="primary"></li>
+                                <li><input type="reset" value="Reset"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
