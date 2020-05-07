@@ -1,15 +1,25 @@
 package sbnz.integracija.example;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import sbnz.integracija.example.facts.Book;
 import sbnz.integracija.example.facts.Item;
+import sbnz.integracija.example.facts.SearchRequest;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class SampleAppController {
 	private static Logger log = LoggerFactory.getLogger(SampleAppController.class);
@@ -32,6 +42,13 @@ public class SampleAppController {
 		Item i2 = sampleService.getClassifiedItem(newItem);
 
 		return i2;
+	}
+	
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public ResponseEntity<ArrayList<Book>> bookSearch(@RequestBody  SearchRequest searchRequest) {
+		//log.debug("Search request received for: " + searchRequest);
+		ArrayList<Book> retVal = sampleService.getFilteredBooks(searchRequest);
+		return new ResponseEntity<>(retVal, HttpStatus.OK);
 	}
 	
 	
