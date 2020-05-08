@@ -1,2 +1,5 @@
 /META-INF/
 /sbnz/
+/controller/
+/service/
+/repository/

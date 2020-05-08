@@ -1,4 +1,4 @@
-package sbnz.integracija.example;
+package sbnz.integracija.example.repository;
 
 import java.util.List;
 
