@@ -15,7 +15,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 public class Book implements Serializable{
 	
 	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private HashMap<String,String> tags = new HashMap<String,String>();
 	private double rating;
@@ -41,6 +41,22 @@ public class Book implements Serializable{
 	}
 	public Book() {
 		super();
+	}
+	@Override
+	public String toString() {
+		return "Book [id=" + id + ", tags=" + tags + ", rating=" + rating + ", avaivableNo=" + avaivableNo + "]";
+	}
+	public double getRating() {
+		return rating;
+	}
+	public void setRating(double rating) {
+		this.rating = rating;
+	}
+	public int getAvaivableNo() {
+		return avaivableNo;
+	}
+	public void setAvaivableNo(int avaivableNo) {
+		this.avaivableNo = avaivableNo;
 	}
 	
 	

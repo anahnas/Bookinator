@@ -45,3 +45,7 @@ body {
     clear: both;
     display: table;
   }
+
+  .bookCard:hover{
+    cursor: pointer;
+  }

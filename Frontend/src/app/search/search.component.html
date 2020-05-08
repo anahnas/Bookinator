@@ -1,112 +1,41 @@
 
-    
-<!--
-       
-            <h3>Actions</h3>
-            <ul class="actions">
-                <li><a href="#" class="button primary">Default</a></li>
-                <li><a href="#" class="button">Default</a></li>
-            </ul>
-            <ul class="actions">
-                <li><a href="#" class="button primary small">Small</a></li>
-                <li><a href="#" class="button small">Small</a></li>
-            </ul>
-            <div class="row">
-                <div class="col-3 col-12-small">
-                    <ul class="actions stacked">
-                        <li><a href="#" class="button primary">Default</a></li>
-                        <li><a href="#" class="button">Default</a></li>
-                    </ul>
-                </div>
-                <div class="col-3 col-12-small">
-                    <ul class="actions stacked">
-                        <li><a href="#" class="button primary small">Small</a></li>
-                        <li><a href="#" class="button small">Small</a></li>
-                    </ul>
-                </div>
-                <div class="col-3 col-12-small">
-                    <ul class="actions stacked">
-                        <li><a href="#" class="button primary fit">Default</a></li>
-                        <li><a href="#" class="button fit">Default</a></li>
-                    </ul>
-                </div>
-                <div class="col-3 col-12-small">
-                    <ul class="actions stacked">
-                        <li><a href="#" class="button primary small fit">Small</a></li>
-                        <li><a href="#" class="button small fit">Small</a></li>
-                    </ul>
-                </div>
-            </div>
-
-       
-        
-        <h3>Buttons</h3>
-        <ul class="actions">
-            <li><a href="#" class="button primary">Primary</a></li>
-            <li><a href="#" class="button">Default</a></li>
-        </ul>
-        <ul class="actions">
-            <li><a href="#" class="button primary large">Large</a></li>
-            <li><a href="#" class="button">Default</a></li>
-        </ul>
-        <ul class="actions">
-            <li><a href="#" class="button small">Small</a></li>
-            <li><a href="#" class="button wide">Wide</a></li>
-        </ul>
-        <ul class="actions fit">
-            <li><a href="#" class="button primary fit">Fit</a></li>
-            <li><a href="#" class="button fit">Fit</a></li>
-        </ul>
-        <ul class="actions fit">
-            <li><a href="#" class="button primary fit small">Fit + Small</a></li>
-            <li><a href="#" class="button fit small">Fit + Small</a></li>
-        </ul>
-        <ul class="actions">
-            <li><a href="#" class="button primary icon fa-search">Icon</a></li>
-            <li><a href="#" class="button icon fa-download">Icon</a></li>
-        </ul>
-        <ul class="actions">
-            <li><span class="button primary disabled">Primary</span></li>
-            <li><span class="button disabled">Default</span></li>
-        </ul>
--->
 <!-- Form -->
 <section id="main" class="wrapper">
     <div class="inner">
         <div class="content">
             <h3>Pretraga knjiga</h3>
-                <form method="post" action="#">
+                <form method="post" action="#" [formGroup]="bookSearchForm" (ngSubmit)="makeSearchRequest()">
                     <div class="row gtr-uniform">
                     
                         <div class="col-6 col-12-xsmall">
-                            <input type="text" name="naslov" id="naslov" value="" placeholder="Naslov knjige">
+                            <input type="text" formControlName="name" id="naslov" value="" placeholder="Naslov knjige">
                         </div>
                         <div class="col-6 col-12-xsmall">
-                            <input type="text" name="pisac" id="pisac" value="" placeholder="Pisac">
+                            <input type="text" formControlName="authorName" id="pisac" value="" placeholder="Pisac">
                         </div>
                         <div class="col-6 col-12-xsmall">
-                            <input type="number" name="godina" id="godina" value="" placeholder="Godina izdavanja">
+                            <input type="number" formControlName="yearPublished" id="godina" value="" placeholder="Godina izdavanja">
                         </div>
                         <div class="col-6 col-12-xsmall">
-                            <input type="text" name="izdKuca" id="izdKuca" value="" placeholder="Izdavacka kuca">
+                            <input type="text" formControlName="publisher" id="izdKuca" value="" placeholder="Izdavacka kuca">
                         </div>
                         <div class="col-6 col-12-xsmall">
                             <input type="text" value="Period radnje:" readonly>
                         </div>
                         <div class="col-6 col-12-xsmall">
-                            <input type="date" name="period" id="period" placeholder="Period radnje">
+                            <input type="date" formControlName="periodSet" id="period" placeholder="Period radnje">
                         </div>
                         <div class="col-6 col-12-xsmall">
-                            <input type="text" name="motiv" id="motiv" value="" placeholder="Motiv knjige">
+                            <input type="text" formControlName="motives" id="motiv" value="" placeholder="Motiv knjige">
                         </div>
                         <div class="col-6 col-12-xsmall">
-                            <input type="text" name="pouka" id="pouka" value="" placeholder="Pouka">
+                            <input type="text" formControlName="lesson" id="pouka" value="" placeholder="Pouka">
                         </div>
                         <div class="col-6 col-12-xsmall">
-                            <input type="number" name="uzrast" id="uzrast" value="" placeholder="Za uzrast">
+                            <input type="number" formControlName="targetAgeGroup" id="uzrast" value="" placeholder="Za uzrast">
                         </div>
                         <div class="col-6 col-12-xsmall">
-                            <select name="category" id="category">
+                            <select formControlName="style" id="stil">
                                 <option value="">- Književni stil -</option>
                                 <option *ngFor='let style of styles' >{{style.name}}</option>
                             </select>
@@ -115,7 +44,7 @@
                         <!-- Break -->
                         <div class="col-6 col-12-xsmall">
                             <h4>Dodani likovi</h4>
-                            <ul  class="alt" id="likovi">
+                            <ul class="alt" id="likovi">
 
                             </ul>
                         </div>
@@ -127,31 +56,14 @@
                         </div>
                             <!-- Break -->
                         <div class="col-12">
-                            <select name="category" id="category">
+                            <select formControlName="genre" id="zanr">
                                 <option value="">- Žanr -</option>
                                 <option *ngFor='let genre of genres' >{{genre.name}}</option>
                             </select>
                         </div>
-                        <!-- Break -->
-                        <!-- <div class="col-4 col-12-small">
-                            <input type="radio" id="radio-alpha" name="radio" checked="">
-                            <label for="radio-alpha">Radio alpha</label>
-                        </div>
-                        <div class="col-4 col-12-small">
-                            <input type="radio" id="radio-beta" name="radio">
-                            <label for="radio-beta">Radio beta</label>
-                        </div>
-                         <div class="col-4 col-12-small">
-                            <input type="radio" id="radio-gamma" name="radio">
-                            <label for="radio-gamma">Radio gamma</label>
-                        </div> -->
-                        <!-- Break 
+                        
                         <div class="col-6 col-12-small">
-                            <input type="checkbox" id="checkbox-alpha" name="checkbox">
-                            <label for="checkbox-alpha">Checkbox alpha</label>
-                        </div> -->
-                        <div class="col-6 col-12-small">
-                            <input type="checkbox" id="dostupno" name="dostupno" checked="">
+                            <input type="checkbox" id="dostupno" checked="">
                             <label for="dostupno">Dostupna</label>
                         </div>
                     
@@ -162,6 +74,18 @@
                                 <li><input type="reset" value="Obriši sve"></li>
                             </ul>
                         </div>
+                    </div>
+
+                    <div class="highlights" *ngIf = 'books && books.length'>
+						<section *ngFor = 'let book of books'>
+							<div class="content bookCard"  *ngIf = 'book.tags'  (click) = 'onSelect(book)'>
+								<header>
+                                    <a href="#" class="icon fa-paper-plane-o"><span class="label">Icon</span></a>                                    <h3>{{book.tags.name}}</h3>
+                                    <h4>{{book.tags.author}}</h4>
+								</header>
+								<p>{{book.tags.description}}</p>
+							</div>
+                        </section>
                     </div>
                 </form>
             </div>
