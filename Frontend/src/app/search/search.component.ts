@@ -34,7 +34,7 @@ export class SearchComponent implements OnInit {
     available: new FormControl('')
   });
 
-  constructor(private _searchService : SearchService,public dialog: MatDialog) { }
+  constructor(private _searchService : SearchService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.genres = this._searchService.getGenres();

@@ -1,7 +1,6 @@
 package sbnz.integracija.example;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import sbnz.integracija.example.facts.Book;
 import sbnz.integracija.example.facts.Item;
+import sbnz.integracija.example.facts.ReviewRequest;
 import sbnz.integracija.example.facts.SearchRequest;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -51,6 +51,12 @@ public class SampleAppController {
 		return new ResponseEntity<>(retVal, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/review", method = RequestMethod.POST)
+	public ResponseEntity bookReview(@RequestBody ReviewRequest reviewRequest) {
+		System.out.println("reviewing...");
+		this.sampleService.bookReview(reviewRequest);
+		return new ResponseEntity(HttpStatus.OK);
+	}
 	
 	
 }

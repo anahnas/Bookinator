@@ -17,7 +17,6 @@ export class SearchService{
 
     private _bookSearchUrl = 'http://localhost:8080/search';
     private _booksUrl = 'http://localhost:8080/books';
-    //http://localhost:8080/
     constructor(private _http: HttpClient){ }
 
     getGenres() : any[]{

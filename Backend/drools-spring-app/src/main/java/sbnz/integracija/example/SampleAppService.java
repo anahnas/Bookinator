@@ -2,6 +2,8 @@ package sbnz.integracija.example;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.annotation.PostConstruct;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import sbnz.integracija.example.facts.Book;
 import sbnz.integracija.example.facts.Item;
+import sbnz.integracija.example.facts.ReviewRequest;
 import sbnz.integracija.example.facts.SearchRequest;
 
 @Service
@@ -91,4 +94,18 @@ public class SampleAppService {
 		return books;
 	}
 	
+	public void bookReview(ReviewRequest reviewRequest) {
+		System.out.println(reviewRequest.toString());
+		Book book = bookRepository.getOne(reviewRequest.getBookId());
+		System.out.println(book.getTags());
+		Iterator it = reviewRequest.getTags().entrySet().iterator();
+	    while (it.hasNext()) {
+	        HashMap.Entry pair = (HashMap.Entry)it.next();
+	        book.getTags().put(pair.getKey().toString(), pair.getValue().toString());
+	        it.remove(); // avoids a ConcurrentModificationException
+	    }
+
+	    this.bookRepository.save(book);
+	    System.out.println("Book updated!");
+	}
 }
