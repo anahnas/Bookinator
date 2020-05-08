@@ -2,10 +2,24 @@ package sbnz.integracija.example.facts;
 
 import java.util.HashMap;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class ReviewRequest {
+	
+	@Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
+	@Column
 	private String critique;
+	@Column
 	private Double rate;
-	private HashMap<String, String> tags = new HashMap<>();
+	
+	//private HashMap<String, String> tags = new HashMap<>();
 	
 	private Long bookId;
 	
@@ -18,7 +32,7 @@ public class ReviewRequest {
 		super();
 		this.critique = critique;
 		this.rate = rate;
-		this.tags = tags;
+		//this.tags = tags;
 		this.bookId = bookId;
 	}
 
@@ -37,13 +51,13 @@ public class ReviewRequest {
 	}
 
 	
-	public HashMap<String, String> getTags() {
-		return tags;
-	}
+//	public HashMap<String, String> getTags() {
+//		//return tags;
+//	}
 
 
 	public void setTags(HashMap<String, String> tags) {
-		this.tags = tags;
+		//this.tags = tags;
 	}
 
 
@@ -57,7 +71,7 @@ public class ReviewRequest {
 
 	@Override
 	public String toString() {
-		return "ReviewRequest [critique=" + critique + ", rate=" + rate + ", tags=" + tags + ", bookId=" + bookId + "]";
+		return "ReviewRequest [critique=" + critique + ", rate=" + rate + ",  bookId=" + bookId + "]";
 	}
 	
 }

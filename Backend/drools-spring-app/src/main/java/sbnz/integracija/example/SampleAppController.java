@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import sbnz.integracija.example.facts.Book;
-import sbnz.integracija.example.facts.Item;
 import sbnz.integracija.example.facts.ReviewRequest;
 import sbnz.integracija.example.facts.SearchRequest;
 
@@ -31,18 +30,18 @@ public class SampleAppController {
 		this.sampleService = sampleService;
 	}
 
-	@RequestMapping(value = "/item", method = RequestMethod.GET, produces = "application/json")
-	public Item getQuestions(@RequestParam(required = true) String id, @RequestParam(required = true) String name,
-			@RequestParam(required = true) double cost, @RequestParam(required = true) double salePrice) {
-
-		Item newItem = new Item(Long.parseLong(id), name, cost, salePrice);
-
-		log.debug("Item request received for: " + newItem);
-
-		Item i2 = sampleService.getClassifiedItem(newItem);
-
-		return i2;
-	}
+//	@RequestMapping(value = "/item", method = RequestMethod.GET, produces = "application/json")
+//	public Item getQuestions(@RequestParam(required = true) String id, @RequestParam(required = true) String name,
+//			@RequestParam(required = true) double cost, @RequestParam(required = true) double salePrice) {
+//
+//		Item newItem = new Item(Long.parseLong(id), name, cost, salePrice);
+//
+//		log.debug("Item request received for: " + newItem);
+//
+//		Item i2 = sampleService.getClassifiedItem(newItem);
+//
+//		return i2;
+//	}
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public ResponseEntity<ArrayList<Book>> bookSearch(@RequestBody  SearchRequest searchRequest) {

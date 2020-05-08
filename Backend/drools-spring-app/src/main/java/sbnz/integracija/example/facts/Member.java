@@ -4,21 +4,44 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Member extends User implements Serializable{
 	
 	enum cathegory{NONE,SILVER,GOLD,PLATINUM};
 	
+	@Column
 	private Date joinDate;
+	@Column
 	private Date expiryDate;
+	@Column
 	private Penalty penalty;
+	@Column
 	private BookLoan loan;
-	private List<BookLoan> history=new ArrayList<BookLoan>();
+	 @OneToMany()
+	private Set<BookLoan> history;
+	@Column
 	private cathegory cathegory;
+	@Column
 	private boolean banned;
+	@Column
 	private Date banExpiry;
+	@Column
 	private int wrongTags;
-	private List<Discount> discounts = new ArrayList<Discount>();
+
+	 @OneToMany()
+	private Set<Discount> discounts ;
 	
 	public Member(String username, String password, Long id) {
 		super(username, password, id);
@@ -32,7 +55,7 @@ public class Member extends User implements Serializable{
 	}
 	
 	public Member(String username, String password, Long id, Date joinDate, Date expiryDate, Penalty penalty,
-			BookLoan loan, List<BookLoan> history, sbnz.integracija.example.facts.Member.cathegory cathegory,
+			BookLoan loan, Set<BookLoan> history, sbnz.integracija.example.facts.Member.cathegory cathegory,
 			boolean banned) {
 		super(username, password, id);
 		this.joinDate = joinDate;
@@ -67,10 +90,10 @@ public class Member extends User implements Serializable{
 	public void setLoan(BookLoan loan) {
 		this.loan = loan;
 	}
-	public List<BookLoan> getHistory() {
+	public Set<BookLoan> getHistory() {
 		return history;
 	}
-	public void setHistory(List<BookLoan> history) {
+	public void setHistory(Set<BookLoan> history) {
 		this.history = history;
 	}
 	public cathegory getCathegory() {

@@ -6,18 +6,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
 @Entity
-public class Discount {
+public class BookTag {
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	@Column
-	private int amount;
-
-	public Discount() {
-		super();
-	};
+	private Long bookId;
+	@Column
+	private String tagKey;
+	@Column
+	private String tagValue;
+	
 
 }
