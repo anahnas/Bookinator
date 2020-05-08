@@ -17,18 +17,32 @@ public class ReviewRequest {
 	@Column
 	private String critique;
 	@Column
-	private Double rate;
+	private float rate;
 	
 	//private HashMap<String, String> tags = new HashMap<>();
 	
+	@Column
 	private Long bookId;
 	
+	@Column 
+	private Long userId;
+	
+	public Long getUserId() {
+		return userId;
+	}
+
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+
 	public ReviewRequest() {
 		super();
 	}
 
 
-	public ReviewRequest(String critique, Double rate, HashMap<String, String> tags, Long bookId) {
+	public ReviewRequest(String critique, float rate, HashMap<String, String> tags, Long bookId) {
 		super();
 		this.critique = critique;
 		this.rate = rate;
@@ -43,10 +57,10 @@ public class ReviewRequest {
 	public void setCritique(String critique) {
 		this.critique = critique;
 	}
-	public Double getRate() {
+	public float getRate() {
 		return rate;
 	}
-	public void setRate(Double rate) {
+	public void setRate(float rate) {
 		this.rate = rate;
 	}
 

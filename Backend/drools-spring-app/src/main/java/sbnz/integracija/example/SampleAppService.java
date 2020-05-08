@@ -3,6 +3,7 @@ package sbnz.integracija.example;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -16,8 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import sbnz.integracija.example.facts.Book;
+import sbnz.integracija.example.facts.BookRating;
 import sbnz.integracija.example.facts.ReviewRequest;
 import sbnz.integracija.example.facts.SearchRequest;
+import sbnz.integracija.example.facts.User;
+import sbnz.integracija.example.repository.BookRatingRepository;
+import sbnz.integracija.example.repository.BookRepository;
+import sbnz.integracija.example.repository.userRepository;
 
 @Service
 public class SampleAppService {
@@ -26,6 +32,12 @@ public class SampleAppService {
 	
 	@Autowired
 	private final BookRepository bookRepository;
+	
+	@Autowired
+	BookRatingRepository ratingRepo;
+	
+	@Autowired
+	userRepository userRepo;
 
 	private final KieContainer kieContainer;
 
@@ -103,7 +115,21 @@ public class SampleAppService {
 //	        book.getTags().put(pair.getKey().toString(), pair.getValue().toString());
 //	        it.remove(); // avoids a ConcurrentModificationException
 //	    }
-
+		
+		User user =  userRepo.findById(reviewRequest.getUserId()).get();
+		BookRating rating=new BookRating(book,user,reviewRequest.getRate());
+		this.ratingRepo.save(rating);
+		
+		List<BookRating> allRatings=ratingRepo.findByBookId(book.getId());
+		float avg = 0;
+		int count = allRatings.size();
+		for (BookRating r:allRatings) {
+			avg+=r.getRating();
+		}
+		float newRating = avg/count;
+		book.setRating(newRating);
+		bookRepository.save(book);
+		
 	    this.bookRepository.save(book);
 	    System.out.println("Book updated!");
 	}
