@@ -81,6 +81,7 @@ export class BookReviewFormComponent implements OnInit {
     this.bookReview.tags = convMap;
     //zasad zakucano
     this.bookReview.bookId = "2";
+    this.bookReview.userId = "1";
     console.log(this.bookReview)
     this._reviewService.postReview(this.bookReview).subscribe(
       error => this.errorMessage = <any>error

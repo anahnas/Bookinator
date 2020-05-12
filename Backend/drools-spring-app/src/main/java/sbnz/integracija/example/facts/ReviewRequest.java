@@ -19,7 +19,7 @@ public class ReviewRequest {
 	@Column
 	private float rate;
 	
-	//private HashMap<String, String> tags = new HashMap<>();
+	private HashMap<String, String> tags = new HashMap<>();
 	
 	@Column
 	private Long bookId;
@@ -46,7 +46,7 @@ public class ReviewRequest {
 		super();
 		this.critique = critique;
 		this.rate = rate;
-		//this.tags = tags;
+		this.tags = tags;
 		this.bookId = bookId;
 	}
 
@@ -65,13 +65,13 @@ public class ReviewRequest {
 	}
 
 	
-//	public HashMap<String, String> getTags() {
-//		//return tags;
-//	}
+	public HashMap<String, String> getTags() {
+		return tags;
+	}
 
 
 	public void setTags(HashMap<String, String> tags) {
-		//this.tags = tags;
+		this.tags = tags;
 	}
 
 

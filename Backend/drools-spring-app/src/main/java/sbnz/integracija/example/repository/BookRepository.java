@@ -11,8 +11,4 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findAll();
     void deleteById(Long id);
     Book save(Book book);
-    
-    @Query("SELECT coalesce(max(b.id), 0) FROM Book b")
-    Long getMaxId();
-
-}
+ }

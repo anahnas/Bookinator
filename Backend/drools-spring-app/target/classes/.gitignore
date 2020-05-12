@@ -1,5 +1,4 @@
 /META-INF/
 /sbnz/
-/controller/
-/service/
-/repository/
+/BookDTO.class
+/DTO/

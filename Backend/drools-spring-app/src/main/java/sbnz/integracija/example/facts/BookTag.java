@@ -18,6 +18,36 @@ public class BookTag {
 	private String tagKey;
 	@Column
 	private String tagValue;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Long getBookId() {
+		return bookId;
+	}
+	public void setBookId(Long bookId) {
+		this.bookId = bookId;
+	}
+	public String getTagKey() {
+		return tagKey;
+	}
+	public void setTagKey(String tagKey) {
+		this.tagKey = tagKey;
+	}
+	public String getTagValue() {
+		return tagValue;
+	}
+	public void setTagValue(String tagValue) {
+		this.tagValue = tagValue;
+	}
+	public BookTag(Long bookId, String tagKey, String tagValue) {
+		super();
+		this.bookId = bookId;
+		this.tagKey = tagKey;
+		this.tagValue = tagValue;
+	}
 	
 
 }

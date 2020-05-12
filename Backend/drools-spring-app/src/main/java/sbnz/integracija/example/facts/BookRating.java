@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 public class BookRating {
 	
-	  @EmbeddedId
+	  	@EmbeddedId
 	    BookRatingKey id;
 	    
 	    @JsonIgnore
