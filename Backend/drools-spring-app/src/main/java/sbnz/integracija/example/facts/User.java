@@ -9,11 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 
 @Entity
 @Inheritance(
 	    strategy = InheritanceType.JOINED
 	)
+@Table(name="user_table")
 public class User implements Serializable{
 
 	@Column

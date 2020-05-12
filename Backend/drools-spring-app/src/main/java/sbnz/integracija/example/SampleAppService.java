@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
@@ -18,11 +16,13 @@ import org.springframework.stereotype.Service;
 
 import sbnz.integracija.example.facts.Book;
 import sbnz.integracija.example.facts.BookRating;
+import sbnz.integracija.example.facts.BookTag;
 import sbnz.integracija.example.facts.ReviewRequest;
 import sbnz.integracija.example.facts.SearchRequest;
 import sbnz.integracija.example.facts.User;
 import sbnz.integracija.example.repository.BookRatingRepository;
 import sbnz.integracija.example.repository.BookRepository;
+import sbnz.integracija.example.repository.BookTagRepository;
 import sbnz.integracija.example.repository.userRepository;
 
 @Service
@@ -32,6 +32,9 @@ public class SampleAppService {
 	
 	@Autowired
 	private final BookRepository bookRepository;
+	
+	@Autowired
+	BookTagRepository bookTagRepository;
 	
 	@Autowired
 	BookRatingRepository ratingRepo;
@@ -108,13 +111,14 @@ public class SampleAppService {
 	public void bookReview(ReviewRequest reviewRequest) {
 		System.out.println(reviewRequest.toString());
 		Book book = bookRepository.getOne(reviewRequest.getBookId());
-		//System.out.println(book.getTags());
-	//	Iterator it = reviewRequest.getTags().entrySet().iterator();
-//	    while (it.hasNext()) {
-//	        HashMap.Entry pair = (HashMap.Entry)it.next();
-//	        book.getTags().put(pair.getKey().toString(), pair.getValue().toString());
-//	        it.remove(); // avoids a ConcurrentModificationException
-//	    }
+		
+		Iterator it = reviewRequest.getTags().entrySet().iterator();
+	    while (it.hasNext()) {
+	        HashMap.Entry pair = (HashMap.Entry)it.next();
+	        //book.getTags().put(pair.getKey().toString(), pair.getValue().toString());
+	        this.bookTagRepository.save(new BookTag(reviewRequest.getBookId(), pair.getKey().toString(), pair.getValue().toString()));
+	        it.remove(); // avoids a ConcurrentModificationException
+	    }
 		
 		User user =  userRepo.findById(reviewRequest.getUserId()).get();
 		BookRating rating=new BookRating(book,user,reviewRequest.getRate());
@@ -128,7 +132,6 @@ public class SampleAppService {
 		}
 		float newRating = avg/count;
 		book.setRating(newRating);
-		bookRepository.save(book);
 		
 	    this.bookRepository.save(book);
 	    System.out.println("Book updated!");

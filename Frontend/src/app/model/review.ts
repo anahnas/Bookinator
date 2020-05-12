@@ -3,4 +3,5 @@ export class Review{
     critique:String
     rate:String
     bookId:String
+    userId:String
 }
