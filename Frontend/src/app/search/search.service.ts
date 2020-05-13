@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { HttpHeaders } from '@angular/common/http';
-import { from, Observable } from 'rxjs';
+import { from, Observable, throwError } from 'rxjs';
 import {  catchError } from 'rxjs/operators';
 import { Book } from '../model/book';
+import { BookDTO } from '../model/bookDTO';
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -49,8 +50,8 @@ export class SearchService{
         
     }
 
-    getFilteredBooks(book : Book) : Observable<Book[]>{
-        return this._http.post<Book[]>(this._bookSearchUrl, book, httpOptions).pipe(
+    getFilteredBooks(book : Book) : Observable<BookDTO[]>{
+        return this._http.post<BookDTO[]>(this._bookSearchUrl, book, httpOptions).pipe(
                     catchError(this.handleError));
     }
 
@@ -61,6 +62,6 @@ export class SearchService{
 
     private handleError(err: HttpErrorResponse){
         console.log(err.message);
-        return Observable.throw(err.message);
+        return throwError(err.message);
     }
 }

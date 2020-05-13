@@ -78,12 +78,13 @@
 
                     <div class="highlights" *ngIf = 'books && books.length'>
 						<section *ngFor = 'let book of books'>
-							<div class="content bookCard"  *ngIf = 'book.tags'  (click) = 'onSelect(book)'>
+							<div class="content bookCard"  (click) = 'onSelect(book)'>
 								<header>
-                                    <a href="#" class="icon fa-paper-plane-o"><span class="label">Icon</span></a>                                    <h3>{{book.tags.name}}</h3>
-                                    <h4>{{book.tags.author}}</h4>
+                                    <a href="#" class="icon fa-paper-plane-o"><span class="label">Icon</span></a>                                    
+                                    <h3>{{book.name}}</h3>
+                                    <h4>{{book.author}}</h4>
 								</header>
-								<p>{{book.tags.description}}</p>
+								<p>{{book.description}}</p>
 							</div>
                         </section>
                     </div>

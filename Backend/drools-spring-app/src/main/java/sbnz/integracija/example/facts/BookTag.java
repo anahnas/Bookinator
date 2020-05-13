@@ -16,8 +16,9 @@ public class BookTag {
 	private Long bookId;
 	@Column
 	private String tagKey;
-	@Column
+	@Column(length=1500)
 	private String tagValue;
+	
 	public Long getId() {
 		return id;
 	}
@@ -47,6 +48,9 @@ public class BookTag {
 		this.bookId = bookId;
 		this.tagKey = tagKey;
 		this.tagValue = tagValue;
+	}
+	public BookTag() {
+		super();
 	}
 	
 

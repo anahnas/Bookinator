@@ -17,14 +17,20 @@ import javax.persistence.Table;
 	)
 @Table(name="user_table")
 public class User implements Serializable{
-
+	@Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
+	
 	@Column
 	private String username;
 	@Column
 	private String password;
-	@Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
+	@Column
+	private String firstName;
+	@Column
+	private String lastName;
+	@Column
+	private String email;
 	
 	public String getUsername() {
 		return username;
@@ -43,6 +49,35 @@ public class User implements Serializable{
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public User(Long id, String username, String password, String firstName, String lastName, String email) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
 	}
 	public User(String username, String password, Long id) {
 		super();

@@ -17,7 +17,6 @@ public class Book implements Serializable{
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	//private HashMap<String,String> tags = new HashMap<String,String>();
 	@Column
 	private double rating;
 	@Column
@@ -29,12 +28,7 @@ public class Book implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-//	public HashMap<String, String> getTags() {
-//		return tags;
-//	}
-//	public void setTags(HashMap<String, String> tags) {
-//		this.tags = tags;
-//	}
+
 	public Book(Long id, HashMap<String, String> tags) {
 		super();
 		this.id = id;
