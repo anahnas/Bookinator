@@ -37,7 +37,7 @@ public class Book implements Serializable{
 //	public void setTags(HashMap<String, String> tags) {
 //		this.tags = tags;
 //	}
-	public Book(Long id, HashMap<String, String> tags) {
+	public Book(Long id) {
 		super();
 		this.id = id;
 		//this.tags = tags;

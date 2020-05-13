@@ -6,12 +6,15 @@ C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\mai
 C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\SampleHomeController.java
 C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\SearchRequest.java
 C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\User.java
+C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\repository\TagRepository.java
 C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\SampleAppController.java
+C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\Tag.java
 C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\repository\BookRatingRepository.java
 C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\DTO\BookDTO.java
 C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\Discount.java
 C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\repository\BookRepository.java
 C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\BookTag.java
+C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\SearchRequestDTO.java
 C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\repository\BookTagRepository.java
 C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\Member.java
 C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\repository\userRepository.java

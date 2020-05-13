@@ -3,7 +3,12 @@ package sbnz.integracija
 
 //list any import classes here.
 import info.debatty.java.stringsimilarity.*;
+import sbnz.integracija.example.facts.SearchRequestDTO;
 import sbnz.integracija.example.facts.Book;
+import sbnz.integracija.example.facts.Tag;
+import sbnz.integracija.example.facts.BookTag;
+import java.util.HashMap;
+import java.util.Iterator;
 
 //declare any global variables here
 
@@ -11,10 +16,25 @@ import sbnz.integracija.example.facts.Book;
 rule "Name-match"
 
     when
-     Book()
+     $s:SearchRequest()
+     $b:Book()
+     $t:Tag()
+     $bt:BookTag()
     then
-     Levenshtein l = new Levenshtein();
-      System.out.println(l.distance("My string", "My $tring"));
+   
+    Levenshtein l = new Levenshtein();
+    
+    //match the book with its tags, and tags with tag names and names with search req params
+    if($b.getId()==$bt.getId() && $bt.getTagKey()==$t.getId()){
+    	 Iterator it = $s.getSearchCriteria().entrySet().iterator();
+	    while (it.hasNext()) {
+	        HashMap.Entry pair = (HashMap.Entry)it.next();
+	        System.out.println(pair.getKey() + " = " + pair.getValue());
+	         System.out.println(l.distance( pair.getValue().toString(), "Ivo Andric"));
+	    }
+    }
+     
+    
 
 end
 

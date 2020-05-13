@@ -17,6 +17,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 import sbnz.integracija.example.facts.Book;
+import sbnz.integracija.example.facts.BookTag;
+import sbnz.integracija.example.facts.SearchRequest;
+import sbnz.integracija.example.facts.SearchRequestDTO;
+import sbnz.integracija.example.facts.Tag;
 
 @SpringBootApplication
 public class SampleApp {
@@ -58,7 +62,16 @@ public class SampleApp {
 		kScanner.start(10_000);
 		 KieSession kSession =
 				  kContainer.newKieSession();
-		 		kSession.insert(new Book());
+		 
+		 		kSession.insert(new Book((long)5));
+		 		kSession.insert(new Tag((long)4,"character"));
+		 		kSession.insert(new BookTag((long)5, (long)1, "Ivo Andric"));
+		 		kSession.insert(new BookTag((long)5,(long) 2, "Na Drini Cuprija"));
+		 		kSession.insert(new BookTag((long)5,(long) 4, "Ivo Andric"));
+		 		SearchRequestDTO s=new SearchRequestDTO();
+		 		s.getSearchCriteria().put("author", "Ivo Andric");
+		 		kSession.insert(s);
+		 		
 				  kSession.fireAllRules();
 		return kContainer;
 	}
