@@ -23,6 +23,8 @@ public class Book implements Serializable{
 	@Column
 	private int avaivableNo;
 	
+	private int searchMatch=0;
+	
 	public Long getId() {
 		return id;
 	}
@@ -58,6 +60,12 @@ public class Book implements Serializable{
 	}
 	public void setAvaivableNo(int avaivableNo) {
 		this.avaivableNo = avaivableNo;
+	}
+	public int getMatch() {
+		return searchMatch;
+	}
+	public void setMatch(int match) {
+		this.searchMatch = match;
 	}
 	
 	

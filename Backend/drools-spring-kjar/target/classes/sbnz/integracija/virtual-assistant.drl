@@ -1,0 +1,28 @@
+//created on: 10.05.2020.
+package sbnz.integracija
+
+//list any import classes here.
+import info.debatty.java.stringsimilarity.*;
+import sbnz.integracija.example.facts.Book;
+
+//declare any global variables here
+
+
+rule "Name-match"
+
+    when
+     Book()
+    then
+     Levenshtein l = new Levenshtein();
+      System.out.println(l.distance("My string", "My $tring"));
+
+end
+
+rule "Your Second Rule"
+    //include attributes such as "salience" here...
+    when
+        //conditions
+    then
+        //actions
+
+end
