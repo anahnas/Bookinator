@@ -10,6 +10,7 @@ export class WelcomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("ulogovan je " + localStorage.getItem("loggedIn"))
   }
 
 }

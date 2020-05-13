@@ -11,4 +11,5 @@ export class Book{
     lesson:String
     targetAgeGroup:String
     style:String
+    description:String
 }
