@@ -19,6 +19,8 @@ public class BookTag {
 	@Column(length=1500)
 	private String tagValue;
 	
+	BookTagStatus status;
+	
 	public Long getId() {
 		return id;
 	}
@@ -43,11 +45,19 @@ public class BookTag {
 	public void setTagValue(String tagValue) {
 		this.tagValue = tagValue;
 	}
-	public BookTag(Long bookId, String tagKey, String tagValue) {
+
+	public BookTag(Long bookId, String tagKey, String tagValue, BookTagStatus status) {
 		super();
 		this.bookId = bookId;
 		this.tagKey = tagKey;
 		this.tagValue = tagValue;
+		this.status = status;
+	}
+	public BookTagStatus getStatus() {
+		return status;
+	}
+	public void setStatus(BookTagStatus status) {
+		this.status = status;
 	}
 	public BookTag() {
 		super();
