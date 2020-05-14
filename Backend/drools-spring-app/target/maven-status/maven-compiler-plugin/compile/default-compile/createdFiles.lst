@@ -23,5 +23,6 @@ DTO\BookTagDTO.class
 sbnz\integracija\example\facts\BookLoan.class
 sbnz\integracija\example\repository\userRepository.class
 sbnz\integracija\example\facts\BookTagStatus.class
+sbnz\integracija\example\facts\SearchResult.class
 sbnz\integracija\example\SampleHomeController.class
 sbnz\integracija\example\facts\Member$cathegory.class
