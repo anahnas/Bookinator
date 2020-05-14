@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Bookinator"
+    }
+  },
+  "defaultProject": "Bookinator",
+  "cli": {
+    "analytics": "08467e22-521e-4c71-b0c6-6e742a845b41"
+  }
 }

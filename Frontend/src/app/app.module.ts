@@ -18,6 +18,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { LoginService } from './login/login.service';
+import { UserListComponent } from './user-list/user-list.component';
 
 
 @NgModule({
@@ -29,10 +32,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     RegistrationComponent,
     BookReviewFormComponent,
-    BookInfoDialogComponent
-  ],
+    BookInfoDialogComponent,
+    UserListComponent
+    ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
@@ -47,12 +52,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       { path: 'registration', component: RegistrationComponent},
       { path: 'review', component: BookReviewFormComponent},
       { path: 'welcome', component: WelcomeComponent},
+
+      { path: 'userList', component: UserListComponent },
       { path: '', redirectTo:'welcome', pathMatch: 'full' },
       { path: '**', redirectTo:'welcome', pathMatch: 'full' }
     ])
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
-  providers: [BookInfoDialogComponent],
+  providers:
+  [BookInfoDialogComponent,
+  LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
