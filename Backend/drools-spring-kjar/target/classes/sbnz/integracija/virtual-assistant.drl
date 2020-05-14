@@ -1,0 +1,59 @@
+//created on: 10.05.2020.
+package sbnz.integracija
+
+//list any import classes here.
+import info.debatty.java.stringsimilarity.*;
+import sbnz.integracija.example.facts.SearchRequestDTO;
+import sbnz.integracija.example.facts.Book;
+import sbnz.integracija.example.facts.Tag;
+import sbnz.integracija.example.facts.BookTag;
+import java.util.HashMap;
+import java.util.Iterator;
+
+//declare any global variables here
+
+
+rule "Name-match"
+
+    when
+     $s:SearchRequestDTO()
+     $b:Book()
+     $t:Tag()
+     $bt:BookTag()
+    then
+   
+    Levenshtein l = new Levenshtein();
+    
+    System.out.println("test");
+      System.out.println($t.getTagName());
+    
+    int tagNo=$s.getSearchCriteria().size();
+    
+    //match the book with its tags, and tags with tag names and names with search req params
+    if($b.getId()==$bt.getBookId() && $bt.getTagKey()==$t.getId()){
+    	 Iterator it = $s.getSearchCriteria().entrySet().iterator();
+	    while (it.hasNext()) {
+	        HashMap.Entry pair = (HashMap.Entry)it.next();
+	        if(pair.getKey().equals($t.getTagName())){     //only compare the same tags
+	        	if(pair.getKey().equals("author")){
+	        		 tagNo= tagNo+1; //some tags are worth more
+	        		 System.out.println(l.distance( pair.getValue().toString(), "Ivo Andric")*200/ tagNo); 
+	        	}
+	        	System.out.println(pair.getKey() + " = " + pair.getValue());
+	        	//calculate the distance between value from request and the book
+	         	System.out.println(l.distance( pair.getValue().toString(), "Ivo Andric")*100/ tagNo); 
+	         }
+	    }
+    }
+    
+
+end
+
+rule "Your Second Rule"
+    //include attributes such as "salience" here...
+    when
+        //conditions
+    then
+        //actions
+
+end

@@ -19,10 +19,12 @@ import sbnz.integracija.example.facts.BookTag;
 import sbnz.integracija.example.facts.BookTagStatus;
 import sbnz.integracija.example.facts.ReviewRequest;
 import sbnz.integracija.example.facts.SearchRequest;
+import sbnz.integracija.example.facts.Tag;
 import sbnz.integracija.example.facts.User;
 import sbnz.integracija.example.repository.BookRatingRepository;
 import sbnz.integracija.example.repository.BookRepository;
 import sbnz.integracija.example.repository.BookTagRepository;
+import sbnz.integracija.example.repository.TagRepository;
 import sbnz.integracija.example.repository.userRepository;
 
 @Service
@@ -41,6 +43,9 @@ public class SampleAppService {
 	
 	@Autowired
 	userRepository userRepo;
+	
+	@Autowired 
+	TagRepository tagRepo;
 
 	private final KieContainer kieContainer;
 	
@@ -109,9 +114,15 @@ public class SampleAppService {
 	    while (it.hasNext()) {
 	        HashMap.Entry pair = (HashMap.Entry)it.next();
 	        //book.getTags().put(pair.getKey().toString(), pair.getValue().toString());
-	        this.bookTagRepository.save(new BookTag(reviewRequest.getBookId(), pair.getKey().toString(),
-	        		pair.getValue().toString(), BookTagStatus.PENDING));
-	        it.remove(); 
+	        Tag tag = this.tagRepo.findByTagName(pair.getKey().toString());
+	        if (tag==null) {
+	        	tagRepo.save(new Tag(pair.getKey().toString()));
+	        	 tag = this.tagRepo.findByTagName(pair.getKey().toString());
+	        }
+	        
+	        this.bookTagRepository.save(new BookTag(reviewRequest.getBookId(), tag.getId(), pair.getValue().toString()));
+	        it.remove(); // avoids a ConcurrentModificationException
+
 	    }
 		
 		User user =  userRepo.findById(reviewRequest.getUserId()).get();

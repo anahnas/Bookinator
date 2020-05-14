@@ -5,4 +5,12 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Drools Spring kjar</name>
   <packaging>jar</packaging>
+  
+  <dependencies>
+  <dependency>
+  <groupId>info.debatty</groupId>
+  <artifactId>java-string-similarity</artifactId>
+  <version>RELEASE</version>
+	</dependency>
+	</dependencies>
 </project>

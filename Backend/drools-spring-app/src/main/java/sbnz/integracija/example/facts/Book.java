@@ -22,6 +22,8 @@ public class Book implements Serializable{
 	@Column
 	private int avaivableNo;
 	
+	private int searchMatch=0;
+	
 	public Long getId() {
 		return id;
 	}
@@ -29,11 +31,16 @@ public class Book implements Serializable{
 		this.id = id;
 	}
 
-	public Book(Long id, HashMap<String, String> tags) {
-		super();
-		this.id = id;
-		//this.tags = tags;
+//	public HashMap<String, String> getTags() {
+//		return tags;
+//	}
+//	public void setTags(HashMap<String, String> tags) {
+//		this.tags = tags;
+//	}
+	public Book(Long id) {
+		this.id=id;
 	}
+
 	public Book() {
 		super();
 	}
@@ -52,6 +59,12 @@ public class Book implements Serializable{
 	}
 	public void setAvaivableNo(int avaivableNo) {
 		this.avaivableNo = avaivableNo;
+	}
+	public int getMatch() {
+		return searchMatch;
+	}
+	public void setMatch(int match) {
+		this.searchMatch = match;
 	}
 	
 	
