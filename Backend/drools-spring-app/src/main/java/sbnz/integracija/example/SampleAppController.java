@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import sbnz.integracija.example.facts.Book;
+import DTO.BookDTO;
+import DTO.BookTagDTO;
+import sbnz.integracija.example.facts.BookTag;
 import sbnz.integracija.example.facts.ReviewRequest;
 import sbnz.integracija.example.facts.SearchRequest;
+import sbnz.integracija.example.facts.User;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -28,6 +30,24 @@ public class SampleAppController {
 	@Autowired
 	public SampleAppController(SampleAppService sampleService) {
 		this.sampleService = sampleService;
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public ResponseEntity<?> login(@RequestBody  User u) {
+		User user = sampleService.login(u);
+		if(user != null) 
+			return new ResponseEntity<>(user, HttpStatus.OK);
+		else 
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public ResponseEntity<?> register(@RequestBody  User u) {
+		User user = sampleService.register(u);
+		if(user != null) 
+			return new ResponseEntity<>(user, HttpStatus.OK);
+		else 
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 
 //	@RequestMapping(value = "/item", method = RequestMethod.GET, produces = "application/json")
@@ -44,9 +64,9 @@ public class SampleAppController {
 //	}
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
-	public ResponseEntity<ArrayList<Book>> bookSearch(@RequestBody  SearchRequest searchRequest) {
+	public ResponseEntity<ArrayList<BookDTO>> bookSearch(@RequestBody  SearchRequest searchRequest) {
 		//log.debug("Search request received for: " + searchRequest);
-		ArrayList<Book> retVal = sampleService.getFilteredBooks(searchRequest);
+		ArrayList<BookDTO> retVal = sampleService.getFilteredBooks(searchRequest);
 		return new ResponseEntity<>(retVal, HttpStatus.OK);
 	}
 	
@@ -57,5 +77,16 @@ public class SampleAppController {
 		return new ResponseEntity(HttpStatus.OK);
 	}
 	
+
+	@RequestMapping(value = "/manageTag", method = RequestMethod.POST)
+	public ResponseEntity manageTag(@RequestBody BookTagDTO bookTagDTO) {
+		if(bookTagDTO.isApproved()) {
+			this.sampleService.approveTag(bookTagDTO.getId());
+		} else {
+			this.sampleService.deleteTag(bookTagDTO.getId());
+		}
+		
+		return new ResponseEntity(HttpStatus.OK);
+	}
 	
 }

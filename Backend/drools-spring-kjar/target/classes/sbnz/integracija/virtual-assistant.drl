@@ -16,7 +16,7 @@ import java.util.Iterator;
 rule "Name-match"
 
     when
-     $s:SearchRequest()
+     $s:SearchRequestDTO()
      $b:Book()
      $t:Tag()
      $bt:BookTag()
@@ -33,7 +33,6 @@ rule "Name-match"
 	         System.out.println(l.distance( pair.getValue().toString(), "Ivo Andric"));
 	    }
     }
-     
     
 
 end

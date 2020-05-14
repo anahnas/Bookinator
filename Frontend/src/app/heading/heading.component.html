@@ -1,7 +1,8 @@
 <!-- Header -->
 <header id="header">
-    <a class="logo" href="index.html">Prijava</a>
+    <a class="logo" [routerLink]="['/login']">Prijava</a>
     <a class="logo"  [routerLink]="['/search']">Pretraga</a>
+    <a class="logo" href="#" (click)='logout()' >Odjava</a>
     <nav>
         <a href="#menu">Menu</a>
     </nav>

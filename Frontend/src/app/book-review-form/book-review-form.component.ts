@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReviewService } from './review.service';
 import { Review } from '../model/review';
 import { Router } from '@angular/router';
+import { User } from '../model/user';
 
 @Component({
   selector: 'app-book-review-form',
@@ -14,6 +15,7 @@ export class BookReviewFormComponent implements OnInit {
   @ViewChild('actionButtons') actionButtons: ElementRef;
   @ViewChild('form') form: ElementRef;
 
+  loggedInUser:User;
   errorMessage : String;
 
   critique : String = '';
@@ -30,9 +32,10 @@ export class BookReviewFormComponent implements OnInit {
     critique: new FormControl('')
   });
 
-  constructor(private _reviewService : ReviewService, private renderer: Renderer2,private router: Router) { }
+  constructor(private _reviewService : ReviewService, private renderer: Renderer2, private router: Router) { }
 
   ngOnInit(): void {
+    this.loggedInUser = JSON.parse(localStorage.getItem("loggedIn"));
   }
 
   generateTagInfo(event: Event) {
@@ -81,7 +84,7 @@ export class BookReviewFormComponent implements OnInit {
     this.bookReview.tags = convMap;
     //zasad zakucano
     this.bookReview.bookId = "2";
-    this.bookReview.userId = "1";
+    this.bookReview.userId = this.loggedInUser.id;
     console.log(this.bookReview)
     this._reviewService.postReview(this.bookReview).subscribe(
       error => this.errorMessage = <any>error

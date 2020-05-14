@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Book } from '../model/book';
 import { BookInfoDialogComponent } from '../book-info-dialog/book-info-dialog.component';
 import { FormGroup, FormControl } from '@angular/forms';
+import { BookDTO } from '../model/bookDTO';
 
 @Component({
   selector: 'app-search',
@@ -15,7 +16,8 @@ export class SearchComponent implements OnInit {
   styles : any[];
   likovi : String[] = [];
   bookRequest : Book = new Book();
-  books : Book [];
+  books : Book [] = [];
+  temp:Book;
   selectedBook:Book;
   errorMessage : string;
 
@@ -56,13 +58,31 @@ export class SearchComponent implements OnInit {
 
   makeSearchRequest(){
     event.preventDefault();
-
+    this.books = [];
+    
     console.log(this.bookSearchForm.value)
     this.bookRequest = this.bookSearchForm.value;
     this.bookRequest.characters = this.likovi;
     this._searchService.getFilteredBooks(this.bookRequest).subscribe(
       books => {
-        this.books = books;
+        for(let b of books){
+          this.temp = new Book()
+          for(let tag of b.tags){
+            if(tag.tagKey === 'name'){
+              this.temp.name = tag.tagValue;
+            }
+
+            if(tag.tagKey === 'author'){
+              this.temp.authorName = tag.tagValue;
+            }
+            
+            if(tag.tagKey === 'description'){
+              this.temp.description = tag.tagValue;
+            }
+          }
+          this.books.push(this.temp);
+        }
+        
         console.log(this.books);
       },
       error => this.errorMessage = <any>error
