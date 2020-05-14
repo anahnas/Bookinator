@@ -6,5 +6,5 @@ import sbnz.integracija.example.facts.Tag;
 
 public interface TagRepository extends JpaRepository<Tag,Long>{
 
-	Tag findByName(String name);
+	Tag findByTagName(String name);
 }

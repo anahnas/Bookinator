@@ -24,13 +24,25 @@ rule "Name-match"
    
     Levenshtein l = new Levenshtein();
     
+    System.out.println("test");
+      System.out.println($t.getTagName());
+    
+    int tagNo=$s.getSearchCriteria().size();
+    
     //match the book with its tags, and tags with tag names and names with search req params
-    if($b.getId()==$bt.getId() && $bt.getTagKey()==$t.getId()){
+    if($b.getId()==$bt.getBookId() && $bt.getTagKey()==$t.getId()){
     	 Iterator it = $s.getSearchCriteria().entrySet().iterator();
 	    while (it.hasNext()) {
 	        HashMap.Entry pair = (HashMap.Entry)it.next();
-	        System.out.println(pair.getKey() + " = " + pair.getValue());
-	         System.out.println(l.distance( pair.getValue().toString(), "Ivo Andric"));
+	        if(pair.getKey().equals($t.getTagName())){     //only compare the same tags
+	        	if(pair.getKey().equals("author")){
+	        		 tagNo= tagNo+1; //some tags are worth more
+	        		 System.out.println(l.distance( pair.getValue().toString(), "Ivo Andric")*200/ tagNo); 
+	        	}
+	        	System.out.println(pair.getKey() + " = " + pair.getValue());
+	        	//calculate the distance between value from request and the book
+	         	System.out.println(l.distance( pair.getValue().toString(), "Ivo Andric")*100/ tagNo); 
+	         }
 	    }
     }
     

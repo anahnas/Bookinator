@@ -13,4 +13,8 @@ public class SearchRequestDTO {
 	public void setSearchCriteria(HashMap<String, String> searchCriteria) {
 		this.searchCriteria = searchCriteria;
 	}
+	
+	public SearchRequestDTO() {
+		searchCriteria = new HashMap<String, String>();
+	}
 }

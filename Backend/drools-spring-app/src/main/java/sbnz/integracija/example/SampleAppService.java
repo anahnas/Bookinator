@@ -114,10 +114,10 @@ public class SampleAppService {
 	    while (it.hasNext()) {
 	        HashMap.Entry pair = (HashMap.Entry)it.next();
 	        //book.getTags().put(pair.getKey().toString(), pair.getValue().toString());
-	        Tag tag = this.tagRepo.findByName(pair.getKey().toString());
+	        Tag tag = this.tagRepo.findByTagName(pair.getKey().toString());
 	        if (tag==null) {
 	        	tagRepo.save(new Tag(pair.getKey().toString()));
-	        	 tag = this.tagRepo.findByName(pair.getKey().toString());
+	        	 tag = this.tagRepo.findByTagName(pair.getKey().toString());
 	        }
 	        
 	        this.bookTagRepository.save(new BookTag(reviewRequest.getBookId(), tag.getId(), pair.getValue().toString()));

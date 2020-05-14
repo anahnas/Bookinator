@@ -16,8 +16,7 @@ public class BookTag {
 	private Long bookId;
 	@Column
 	private Long tagKey; //foreign key from Tag table
-	@Column
-
+	@Column(length=1500)
 	private String tagValue;
 	
 	BookTagStatus status;
