@@ -1,12 +1,50 @@
 <!-- Header -->
+<div *ngIf = "someonelogged">
 <header id="header">
     <a class="logo" [routerLink]="['/login']">Prijava</a>
     <a class="logo"  [routerLink]="['/search']">Pretraga</a>
+    <!--<a class="logo" *ngIf = "employee && homepage" [routerLink]="['/userList']">User list</a>-->
+    <a class="logo" *ngIf = "employee" [routerLink]="['/userList']">User list</a>
+
     <a class="logo" href="#" (click)='logout()' >Odjava</a>
     <nav>
-        <a href="#menu">Menu</a>
+      <a href="#menu">Menu</a>
+
     </nav>
-</header>
+  </header>
+</div>
+
+
+    <!--<div *ngIf="someonelogged">
+    <nav class="navbar">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" *ngIf = "employee" >
+          <a class="nav-link" routerLink="/userList">User List</a>
+        </li>
+        <li>
+          <a class="nav-link" [routerLink]="['/login']">Prijava</a>
+
+        </li>
+        <li>
+          <a class="nav-link" href="#" (click)='logout()' >Odjava</a>
+
+        </li>
+        <li>
+          <a href="#menu">Menu</a>
+
+        </li>
+      </ul>
+    </nav>
+  </div>-->
+
+<!--<div *ngIf = "someonelogged">
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+  <div class = "collapse navbar-collapse">
+    <ul class=""
+  </div>
+</div>
+</nav>-->
 
 <!-- Nav -->
 <nav id="menu">
@@ -16,6 +54,8 @@
         <li><a href="generic.html">Generic</a></li>
     </ul>
 </nav>
+
+
 
 
 <!-- Banner -->

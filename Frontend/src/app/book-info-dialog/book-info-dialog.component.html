@@ -1,9 +1,9 @@
 <h1 mat-dialog-title>{{data.name}}, {{data.authorName}}</h1>
 <div mat-dialog-content>
   <p >Informacije</p>
-  <mat-form-field  *ngFor="let tag in tags">
-    <mat-label>{{tag.name}}</mat-label>
-    <mat-label >{{tag.value}}</mat-label>
+  <mat-form-field  *ngFor="let tag of tags">
+    <mat-label>{{tag.tagKey}}</mat-label>
+    <mat-label >{{tag.tagValue}}</mat-label>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>

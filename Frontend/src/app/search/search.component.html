@@ -6,7 +6,7 @@
             <h3>Pretraga knjiga</h3>
                 <form method="post" action="#" [formGroup]="bookSearchForm" (ngSubmit)="makeSearchRequest()">
                     <div class="row gtr-uniform">
-                    
+
                         <div class="col-6 col-12-xsmall">
                             <input type="text" formControlName="name" id="naslov" value="" placeholder="Naslov knjige">
                         </div>
@@ -40,7 +40,7 @@
                                 <option *ngFor='let style of styles' >{{style.name}}</option>
                             </select>
                         </div>
-                        
+
                         <!-- Break -->
                         <div class="col-6 col-12-xsmall">
                             <h4>Dodani likovi</h4>
@@ -52,7 +52,7 @@
                             <input type="text" name="lik" id="lik" placeholder="Dodaj lika...">
                         </div>
                         <div class="col-3 col-12-xsmall">
-                            <li class="button primary fit" (click)="dodajLika()">Dodaj</li>                        
+                            <li class="button primary fit" (click)="dodajLika()">Dodaj</li>
                         </div>
                             <!-- Break -->
                         <div class="col-12">
@@ -61,12 +61,12 @@
                                 <option *ngFor='let genre of genres' >{{genre.name}}</option>
                             </select>
                         </div>
-                        
+
                         <div class="col-6 col-12-small">
                             <input type="checkbox" id="dostupno" checked="">
                             <label for="dostupno">Dostupna</label>
                         </div>
-                    
+
                         <!-- Break -->
                         <div class="col-12">
                             <ul class="actions">
@@ -78,11 +78,11 @@
 
                     <div class="highlights" *ngIf = 'books && books.length'>
 						<section *ngFor = 'let book of books'>
-							<div class="content bookCard"  (click) = 'onSelect(book)'>
+							<div class="content bookCard"  (click) = "onSelect(book)">
 								<header>
-                                    <a href="#" class="icon fa-paper-plane-o"><span class="label">Icon</span></a>                                    
+                                    <a href="#" class="icon fa-paper-plane-o"><span class="label">Icon</span></a>
                                     <h3>{{book.name}}</h3>
-                                    <h4>{{book.author}}</h4>
+                                    <h4>{{book.authorName}}</h4>
 								</header>
 								<p>{{book.description}}</p>
 							</div>
@@ -93,4 +93,4 @@
         </div>
 </section>
 
-       
+
