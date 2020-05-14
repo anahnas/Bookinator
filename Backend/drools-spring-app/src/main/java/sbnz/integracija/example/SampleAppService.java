@@ -3,6 +3,8 @@ package sbnz.integracija.example;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
@@ -77,6 +79,19 @@ public class SampleAppService {
 		return this.userRepo.save(user);
 	}
 	
+	public List<User> findAll() {
+		
+		return userRepo.findAll();
+	}
+	
+	public User saveUser(User user) {
+		User u = this.userRepo.findByUsername(user.getUsername());
+		if(u != null) {
+			return null;
+		} 
+		return this.userRepo.save(user);
+	}
+	
 	public ArrayList<BookDTO> getFilteredBooks(SearchRequest searchRequest) {
 		ArrayList<Book> books = (ArrayList<Book>) bookRepository.findAll();
 		ArrayList<BookDTO> bookDTOs = new ArrayList<>();
@@ -128,5 +143,7 @@ public class SampleAppService {
 	    this.bookRepository.save(book);
 	    System.out.println("Book updated!");
 	}
+	
+	
 	
 }

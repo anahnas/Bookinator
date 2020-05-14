@@ -1,5 +1,7 @@
-insert into user_table(username, password, first_name, last_name, email) values('guest', 'guest', 'guest', 'guest','guest');
+insert into user_table(username, password, first_name, last_name, email, user_type) values('guest', 'guest', 'guest', 'guest','guest', 0);
+insert into user_table(username, password, first_name, last_name, email, user_type) values('admin', 'admin', 'admin', 'admin','admin', 1);
 
+insert into employee_table(employee_pkey) values (2);
 
 insert into book(avaivable_no,rating) values(1,0);
 insert into book_tag(book_id,tag_key,tag_value) values (1,'name','Lovac na zmajeve');
