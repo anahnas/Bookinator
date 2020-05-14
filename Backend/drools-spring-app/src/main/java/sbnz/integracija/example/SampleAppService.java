@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import DTO.BookDTO;
 import sbnz.integracija.example.facts.Book;
 import sbnz.integracija.example.facts.BookTag;
+import sbnz.integracija.example.facts.BookTagStatus;
 import sbnz.integracija.example.facts.ReviewRequest;
 import sbnz.integracija.example.facts.SearchRequest;
 import sbnz.integracija.example.facts.User;
@@ -108,8 +109,9 @@ public class SampleAppService {
 	    while (it.hasNext()) {
 	        HashMap.Entry pair = (HashMap.Entry)it.next();
 	        //book.getTags().put(pair.getKey().toString(), pair.getValue().toString());
-	        this.bookTagRepository.save(new BookTag(reviewRequest.getBookId(), pair.getKey().toString(), pair.getValue().toString()));
-	        it.remove(); // avoids a ConcurrentModificationException
+	        this.bookTagRepository.save(new BookTag(reviewRequest.getBookId(), pair.getKey().toString(),
+	        		pair.getValue().toString(), BookTagStatus.PENDING));
+	        it.remove(); 
 	    }
 		
 		User user =  userRepo.findById(reviewRequest.getUserId()).get();
@@ -129,4 +131,16 @@ public class SampleAppService {
 	    System.out.println("Book updated!");
 	}
 	
+	public void approveTag(Long id) {
+		BookTag bookTag = bookTagRepository.getOne(id);
+		bookTag.setStatus(BookTagStatus.APPROVED);
+		this.bookTagRepository.save(bookTag);
+	}
+	
+
+	public void deleteTag(Long id) {
+		BookTag bookTag = bookTagRepository.getOne(id);
+		bookTag.setStatus(BookTagStatus.REFUSED);
+		this.bookTagRepository.delete(bookTag);
+	}
 }

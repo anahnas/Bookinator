@@ -13,5 +13,6 @@ public interface BookTagRepository  extends JpaRepository<BookTag, Long>{
 	BookTag save(BookTag bookTag);
 	@Query("SELECT tag FROM BookTag tag WHERE ?1 = tag.bookId")
 	ArrayList<BookTag> findTagsByBookId(Long bookId);
-
+	
+	void delete(BookTag entity);
 }

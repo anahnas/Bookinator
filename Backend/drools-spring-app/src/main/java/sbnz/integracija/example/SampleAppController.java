@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import DTO.BookDTO;
+import DTO.BookTagDTO;
+import sbnz.integracija.example.facts.BookTag;
 import sbnz.integracija.example.facts.ReviewRequest;
 import sbnz.integracija.example.facts.SearchRequest;
 import sbnz.integracija.example.facts.User;
@@ -75,5 +77,16 @@ public class SampleAppController {
 		return new ResponseEntity(HttpStatus.OK);
 	}
 	
+
+	@RequestMapping(value = "/manageTag", method = RequestMethod.POST)
+	public ResponseEntity manageTag(@RequestBody BookTagDTO bookTagDTO) {
+		if(bookTagDTO.isApproved()) {
+			this.sampleService.approveTag(bookTagDTO.getId());
+		} else {
+			this.sampleService.deleteTag(bookTagDTO.getId());
+		}
+		
+		return new ResponseEntity(HttpStatus.OK);
+	}
 	
 }
