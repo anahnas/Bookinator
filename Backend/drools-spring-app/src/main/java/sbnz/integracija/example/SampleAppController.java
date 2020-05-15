@@ -1,6 +1,7 @@
 package sbnz.integracija.example;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +45,21 @@ public class SampleAppController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<?> register(@RequestBody  User u) {
 		User user = sampleService.register(u);
+		if(user != null) 
+			return new ResponseEntity<>(user, HttpStatus.OK);
+		else 
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+	
+	@RequestMapping(value="/allUsers", method = RequestMethod.GET)
+	public ResponseEntity<List<User>> getUsers() {
+		List<User> user = sampleService.findAll();
+		return new ResponseEntity<>(user, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
+	public ResponseEntity<?> saveUser(@RequestBody  User u) {
+		User user = sampleService.saveUser(u);
 		if(user != null) 
 			return new ResponseEntity<>(user, HttpStatus.OK);
 		else 
