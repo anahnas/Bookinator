@@ -3,9 +3,6 @@ package sbnz.integracija.example;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Timer;
-
-import javax.annotation.PostConstruct;
 
 import org.kie.api.runtime.KieContainer;
 import org.slf4j.Logger;
@@ -14,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import DTO.BookDTO;
+import enumeration.RoleEnum;
 import sbnz.integracija.example.facts.Book;
 import sbnz.integracija.example.facts.BookTag;
 import sbnz.integracija.example.facts.BookTagStatus;
@@ -85,6 +83,7 @@ public class SampleAppService {
 		if(u != null) {
 			return null;
 		} 
+		user.setUserType(RoleEnum.MEMBER);
 		return this.userRepo.save(user);
 	}
 	

@@ -1,22 +1,16 @@
 package sbnz.integracija.example.facts;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
+@PrimaryKeyJoinColumn(name = "member_pkey")
 public class Member extends User implements Serializable{
 	
 	enum cathegory{NONE,SILVER,GOLD,PLATINUM};
@@ -24,7 +18,7 @@ public class Member extends User implements Serializable{
 	@Column
 	private Date joinDate;
 	@Column
-	private Date expiryDate;
+	private boolean membershipExpired;
 	@Column
 	private Penalty penalty;
 	@Column
