@@ -49,7 +49,7 @@ rule "Name-match"
 
 end
 
-rule "Your Second Rule"
+rule "Membership-expiration-check"
     //include attributes such as "salience" here...
     when
         //conditions

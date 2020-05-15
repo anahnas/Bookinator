@@ -3,10 +3,10 @@ package sbnz.integracija.example;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Timer;
 
 import javax.annotation.PostConstruct;
 
-import org.apache.xmlbeans.impl.xb.xsdschema.Attribute.Use;
 import org.kie.api.runtime.KieContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +26,7 @@ import sbnz.integracija.example.repository.BookRepository;
 import sbnz.integracija.example.repository.BookTagRepository;
 import sbnz.integracija.example.repository.TagRepository;
 import sbnz.integracija.example.repository.userRepository;
+import util.MembershipRemindTask;
 
 @Service
 public class SampleAppService {
@@ -46,18 +47,21 @@ public class SampleAppService {
 	
 	@Autowired 
 	TagRepository tagRepo;
+	
+	@Autowired 
+	MembershipRemindTask membershipRemindTask;
 
 	private final KieContainer kieContainer;
+	
 	
 	@Autowired
 	public SampleAppService(KieContainer kieContainer, BookRepository bookRepository, BookTagRepository bookTagRepository) {
 		log.info("Initialising a new example session.");
 		this.kieContainer = kieContainer;
 		this.bookRepository = bookRepository;
-		this.bookTagRepository = bookTagRepository;
-		
+		this.bookTagRepository = bookTagRepository;		 
 	}
-
+	
 //	public Item getClassifiedItem(Item i) {
 //		KieSession kieSession = kieContainer.newKieSession();
 //		kieSession.insert(i);
@@ -72,6 +76,7 @@ public class SampleAppService {
 				return u;
 			}
 		}
+
 		return null;
 	}
 

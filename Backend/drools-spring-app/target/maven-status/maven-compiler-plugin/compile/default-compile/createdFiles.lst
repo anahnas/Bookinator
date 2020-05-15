@@ -1,6 +1,7 @@
 sbnz\integracija\example\facts\Employee.class
 sbnz\integracija\example\facts\SearchRequestDTO.class
 sbnz\integracija\example\repository\BookTagRepository.class
+util\MembershipRemindTask.class
 sbnz\integracija\example\facts\Penalty.class
 sbnz\integracija\example\repository\BookRepository.class
 DTO\BookDTO.class
@@ -16,6 +17,7 @@ sbnz\integracija\example\facts\BookRating.class
 sbnz\integracija\example\SampleApp.class
 sbnz\integracija\example\facts\Member.class
 sbnz\integracija\example\repository\TagRepository.class
+config\AppConfig.class
 sbnz\integracija\example\facts\User.class
 sbnz\integracija\example\facts\BookRatingKey.class
 sbnz\integracija\example\facts\Tag.class
