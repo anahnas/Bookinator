@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
-Built-By: Jelena
-Build-Jdk: 12.0.2
+Built-By: ana
+Build-Jdk: 11.0.7
 Implementation-Title: Drools Spring App
 Implementation-Version: 0.0.1-SNAPSHOT
 Implementation-Vendor-Id: sbnz.integracija
