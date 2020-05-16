@@ -1,21 +1,21 @@
 <section id="main" class="wrapper">
     <div class="inner">
         <div class="content">
-            <h3>Prijava</h3>
+            <h3>Login</h3>
                 <form method="post" [formGroup]="loginForm" action="#">
                     <div class="row gtr-uniform">
                     
                         <div class="col-6 col-12-xsmall">
-                            <input type="text" formControlName="username" value="" placeholder="Korisnicko ime">
+                            <input type="text" formControlName="username" value="" placeholder="Username">
                         </div>
                         <div class="col-6 col-12-xsmall">
-                            <input type="password" formControlName="password" value="" placeholder="Sifra">
+                            <input type="password" formControlName="password" value="" placeholder="Password">
                         </div>
                         <!-- Break -->
                         <div class="col-12">
                             <ul class="actions">
-                                <li><input type="submit" value="Uloguj se" class="primary" (click) = 'login()'></li>
-                                <li><input type="reset" value="Registracija" [routerLink]="['/registration']"></li>
+                                <li><input type="submit" value="Login" class="primary" (click) = 'login()'></li>
+                                <li><input type="reset" value="Register" [routerLink]="['/registration']"></li>
                             </ul>
                         </div>
                     </div>

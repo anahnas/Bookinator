@@ -16,23 +16,23 @@ const httpOptions = {
 @Injectable()
 export class SearchService{
 
-    private _bookSearchUrl = 'http://localhost:8080/search';
+    private _bookSearchUrl = 'http://localhost:8080/search/book';
     private _booksUrl = 'http://localhost:8080/books';
     constructor(private _http: HttpClient){ }
 
     getGenres() : any[]{
         return[
-            {"name":"Realizam"},
-            {"name":"Fantasika"},
-            {"name":"Kriminalisika"},
-            {"name":"Romantizam"},
-            {"name":"Horor"},
+            {"name":"Realism"},
+            {"name":"Fantasy"},
+            {"name":"Crime"},
+            {"name":"Romance"},
+            {"name":"Horror"},
             {"name":"Drama"},
-            {"name":"Komedija"},
-            {"name":"Enciklopedistika"},
-            {"name":"Istorijski romani"},
-            {"name":"Ratni romani"},
-            {"name":"Novele"}
+            {"name":"Comedy"},
+            {"name":"Encyclopedia"},
+            {"name":"History"},
+            {"name":"War"},
+            {"name":"Novel"}
         ]
         
     };
