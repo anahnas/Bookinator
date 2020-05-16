@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("loggedIn", JSON.stringify(this.user));
         this.router.navigate(['']);
       },
-      error => alert("Pogrešno korisničko ime ili lozinka.")
+      error => alert("Wrong username or password.")
     );
   }
 }

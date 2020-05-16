@@ -1,12 +1,21 @@
 <!-- Header -->
 <div *ngIf = "someonelogged">
 <header id="header">
+<<<<<<< HEAD
     <a class="logo" [routerLink]="['/login']">Prijava</a>
     <a class="logo"  [routerLink]="['/search']">Pretraga</a>
     <!--<a class="logo" *ngIf = "employee && homepage" [routerLink]="['/userList']">User list</a>-->
     <a class="logo" *ngIf = "employee" [routerLink]="['/userList']">User list</a>
 
     <a class="logo" href="#" (click)='logout()' >Odjava</a>
+=======
+    <a class="logo" [routerLink]="['/login']">Login</a>
+    <a class="logo"  [routerLink]="['/search']">Search</a>
+    <!--<a class="logo" *ngIf = "employee && homepage" [routerLink]="['/userList']">User list</a>-->
+    <a class="logo" *ngIf = "employee" [routerLink]="['/userList']">User list</a>
+
+    <a class="logo" href="#" (click)='logout()' >Logout</a>
+>>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8
     <nav>
       <a href="#menu">Menu</a>
 
@@ -61,8 +70,8 @@
 <!-- Banner -->
     <section id="heading">
         <div class="inner">
-            <h1>Biblioteka Oblak</h1>
-            <p>“A reader lives a thousand lives before he dies . . . The man who never reads lives only one.” – George R.R. Martins<br />
+            <h1>LIBRARY CLOUD</h1>
+            <p>“A reader lives a thousand lives before he dies . . . The man who never reads lives only one.” – George R.R. Martin<br />
             </p>
         </div>
         <!-- <video autoplay loop muted playsinline src="images/banner.mp4"></video> -->

@@ -12,7 +12,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^9.1.3",
-    "@angular/cdk": "^9.2.1",
+    "@angular/cdk": "^9.2.3",
     "@angular/common": "^9.1.3",
     "@angular/compiler": "^9.1.3",
     "@angular/core": "^9.1.3",
@@ -22,8 +22,15 @@
     "@angular/platform-browser-dynamic": "^9.1.3",
     "@angular/router": "^9.1.3",
     "@types/angular-material": "^1.1.71",
+<<<<<<< HEAD
     "angular-material": "^1.1.22",
+=======
+    "angular": "^1.7.9",
+    "angular-material": "^1.1.22",
+    "material": "^0.4.3",
+>>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8
     "rxjs": "~6.5.4",
+    "toppy": "^2.3.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

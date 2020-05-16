@@ -21,7 +21,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LoginService } from './login/login.service';
 import { UserListComponent } from './user-list/user-list.component';
+<<<<<<< HEAD
 
+=======
+import { ToppyModule } from 'toppy'
+>>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8
 
 @NgModule({
   declarations: [
@@ -46,6 +50,7 @@ import { UserListComponent } from './user-list/user-list.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    ToppyModule,
     RouterModule.forRoot([
       { path: 'search', component: SearchComponent},
       { path: 'login', component: LoginComponent},

@@ -29,7 +29,7 @@ export class RegistrationComponent implements OnInit {
   register(){
     event.preventDefault();
     if(this.registrationForm.get('password').value != this.registrationForm.get('passwordRepeat').value){
-      alert("Lozinke se ne poklapaju!");
+      alert("Passwords dont match!");
       return;
     }
     this.user = this.registrationForm.value;
@@ -37,7 +37,7 @@ export class RegistrationComponent implements OnInit {
       user => {
         this.router.navigate(['/login']);
       },
-      error => alert("Greška pri registraciji.")
+      error => alert("Error occured")
     );
   }
 }
