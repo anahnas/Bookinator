@@ -2066,7 +2066,7 @@ ul.icons {
   background-color: #ce1b28;
   color: rgba(255, 255, 255, 0.75);
   background-attachment: fixed;
-  background-image: linear-gradient(rgba(206, 27, 40, 0.25), rgba(206, 27, 40, 0.25)), url("/assets/images/cta01.jpg");
+  background-image: linear-gradient(rgba(206, 27, 111, 0.25), rgba(206, 27, 40, 0.25)), url("/assets/images/bg.jpg");
   background-position: bottom;
   background-repeat: no-repeat;
   background-size: cover;
@@ -2408,7 +2408,7 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
-    opacity: 0.05; }
+    opacity: 0.2; }
 
 #header {
   -moz-align-items: center;

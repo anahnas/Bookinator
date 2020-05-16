@@ -1,15 +1,15 @@
 <section id="main" class="wrapper">
     <div class="inner">
         <div class="content">
-            <h3>Registracija</h3>
+            <h3>Register</h3>
                 <form method="post" [formGroup]="registrationForm" action="#">
                     <div class="row gtr-uniform">
                     
                         <div class="col-6 col-12-xsmall">
-                            <input type="text" formControlName="firstName"  value="" placeholder="Ime">
+                            <input type="text" formControlName="firstName"  value="" placeholder="Name">
                         </div>
                         <div class="col-6 col-12-xsmall">
-                            <input type="text" formControlName="lastName" value="" placeholder="Prezime">
+                            <input type="text" formControlName="lastName" value="" placeholder="Last name">
                         </div>
                         <div class="col-6 col-12-xsmall">
                             <input type="text" formControlName="username" value="" placeholder="Username">
@@ -18,16 +18,16 @@
                             <input type="email" formControlName="email" value="" placeholder="Email">
                         </div>
                         <div class="col-6 col-12-xsmall">
-                            <input type="password" formControlName="password"  value="" placeholder="Sifra">
+                            <input type="password" formControlName="password"  value="" placeholder="Password">
                         </div>
                         <div class="col-6 col-12-xsmall">
-                            <input type="password" formControlName="passwordRepeat" value="" placeholder="Ponovi sifru">
+                            <input type="password" formControlName="passwordRepeat" value="" placeholder="Repeat password">
                         </div>
                         <!-- Break -->
                         <div class="col-12">
                             <ul class="actions">
-                                <li><input type="submit" (click)="register()" value="Registruj se" class="primary"></li>
-                                <li><input type="reset" value="Obriši sve"></li>
+                                <li><input type="submit" (click)="register()" value="Register" class="primary"></li>
+                                <li><input type="reset" value="Clear all"></li>
                             </ul>
                         </div>
                     </div>

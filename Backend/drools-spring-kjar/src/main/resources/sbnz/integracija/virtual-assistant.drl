@@ -14,11 +14,16 @@ import java.lang.Exception;
 
 //declare any global variables here
 
+query "getSearchResults"
+    $result: Book() from entry-point "search"
+end
+
 rule "Weight-split"
+agenda-group "startSearch"
 auto-focus true
 	 salience 10
 	when 
-		$s:SearchRequestDTO()
+		$s:SearchRequestDTO() from entry-point "search"
 	then
 		int tagNo=$s.getSearchCriteria().size();
 		 System.out.println("number of search tags: "+tagNo);
@@ -37,20 +42,20 @@ auto-focus true
 	        	}
 	    }
 	    System.out.println(" new number of search tags: "+tagNo);
-	    insert (new SearchResult(tagNo));
-	     drools.setFocus("search");
+	     drools.getEntryPoint("search").insert(new SearchResult(tagNo));
+	     drools.setFocus("searchGroup");
 end
 
 rule "Author-match"
 salience 9
 lock-on-active
-agenda-group "search"
+agenda-group "searchGroup"
     when
-     $sr:SearchResult()
-     $s:SearchRequestDTO()
-     $b:Book()
-     $t:Tag()
-     $bt:BookTag()
+     $sr:SearchResult() from entry-point "search"
+     $s:SearchRequestDTO() from entry-point "search"
+     $b:Book() from entry-point "search"
+     $t:Tag() from entry-point "search"
+     $bt:BookTag() from entry-point "search"
     then
    
     Levenshtein l = new Levenshtein();
@@ -87,13 +92,13 @@ end
 rule "Name-match"
 salience 8
 lock-on-active
-agenda-group "search"
+agenda-group "searchGroup"
     when
-    $sr:SearchResult()
-     $s:SearchRequestDTO()
-     $b:Book()
-     $t:Tag()
-     $bt:BookTag()
+    $sr:SearchResult() from entry-point "search"
+     $s:SearchRequestDTO() from entry-point "search"
+     $b:Book() from entry-point "search"
+     $t:Tag() from entry-point "search"
+     $bt:BookTag() from entry-point "search"
     then
    
     Levenshtein l = new Levenshtein();
@@ -126,13 +131,13 @@ end
 rule "Genre-match"
 salience 7
 lock-on-active
-agenda-group "search"
+agenda-group "searchGroup"
     when
-    $sr:SearchResult()
-     $s:SearchRequestDTO()
-     $b:Book()
-     $t:Tag()
-     $bt:BookTag()
+     $sr:SearchResult() from entry-point "search"
+     $s:SearchRequestDTO() from entry-point "search"
+     $b:Book() from entry-point "search"
+     $t:Tag() from entry-point "search"
+     $bt:BookTag() from entry-point "search"
     then
    
     Levenshtein l = new Levenshtein();
@@ -166,13 +171,13 @@ end
 rule "String-tags"
 salience 6
 lock-on-active
-agenda-group "search"
+agenda-group "searchGroup"
     when
-    $sr:SearchResult()
-     $s:SearchRequestDTO()
-     $b:Book()
-     $t:Tag()
-     $bt:BookTag()
+    $sr:SearchResult() from entry-point "search"
+     $s:SearchRequestDTO() from entry-point "search"
+     $b:Book() from entry-point "search"
+     $t:Tag() from entry-point "search"
+     $bt:BookTag() from entry-point "search"
     then
    
     Levenshtein l = new Levenshtein();
