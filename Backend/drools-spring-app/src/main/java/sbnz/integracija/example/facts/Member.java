@@ -32,7 +32,7 @@ public class Member extends User implements Serializable{
 	@Column
 	private cathegory cathegory;
 	@Column
-	private boolean banned;
+	private boolean banned = false;
 	@Column
 	private Date banExpiry;
 	@Column

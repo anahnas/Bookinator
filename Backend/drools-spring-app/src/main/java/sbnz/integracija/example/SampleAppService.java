@@ -177,6 +177,15 @@ public class SampleAppService {
 		this.bookTagRepository.delete(bookTag);
 	}
 	
+	public void payMembership(Long id) {
+		Member member = memberRepo.getOne(id);
+		member.setMembershipExpired(false);
+		memberRepo.save(member);
+		//start the clock again
+		startMembershipCheck(id);
+	}
+	
+	
 	public void startMembershipCheck(Long uId) {
 		System.out.println("Initializing membership check rule...............................");
 		
@@ -206,11 +215,9 @@ public class SampleAppService {
         	    for(Object o : newEvents) {
         	    	if(o instanceof MembershipExpiredEvent) {
         	    		MembershipExpiredEvent m = (MembershipExpiredEvent) o;
-        	    		System.out.println("evo nije platio - " + m.getUserId());
         	    		Member member = memberRepo.getOne(m.getUserId());
         	    		member.setMembershipExpired(true);
         	    		memberRepo.save(member);
-        	    		//System.out.println("evo iz baze - " + member.getId());
         	    		
         	    	}
         	    		
