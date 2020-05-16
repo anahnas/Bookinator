@@ -1,4 +1,4 @@
-import { BookTag } from './BookTag'
+import { BookTag } from './bookTag'
 
 export class BookDTO{
     id:String

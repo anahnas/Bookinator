@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,8 +45,10 @@ public class SampleAppController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<?> register(@RequestBody  User u) {
 		User user = sampleService.register(u);
-		if(user != null) 
-			return new ResponseEntity<>(user, HttpStatus.OK);
+		if(user != null) {
+			this.sampleService.startMembershipCheck(user.getId());
+			return new ResponseEntity<>(user, HttpStatus.OK);	
+		}
 		else 
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
@@ -89,4 +92,9 @@ public class SampleAppController {
 		return new ResponseEntity(HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/payMembership/{uId}", method = RequestMethod.GET)
+	public ResponseEntity payMembership(@PathVariable("uId") Long uId) {
+		this.sampleService.payMembership(uId);
+		return new ResponseEntity(HttpStatus.OK);
+	}
 }

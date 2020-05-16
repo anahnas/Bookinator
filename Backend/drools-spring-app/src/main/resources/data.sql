@@ -1,4 +1,5 @@
-insert into user_table(username, password, first_name, last_name, email) values('guest', 'guest', 'guest', 'guest','guest');
+insert into user_table(username, password, first_name, last_name, email, user_type) values('guest', 'guest', 'guest', 'guest','guest', 0);
+insert into member(member_pkey, banned, membership_expired, wrong_tags) values(1, false, false, 0);
 
 insert into tag(tag_name) values ('author');
 insert into tag(tag_name) values ('name');
