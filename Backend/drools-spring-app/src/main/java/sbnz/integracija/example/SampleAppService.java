@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import org.drools.core.ClockType;
 import org.kie.api.KieBase;
@@ -18,7 +19,6 @@ import org.kie.api.runtime.conf.ClockTypeOption;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import DTO.BookDTO;
@@ -26,6 +26,7 @@ import enumeration.RoleEnum;
 import events.MembershipExpiredEvent;
 import events.TransactionEvent;
 import sbnz.integracija.example.facts.Book;
+import sbnz.integracija.example.facts.BookRating;
 import sbnz.integracija.example.facts.BookTag;
 import sbnz.integracija.example.facts.BookTagStatus;
 import sbnz.integracija.example.facts.Member;
@@ -148,7 +149,7 @@ public class SampleAppService {
 	    }
 		
 		User user =  userRepo.findById(reviewRequest.getUserId()).get();
-		/*BookRating rating=new BookRating(book,user,reviewRequest.getRate());
+		BookRating rating=new BookRating(book,user,reviewRequest.getRate());
 		this.ratingRepo.save(rating);
 		
 		List<BookRating> allRatings=ratingRepo.findByBookId(book.getId());
@@ -159,7 +160,7 @@ public class SampleAppService {
 		}
 		float newRating = avg/count;
 		book.setRating(newRating);
-		*/
+		
 	    this.bookRepository.save(book);
 	    System.out.println("Book updated!");
 	}
