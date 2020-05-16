@@ -44,8 +44,10 @@ public class SampleAppController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<?> register(@RequestBody  User u) {
 		User user = sampleService.register(u);
-		if(user != null) 
-			return new ResponseEntity<>(user, HttpStatus.OK);
+		if(user != null) {
+			this.sampleService.startMembershipCheck(user.getId());
+			return new ResponseEntity<>(user, HttpStatus.OK);	
+		}
 		else 
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}

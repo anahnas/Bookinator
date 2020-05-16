@@ -1,20 +1,34 @@
 package sbnz.integracija.example;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import org.drools.core.ClockType;
+import org.kie.api.KieBase;
+import org.kie.api.KieBaseConfiguration;
+import org.kie.api.KieServices;
+import org.kie.api.conf.EventProcessingOption;
+import org.kie.api.runtime.ClassObjectFilter;
 import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.KieSessionConfiguration;
+import org.kie.api.runtime.conf.ClockTypeOption;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import DTO.BookDTO;
 import enumeration.RoleEnum;
+import events.MembershipExpiredEvent;
+import events.TransactionEvent;
 import sbnz.integracija.example.facts.Book;
 import sbnz.integracija.example.facts.BookTag;
 import sbnz.integracija.example.facts.BookTagStatus;
+import sbnz.integracija.example.facts.Member;
 import sbnz.integracija.example.facts.ReviewRequest;
 import sbnz.integracija.example.facts.SearchRequest;
 import sbnz.integracija.example.facts.Tag;
@@ -22,9 +36,9 @@ import sbnz.integracija.example.facts.User;
 import sbnz.integracija.example.repository.BookRatingRepository;
 import sbnz.integracija.example.repository.BookRepository;
 import sbnz.integracija.example.repository.BookTagRepository;
+import sbnz.integracija.example.repository.MemberRepository;
 import sbnz.integracija.example.repository.TagRepository;
 import sbnz.integracija.example.repository.userRepository;
-import util.MembershipRemindTask;
 
 @Service
 public class SampleAppService {
@@ -42,13 +56,13 @@ public class SampleAppService {
 	
 	@Autowired
 	userRepository userRepo;
+
+	@Autowired
+	MemberRepository memberRepo; 
 	
 	@Autowired 
 	TagRepository tagRepo;
 	
-	@Autowired 
-	MembershipRemindTask membershipRemindTask;
-
 	private final KieContainer kieContainer;
 	
 	
@@ -67,6 +81,8 @@ public class SampleAppService {
 //		kieSession.dispose();
 //		return i;
 //	}
+	
+	
 	public User login(User user) {
 		User u = this.userRepo.findByUsername(user.getUsername());
 		if(u != null) {
@@ -84,7 +100,9 @@ public class SampleAppService {
 			return null;
 		} 
 		user.setUserType(RoleEnum.MEMBER);
-		return this.userRepo.save(user);
+		Member member = new Member(user);
+		//return this.userRepo.save(user);
+		return this.memberRepo.save(member);
 	}
 	
 	public ArrayList<BookDTO> getFilteredBooks(SearchRequest searchRequest) {
@@ -158,4 +176,54 @@ public class SampleAppService {
 		bookTag.setStatus(BookTagStatus.REFUSED);
 		this.bookTagRepository.delete(bookTag);
 	}
+	
+	public void startMembershipCheck(Long uId) {
+		System.out.println("Initializing membership check rule...............................");
+		
+		KieServices ks = KieServices.Factory.get();
+		KieBaseConfiguration kbconf = ks.newKieBaseConfiguration();
+        kbconf.setOption(EventProcessingOption.STREAM);		
+		KieBase kbase = kieContainer.newKieBase(kbconf);
+		
+		KieSessionConfiguration ksconf1 = ks.newKieSessionConfiguration();
+	    ksconf1.setOption(ClockTypeOption.get(ClockType.REALTIME_CLOCK.getId()));
+	    KieSession kSession1 = kbase.newKieSession(ksconf1, null);
+	        
+	    runRealtimeClock(kSession1, uId);
+	   
+	}
+
+	private void runRealtimeClock(KieSession kSession1, Long uId) {
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+            	TransactionEvent t1 = new TransactionEvent(uId);
+            	kSession1.insert(t1);
+            	
+                kSession1.fireUntilHalt();
+
+                Collection<?> newEvents = kSession1.getObjects(new ClassObjectFilter(MembershipExpiredEvent.class));
+        	    for(Object o : newEvents) {
+        	    	if(o instanceof MembershipExpiredEvent) {
+        	    		MembershipExpiredEvent m = (MembershipExpiredEvent) o;
+        	    		System.out.println("evo nije platio - " + m.getUserId());
+        	    		Member member = memberRepo.getOne(m.getUserId());
+        	    		member.setMembershipExpired(true);
+        	    		memberRepo.save(member);
+        	    		//System.out.println("evo iz baze - " + member.getId());
+        	    		
+        	    	}
+        	    		
+        	    }
+            }
+        };
+        t.setDaemon(true);
+        t.start();
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            //do nothing
+        }
+    }
+	
 }

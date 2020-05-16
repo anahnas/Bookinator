@@ -1,0 +1,36 @@
+//created on: May 15, 2020
+package integracija
+
+//list any import classes here.
+import events.TransactionEvent;
+import events.MembershipExpiredEvent;
+//declare any global variables here
+
+declare MembershipPaid
+	@role(event)
+    userId: Long
+end
+
+rule "Membership-expired"
+    when
+    	MembershipPaid($uId: userId)
+    	//MembershipPaid(userId == $uId)
+        not(
+            //$t1:TransactionEvent($uId: userId) 
+            MembershipPaid(userId == $uId)
+            over window:time(10s)
+        )
+    then
+        System.out.println("expired__________________________________________________________________" );
+        insert(new MembershipExpiredEvent($uId));
+        drools.halt();
+end
+
+rule "Membership-paid"
+    when
+    	$t1:TransactionEvent($uId: userId) 
+    then
+        System.out.println("paid__________________________________________________________________" + $uId );
+        insert(new MembershipPaid($uId));
+end
+

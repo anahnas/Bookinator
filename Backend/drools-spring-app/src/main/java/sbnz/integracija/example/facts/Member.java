@@ -9,6 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
+import org.springframework.transaction.annotation.Transactional;
+
+import enumeration.RoleEnum;
+
 @Entity
 @PrimaryKeyJoinColumn(name = "member_pkey")
 public class Member extends User implements Serializable{
@@ -18,7 +22,7 @@ public class Member extends User implements Serializable{
 	@Column
 	private Date joinDate;
 	@Column
-	private boolean membershipExpired;
+	private boolean membershipExpired = false;
 	@Column
 	private Penalty penalty;
 	@Column
@@ -48,29 +52,54 @@ public class Member extends User implements Serializable{
 		
 	}
 	
-	public Member(String username, String password, Long id, Date joinDate, Date expiryDate, Penalty penalty,
+	public Member(String username, String password, String firstName, String lastName, String email,
+			RoleEnum userType) {
+		super(username, password, firstName, lastName, email, userType);
+	}
+
+	public Member(User u) {
+		super(u.getUsername(), u.getPassword(), u.getFirstName(), u.getLastName(), u.getEmail(), u.getUserType());
+	}
+	
+	public Member() {
+		super();
+	}
+	
+	
+	public Member(String username, String password, Long id, Date joinDate, Penalty penalty,
 			BookLoan loan, Set<BookLoan> history, sbnz.integracija.example.facts.Member.cathegory cathegory,
 			boolean banned) {
 		super(username, password, id);
 		this.joinDate = joinDate;
-		this.expiryDate = expiryDate;
 		this.penalty = penalty;
 		this.loan = loan;
 		this.history = history;
 		this.cathegory = cathegory;
 		this.banned = banned;
 	}
+	
+	public Member(String username, String password, String firstName, String lastName, String email, RoleEnum userType,
+			Date joinDate, boolean membershipExpired, Penalty penalty, BookLoan loan, Set<BookLoan> history,
+			sbnz.integracija.example.facts.Member.cathegory cathegory, boolean banned, Date banExpiry, int wrongTags,
+			Set<Discount> discounts) {
+		super(username, password, firstName, lastName, email, userType);
+		this.joinDate = joinDate;
+		this.membershipExpired = membershipExpired;
+		this.penalty = penalty;
+		this.loan = loan;
+		this.history = history;
+		this.cathegory = cathegory;
+		this.banned = banned;
+		this.banExpiry = banExpiry;
+		this.wrongTags = wrongTags;
+		this.discounts = discounts;
+	}
+
 	public Date getJoinDate() {
 		return joinDate;
 	}
 	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
-	}
-	public Date getExpiryDate() {
-		return expiryDate;
-	}
-	public void setExpiryDate(Date expiryDate) {
-		this.expiryDate = expiryDate;
 	}
 	public Penalty getPenalty() {
 		return penalty;
@@ -102,7 +131,37 @@ public class Member extends User implements Serializable{
 	public void setBanned(boolean banned) {
 		this.banned = banned;
 	}
-	
-	
+
+	public boolean isMembershipExpired() {
+		return membershipExpired;
+	}
+
+	public void setMembershipExpired(boolean membershipExpired) {
+		this.membershipExpired = membershipExpired;
+	}
+
+	public Date getBanExpiry() {
+		return banExpiry;
+	}
+
+	public void setBanExpiry(Date banExpiry) {
+		this.banExpiry = banExpiry;
+	}
+
+	public int getWrongTags() {
+		return wrongTags;
+	}
+
+	public void setWrongTags(int wrongTags) {
+		this.wrongTags = wrongTags;
+	}
+
+	public Set<Discount> getDiscounts() {
+		return discounts;
+	}
+
+	public void setDiscounts(Set<Discount> discounts) {
+		this.discounts = discounts;
+	}
 
 }

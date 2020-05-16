@@ -1,4 +1,4 @@
-package sbnz.integracija.example.facts;
+package events;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -9,7 +9,7 @@ import org.kie.api.definition.type.Timestamp;
 
 @Role(Role.Type.EVENT)
 @Timestamp("executionTime")
-@Expires("2h30m")
+@Expires("10m")
 public class TransactionEvent  implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -8,18 +8,13 @@ import sbnz.integracija.example.facts.Book;
 import sbnz.integracija.example.facts.Tag;
 import sbnz.integracija.example.facts.BookTag;
 import sbnz.integracija.example.facts.SearchResult;
-import sbnz.integracija.example.facts.TransactionEvent;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.lang.Exception;
 
 //declare any global variables here
 
-declare MembershipPaidEvent
-    @role(event)
-    userId: Long
-    reason: String
-end
+
 
 rule "Weight-split"
 auto-focus true
@@ -215,13 +210,4 @@ agenda-group "search"
 
 end
 
-rule "Membership-expired"
-    when
-        not(
-            TransactionEvent($uId: userId) 
-            over window:time(5s)
-        )
-    then
-        System.out.println("expired for " + $uId);
-        
-end
+
