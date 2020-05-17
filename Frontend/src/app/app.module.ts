@@ -21,11 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LoginService } from './login/login.service';
 import { UserListComponent } from './user-list/user-list.component';
-<<<<<<< HEAD
-
-=======
-import { ToppyModule } from 'toppy'
->>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8
+import { ToppyModule } from 'toppy';
+import { WelcomeSpeechComponent } from './virtual-assistant/welcome-speech/welcome-speech.component'
 
 @NgModule({
   declarations: [
@@ -37,7 +34,8 @@ import { ToppyModule } from 'toppy'
     RegistrationComponent,
     BookReviewFormComponent,
     BookInfoDialogComponent,
-    UserListComponent
+    UserListComponent,
+    WelcomeSpeechComponent
     ],
   imports: [
     BrowserModule,
@@ -67,6 +65,7 @@ import { ToppyModule } from 'toppy'
   providers:
   [BookInfoDialogComponent,
   LoginService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports:[WelcomeSpeechComponent]
 })
 export class AppModule { }

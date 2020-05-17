@@ -103,7 +103,8 @@ html {
 
 body {
   background-color: #ffffff;
-  color: #444444; }
+  color: #444444; 
+  opacity: .99;}
 
 body, input, select, textarea {
   font-family: "Raleway", Arial, Helvetica, sans-serif;
@@ -247,12 +248,13 @@ hr {
   margin: 0 auto;
   width: 75rem;
   max-width: calc(100% - 6rem); 
+  opacity: 0.99;
 
   }
   @media screen and (max-width: 480px) {
     .inner {
       max-width: calc(100% - 3rem);
-      color:rgba(0, 0, 0, 0.25);   }}
+      color:rgba(0, 0, 0, 0.25);  opacity: 0.99; }}
 
 /* Button */
 input[type="submit"],
@@ -1787,16 +1789,17 @@ ul.icons {
 .wrapper {
   padding: 8rem 0 6rem 0 ;
   position: relative;
-  z-index: 1; }
+  z-index: 1;
+opacity: 0.99; }
   @media screen and (max-width: 1280px) {
     .wrapper {
-      padding: 4rem 0 2rem 0 ; } }
+      padding: 4rem 0 2rem 0 ;opacity: 0.99; } }
   @media screen and (max-width: 736px) {
     .wrapper {
-      padding: 3rem 0 1rem 0 ; } }
+      padding: 3rem 0 1rem 0 ; opacity: 0.99;} }
   @media screen and (max-width: 480px) {
     .wrapper {
-      padding: 2rem 0 0.1rem 0 ; } }
+      padding: 2rem 0 0.1rem 0 ; opacity: 0.99;} }
 
 /* Banner */
 #banner {
@@ -2671,13 +2674,14 @@ body {
   border-radius: 4px;
   box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.025);
   margin-bottom: 2rem;
-  padding: 3rem; }
+  padding: 3rem;
+  opacity: 0.99; }
   @media screen and (max-width: 980px) {
     #main .content {
-      padding: 2rem; } }
+      padding: 2rem; opacity: 0.99; } }
   @media screen and (max-width: 480px) {
     #main .content {
-      padding: 1.5rem; } }
+      padding: 1.5rem; opacity: 0.99; } }
 
 /* Menu */
 #menu {

@@ -18,7 +18,6 @@ query "getSearchResults"
     $result: Book() from entry-point "search"
 end
 
-<<<<<<< HEAD
 
 rule "Weight-split"
 auto-focus true

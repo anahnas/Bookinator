@@ -1,9 +1,11 @@
 body {
     font-family: Arial;
+    opacity: .99;
   }
   
   * {
     box-sizing: border-box;
+    opacity: .99;
   }
   
   form.example input[type=text]{
@@ -13,6 +15,7 @@ body {
     float: left;
     width: 70%;
     background: #f1f1f1;
+    opacity: .99;
   }
 
   input[type=number], input[type=date]{
@@ -22,6 +25,7 @@ body {
     float: left;
     width: 100%;
     background: #f1f1f1;
+    opacity: .99;
   }
 
   form.example button {
@@ -34,18 +38,22 @@ body {
     border: 1px solid grey;
     border-left: none;
     cursor: pointer;
+    opacity: .99;
   }
   
   form.example button:hover {
     background: #949697;
+    opacity: .99;
   }
   
   form.example::after {
     content: "";
     clear: both;
     display: table;
+    opacity: .99;
   }
 
   .bookCard:hover{
     cursor: pointer;
+    opacity: .99;
   }

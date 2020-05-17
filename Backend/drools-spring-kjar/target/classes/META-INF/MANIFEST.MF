@@ -1,11 +1,5 @@
-<<<<<<< HEAD
 Manifest-Version: 1.0
-Built-By: Jelena
-Build-Jdk: 12.0.2
+Built-By: HP
+Build-Jdk: 1.8.0_251
 Created-By: Maven Integration for Eclipse
 
-=======
-Manifest-Version: 1.0
-Class-Path: 
-
->>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8

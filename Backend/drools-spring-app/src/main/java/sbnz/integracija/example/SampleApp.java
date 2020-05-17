@@ -1,12 +1,11 @@
 package sbnz.integracija.example;
 
-<<<<<<< HEAD
-=======
+<<<<<<<HEAD=======
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
-import java.util.ArrayList;
->>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8
+import java.util.ArrayList;>>>>>>>834 cbbceba6674f9d215dd9c9bfa0f825f5dabb8
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,17 +40,15 @@ public class SampleApp {
 
 		String[] beanNames = ctx.getBeanDefinitionNames();
 		Arrays.sort(beanNames);
-		
-		//StringBuilder sb = new StringBuilder("Application beans:\n");
-		//for (String beanName : beanNames) {
-		//	sb.append(beanName + "\n");
-		//}
-		//log.info(sb.toString());	   
+
+		// StringBuilder sb = new StringBuilder("Application beans:\n");
+		// for (String beanName : beanNames) {
+		// sb.append(beanName + "\n");
+		// }
+		// log.info(sb.toString());
 
 	}
 
-		 
-	
 	@Bean
 	public KieContainer kieContainer() {
 		
@@ -115,5 +112,5 @@ public class SampleApp {
 >>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8
 		return kContainer;
 	}
-	
+
 }
