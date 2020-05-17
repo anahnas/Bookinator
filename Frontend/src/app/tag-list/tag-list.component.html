@@ -1,0 +1,35 @@
+<html>
+<body>
+<br>
+<br>
+<br>
+<h2 align = "center" style="color:#cf3636">List of requested tags</h2>
+<table class="table">
+  <tr>
+    <th>#</th>
+    <th>Tag name: </th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let tag of reqTags; let i = index">
+    <td>{{i + 1}}</td>
+    <td>{{tag.tagName}}</td>
+    <td><button class="btn badge-success" (click)="approveTag(tag.tagName)">Accept</button></td>
+    <td><button class="btn badge-danger" (click)="deleteTag(tag.tagName)">Decline</button></td>
+  </tr>
+</table>
+<h2 align = "center" style="color:#cf3636">List of all tags</h2>
+
+<table>
+  <tr>
+    <th>#</th>
+    <th>Tag name: </th>
+    <th>Tag value: </th>
+  </tr>
+  <tr *ngFor="let tag of bookTags; let i = index">
+    <td>{{i + 1}}</td>
+    <td>{{tag.tagKey}}</td>
+    <td>{{tag.tagValue}}</td>
+</table>
+</body>
+</html>
