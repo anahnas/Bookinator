@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import DTO.BookDTO;
+import DTO.BookTagDTO;
 import sbnz.integracija.example.facts.Book;
 import sbnz.integracija.example.facts.BookTag;
 import sbnz.integracija.example.facts.BookTagStatus;
@@ -130,12 +131,16 @@ public class SampleAppService {
 	        HashMap.Entry pair = (HashMap.Entry)it.next();
 	        //book.getTags().put(pair.getKey().toString(), pair.getValue().toString());
 	        Tag tag = this.tagRepo.findByTagName(pair.getKey().toString());
+
 	        if (tag==null) {
 	        	tagRepo.save(new Tag(pair.getKey().toString()));
 	        	 tag = this.tagRepo.findByTagName(pair.getKey().toString());
+	        	 tag.setApproved(false);
 	        }
+	       
+	        // this.bookTagRepository.save(new BookTag(reviewRequest.getBookId(), tag.getId(), pair.getValue().toString()));
+	        this.bookTagRepository.save(new BookTag(reviewRequest.getBookId(), tag.getId(), pair.getValue().toString(), BookTagStatus.PENDING));
 	        
-	        this.bookTagRepository.save(new BookTag(reviewRequest.getBookId(), tag.getId(), pair.getValue().toString()));
 	        it.remove(); // avoids a ConcurrentModificationException
 
 	    }
@@ -163,11 +168,36 @@ public class SampleAppService {
 		this.bookTagRepository.save(bookTag);
 	}
 	
+	public void approveJustTag(String name) {
+		Tag tag = tagRepo.findByTagName(name);
+		tag.setApproved(true);
+		this.tagRepo.save(tag);
+		// bookTagRepository.setConfirmed(tag.getTagValue());
+	}
+	
 
 	public void deleteTag(Long id) {
 		BookTag bookTag = bookTagRepository.getOne(id);
 		bookTag.setStatus(BookTagStatus.REFUSED);
 		this.bookTagRepository.delete(bookTag);
+	}
+	
+	public void deleteJustTag(String name) {
+		Tag tag = tagRepo.findByTagName(name);
+		tag.setApproved(false);
+		this.tagRepo.delete(tag);
+	}
+
+	public List<BookTag> findAllTags() {
+		return bookTagRepository.findAll();
+	}
+	
+	public List<BookTag> findRequestedTags() {
+		return bookTagRepository.findRequestedTags();
+	}
+	
+	public List<Tag> findTags() {
+		return tagRepo.findTags();
 	}
 	
 	

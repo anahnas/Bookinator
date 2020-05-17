@@ -17,9 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import DTO.BookDTO;
 import DTO.BookTagDTO;
 import sbnz.integracija.example.facts.BookTag;
+import sbnz.integracija.example.facts.BookTagStatus;
 import sbnz.integracija.example.facts.ReviewRequest;
 import sbnz.integracija.example.facts.SearchRequest;
+import sbnz.integracija.example.facts.Tag;
 import sbnz.integracija.example.facts.User;
+import sbnz.integracija.example.repository.TagRepository;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -98,11 +101,47 @@ public class SampleAppController {
 	public ResponseEntity manageTag(@RequestBody BookTagDTO bookTagDTO) {
 		if(bookTagDTO.isApproved()) {
 			this.sampleService.approveTag(bookTagDTO.getId());
+
 		} else {
 			this.sampleService.deleteTag(bookTagDTO.getId());
+
 		}
 		
 		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/approveTag", method = RequestMethod.POST)
+	public ResponseEntity<String> approveTag(@RequestBody String name) {
+		
+		sampleService.approveJustTag(name);
+		return new ResponseEntity<>("", HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(value = "/deleteTag", method = RequestMethod.POST)
+	public ResponseEntity<String> deleteTag(@RequestBody String name) {
+		
+		sampleService.deleteJustTag(name);
+		return new ResponseEntity<>("", HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(value="/getTags", method = RequestMethod.GET)
+	public ResponseEntity<List<BookTag>> getTags() {
+		List<BookTag> bookTag = sampleService.findAllTags();
+		return new ResponseEntity<>(bookTag, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/getRequestedTags", method = RequestMethod.GET)
+	public ResponseEntity<List<BookTag>> getRequestedTags() {
+		List<BookTag> bookTag = sampleService.findRequestedTags();
+		return new ResponseEntity<>(bookTag, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/getTagsPair", method = RequestMethod.GET)
+	public ResponseEntity<List<Tag>> getTagss() {
+		List<Tag> tag = sampleService.findTags();
+		return new ResponseEntity<>(tag, HttpStatus.OK);
 	}
 	
 }
