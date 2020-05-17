@@ -5,10 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-<<<<<<< HEAD
-=======
 import java.util.Set;
->>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8
 
 import org.drools.core.ClockType;
 import org.kie.api.KieBase;
@@ -195,7 +192,6 @@ public class SampleAppService {
 		this.bookTagRepository.delete(bookTag);
 	}
 	
-<<<<<<< HEAD
 	public void payMembership(Long id) {
 		Member member = memberRepo.getOne(id);
 		member.setMembershipExpired(false);
@@ -251,7 +247,5 @@ public class SampleAppService {
             //do nothing
         }
     }
-=======
->>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8
 	
 }
