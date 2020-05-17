@@ -68,6 +68,7 @@ export class SearchComponent implements OnInit {
     const searchRequest = new SearchRequest();
     searchRequest.searchCriteria = {};
     Object.keys(this.bookSearchForm.controls).forEach(key => {
+      if(this.bookSearchForm.get(key).value!="" && this.bookSearchForm.get(key).value!=null)
       searchRequest.searchCriteria[key] = this.bookSearchForm.get(key).value;
     });
     console.log(searchRequest)

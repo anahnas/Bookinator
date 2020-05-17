@@ -25,7 +25,6 @@ import { ToppyModule } from 'toppy';
 import { WelcomeSpeechComponent } from './virtual-assistant/welcome-speech/welcome-speech.component'
 import { TagListComponent } from './tag-list/tag-list.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

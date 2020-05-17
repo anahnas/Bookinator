@@ -82,7 +82,7 @@
 
                     <div class="highlights" *ngIf = 'books && books.length'>
 						<section *ngFor = 'let book of books'>
-							<div class="content bookCard"  (click) = "onSelect(book)">
+							<div class="content bookCard"  (click) = "onSelect(book)" style="background-color:lavender">
 								<header>
                                     <a href="#" class="icon fa-paper-plane-o"><span class="label">Icon</span></a>
                                     <h3>{{book.name}}</h3>
