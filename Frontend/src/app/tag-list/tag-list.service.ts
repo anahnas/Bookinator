@@ -43,7 +43,7 @@ export class TagListService {
 
 
   public approveTag(tagName: String): Observable<any> {
-    return this.http.post<any>(this.manageTagUrl, tagName);
+    return this.http.post<any>(this.acceptTagUrl, tagName);
   }
 
 

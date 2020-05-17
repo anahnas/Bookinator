@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class SearchRequestDTO {
 
-	private HashMap<String,String> searchCriteria;
+	private HashMap<String,String> searchCriteria = new HashMap<String, String>();
 
 	public HashMap<String, String> getSearchCriteria() {
 		return searchCriteria;
@@ -15,6 +15,7 @@ public class SearchRequestDTO {
 	}
 	
 	public SearchRequestDTO() {
-		searchCriteria = new HashMap<String, String>();
+		
 	}
+	
 }

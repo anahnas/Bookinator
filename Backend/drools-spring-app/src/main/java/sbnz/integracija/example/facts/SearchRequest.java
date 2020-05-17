@@ -6,7 +6,7 @@ import java.util.Date;
 public class SearchRequest {
 
 	private String name; 
-	private String authorName;
+	private String author;
     private String genre;
     private String authorOrigin;
     private String yearPublished;
@@ -25,11 +25,11 @@ public class SearchRequest {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getAuthorName() {
-		return authorName;
+	public String getAuthor() {
+		return author;
 	}
-	public void setAuthorName(String authorName) {
-		this.authorName = authorName;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 	public String getGenre() {
 		return genre;
@@ -98,10 +98,10 @@ public class SearchRequest {
 	public void setAvailable(boolean available) {
 		this.available = available;
 	}
-	public SearchRequest(String name, String authorName) {
+	public SearchRequest(String name, String author) {
 		super();
 		this.name = name;
-		this.authorName = authorName;
+		this.author = author;
 	}
 	public SearchRequest() {
 		super();

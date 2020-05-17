@@ -11,7 +11,7 @@
                             <input type="text" formControlName="name" id="naslov" value="" placeholder="Title">
                         </div>
                         <div class="col-6 col-12-xsmall">
-                            <input type="text" formControlName="authorName" id="pisac" value="" placeholder="Author">
+                            <input type="text" formControlName="author" id="pisac" value="" placeholder="Author">
                         </div>
                         <div class="col-6 col-12-xsmall">
                             <input type="number" formControlName="yearPublished" id="godina" value="" placeholder="Year published">
@@ -86,9 +86,10 @@
 								<header>
                                     <a href="#" class="icon fa-paper-plane-o"><span class="label">Icon</span></a>
                                     <h3>{{book.name}}</h3>
-                                    <h4>{{book.authorName}}</h4>
+                                    <h4>{{book.author}}</h4>
 								</header>
-								<p>{{book.description}}</p>
+                                <p>{{book.description}}</p>
+                                <h4>Match - {{book.match | number:'2.1-1'}}</h4>
 							</div>
                         </section>
                     </div>
