@@ -11,11 +11,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-<<<<<<< HEAD
 import enumeration.RoleEnum;
-=======
-import sbnz.integracija.example.facts.enumeration.RoleEnum;
->>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8
 
 @Entity
 @Inheritance(
@@ -40,8 +36,6 @@ public class User implements Serializable{
 	@Column(name = "user_type", unique = false)
 	private RoleEnum userType;
 	
-	@Column(name = "user_type", unique = false)
-	private RoleEnum userType;	
 	
 	public String getUsername() {
 		return username;
@@ -80,16 +74,9 @@ public class User implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public RoleEnum getUserType() {
-		return userType;
-	}
-	public void setUserType(RoleEnum userType) {
-		this.userType = userType;
-	}
 	
-<<<<<<< HEAD
-	public User(String username, String password, String firstName, String lastName, String email, RoleEnum userType) {
-=======
+	
+	public User(String username, String password, String firstName, String lastName, String email, RoleEnum userType) {}
 	
 	
 	public RoleEnum getUserType() {
@@ -99,7 +86,6 @@ public class User implements Serializable{
 		this.userType = userType;
 	}
 	public User(Long id, String username, String password, String firstName, String lastName, String email, RoleEnum userType) {
->>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8
 		super();
 		this.username = username;
 		this.password = password;
