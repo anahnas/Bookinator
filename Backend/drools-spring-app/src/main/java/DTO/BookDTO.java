@@ -10,6 +10,7 @@ public class BookDTO {
 
 	private Long id;
 	private ArrayList<BookTag> tags = new ArrayList<>();
+	private double match;
 	
 	public BookDTO(Long id, ArrayList<BookTag> tags) {
 		super();
@@ -23,6 +24,7 @@ public class BookDTO {
 	
 	public BookDTO(Book b) {
 		this.id = b.getId();
+		this.match = b.getMatch();
 	}
 	
 	public Long getId() {
@@ -40,7 +42,20 @@ public class BookDTO {
 		this.tags = tags;
 	}
 
+	public BookDTO(Long id, ArrayList<BookTag> tags, double match) {
+		super();
+		this.id = id;
+		this.tags = tags;
+		this.match = match;
+	}
 
-	
+	public double getMatch() {
+		return match;
+	}
+
+	public void setMatch(double match) {
+		this.match = match;
+	}
+
 	
 }

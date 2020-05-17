@@ -5,6 +5,7 @@ import { Book } from '../model/book';
 import { BookInfoDialogComponent } from '../book-info-dialog/book-info-dialog.component';
 import { FormGroup, FormControl } from '@angular/forms';
 import { BookDTO } from '../model/bookDTO';
+import { SearchRequest } from '../model/searchRequest';
 
 @Component({
   selector: 'app-search',
@@ -23,7 +24,7 @@ export class SearchComponent implements OnInit {
 
   bookSearchForm = new FormGroup({
     name: new FormControl(''),
-    authorName: new FormControl(''),
+    author: new FormControl(''),
     periodSet: new FormControl(''),
     targetAgeGroup: new FormControl(''),
     yearPublished: new FormControl(''), 
@@ -61,29 +62,38 @@ export class SearchComponent implements OnInit {
     this.books = [];
     
     console.log(this.bookSearchForm.value)
-    this.bookRequest = this.bookSearchForm.value;
-    this.bookRequest.characters = this.likovi;
-    this._searchService.getFilteredBooks(this.bookRequest).subscribe(
+    //this.bookRequest = this.bookSearchForm.value;
+    //this.bookRequest.characters = this.likovi;
+
+    const searchRequest = new SearchRequest();
+    searchRequest.searchCriteria = {};
+    Object.keys(this.bookSearchForm.controls).forEach(key => {
+      searchRequest.searchCriteria[key] = this.bookSearchForm.get(key).value;
+    });
+    console.log(searchRequest)
+
+    this._searchService.getFilteredBooks(searchRequest).subscribe(
       books => {
         for(let b of books){
-          this.temp = new Book()
+          this.temp = new Book();
+          this.temp.match = b.match;
           for(let tag of b.tags){
-            if(tag.tagKey === 'name'){
+            if(tag.tagKey == '2'){
               this.temp.name = tag.tagValue;
             }
 
-            if(tag.tagKey === 'author'){
-              this.temp.authorName = tag.tagValue;
+            if(tag.tagKey == '1'){
+              this.temp.author = tag.tagValue;
             }
             
-            if(tag.tagKey === 'description'){
+            if(tag.tagKey == '3'){
               this.temp.description = tag.tagValue;
             }
           }
           this.books.push(this.temp);
+          
         }
-        
-        console.log(this.books);
+                
       },
       error => this.errorMessage = <any>error
     );

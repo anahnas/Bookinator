@@ -1,6 +1,8 @@
 package sbnz.integracija.example.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -19,8 +21,9 @@ import DTO.BookDTO;
 import DTO.BookTagDTO;
 import sbnz.integracija.example.SampleAppService;
 import sbnz.integracija.example.facts.BookTag;
+import sbnz.integracija.example.facts.BookTagStatus;
 import sbnz.integracija.example.facts.ReviewRequest;
-import sbnz.integracija.example.facts.SearchRequest;
+import sbnz.integracija.example.facts.SearchRequestDTO;
 import sbnz.integracija.example.facts.Tag;
 import sbnz.integracija.example.facts.User;
 
@@ -37,9 +40,9 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/book", method = RequestMethod.POST)
-	public ResponseEntity<ArrayList<BookDTO>> bookSearch(@RequestBody  SearchRequest searchRequest) {
-		log.debug("Search request received for: " + searchRequest);
-		ArrayList<BookDTO> retVal = sampleService.getFilteredBooks(searchRequest);
+	public ResponseEntity<ArrayList<BookDTO>> bookSearch(@RequestBody  SearchRequestDTO searchRequestDTO) {		
+		
+	    ArrayList<BookDTO> retVal = sampleService.getFilteredBooks(searchRequestDTO);
 		return new ResponseEntity<>(retVal, HttpStatus.OK);
 	}
 	
