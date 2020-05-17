@@ -21,6 +21,7 @@ import sbnz.integracija.example.SampleAppService;
 import sbnz.integracija.example.facts.BookTag;
 import sbnz.integracija.example.facts.ReviewRequest;
 import sbnz.integracija.example.facts.SearchRequest;
+import sbnz.integracija.example.facts.Tag;
 import sbnz.integracija.example.facts.User;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -91,6 +92,42 @@ public class UserController {
 		
 		return new ResponseEntity(HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/approveTag", method = RequestMethod.POST)
+	public ResponseEntity<String> approveTag(@RequestBody String name) {
+
+		sampleService.approveJustTag(name);
+		return new ResponseEntity<>("", HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value = "/deleteTag", method = RequestMethod.POST)
+	public ResponseEntity<String> deleteTag(@RequestBody String name) {
+
+		sampleService.deleteJustTag(name);
+		return new ResponseEntity<>("", HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value="/getTags", method = RequestMethod.GET)
+	public ResponseEntity<List<BookTag>> getTags() {
+		List<BookTag> bookTag = sampleService.findAllTags();
+		return new ResponseEntity<>(bookTag, HttpStatus.OK);
+	}
+
+	@RequestMapping(value="/getRequestedTags", method = RequestMethod.GET)
+	public ResponseEntity<List<BookTag>> getRequestedTags() {
+		List<BookTag> bookTag = sampleService.findRequestedTags();
+		return new ResponseEntity<>(bookTag, HttpStatus.OK);
+	}
+
+	@RequestMapping(value="/getTagsPair", method = RequestMethod.GET)
+	public ResponseEntity<List<Tag>> getTagss() {
+		List<Tag> tag = sampleService.findTags();
+		return new ResponseEntity<>(tag, HttpStatus.OK);
+	}
+	
+	
 	
 	@RequestMapping(value = "/payMembership/{uId}", method = RequestMethod.GET)
 	public ResponseEntity payMembership(@PathVariable("uId") Long uId) {
