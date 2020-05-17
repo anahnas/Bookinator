@@ -34,10 +34,10 @@ public class User implements Serializable{
 	private String lastName;
 	@Column
 	private String email;
+
 	@Column(name = "user_type", unique = false)
 	private RoleEnum userType;
-	
-	
+
 	public String getUsername() {
 		return username;
 	}
@@ -93,7 +93,6 @@ public class User implements Serializable{
 		this.userType = userType;
 	}
 	public User(Long id, String username, String password, String firstName, String lastName, String email, RoleEnum userType) {
-
 		super();
 		this.username = username;
 		this.password = password;
@@ -102,12 +101,14 @@ public class User implements Serializable{
 		this.email = email;
 		this.userType = userType;
 	}
+	
 	public User(String username, String password, Long id) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.id = id;
 	}
+	
 	public User() {
 		super();
 	}

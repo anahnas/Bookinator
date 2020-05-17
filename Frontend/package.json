@@ -22,6 +22,10 @@
     "@angular/platform-browser-dynamic": "^9.1.3",
     "@angular/router": "^9.1.3",
     "@types/angular-material": "^1.1.71",
+<<<<<<< HEAD
+=======
+    "@types/jest": "^25.2.2",
+>>>>>>> 4bf40250e135ef631206156a4172e4778a194bb2
     "angular": "^1.7.9",
     "angular-material": "^1.1.22",
     "material": "^0.4.3",

@@ -2,6 +2,7 @@ package sbnz.integracija.example;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -11,12 +12,15 @@ import org.drools.core.ClockType;
 import org.kie.api.KieBase;
 import org.kie.api.KieBaseConfiguration;
 import org.kie.api.KieServices;
+import org.kie.api.builder.KieScanner;
 import org.kie.api.conf.EventProcessingOption;
 import org.kie.api.runtime.ClassObjectFilter;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.KieSessionConfiguration;
 import org.kie.api.runtime.conf.ClockTypeOption;
+import org.kie.api.runtime.rule.QueryResults;
+import org.kie.api.runtime.rule.QueryResultsRow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +30,7 @@ import DTO.BookDTO;
 import enumeration.RoleEnum;
 import events.MembershipExpiredEvent;
 import events.TransactionEvent;
+import DTO.BookTagDTO;
 import sbnz.integracija.example.facts.Book;
 import sbnz.integracija.example.facts.BookRating;
 import sbnz.integracija.example.facts.BookTag;
@@ -33,6 +38,7 @@ import sbnz.integracija.example.facts.BookTagStatus;
 import sbnz.integracija.example.facts.Member;
 import sbnz.integracija.example.facts.ReviewRequest;
 import sbnz.integracija.example.facts.SearchRequest;
+import sbnz.integracija.example.facts.SearchRequestDTO;
 import sbnz.integracija.example.facts.Tag;
 import sbnz.integracija.example.facts.User;
 import sbnz.integracija.example.repository.BookRatingRepository;
@@ -121,11 +127,17 @@ public class SampleAppService {
 	}
 	
 	public ArrayList<BookDTO> getFilteredBooks(SearchRequest searchRequest) {
-		ArrayList<Book> books = (ArrayList<Book>) bookRepository.findAll();
+		
+		
+		ArrayList<Book> books  = startSearch(searchRequest);
+		
 		ArrayList<BookDTO> bookDTOs = new ArrayList<>();
+		
+		Collections.sort(books, Collections.reverseOrder());
+		
 		for(Book b : books) {
+			System.out.println("book - " + b.toString() + " - " + b.getMatch());
 			BookDTO bookDTO = new BookDTO(b);
-			//bookDTO.setTags();
 			ArrayList<BookTag> bookTags = this.bookTagRepository.findTagsByBookId(b.getId());
 			for(BookTag bt : bookTags) {
 				bookDTO.getTags().add(bt);
@@ -133,16 +145,65 @@ public class SampleAppService {
 			
 			bookDTOs.add(bookDTO);	
 		}		
-		
-//		KieSession kieSession = kieContainer.newKieSession();
-//		kieSession.insert(searchRequest);
-//		kieSession.fireAllRules();
-//		kieSession.dispose();
+
 		
 		return bookDTOs;
 	}
 	
-
+	public ArrayList<Book> startSearch(SearchRequest searchRequest) {
+		System.out.println("Initializing virtual assisant...............................");
+		
+		KieServices ks = KieServices.Factory.get();
+		KieBaseConfiguration kbconf = ks.newKieBaseConfiguration();
+        kbconf.setOption(EventProcessingOption.STREAM);		
+		KieBase kbase = kieContainer.newKieBase(kbconf);
+		
+	    KieSession kSession = kbase.newKieSession();
+		
+	    List<Book> books = bookRepository.findAll();
+	    for(Book book : books) {
+	    	kSession.getEntryPoint("search").insert(book);
+	    }
+	    
+	    List<Tag> tags =  tagRepo.findAll();
+	    for(Tag tag : tags) {
+	    	kSession.getEntryPoint("search").insert(tag);
+	    }
+	    
+	    List<BookTag> bookTags = bookTagRepository.findAll();
+	    for(BookTag bookTag : bookTags) {
+	    	kSession.getEntryPoint("search").insert(bookTag);
+	    }
+	    
+//		kSession.getEntryPoint("search").insert(new Book((long)5));
+//		kSession.getEntryPoint("search").insert(new Tag((long)4,"character"));
+//		kSession.getEntryPoint("search").insert(new Tag((long)1,"author"));
+//		kSession.getEntryPoint("search").insert(new Tag((long)2,"name"));
+//		kSession.getEntryPoint("search").insert(new BookTag((long)5, (long)1, "Ivo Andric"));
+//		kSession.getEntryPoint("search").insert(new BookTag((long)5,(long) 2, "Na Drini Cuprija"));
+//		kSession.getEntryPoint("search").insert(new BookTag((long)5,(long) 4, "Turcin"));
+		SearchRequestDTO s=new SearchRequestDTO();
+		s.getSearchCriteria().put("author", "Ivo Andric");
+		s.getSearchCriteria().put("character","Turci");
+		kSession.getEntryPoint("search").insert(s);
+		// can be commented out
+		kSession.getAgenda().getAgendaGroup( "startSearch" ).setFocus();
+		//
+		kSession.fireAllRules();
+		List<Book> searchResults=new ArrayList<>();
+		QueryResults results = kSession.getQueryResults( "getSearchResults" ); 
+		for ( QueryResultsRow row : results ) {
+		    Book b = ( Book ) row.get( "$result" ); 
+		    searchResults.add(b);
+		}
+		 
+		System.out.println("rezultati:");
+		for (Book b: searchResults)
+			System.out.println(b.getMatch() + " : " + b.toString());
+		
+		return (ArrayList<Book>) searchResults;
+	}
+	
 	public void bookReview(ReviewRequest reviewRequest) {
 		System.out.println(reviewRequest.toString());
 		Book book = bookRepository.getOne(reviewRequest.getBookId());
@@ -152,12 +213,16 @@ public class SampleAppService {
 	        HashMap.Entry pair = (HashMap.Entry)it.next();
 	        //book.getTags().put(pair.getKey().toString(), pair.getValue().toString());
 	        Tag tag = this.tagRepo.findByTagName(pair.getKey().toString());
+
 	        if (tag==null) {
 	        	tagRepo.save(new Tag(pair.getKey().toString()));
 	        	 tag = this.tagRepo.findByTagName(pair.getKey().toString());
+ 	        	 tag.setApproved(false); 
 	        }
+	       
+	        // this.bookTagRepository.save(new BookTag(reviewRequest.getBookId(), tag.getId(), pair.getValue().toString()));
+	        this.bookTagRepository.save(new BookTag(reviewRequest.getBookId(), tag.getId(), pair.getValue().toString(), BookTagStatus.PENDING));
 	        
-	        this.bookTagRepository.save(new BookTag(reviewRequest.getBookId(), tag.getId(), pair.getValue().toString()));
 	        it.remove(); // avoids a ConcurrentModificationException
 
 	    }
@@ -179,10 +244,18 @@ public class SampleAppService {
 	    System.out.println("Book updated!");
 	}
 	
+	
 	public void approveTag(Long id) {
 		BookTag bookTag = bookTagRepository.getOne(id);
 		bookTag.setStatus(BookTagStatus.APPROVED);
 		this.bookTagRepository.save(bookTag);
+	}
+	
+	public void approveJustTag(String name) {
+		Tag tag = tagRepo.findByTagName(name);
+		tag.setApproved(true);
+		this.tagRepo.save(tag);
+		// bookTagRepository.setConfirmed(tag.getTagValue());
 	}
 	
 
@@ -191,7 +264,27 @@ public class SampleAppService {
 		bookTag.setStatus(BookTagStatus.REFUSED);
 		this.bookTagRepository.delete(bookTag);
 	}
+
+
+	public void deleteJustTag(String name) {
+		Tag tag = tagRepo.findByTagName(name);
+		tag.setApproved(false);
+		this.tagRepo.delete(tag);
+	}
+
+	public List<BookTag> findAllTags() {
+		return bookTagRepository.findAll();
+	}
+
+	public List<BookTag> findRequestedTags() {
+		return bookTagRepository.findRequestedTags();
+	}
+
+	public List<Tag> findTags() {
+		return tagRepo.findTags();
+	}
 	
+
 	public void payMembership(Long id) {
 		Member member = memberRepo.getOne(id);
 		member.setMembershipExpired(false);
@@ -213,7 +306,7 @@ public class SampleAppService {
 	    ksconf1.setOption(ClockTypeOption.get(ClockType.REALTIME_CLOCK.getId()));
 	    KieSession kSession1 = kbase.newKieSession(ksconf1, null);
 	        
-	    runRealtimeClock(kSession1, uId);
+	    // runRealtimeClock(kSession1, uId);
 	   
 	}
 
@@ -247,5 +340,6 @@ public class SampleAppService {
             //do nothing
         }
     }
+
 	
 }
