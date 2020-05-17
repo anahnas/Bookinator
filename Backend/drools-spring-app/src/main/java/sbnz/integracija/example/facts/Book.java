@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @Entity
-public class Book implements Serializable{
+public class Book implements Serializable , Comparable< Book >{
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -31,12 +31,6 @@ public class Book implements Serializable{
 		this.id = id;
 	}
 
-//	public HashMap<String, String> getTags() {
-//		return tags;
-//	}
-//	public void setTags(HashMap<String, String> tags) {
-//		this.tags = tags;
-//	}
 	public Book(Long id) {
 		this.id=id;
 	}
@@ -67,5 +61,8 @@ public class Book implements Serializable{
 		this.searchMatch = match;
 	}
 	
-	
+    @Override
+    public int compareTo(Book b) {
+        return Double.compare(this.getMatch(), b.getMatch());
+    }
 }

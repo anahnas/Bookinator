@@ -1,4 +1,4 @@
-package controller;
+package sbnz.integracija.example.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +35,13 @@ public class UserController {
 		this.sampleService = sampleService;
 	}
 	
+	@RequestMapping(value = "/book", method = RequestMethod.POST)
+	public ResponseEntity<ArrayList<BookDTO>> bookSearch(@RequestBody  SearchRequest searchRequest) {
+		log.debug("Search request received for: " + searchRequest);
+		ArrayList<BookDTO> retVal = sampleService.getFilteredBooks(searchRequest);
+		return new ResponseEntity<>(retVal, HttpStatus.OK);
+	}
+
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<?> login(@RequestBody  User u) {
 		User user = sampleService.login(u);

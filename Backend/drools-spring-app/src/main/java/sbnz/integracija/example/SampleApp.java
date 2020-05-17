@@ -64,38 +64,35 @@ public class SampleApp {
 		KieScanner kScanner = ks.newKieScanner(kContainer);
 		kScanner.start(10_000);
 
-		
-		KieBase kbase = kContainer.newKieBase(kbconf);
-		KieSession kSession = kbase.newKieSession();
-
-
-		 //KieSession kSession = kContainer.newKieSession();
-		 
-		 kSession.getEntryPoint("search").insert(new Book((long)5));
-		 kSession.getEntryPoint("search").insert(new Tag((long)4,"character"));
-		 kSession.getEntryPoint("search").insert(new Tag((long)1,"author"));
-		 kSession.getEntryPoint("search").insert(new Tag((long)2,"name"));
-		 kSession.getEntryPoint("search").insert(new BookTag((long)5, (long)1, "Ivo Andric"));
-		 kSession.getEntryPoint("search").insert(new BookTag((long)5,(long) 2, "Na Drini Cuprija"));
-		 kSession.getEntryPoint("search").insert(new BookTag((long)5,(long) 4, "Turcin"));
-		 SearchRequestDTO s=new SearchRequestDTO();
-		 s.getSearchCriteria().put("author", "Ivo Andric");
-		 s.getSearchCriteria().put("character","Turci");
-		 kSession.getEntryPoint("search").insert(s);
-		 // can be commented out
-		 kSession.getAgenda().getAgendaGroup( "startSearch" ).setFocus();
-		 //
-		 kSession.fireAllRules();
-		 List<Book> searchResults=new ArrayList<>();
-		 QueryResults results = kSession.getQueryResults( "getSearchResults" ); 
-		 for ( QueryResultsRow row : results ) {
-		     Book b = ( Book ) row.get( "$result" ); 
-		     searchResults.add(b);
-		 }
-		 
-		 System.out.println("rezultati:");
-		 for (Book b: searchResults)
-			 System.out.println(b.getMatch());
+//		
+//		KieBase kbase = kContainer.newKieBase(kbconf);
+//		KieSession kSession = kbase.newKieSession();
+//		
+//		 kSession.getEntryPoint("search").insert(new Book((long)5));
+//		 kSession.getEntryPoint("search").insert(new Tag((long)4,"character"));
+//		 kSession.getEntryPoint("search").insert(new Tag((long)1,"author"));
+//		 kSession.getEntryPoint("search").insert(new Tag((long)2,"name"));
+//		 kSession.getEntryPoint("search").insert(new BookTag((long)5, (long)1, "Ivo Andric"));
+//		 kSession.getEntryPoint("search").insert(new BookTag((long)5,(long) 2, "Na Drini Cuprija"));
+//		 kSession.getEntryPoint("search").insert(new BookTag((long)5,(long) 4, "Turcin"));
+//		 SearchRequestDTO s=new SearchRequestDTO();
+//		 s.getSearchCriteria().put("author", "Ivo Andric");
+//		 s.getSearchCriteria().put("character","Turci");
+//		 kSession.getEntryPoint("search").insert(s);
+//		 // can be commented out
+//		 kSession.getAgenda().getAgendaGroup( "startSearch" ).setFocus();
+//		 //
+//		 kSession.fireAllRules();
+//		 List<Book> searchResults=new ArrayList<>();
+//		 QueryResults results = kSession.getQueryResults( "getSearchResults" ); 
+//		 for ( QueryResultsRow row : results ) {
+//		     Book b = ( Book ) row.get( "$result" ); 
+//		     searchResults.add(b);
+//		 }
+//		 
+//		 System.out.println("rezultati:");
+//		 for (Book b: searchResults)
+//			 System.out.println(b.getMatch());
 
 		return kContainer;
 	}

@@ -15,6 +15,10 @@ public class Tag {
 	@Column
 	private String tagName;
 
+	public Tag() {
+		super();
+	}
+
 	public Tag(Long id, String tagName) {
 		super();
 		this.id = id;
