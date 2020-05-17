@@ -26,7 +26,7 @@ export class WelcomeComponent implements OnInit {
       )
       .config({
         closeOnEsc: true,
-        closeOnDocClick: true
+        closeOnDocClick: false
       })
       .content('<img src="./assets/images/robot.png" width="100%"/>', { hasHTML: true })
       .create();
@@ -43,11 +43,13 @@ export class WelcomeComponent implements OnInit {
             offset: 120
           })
         )
+        .config({closeOnDocClick:false})
         .content(WelcomeSpeechComponent, { text1: 'Hello! My name is Bookinator',text2:'Log in and let me help you!' })
         .create()
         this._toppyControlSpeech.listen('t_compins').subscribe(comp => {
           console.log('component is ready!', comp); // returns component
         });
+        this.openSpeech();
     }
 
       else {
@@ -57,16 +59,18 @@ export class WelcomeComponent implements OnInit {
             placement: OutsidePlacement.BOTTOM_RIGHT,
             width: 'auto',
             height: 'auto',
-            offset: 110
+            offset: 110,
           })
         )
+        .config({closeOnDocClick:false})
         .content(WelcomeSpeechComponent, { text1:'Click the "Search" toolbar',text2:'and start searching!' })
         .create()
         this._toppyControlSpeech.listen('t_compins').subscribe(comp => {
           console.log('component is ready!', comp); // returns component
         });
+        this.openSpeech();
       }
-      this.openSpeech();
+     
 
   }
 
@@ -77,6 +81,7 @@ export class WelcomeComponent implements OnInit {
 openSpeech() {
   this._toppyControlSpeech.open();
 }
+
 
 
 }
