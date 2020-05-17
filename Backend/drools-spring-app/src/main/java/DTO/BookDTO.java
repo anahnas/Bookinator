@@ -10,7 +10,6 @@ public class BookDTO {
 
 	private Long id;
 	private ArrayList<BookTag> tags = new ArrayList<>();
-
 	
 	public BookDTO(Long id, ArrayList<BookTag> tags) {
 		super();

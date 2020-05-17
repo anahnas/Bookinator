@@ -18,7 +18,14 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { LoginService } from './login/login.service';
+import { UserListComponent } from './user-list/user-list.component';
+<<<<<<< HEAD
 
+=======
+import { ToppyModule } from 'toppy'
+>>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8
 
 @NgModule({
   declarations: [
@@ -29,10 +36,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     RegistrationComponent,
     BookReviewFormComponent,
-    BookInfoDialogComponent
-  ],
+    BookInfoDialogComponent,
+    UserListComponent
+    ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
@@ -41,18 +50,23 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    ToppyModule,
     RouterModule.forRoot([
       { path: 'search', component: SearchComponent},
       { path: 'login', component: LoginComponent},
       { path: 'registration', component: RegistrationComponent},
       { path: 'review', component: BookReviewFormComponent},
       { path: 'welcome', component: WelcomeComponent},
+
+      { path: 'userList', component: UserListComponent },
       { path: '', redirectTo:'welcome', pathMatch: 'full' },
       { path: '**', redirectTo:'welcome', pathMatch: 'full' }
     ])
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
-  providers: [BookInfoDialogComponent],
+  providers:
+  [BookInfoDialogComponent,
+  LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -15,9 +15,12 @@ public class BookTag {
 	@Column
 	private Long bookId;
 	@Column
-	private String tagKey;
+	private Long tagKey; //foreign key from Tag table
 	@Column(length=1500)
 	private String tagValue;
+	
+	@Column(name="book_status")
+	BookTagStatus status;
 	
 	public Long getId() {
 		return id;
@@ -31,10 +34,10 @@ public class BookTag {
 	public void setBookId(Long bookId) {
 		this.bookId = bookId;
 	}
-	public String getTagKey() {
+	public Long getTagKey() {
 		return tagKey;
 	}
-	public void setTagKey(String tagKey) {
+	public void setTagKey(Long tagKey) {
 		this.tagKey = tagKey;
 	}
 	public String getTagValue() {
@@ -43,15 +46,36 @@ public class BookTag {
 	public void setTagValue(String tagValue) {
 		this.tagValue = tagValue;
 	}
-	public BookTag(Long bookId, String tagKey, String tagValue) {
+
+	public BookTag(Long bookId, Long tagKey, String tagValue) {
 		super();
 		this.bookId = bookId;
 		this.tagKey = tagKey;
 		this.tagValue = tagValue;
 	}
+	
+
+	public BookTag(Long bookId, Long tagKey, String tagValue, BookTagStatus status) {
+		super();
+		this.bookId = bookId;
+		this.tagKey = tagKey;
+		this.tagValue = tagValue;
+		this.status = status;
+	}
+	public BookTagStatus getStatus() {
+		return status;
+	}
+	public void setStatus(BookTagStatus status) {
+		this.status = status;
+	}
 	public BookTag() {
 		super();
 	}
 	
+	public BookTag(String tagValue, BookTagStatus status) {
+		this.tagValue = tagValue;
+		this.status = status;
+	}
+
 
 }

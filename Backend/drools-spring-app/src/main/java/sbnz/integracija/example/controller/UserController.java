@@ -97,7 +97,7 @@ public class UserController {
 	
 
 	@RequestMapping(value = "/manageTag", method = RequestMethod.POST)
-	public ResponseEntity manageTag(@RequestBody BookTag bookTagDTO) {
+	public ResponseEntity manageTag(@RequestBody BookTagDTO bookTagDTO) {
 		if(bookTagDTO.isApproved()) {
 			this.sampleService.approveTag(bookTagDTO.getId());
 		} else {

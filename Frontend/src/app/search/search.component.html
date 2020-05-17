@@ -3,86 +3,94 @@
 <section id="main" class="wrapper">
     <div class="inner">
         <div class="content">
-            <h3>Pretraga knjiga</h3>
+            <h3>Book search</h3>
                 <form method="post" action="#" [formGroup]="bookSearchForm" (ngSubmit)="makeSearchRequest()">
                     <div class="row gtr-uniform">
-                    
+
                         <div class="col-6 col-12-xsmall">
-                            <input type="text" formControlName="name" id="naslov" value="" placeholder="Naslov knjige">
+                            <input type="text" formControlName="name" id="naslov" value="" placeholder="Title">
                         </div>
                         <div class="col-6 col-12-xsmall">
-                            <input type="text" formControlName="authorName" id="pisac" value="" placeholder="Pisac">
+                            <input type="text" formControlName="authorName" id="pisac" value="" placeholder="Author">
                         </div>
                         <div class="col-6 col-12-xsmall">
-                            <input type="number" formControlName="yearPublished" id="godina" value="" placeholder="Godina izdavanja">
+                            <input type="number" formControlName="yearPublished" id="godina" value="" placeholder="Year published">
                         </div>
                         <div class="col-6 col-12-xsmall">
-                            <input type="text" formControlName="publisher" id="izdKuca" value="" placeholder="Izdavacka kuca">
+                            <input type="text" formControlName="publisher" id="izdKuca" value="" placeholder="Publisher">
                         </div>
                         <div class="col-6 col-12-xsmall">
-                            <input type="text" value="Period radnje:" readonly>
+                            <input type="text" value="Age set:" readonly>
                         </div>
                         <div class="col-6 col-12-xsmall">
-                            <input type="date" formControlName="periodSet" id="period" placeholder="Period radnje">
+                            <input type="date" formControlName="periodSet" id="period" placeholder="Age set">
                         </div>
                         <div class="col-6 col-12-xsmall">
-                            <input type="text" formControlName="motives" id="motiv" value="" placeholder="Motiv knjige">
+                            <input type="text" formControlName="motives" id="motiv" value="" placeholder="Motive">
                         </div>
                         <div class="col-6 col-12-xsmall">
-                            <input type="text" formControlName="lesson" id="pouka" value="" placeholder="Pouka">
+                            <input type="text" formControlName="lesson" id="pouka" value="" placeholder="Lesson">
                         </div>
                         <div class="col-6 col-12-xsmall">
-                            <input type="number" formControlName="targetAgeGroup" id="uzrast" value="" placeholder="Za uzrast">
+                            <input type="number" formControlName="targetAgeGroup" id="uzrast" value="" placeholder="For age">
                         </div>
-                        <div class="col-6 col-12-xsmall">
+                        <!--div class="col-6 col-12-xsmall">
                             <select formControlName="style" id="stil">
-                                <option value="">- Književni stil -</option>
+                                <option value="">- Literary style -</option>
                                 <option *ngFor='let style of styles' >{{style.name}}</option>
                             </select>
+                        </div!-->
+
+                        <div class="col-6 col-12-xsmall">
+                            <input type="text" formControlName="style" id="style" value="" placeholder="Literary style">
                         </div>
-                        
+
                         <!-- Break -->
                         <div class="col-6 col-12-xsmall">
-                            <h4>Dodani likovi</h4>
+                            <h4>Added characters</h4>
                             <ul class="alt" id="likovi">
 
                             </ul>
                         </div>
                         <div class="col-3 col-12-xsmall">
-                            <input type="text" name="lik" id="lik" placeholder="Dodaj lika...">
+                            <input type="text" name="lik" id="lik" placeholder="Add a character">
                         </div>
                         <div class="col-3 col-12-xsmall">
-                            <li class="button primary fit" (click)="dodajLika()">Dodaj</li>                        
+<<<<<<< HEAD
+                            <li class="button primary fit" (click)="dodajLika()">Dodaj</li>
+=======
+                            <li class="button primary fit" (click)="dodajLika()">Add</li>
+>>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8
                         </div>
                             <!-- Break -->
                         <div class="col-12">
                             <select formControlName="genre" id="zanr">
-                                <option value="">- Žanr -</option>
+                                <option value="">- Genre -</option>
                                 <option *ngFor='let genre of genres' >{{genre.name}}</option>
                             </select>
                         </div>
-                        
+
                         <div class="col-6 col-12-small">
                             <input type="checkbox" id="dostupno" checked="">
-                            <label for="dostupno">Dostupna</label>
+                            <label for="dostupno">Available</label>
                         </div>
-                    
+
                         <!-- Break -->
                         <div class="col-12">
                             <ul class="actions">
-                                <li><input type="submit" value="Pretraži" class="primary"></li>
-                                <li><input type="reset" value="Obriši sve"></li>
+                                <li><input type="submit" value="Search" class="primary"></li>
+                                <li><input type="reset" value="Clear all"></li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="highlights" *ngIf = 'books && books.length'>
 						<section *ngFor = 'let book of books'>
-							<div class="content bookCard"  (click) = 'onSelect(book)'>
+							<div class="content bookCard"  (click) = "onSelect(book)">
 								<header>
-                                    <a href="#" class="icon fa-paper-plane-o"><span class="label">Icon</span></a>                                    
+                                    <a href="#" class="icon fa-paper-plane-o"><span class="label">Icon</span></a>
                                     <h3>{{book.name}}</h3>
-                                    <h4>{{book.author}}</h4>
+                                    <h4>{{book.authorName}}</h4>
 								</header>
 								<p>{{book.description}}</p>
 							</div>
@@ -93,4 +101,4 @@
         </div>
 </section>
 
-       
+
