@@ -2,12 +2,15 @@ package DTO;
 
 import javax.persistence.Column;
 
+import sbnz.integracija.example.facts.BookTagStatus;
+
 public class BookTagDTO {
 	private Long id;
 	private Long bookId;
 	private String tagKey;
 	private String tagValue;
 	private boolean approved;
+
 	
 	public BookTagDTO() {
 		super();
@@ -18,6 +21,13 @@ public class BookTagDTO {
 		this.bookId = bookId;
 		this.tagKey = tagKey;
 		this.tagValue = tagValue;
+		this.approved = approved;
+	}
+	
+	
+	public BookTagDTO(String tagKey, boolean approved) {
+		super();
+		this.tagKey = tagKey;
 		this.approved = approved;
 	}
 	public Long getId() {

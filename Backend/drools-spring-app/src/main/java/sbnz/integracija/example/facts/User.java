@@ -10,8 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
-import enumeration.RoleEnum;
 
+
+import enumeration.RoleEnum;
 
 @Entity
 @Inheritance(
@@ -36,6 +37,7 @@ public class User implements Serializable{
 	
 	@Column(name = "user_type", unique = false)
 	private RoleEnum userType;
+
 	
 	public String getUsername() {
 		return username;
@@ -74,14 +76,19 @@ public class User implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+
+	
+	public User(String username, String password, String firstName, String lastName, String email, RoleEnum userType) {}
+	
+	
 	public RoleEnum getUserType() {
 		return userType;
 	}
 	public void setUserType(RoleEnum userType) {
 		this.userType = userType;
 	}
-	
-	public User(String username, String password, String firstName, String lastName, String email, RoleEnum userType) {
+	public User(Long id, String username, String password, String firstName, String lastName, String email, RoleEnum userType) {
 		super();
 		this.username = username;
 		this.password = password;
