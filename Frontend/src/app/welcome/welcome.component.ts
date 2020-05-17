@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { GlobalPosition, InsidePlacement, Toppy, ToppyControl } from 'toppy';
+import { GlobalPosition, InsidePlacement, Toppy, ToppyControl, RelativePosition, OutsidePlacement } from 'toppy';
+import { WelcomeSpeechComponent } from '../virtual-assistant/welcome-speech/welcome-speech.component';
 
 @Component({
   selector: 'app-welcome',
@@ -9,13 +10,11 @@ import { GlobalPosition, InsidePlacement, Toppy, ToppyControl } from 'toppy';
 export class WelcomeComponent implements OnInit {
 
   _toppyControl2: ToppyControl;
-
-  @ViewChild('modalTpl', { read: TemplateRef }) modalTpl: TemplateRef<any>;
+  _toppyControlSpeech:ToppyControl;
 
   constructor(private toppy: Toppy) { }
 
   ngOnInit(): void {
-    console.log("ulogovan je " + localStorage.getItem("loggedIn"))
 
     this._toppyControl2 = this.toppy
       .position(
@@ -32,10 +31,52 @@ export class WelcomeComponent implements OnInit {
       .content('<img src="./assets/images/robot.png" width="100%"/>', { hasHTML: true })
       .create();
       this.openImage()
+
+      if(localStorage.getItem("loggedIn")==null){
+
+        this._toppyControlSpeech = this.toppy
+        .position(
+          new GlobalPosition({
+            placement: OutsidePlacement.BOTTOM_RIGHT,
+            width: 'auto',
+            height: 'auto',
+            offset: 120
+          })
+        )
+        .content(WelcomeSpeechComponent, { text1: 'Hello! My name is Bookinator',text2:'Log in and let me help you!' })
+        .create()
+        this._toppyControlSpeech.listen('t_compins').subscribe(comp => {
+          console.log('component is ready!', comp); // returns component
+        });
+    }
+
+      else {
+        this._toppyControlSpeech = this.toppy
+        .position(
+          new GlobalPosition({
+            placement: OutsidePlacement.BOTTOM_RIGHT,
+            width: 'auto',
+            height: 'auto',
+            offset: 110
+          })
+        )
+        .content(WelcomeSpeechComponent, { text1:'Click the "Search" toolbar',text2:'and start searching!' })
+        .create()
+        this._toppyControlSpeech.listen('t_compins').subscribe(comp => {
+          console.log('component is ready!', comp); // returns component
+        });
+      }
+      this.openSpeech();
+
   }
 
   openImage() {
     this._toppyControl2.open();
-
 }
+
+openSpeech() {
+  this._toppyControlSpeech.open();
+}
+
+
 }

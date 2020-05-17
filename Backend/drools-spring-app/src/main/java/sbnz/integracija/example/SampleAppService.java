@@ -8,7 +8,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-
 import org.drools.core.ClockType;
 import org.kie.api.KieBase;
 import org.kie.api.KieBaseConfiguration;
@@ -265,7 +264,7 @@ public class SampleAppService {
 		bookTag.setStatus(BookTagStatus.REFUSED);
 		this.bookTagRepository.delete(bookTag);
 	}
-	
+
 
 	public void deleteJustTag(String name) {
 		Tag tag = tagRepo.findByTagName(name);
@@ -285,8 +284,7 @@ public class SampleAppService {
 		return tagRepo.findTags();
 	}
 	
-	
-	
+
 	public void payMembership(Long id) {
 		Member member = memberRepo.getOne(id);
 		member.setMembershipExpired(false);

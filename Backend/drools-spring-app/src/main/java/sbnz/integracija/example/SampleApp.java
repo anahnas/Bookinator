@@ -1,6 +1,4 @@
 package sbnz.integracija.example;
-
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -39,17 +37,15 @@ public class SampleApp {
 
 		String[] beanNames = ctx.getBeanDefinitionNames();
 		Arrays.sort(beanNames);
-		
-		//StringBuilder sb = new StringBuilder("Application beans:\n");
-		//for (String beanName : beanNames) {
-		//	sb.append(beanName + "\n");
-		//}
-		//log.info(sb.toString());	   
+
+		// StringBuilder sb = new StringBuilder("Application beans:\n");
+		// for (String beanName : beanNames) {
+		// sb.append(beanName + "\n");
+		// }
+		// log.info(sb.toString());
 
 	}
 
-		 
-	
 	@Bean
 	public KieContainer kieContainer() {
 		
@@ -63,6 +59,7 @@ public class SampleApp {
 				.newKieContainer(ks.newReleaseId("sbnz.integracija", "drools-spring-kjar", "0.0.1-SNAPSHOT"));
 		KieScanner kScanner = ks.newKieScanner(kContainer);
 		kScanner.start(10_000);
+
 
 //		
 //		KieBase kbase = kContainer.newKieBase(kbconf);
@@ -96,6 +93,6 @@ public class SampleApp {
 
 		return kContainer;
 	}
-	
+
 }
 	

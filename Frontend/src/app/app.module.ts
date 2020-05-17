@@ -22,7 +22,11 @@ import { CommonModule } from '@angular/common';
 import { LoginService } from './login/login.service';
 import { UserListComponent } from './user-list/user-list.component';
 import { ToppyModule } from 'toppy';
+<<<<<<< HEAD
+import { WelcomeSpeechComponent } from './virtual-assistant/welcome-speech/welcome-speech.component'
+=======
 import { TagListComponent } from './tag-list/tag-list.component';
+>>>>>>> 4bf40250e135ef631206156a4172e4778a194bb2
 
 @NgModule({
   declarations: [
@@ -35,7 +39,11 @@ import { TagListComponent } from './tag-list/tag-list.component';
     BookReviewFormComponent,
     BookInfoDialogComponent,
     UserListComponent,
+<<<<<<< HEAD
+    WelcomeSpeechComponent
+=======
     TagListComponent
+>>>>>>> 4bf40250e135ef631206156a4172e4778a194bb2
     ],
   imports: [
     BrowserModule,
@@ -66,6 +74,7 @@ import { TagListComponent } from './tag-list/tag-list.component';
   providers:
   [BookInfoDialogComponent,
   LoginService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports:[WelcomeSpeechComponent]
 })
 export class AppModule { }

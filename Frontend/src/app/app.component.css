@@ -10,7 +10,8 @@
 @-ms-viewport {
   width: device-width; }
 body {
-  -ms-overflow-style: scrollbar; }
+  -ms-overflow-style: scrollbar; 
+  opacity: .99;}
 
 @media screen and (max-width: 480px) {
   html, body {
