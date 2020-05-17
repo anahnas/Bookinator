@@ -1,9 +1,7 @@
 insert into user_table(username, password, first_name, last_name, email, user_type) values('guest', 'guest', 'guest', 'guest','guest', 0);
-<<<<<<< HEAD
 insert into member(member_pkey, banned, membership_expired, wrong_tags) values(1, false, false, 0);
-=======
+
 insert into user_table(username, password, first_name, last_name, email, user_type) values('admin', 'admin', 'admin', 'admin','admin', 1);
->>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8
 
 insert into tag(tag_name) values ('author');
 insert into tag(tag_name) values ('name');

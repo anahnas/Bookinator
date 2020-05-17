@@ -1,11 +1,8 @@
 sbnz\integracija\example\facts\Employee.class
 sbnz\integracija\example\repository\EmployeeRepository.class
 sbnz\integracija\example\facts\SearchRequestDTO.class
-<<<<<<< HEAD
-sbnz\integracija\example\SampleAppService$1.class
-=======
 controller\UserController.class
->>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8
+sbnz\integracija\example\SampleAppService$1.class
 sbnz\integracija\example\repository\BookTagRepository.class
 events\TransactionEvent.class
 sbnz\integracija\example\facts\Penalty.class
@@ -33,10 +30,7 @@ controller\SearchController.class
 sbnz\integracija\example\facts\BookLoan.class
 sbnz\integracija\example\repository\userRepository.class
 sbnz\integracija\example\facts\BookTagStatus.class
-<<<<<<< HEAD
 enumeration\RoleEnum.class
-=======
->>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8
 sbnz\integracija\example\facts\SearchResult.class
 sbnz\integracija\example\SampleHomeController.class
 sbnz\integracija\example\facts\Member$cathegory.class

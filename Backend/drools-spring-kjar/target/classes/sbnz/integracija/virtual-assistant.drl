@@ -18,46 +18,6 @@ query "getSearchResults"
     $result: Book() from entry-point "search"
 end
 
-<<<<<<< HEAD
-
-rule "Weight-split"
-auto-focus true
-	 salience 10
-	when 
-		$s:SearchRequestDTO()
-	then
-		int tagNo=$s.getSearchCriteria().size();
-		 System.out.println("number of search tags: "+tagNo);
-		 Iterator it = $s.getSearchCriteria().entrySet().iterator();
-	    while (it.hasNext()) {
-	        HashMap.Entry pair = (HashMap.Entry)it.next();
-	        
-	        	if(pair.getKey().equals("author")){
-	        		 tagNo= tagNo+1; //some tags are worth more
-	        	}
-	        	if(pair.getKey().equals("name")){
-	        		 tagNo= tagNo+1; //some tags are worth more
-	        	}
-	        	if(pair.getKey().equals("genre")){
-	        		 tagNo= tagNo+1; //some tags are worth more
-	        	}
-	    }
-	    System.out.println(" new number of search tags: "+tagNo);
-	    insert (new SearchResult(tagNo));
-	     drools.setFocus("search");
-end
-
-rule "Author-match"
-salience 9
-lock-on-active
-agenda-group "search"
-    when
-     $sr:SearchResult()
-     $s:SearchRequestDTO()
-     $b:Book()
-     $t:Tag()
-     $bt:BookTag()
-=======
 rule "Weight-split"
 agenda-group "startSearch"
 auto-focus true
@@ -96,13 +56,11 @@ agenda-group "searchGroup"
      $b:Book() from entry-point "search"
      $t:Tag() from entry-point "search"
      $bt:BookTag() from entry-point "search"
->>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8
     then
    
     Levenshtein l = new Levenshtein();
     
   
-<<<<<<< HEAD
     
     //match the book with its tags, and tags with tag names and names with search req params
     if($b.getId()==$bt.getBookId() && $bt.getTagKey()==$t.getId()){
@@ -128,48 +86,12 @@ agenda-group "searchGroup"
 	    }
     }
     
-=======
-    
-    //match the book with its tags, and tags with tag names and names with search req params
-    if($b.getId()==$bt.getBookId() && $bt.getTagKey()==$t.getId()){
-    	 Iterator it = $s.getSearchCriteria().entrySet().iterator();
-	    while (it.hasNext()) {
-	        HashMap.Entry pair = (HashMap.Entry)it.next();
-	        if(pair.getKey().equals($t.getTagName())){     //only compare the same tags
-	        	if(pair.getKey().equals("author")){
-	        	
-	        	 //System.out.println(pair.getKey());
-   				 System.out.println($t.getTagName());
-	        	
-	        		int len1=pair.getValue().toString().length();
-	        		int len2=$bt.getTagValue().length();
-	        		int longestString=Math.max(len1,len2);
-	        		 System.out.println((1-(l.distance( pair.getValue().toString(), $bt.getTagValue())/longestString))*200/ $sr.getSearchTagNo()); 
-	        		 double match=$b.getMatch();
-	        		 $b.setMatch(match+(1-(l.distance( pair.getValue().toString(), $bt.getTagValue())/longestString))*200/ $sr.getSearchTagNo());
-	        		 update($b);
-	        		 break;
-	        	}
-	         }
-	    }
-    }
-    
->>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8
 
 end
 
 rule "Name-match"
 salience 8
 lock-on-active
-<<<<<<< HEAD
-agenda-group "search"
-    when
-    $sr:SearchResult()
-     $s:SearchRequestDTO()
-     $b:Book()
-     $t:Tag()
-     $bt:BookTag()
-=======
 agenda-group "searchGroup"
     when
     $sr:SearchResult() from entry-point "search"
@@ -177,7 +99,6 @@ agenda-group "searchGroup"
      $b:Book() from entry-point "search"
      $t:Tag() from entry-point "search"
      $bt:BookTag() from entry-point "search"
->>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8
     then
    
     Levenshtein l = new Levenshtein();
@@ -198,7 +119,6 @@ agenda-group "searchGroup"
 	        		 $b.setMatch(match+(1-(l.distance( pair.getValue().toString(), $bt.getTagValue())/longestString))*200/ $sr.getSearchTagNo());
 	        		 update($b);
 	        		 break; 
-<<<<<<< HEAD
 	        	}
 
 	         }
@@ -208,62 +128,6 @@ agenda-group "searchGroup"
 
 end
 
-rule "Genre-match"
-salience 7
-lock-on-active
-agenda-group "search"
-    when
-    $sr:SearchResult()
-     $s:SearchRequestDTO()
-     $b:Book()
-     $t:Tag()
-     $bt:BookTag()
-    then
-   
-    Levenshtein l = new Levenshtein();
-    int tagNo=$s.getSearchCriteria().size();
-    
-    //match the book with its tags, and tags with tag names and names with search req params
-    if($b.getId()==$bt.getBookId() && $bt.getTagKey()==$t.getId()){
-    	 Iterator it = $s.getSearchCriteria().entrySet().iterator();
-	    while (it.hasNext()) {
-	        HashMap.Entry pair = (HashMap.Entry)it.next();
-	        if(pair.getKey().equals($t.getTagName())){     //only compare the same tags
-	        
-	        	if(pair.getKey().equals("genre")){
-	        		int len1=pair.getValue().toString().length();
-	        		int len2=$bt.getTagValue().length();
-	        		int longestString=Math.max(len1,len2);
-	        		 System.out.println((1-(l.distance( pair.getValue().toString(), $bt.getTagValue())/longestString))*200/ $sr.getSearchTagNo());
-	        		  double match=$b.getMatch();
-	        		 $b.setMatch(match+(1-(l.distance( pair.getValue().toString(), $bt.getTagValue())/longestString))*200/ $sr.getSearchTagNo());
-	        		 update($b);
-	        		 break; 
-=======
->>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8
-	        	}
-
-	         }
-	    }
-    }
-    
-
-end
-
-<<<<<<< HEAD
-
-rule "String-tags"
-salience 6
-lock-on-active
-agenda-group "search"
-
-    when
-    $sr:SearchResult()
-     $s:SearchRequestDTO()
-     $b:Book()
-     $t:Tag()
-     $bt:BookTag()
-=======
 rule "Genre-match"
 salience 7
 lock-on-active
@@ -274,7 +138,6 @@ agenda-group "searchGroup"
      $b:Book() from entry-point "search"
      $t:Tag() from entry-point "search"
      $bt:BookTag() from entry-point "search"
->>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8
     then
    
     Levenshtein l = new Levenshtein();
@@ -286,24 +149,6 @@ agenda-group "searchGroup"
 	    while (it.hasNext()) {
 	        HashMap.Entry pair = (HashMap.Entry)it.next();
 	        if(pair.getKey().equals($t.getTagName())){     //only compare the same tags
-<<<<<<< HEAD
-		        if(!(pair.getKey().equals("name") || pair.getKey().equals("author") || pair.getKey().equals("genre"))){
-		        System.out.println( pair.getValue().toString()+" "+ $bt.getTagValue());
-		        	try{
-		        		Integer.parseInt( pair.getValue().toString());}
-		        		catch(Exception e){
-		        		int len1=pair.getValue().toString().length();
-		        		int len2=$bt.getTagValue().length();
-		        		int longestString=Math.max(len1,len2);
-		        		System.out.println(l.distance( pair.getValue().toString(), $bt.getTagValue()));
-		        		 System.out.println((1-(l.distance( pair.getValue().toString(), $bt.getTagValue())/longestString))*100/ $sr.getSearchTagNo());
-		        		  double match=$b.getMatch();
-	        			  $b.setMatch(match+(1-(l.distance( pair.getValue().toString(), $bt.getTagValue())/longestString))*100/ $sr.getSearchTagNo());
-	        		 	  update($b);
-		        		 } 
-		        	}
-		    }
-=======
 	        
 	        	if(pair.getKey().equals("genre")){
 	        		int len1=pair.getValue().toString().length();
@@ -317,15 +162,12 @@ agenda-group "searchGroup"
 	        	}
 
 	         }
->>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8
 	    }
     }
     
 
 end
 
-<<<<<<< HEAD
-=======
 rule "String-tags"
 salience 6
 lock-on-active
@@ -368,5 +210,3 @@ agenda-group "searchGroup"
     
 
 end
->>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8
-

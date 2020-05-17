@@ -1,12 +1,10 @@
 package sbnz.integracija.example;
 
-<<<<<<< HEAD
-=======
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.ArrayList;
->>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8
 import java.util.Arrays;
 import java.util.List;
 
@@ -65,27 +63,13 @@ public class SampleApp {
 				.newKieContainer(ks.newReleaseId("sbnz.integracija", "drools-spring-kjar", "0.0.1-SNAPSHOT"));
 		KieScanner kScanner = ks.newKieScanner(kContainer);
 		kScanner.start(10_000);
-<<<<<<< HEAD
+
 		
 		KieBase kbase = kContainer.newKieBase(kbconf);
 		KieSession kSession = kbase.newKieSession();
 
- 		kSession.insert(new Book((long)5));
- 		kSession.insert(new Tag((long)4,"character"));
- 		kSession.insert(new Tag((long)1,"author"));
- 		kSession.insert(new Tag((long)2,"name"));
- 		kSession.insert(new BookTag((long)5, (long)1, "Ivo Andric"));
- 		kSession.insert(new BookTag((long)5,(long) 2, "Na Drini Cuprija"));
- 		kSession.insert(new BookTag((long)5,(long) 4, "Turcin"));
- 		SearchRequestDTO s=new SearchRequestDTO();
- 		s.getSearchCriteria().put("author", "Ivo Andric");
- 		s.getSearchCriteria().put("character","Turci");
- 		kSession.insert(s);
 
-        kSession.fireAllRules();
-=======
-		 KieSession kSession =
-				  kContainer.newKieSession();
+		 //KieSession kSession = kContainer.newKieSession();
 		 
 		 kSession.getEntryPoint("search").insert(new Book((long)5));
 		 kSession.getEntryPoint("search").insert(new Tag((long)4,"character"));
@@ -112,7 +96,7 @@ public class SampleApp {
 		 System.out.println("rezultati:");
 		 for (Book b: searchResults)
 			 System.out.println(b.getMatch());
->>>>>>> 834cbbceba6674f9d215dd9c9bfa0f825f5dabb8
+
 		return kContainer;
 	}
 	
