@@ -19,7 +19,7 @@ public class BookTag {
 	@Column(length=1500)
 	private String tagValue;
 	
- 	@Column(name="book_status") 
+	@Column(name="book_status")
 	BookTagStatus status;
 	
 	public Long getId() {
@@ -54,6 +54,7 @@ public class BookTag {
 		this.tagValue = tagValue;
 	}
 	
+
 	public BookTag(Long bookId, Long tagKey, String tagValue, BookTagStatus status) {
 		super();
 		this.bookId = bookId;
@@ -75,7 +76,6 @@ public class BookTag {
 		this.tagValue = tagValue;
 		this.status = status;
 	}
-	
-	
+
 
 }

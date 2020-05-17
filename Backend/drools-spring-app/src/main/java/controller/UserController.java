@@ -51,7 +51,7 @@ public class UserController {
 	public ResponseEntity<?> register(@RequestBody  User u) {
 		User user = sampleService.register(u);
 		if(user != null) {
-			this.sampleService.startMembershipCheck(user.getId());
+			// this.sampleService.startMembershipCheck(user.getId());
 			return new ResponseEntity<>(user, HttpStatus.OK);	
 		}
 		else 
@@ -144,7 +144,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/payMembership/{uId}", method = RequestMethod.GET)
 	public ResponseEntity payMembership(@PathVariable("uId") Long uId) {
-		this.sampleService.payMembership(uId);
+		// this.sampleService.payMembership(uId);
 		return new ResponseEntity(HttpStatus.OK);
 	}
 }

@@ -30,6 +30,7 @@ sbnz/integracija/example/repository/MemberRepository.class
 sbnz/integracija/example/repository/EmployeeRepository.class
 sbnz/integracija/example/repository/TagRepository.class
 enumeration/RoleEnum.class
+sbnz/integracija/example/SampleAppController.class
 sbnz/integracija/example/SampleAppService.class
 sbnz/integracija/example/facts/BookTagStatus.class
 events/TransactionEvent.class

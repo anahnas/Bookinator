@@ -17,6 +17,7 @@
 /home/ana/git/Bookinator/Backend/drools-spring-app/src/main/java/sbnz/integracija/example/repository/TagRepository.java
 /home/ana/git/Bookinator/Backend/drools-spring-app/src/main/java/sbnz/integracija/example/facts/Discount.java
 /home/ana/git/Bookinator/Backend/drools-spring-app/src/main/java/sbnz/integracija/example/facts/ReviewRequest.java
+/home/ana/git/Bookinator/Backend/drools-spring-app/src/main/java/sbnz/integracija/example/SampleAppController.java
 /home/ana/git/Bookinator/Backend/drools-spring-app/src/main/java/sbnz/integracija/example/facts/Tag.java
 /home/ana/git/Bookinator/Backend/drools-spring-app/src/main/java/controller/UserController.java
 /home/ana/git/Bookinator/Backend/drools-spring-app/src/main/java/sbnz/integracija/example/SampleAppService.java

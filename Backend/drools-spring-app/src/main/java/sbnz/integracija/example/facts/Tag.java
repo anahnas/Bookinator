@@ -21,7 +21,6 @@ public class Tag {
 	@Column
 	private String tagValue;
 
-
 	public Tag() {}
 
 	public Tag(Long id, String tagName, Boolean approved) {
@@ -31,7 +30,8 @@ public class Tag {
 		this.approved = Boolean.FALSE;
 	}
 
-	public Tag(Long id, String tagName, String tagValue, Boolean approved) {
+
+		public Tag(Long id, String tagName, String tagValue, Boolean approved) {
 		super();
 		this.id = id;
 		this.tagName = tagName;
@@ -81,6 +81,15 @@ public class Tag {
 		this.approved = approved;
 	}
 	
+
+	public Boolean getApproved() {
+		return approved;
+	}
+
+	public void setApproved(Boolean approved) {
+		this.approved = approved;
+	}
+
 	public String getTagValue() {
 		return tagValue;
 	}
@@ -88,8 +97,6 @@ public class Tag {
 	public void setTagValue(String tagValue) {
 		this.tagValue = tagValue;
 	}
-	
-
-	
+		
 
 }
