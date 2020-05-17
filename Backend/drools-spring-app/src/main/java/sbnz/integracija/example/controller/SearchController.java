@@ -26,11 +26,11 @@ public class SearchController {
 	private static Logger log = LoggerFactory.getLogger(UserController.class);
 
 	
-	@RequestMapping(value = "/book", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/book", method = RequestMethod.POST)
 	public ResponseEntity<ArrayList<BookDTO>> bookSearch(@RequestBody  SearchRequest searchRequest) {
 		log.debug("Search request received for: " + searchRequest);
 		ArrayList<BookDTO> retVal = sampleService.getFilteredBooks(searchRequest);
 		return new ResponseEntity<>(retVal, HttpStatus.OK);
-	}
+	}*/
 
 }
