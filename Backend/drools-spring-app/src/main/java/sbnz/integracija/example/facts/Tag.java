@@ -21,8 +21,6 @@ public class Tag {
 	@Column
 	private String tagValue;
 
-	public Tag() {}
-
 	public Tag(Long id, String tagName, Boolean approved) {
 		super();
 		this.id = id;
@@ -31,7 +29,7 @@ public class Tag {
 	}
 
 
-		public Tag(Long id, String tagName, String tagValue, Boolean approved) {
+	public Tag(Long id, String tagName, String tagValue, Boolean approved) {
 		super();
 		this.id = id;
 		this.tagName = tagName;
