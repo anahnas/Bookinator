@@ -21,7 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LoginService } from './login/login.service';
 import { UserListComponent } from './user-list/user-list.component';
-import { ToppyModule } from 'toppy'
+import { ToppyModule } from 'toppy';
+import { TagListComponent } from './tag-list/tag-list.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ToppyModule } from 'toppy'
     RegistrationComponent,
     BookReviewFormComponent,
     BookInfoDialogComponent,
-    UserListComponent
+    UserListComponent,
+    TagListComponent
     ],
   imports: [
     BrowserModule,
@@ -55,6 +57,7 @@ import { ToppyModule } from 'toppy'
       { path: 'welcome', component: WelcomeComponent},
 
       { path: 'userList', component: UserListComponent },
+      { path: 'tagList', component: TagListComponent },
       { path: '', redirectTo:'welcome', pathMatch: 'full' },
       { path: '**', redirectTo:'welcome', pathMatch: 'full' }
     ])
