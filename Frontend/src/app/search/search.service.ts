@@ -16,7 +16,7 @@ const httpOptions = {
 @Injectable()
 export class SearchService{
 
-    private _bookSearchUrl = 'http://localhost:8080/search/book';
+    private _bookSearchUrl = 'http://localhost:8080/book';
     private _booksUrl = 'http://localhost:8080/books';
     constructor(private _http: HttpClient){ }
 
@@ -50,8 +50,8 @@ export class SearchService{
         
     }
 
-    getFilteredBooks(book : Book) : Observable<BookDTO[]>{
-        return this._http.post<BookDTO[]>(this._bookSearchUrl, book, httpOptions).pipe(
+    getFilteredBooks(searchRequest : any) : Observable<BookDTO[]>{
+        return this._http.post<BookDTO[]>(this._bookSearchUrl, searchRequest, httpOptions).pipe(
                     catchError(this.handleError));
     }
 

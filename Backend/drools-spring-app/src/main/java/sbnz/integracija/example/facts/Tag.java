@@ -16,7 +16,7 @@ public class Tag {
 	private String tagName;
 	
 	@Column(name = "tag_approved")
-	private boolean approved;
+	private boolean approved = false;
 	
 	@Column
 	private String tagValue;

@@ -1,7 +1,7 @@
 export class Book{
     name:String
     genre:String[]
-    authorName:String
+    author:String
     authorOrigin:String
     yearPublished:number
     publisher:String
@@ -12,4 +12,5 @@ export class Book{
     targetAgeGroup:String
     style:String
     description:String
+    match:String
 }

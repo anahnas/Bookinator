@@ -109,7 +109,6 @@ public class SampleAppService {
 		} 
 		user.setUserType(RoleEnum.MEMBER);
 		Member member = new Member(user);
-		//return this.userRepo.save(user);
 		return this.memberRepo.save(member);
 	}
 	
@@ -126,11 +125,8 @@ public class SampleAppService {
 		return this.userRepo.save(user);
 	}
 	
-	public ArrayList<BookDTO> getFilteredBooks(SearchRequest searchRequest) {
-		
-		
-		ArrayList<Book> books  = startSearch(searchRequest);
-		
+	public ArrayList<BookDTO> getFilteredBooks(SearchRequestDTO searchRequestDTO) {
+		ArrayList<Book> books  = startSearch(searchRequestDTO);
 		ArrayList<BookDTO> bookDTOs = new ArrayList<>();
 		
 		Collections.sort(books, Collections.reverseOrder());
@@ -150,7 +146,7 @@ public class SampleAppService {
 		return bookDTOs;
 	}
 	
-	public ArrayList<Book> startSearch(SearchRequest searchRequest) {
+	public ArrayList<Book> startSearch(SearchRequestDTO searchRequestDTO) {
 		System.out.println("Initializing virtual assisant...............................");
 		
 		KieServices ks = KieServices.Factory.get();
@@ -182,10 +178,14 @@ public class SampleAppService {
 //		kSession.getEntryPoint("search").insert(new BookTag((long)5, (long)1, "Ivo Andric"));
 //		kSession.getEntryPoint("search").insert(new BookTag((long)5,(long) 2, "Na Drini Cuprija"));
 //		kSession.getEntryPoint("search").insert(new BookTag((long)5,(long) 4, "Turcin"));
-		SearchRequestDTO s=new SearchRequestDTO();
-		s.getSearchCriteria().put("author", "Ivo Andric");
-		s.getSearchCriteria().put("character","Turci");
-		kSession.getEntryPoint("search").insert(s);
+//		SearchRequestDTO s=new SearchRequestDTO();
+//		s.getSearchCriteria().put("author", "Ivo Andric");
+//		s.getSearchCriteria().put("character","Turci");
+//		kSession.getEntryPoint("search").insert(s);
+	    
+	 
+	    
+	    kSession.getEntryPoint("search").insert(searchRequestDTO);
 		// can be commented out
 		kSession.getAgenda().getAgendaGroup( "startSearch" ).setFocus();
 		//
@@ -220,7 +220,6 @@ public class SampleAppService {
  	        	 tag.setApproved(false); 
 	        }
 	       
-	        // this.bookTagRepository.save(new BookTag(reviewRequest.getBookId(), tag.getId(), pair.getValue().toString()));
 	        this.bookTagRepository.save(new BookTag(reviewRequest.getBookId(), tag.getId(), pair.getValue().toString(), BookTagStatus.PENDING));
 	        
 	        it.remove(); // avoids a ConcurrentModificationException
