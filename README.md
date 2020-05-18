@@ -10,6 +10,11 @@ login i logout, registracija, pretraga knjiga, pregled tagova knjiga, pregled ko
 ### Pravila: 
 pravila za proveru validnosti članarina, pravila za pametnu pretragu knjiga
 <br>
+### Pokretanje:
+<br>
+Frontend: angular6. Pokretanje : npm start za frontend u odgovarajućem terminalu
+<br>
+Bekend: clean install na kjar projekat, clean package na app projekat pa zatim java -jar .\drools-spring-app-0.0.1-SNAPSHOT.jar u terminalu target foldera app projekta.
 <br>
 ### Projekat iz predmeta Sistemi bazirani na znanju. Rule-based aplikacija za upravljanje bibliotečkim sistemom. 
 
