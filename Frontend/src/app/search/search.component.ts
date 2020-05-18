@@ -6,6 +6,7 @@ import { BookInfoDialogComponent } from '../book-info-dialog/book-info-dialog.co
 import { FormGroup, FormControl } from '@angular/forms';
 import { BookDTO } from '../model/bookDTO';
 import { SearchRequest } from '../model/searchRequest';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-search',
@@ -71,6 +72,9 @@ export class SearchComponent implements OnInit {
       if(this.bookSearchForm.get(key).value!="" && this.bookSearchForm.get(key).value!=null)
       searchRequest.searchCriteria[key] = this.bookSearchForm.get(key).value;
     });
+    for(let lik of this.likovi){
+      searchRequest.searchCriteria["character"] = lik;
+    }
     console.log(searchRequest)
 
     this._searchService.getFilteredBooks(searchRequest).subscribe(

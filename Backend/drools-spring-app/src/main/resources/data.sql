@@ -6,35 +6,36 @@ insert into user_table(username, password, first_name, last_name, email, user_ty
 insert into tag(tag_name, tag_approved) values ('author', true);
 insert into tag(tag_name, tag_approved) values ('name', true);
 insert into tag(tag_name, tag_approved) values ('description', true);
+insert into tag(tag_name, tag_approved) values ('character', true);
 insert into employee_table(employee_pkey) values (2);
 
 
 
 insert into book(avaivable_no,rating,search_match) values(1,0,0);
-insert into book_tag(book_id,tag_key,tag_value) values (1,2,'Lovac na zmajeve');
+insert into book_tag(book_id,tag_key,tag_value) values (1,2,'The kite runner');
 insert into book_tag(book_id,tag_key,tag_value) values (1,1,'Khaled Hosseini');
-insert into book_tag(book_id,tag_key,tag_value) values (1,3,'Emotivna prica o ljubavi i prijateljstvu smjestena u Afganistan za vrijeme okrutnog talibanskog rezima. Paralelno uz pricu o decackom prijateljstvu koje razaraju strah, ljubomora i okrutnost, tece prica o modernom Afganistanu, neverovatno nesretnoj zemlji koju je nacela americka okupacija a potom dokrajcio talibanski rezim.');
+insert into book_tag(book_id,tag_key,tag_value) values (1,3,'The Kite Runner is the first novel by Afghan-American author Khaled Hosseini.[1] Published in 2003 by Riverhead Books, it tells the story of Amir, a young boy from the Wazir Akbar Khan district of Kabul, whose closest friend is Hassan. The story is set against a backdrop of tumultuous events, from the fall of Afghanistans monarchy through the Soviet military intervention, the exodus of refugees to Pakistan and the United States, and the rise of the Taliban regime.');
 
 insert into book(avaivable_no,rating,search_match) values(4,0,0);
-insert into book_tag(book_id,tag_key,tag_value) values (2,2,'Za kim zvono zvoni');
-insert into book_tag(book_id,tag_key,tag_value) values (2,1,'Ernest Hemingvej');
-insert into book_tag(book_id,tag_key,tag_value) values (2,3,'Roman napisan 1939. na Kubi a objavljen 1940., jedno od piscevih najpopularnijih dela. To je istorijsko - ljubavni roman koji govori o dozivljajima americkog profesora spanskog jezika Roberta Jordana, koji ucestvuje u Spanskom gradjanskom ratu kao dobrovoljac protiv fasista Francisca Franca, a na strani komunista. Sam roman bazira se na Hemingwayevim iskustvima u Spaniji tokom rata.');;
+insert into book_tag(book_id,tag_key,tag_value) values (2,2,'For Whom the Bell Tolls');
+insert into book_tag(book_id,tag_key,tag_value) values (2,1,'ErnestHemingway');
+insert into book_tag(book_id,tag_key,tag_value) values (2,3,'For Whom the Bell Tolls is a novel by Ernest Hemingway published in 1940. It tells the story of Robert Jordan, a young American volunteer attached to a Republican guerrilla unit during the Spanish Civil War. As a dynamiter, he is assigned to blow up a bridge during an attack on the city of Segovia.');;
 
 
 insert into book(avaivable_no,rating,search_match) values(2,0,0);
-insert into book_tag(book_id,tag_key,tag_value) values (3,2,'Ubiti pticu rugalicu');
+insert into book_tag(book_id,tag_key,tag_value) values (3,2,'To Kill a Mockingbird ');
 insert into book_tag(book_id,tag_key,tag_value) values (3,1,'Harper Lee');
-insert into book_tag(book_id,tag_key,tag_value) values (3,3,'Americki dramski roman koji je 1960. napisala i objavila Harper Lee. Postigao je brzi uspeh i postao klasik americke knjizevnosti. Radnja se labavo zasniva na Leeinim opazanjima o svojoj porodici i komsijama, kao i na dogadjaju koji se je odigrao u blizini njenog grada 1936., kada je imala 10 godina. Roman krasi toplina i humor, uprkos tome sto se bavi ozbiljnim temama o silovanju i rasnoj diskriminaciji.');
+insert into book_tag(book_id,tag_key,tag_value) values (3,3,'To Kill a Mockingbird is a novel by Harper Lee published in 1960. Instantly successful, widely read in high schools and middle schools in the United States, it has become a classic of modern American literature, winning the Pulitzer Prize. The plot and characters are loosely based on Lees observations of her family, her neighbors and an event that occurred near her hometown of Monroeville, Alabama, in 1936, when she was ten.');
 
 
 insert into book(avaivable_no,rating,search_match) values(5,0,0);
-insert into book_tag(book_id,tag_key,tag_value) values (4,2,'Proces');
+insert into book_tag(book_id,tag_key,tag_value) values (4,2,'The Trial');
 insert into book_tag(book_id,tag_key,tag_value) values (4,1,'Franz Kafka');
-insert into book_tag(book_id,tag_key,tag_value) values (4,3,'Proces je roman Franza Kafke, napisan izmedju 1914. i 1915. godine i objavljen 1925. godine. Jedan od njegovih najpoznatijih radova, to je prica o coveku koji je uhapsen i optuzen od strane dalekog i nedostupnog organa vlasti, za zločin cija priroda ostaje do kraja nepoznata i njemu i citaocu.');
+insert into book_tag(book_id,tag_key,tag_value) values (4,3,'The Trial is a novel written by Franz Kafka between 1914 and 1915 and published posthumously in 1925. One of his best-known works, it tells the story of Josef K., a man arrested and prosecuted by a remote, inaccessible authority, with the nature of his crime revealed neither to him nor to the reader.');
 
 
 insert into book(avaivable_no,rating,search_match) values(3,0,0);
-insert into book_tag(book_id,tag_key,tag_value) values (5,2,'Na Drini Cuprija');
+insert into book_tag(book_id,tag_key,tag_value) values (5,2,'The Bridge on the Drina');
 insert into book_tag(book_id,tag_key,tag_value) values (5,1,'Ivo Andric');
-insert into book_tag(book_id,tag_key,tag_value) values (5,4,'Turcin');
-insert into book_tag(book_id,tag_key,tag_value) values (5,3,'Na Drini cuprija je jedan od najpoznatijih romana domaceg knjizevnika i nobelovca Ive Andrica, a nakon Proklete avlije i jedan od knjizevno doradjenijih, hronoloski prati cetiri veka zbivanja oko velikog mosta preko reke Drine u Visegradu, koji je izgradio veliki vezir Mehmed paša Sokolovic, poreklom iz tih krajeva.');
+insert into book_tag(book_id,tag_key,tag_value) values (5,4,'turk');
+insert into book_tag(book_id,tag_key,tag_value) values (5,3,'The Bridge on the Drina is a historical novel by the Yugoslav writer Ivo Andrić. It revolves around the Mehmed Paša Sokolović Bridge in Višegrad, which spans the Drina River and stands as a silent witness to history from its construction by the Ottomans in the mid-16th century until its partial destruction during World War I. The story spans about four centuries and covers the Ottoman and Austro-Hungarian occupations of the region, with a particular emphasis on the lives, destinies and relations of the local inhabitants, especially Serbs and Bosnian Muslims. .');

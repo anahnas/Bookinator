@@ -158,6 +158,7 @@ public class SampleAppService {
 		
 	    List<Book> books = bookRepository.findAll();
 	    for(Book book : books) {
+	    	book.setMatch((long)0);
 	    	kSession.getEntryPoint("search").insert(book);
 	    }
 	    

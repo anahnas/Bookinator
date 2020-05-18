@@ -16,6 +16,8 @@ export class WelcomeComponent implements OnInit {
 
   ngOnInit(): void {
 
+    console.log(localStorage.getItem("loggedIn"))
+
     this._toppyControl2 = this.toppy
       .position(
         new GlobalPosition({
@@ -32,7 +34,7 @@ export class WelcomeComponent implements OnInit {
       .create();
       this.openImage()
 
-      if(localStorage.getItem("loggedIn")==null){
+      if(localStorage.getItem("loggedIn")==null || localStorage.getItem("loggedIn")===undefined){
 
         this._toppyControlSpeech = this.toppy
         .position(
