@@ -3,5 +3,7 @@
 
 Autori: Garić Jelena, Lazarević Tamara, Tomić Ana
 
+Projekat iz predmeta Sistemi bazirani na znanju. Rule-based aplikacija za upravljanje bibliotečkim sistemom. 
+
 ![GitHub Logo](https://github.com/TLazarevic/Bookinator/blob/master/Frontend/src/assets/images/robot.png)
 
