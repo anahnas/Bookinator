@@ -69,6 +69,7 @@ import { TagListComponent } from './tag-list/tag-list.component';
   [BookInfoDialogComponent,
   LoginService],
   bootstrap: [AppComponent],
-  exports:[WelcomeSpeechComponent]
+  exports:[WelcomeSpeechComponent],
+  entryComponents:[BookInfoDialogComponent]
 })
 export class AppModule { }

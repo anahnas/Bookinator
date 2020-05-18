@@ -112,6 +112,7 @@ export class SearchComponent implements OnInit {
   openDialog(){
     const dialogRef = this.dialog.open(BookInfoDialogComponent, {
       width: '250px',
+      
       data: {book: this.selectedBook}
     });
 

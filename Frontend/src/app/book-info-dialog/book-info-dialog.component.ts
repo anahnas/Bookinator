@@ -14,10 +14,12 @@ export class BookInfoDialogComponent implements OnInit {
 
   tag: BookTag;
   tags: Set<BookTag>;
-
+  book:Book = new Book();
 
   constructor(public dialogRef: MatDialogRef<BookInfoDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Book) { }
+    @Inject(MAT_DIALOG_DATA) public data: Book) { 
+      this.book = data['book'];
+    }
 
   ngOnInit(): void {
     this.tag = new BookTag();

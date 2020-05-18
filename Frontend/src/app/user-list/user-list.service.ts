@@ -26,8 +26,8 @@ export class UserListService {
   }
 
   public payMembership(id:String): Observable<any> {
-    return this.http.get(this.payMembershipURL+id).pipe(
-      catchError(this.handleError));
+    return this.http.get(this.payMembershipURL+id)
+    .pipe(catchError(this.handleError));
   }
   
   private handleError(err: HttpErrorResponse){
