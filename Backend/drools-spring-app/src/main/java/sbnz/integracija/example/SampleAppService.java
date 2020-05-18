@@ -109,8 +109,69 @@ public class SampleAppService {
 		} 
 		user.setUserType(RoleEnum.MEMBER);
 		Member member = new Member(user);
-		return this.memberRepo.save(member);
+		
+		this.memberRepo.save(member);
+		payMembership(member.getId()); 
+		return this.memberRepo.getOne(member.getId());
 	}
+	
+
+	public void payMembership(Long id) {
+		Member member = memberRepo.getOne(id);
+		member.setMembershipExpired(false);
+		memberRepo.save(member);
+		//start the clock again
+		startMembershipCheck(id);
+	}
+	
+	public void startMembershipCheck(Long uId) {
+		System.out.println("Initializing membership check rule...............................");
+		
+		KieServices ks = KieServices.Factory.get();
+		KieBaseConfiguration kbconf = ks.newKieBaseConfiguration();
+        kbconf.setOption(EventProcessingOption.STREAM);		
+		KieBase kbase = kieContainer.newKieBase(kbconf);
+		
+		KieSessionConfiguration ksconf1 = ks.newKieSessionConfiguration();
+	    ksconf1.setOption(ClockTypeOption.get(ClockType.REALTIME_CLOCK.getId()));
+	    KieSession kSession1 = kbase.newKieSession(ksconf1, null);
+	        
+	    runRealtimeClock(kSession1, uId);
+	   
+	}
+
+	private void runRealtimeClock(KieSession kSession1, Long uId) {
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+            	TransactionEvent t1 = new TransactionEvent(uId);
+            	kSession1.insert(t1);
+            	
+                kSession1.fireUntilHalt();
+
+                Collection<?> newEvents = kSession1.getObjects(new ClassObjectFilter(MembershipExpiredEvent.class));
+        	    for(Object o : newEvents) {
+        	    	if(o instanceof MembershipExpiredEvent) {
+        	    		MembershipExpiredEvent m = (MembershipExpiredEvent) o;
+        	    		Member member = memberRepo.getOne(m.getUserId());
+        	    		member.setMembershipExpired(true);
+        	    		memberRepo.save(member);
+        	    		
+        	    	}
+        	    		
+        	    }
+            }
+        };
+        t.setDaemon(true);
+        t.start();
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            //do nothing
+        }
+    }
+
+	
 	
 	public List<User> findAll() {
 		
@@ -169,22 +230,8 @@ public class SampleAppService {
 	    List<BookTag> bookTags = bookTagRepository.findAll();
 	    for(BookTag bookTag : bookTags) {
 	    	kSession.getEntryPoint("search").insert(bookTag);
-	    }
-	    
-//		kSession.getEntryPoint("search").insert(new Book((long)5));
-//		kSession.getEntryPoint("search").insert(new Tag((long)4,"character"));
-//		kSession.getEntryPoint("search").insert(new Tag((long)1,"author"));
-//		kSession.getEntryPoint("search").insert(new Tag((long)2,"name"));
-//		kSession.getEntryPoint("search").insert(new BookTag((long)5, (long)1, "Ivo Andric"));
-//		kSession.getEntryPoint("search").insert(new BookTag((long)5,(long) 2, "Na Drini Cuprija"));
-//		kSession.getEntryPoint("search").insert(new BookTag((long)5,(long) 4, "Turcin"));
-//		SearchRequestDTO s=new SearchRequestDTO();
-//		s.getSearchCriteria().put("author", "Ivo Andric");
-//		s.getSearchCriteria().put("character","Turci");
-//		kSession.getEntryPoint("search").insert(s);
-	    
+	    }   
 	 
-	    
 	    kSession.getEntryPoint("search").insert(searchRequestDTO);
 		// can be commented out
 		kSession.getAgenda().getAgendaGroup( "startSearch" ).setFocus();
@@ -282,63 +329,5 @@ public class SampleAppService {
 	public List<Tag> findTags() {
 		return tagRepo.findTags();
 	}
-	
-
-	public void payMembership(Long id) {
-		Member member = memberRepo.getOne(id);
-		member.setMembershipExpired(false);
-		memberRepo.save(member);
-		//start the clock again
-		startMembershipCheck(id);
-	}
-	
-	
-	public void startMembershipCheck(Long uId) {
-		System.out.println("Initializing membership check rule...............................");
 		
-		KieServices ks = KieServices.Factory.get();
-		KieBaseConfiguration kbconf = ks.newKieBaseConfiguration();
-        kbconf.setOption(EventProcessingOption.STREAM);		
-		KieBase kbase = kieContainer.newKieBase(kbconf);
-		
-		KieSessionConfiguration ksconf1 = ks.newKieSessionConfiguration();
-	    ksconf1.setOption(ClockTypeOption.get(ClockType.REALTIME_CLOCK.getId()));
-	    KieSession kSession1 = kbase.newKieSession(ksconf1, null);
-	        
-	    // runRealtimeClock(kSession1, uId);
-	   
-	}
-
-	private void runRealtimeClock(KieSession kSession1, Long uId) {
-        Thread t = new Thread() {
-            @Override
-            public void run() {
-            	TransactionEvent t1 = new TransactionEvent(uId);
-            	kSession1.insert(t1);
-            	
-                kSession1.fireUntilHalt();
-
-                Collection<?> newEvents = kSession1.getObjects(new ClassObjectFilter(MembershipExpiredEvent.class));
-        	    for(Object o : newEvents) {
-        	    	if(o instanceof MembershipExpiredEvent) {
-        	    		MembershipExpiredEvent m = (MembershipExpiredEvent) o;
-        	    		Member member = memberRepo.getOne(m.getUserId());
-        	    		member.setMembershipExpired(true);
-        	    		memberRepo.save(member);
-        	    		
-        	    	}
-        	    		
-        	    }
-            }
-        };
-        t.setDaemon(true);
-        t.start();
-        try {
-            Thread.sleep(200);
-        } catch (InterruptedException e) {
-            //do nothing
-        }
-    }
-
-	
 }

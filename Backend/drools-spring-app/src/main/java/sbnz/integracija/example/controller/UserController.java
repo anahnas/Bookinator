@@ -82,21 +82,6 @@ public class UserController {
 		else 
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
-
-//	@RequestMapping(value = "/item", method = RequestMethod.GET, produces = "application/json")
-//	public Item getQuestions(@RequestParam(required = true) String id, @RequestParam(required = true) String name,
-//			@RequestParam(required = true) double cost, @RequestParam(required = true) double salePrice) {
-//
-//		Item newItem = new Item(Long.parseLong(id), name, cost, salePrice);
-//
-//		log.debug("Item request received for: " + newItem);
-//
-//		Item i2 = sampleService.getClassifiedItem(newItem);
-//
-//		return i2;
-//	}
-	
-	
 	
 	@RequestMapping(value = "/review", method = RequestMethod.POST)
 	public ResponseEntity bookReview(@RequestBody ReviewRequest reviewRequest) {
@@ -154,7 +139,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/payMembership/{uId}", method = RequestMethod.GET)
 	public ResponseEntity payMembership(@PathVariable("uId") Long uId) {
-		// this.sampleService.payMembership(uId);
-		return new ResponseEntity(HttpStatus.OK);
+		this.sampleService.payMembership(uId);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
