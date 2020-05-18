@@ -31,10 +31,19 @@ export class UserListComponent implements OnInit {
     this.createForm();
   }
 
+  payMembership(id:String){
+    this.service.payMembership(id).subscribe( result =>{
+        window.location.reload();
+      },
+      error => alert("Error.")
+    );
+
+  }
+
   onSubmit() {
 
     this.service.saveUser(this.user).subscribe(result => {
-      alert('success');
+      alert('You have added an user.');
       this.router.navigate(['/userList']);
     });
     }

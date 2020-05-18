@@ -7,4 +7,5 @@ export class User{
     lastName:String
     email:String
     userType:String
+    membershipExpired:boolean
 }
