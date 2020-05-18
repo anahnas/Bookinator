@@ -76,9 +76,8 @@ agenda-group "searchGroup"
 	        		int len1=pair.getValue().toString().length();
 	        		int len2=$bt.getTagValue().length();
 	        		int longestString=Math.max(len1,len2);
-	        		 System.out.println((1-(l.distance( pair.getValue().toString(), $bt.getTagValue())/longestString))*200/ $sr.getSearchTagNo()); 
 	        		 double match=$b.getMatch();
-	        		 $b.setMatch(match+(1-(l.distance( pair.getValue().toString(), $bt.getTagValue())/longestString))*200/ $sr.getSearchTagNo());
+	        		 $b.setMatch(match+(1-(l.distance( pair.getValue().toString().toUpperCase(), $bt.getTagValue().toUpperCase())/longestString))*200/ $sr.getSearchTagNo());
 	        		 update($b);
 	        		 break;
 	        	}
@@ -114,9 +113,8 @@ agenda-group "searchGroup"
 	        		int len1=pair.getValue().toString().length();
 	        		int len2=$bt.getTagValue().length();
 	        		int longestString=Math.max(len1,len2);
-	        		 System.out.println((1-(l.distance( pair.getValue().toString(), $bt.getTagValue())/longestString))*200/ $sr.getSearchTagNo());
 	        		  double match=$b.getMatch();
-	        		 $b.setMatch(match+(1-(l.distance( pair.getValue().toString(), $bt.getTagValue())/longestString))*200/ $sr.getSearchTagNo());
+	        		 $b.setMatch(match+(1-(l.distance( pair.getValue().toString().toUpperCase(), $bt.getTagValue().toUpperCase())/longestString))*200/ $sr.getSearchTagNo());
 	        		 update($b);
 	        		 break; 
 	        	}
@@ -154,9 +152,8 @@ agenda-group "searchGroup"
 	        		int len1=pair.getValue().toString().length();
 	        		int len2=$bt.getTagValue().length();
 	        		int longestString=Math.max(len1,len2);
-	        		 System.out.println((1-(l.distance( pair.getValue().toString(), $bt.getTagValue())/longestString))*200/ $sr.getSearchTagNo());
 	        		  double match=$b.getMatch();
-	        		 $b.setMatch(match+(1-(l.distance( pair.getValue().toString(), $bt.getTagValue())/longestString))*200/ $sr.getSearchTagNo());
+	        		 $b.setMatch(match+(1-(l.distance( pair.getValue().toString().toUpperCase(), $bt.getTagValue().toUpperCase())/longestString))*200/ $sr.getSearchTagNo());
 	        		 update($b);
 	        		 break; 
 	        	}
@@ -197,10 +194,8 @@ agenda-group "searchGroup"
 		        		int len1=pair.getValue().toString().length();
 		        		int len2=$bt.getTagValue().length();
 		        		int longestString=Math.max(len1,len2);
-		        		System.out.println(l.distance( pair.getValue().toString(), $bt.getTagValue()));
-		        		 System.out.println((1-(l.distance( pair.getValue().toString(), $bt.getTagValue())/longestString))*100/ $sr.getSearchTagNo());
 		        		  double match=$b.getMatch();
-	        			  $b.setMatch(match+(1-(l.distance( pair.getValue().toString(), $bt.getTagValue())/longestString))*100/ $sr.getSearchTagNo());
+	        			  $b.setMatch(match+(1-(l.distance( pair.getValue().toString().toUpperCase(), $bt.getTagValue().toUpperCase())/longestString))*100/ $sr.getSearchTagNo());
 	        		 	  update($b);
 		        		 } 
 		        	}

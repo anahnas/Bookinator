@@ -2411,7 +2411,7 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
-    opacity: 0.2; }
+    opacity: 0.1; }
 
 #header {
   -moz-align-items: center;
@@ -2507,7 +2507,7 @@ body {
   -webkit-justify-content: center;
   -ms-justify-content: center;
   justify-content: center;
-  background-image: linear-gradient(rgba(105, 3, 91, 0.301), rgba(206, 209, 34, 0.25)), url("/assets/images/book2.jpg");
+  background-image: linear-gradient(rgba(105, 3, 91, 0.747), rgba(206, 209, 34, 0.411)), url("/assets/images/book2.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
