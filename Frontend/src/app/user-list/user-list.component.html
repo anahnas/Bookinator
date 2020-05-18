@@ -8,7 +8,7 @@
 <div class="container container-table input-group input-group-sm">
   <form  (ngSubmit)="onSubmit()" [formGroup]="createUser">
     <div class="form-group">
-      <h2 align = "center" style="color:#cf3636">Add new user</h2>
+      <h2 align = "center" style="color:#6c0daf">Add new user</h2>
     </div>
 
     <div class="form-group">
@@ -34,13 +34,14 @@
 </form>
 </div>
 
-<p align="center" style="color:#cf2e2e">List of all users</p>
+<p align="center" style="color:#670e81">List of all users</p>
 
 <table class="table table-bordered table-striped">
   <thead class = "thead dark">
   <tr>
     <th scope="col">First name</th>
     <th scope="col">Last name</th>
+    <th scope="col">Membership</th>
   </tr>
 
   </thead>
@@ -50,7 +51,8 @@
 
     <td>{{u.firstName}}</td>
     <td>{{u.lastName}}</td>
-
+    <div *ngIf="u.membershipExpired; else elseBlock"><button (click)='payMembership(u.id)'>Pay membership</button></div>
+    <ng-template #elseBlock>Paid</ng-template>
   </tr>
   </tbody>
   </table>
