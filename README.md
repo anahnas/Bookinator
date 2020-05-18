@@ -10,7 +10,8 @@ login i logout, registracija, pretraga knjiga, pregled tagova knjiga, pregled ko
 ### Pravila: 
 pravila za proveru validnosti članarina, pravila za pametnu pretragu knjiga
 <br>
-Projekat iz predmeta Sistemi bazirani na znanju. Rule-based aplikacija za upravljanje bibliotečkim sistemom. 
+<br>
+### Projekat iz predmeta Sistemi bazirani na znanju. Rule-based aplikacija za upravljanje bibliotečkim sistemom. 
 
 ![GitHub Logo](https://github.com/TLazarevic/Bookinator/blob/master/Frontend/src/assets/images/robot.png)
 robot clipart PNG Designed By Essie from <a href="https://pngtree.com/">Pngtree.com</a>
