@@ -3,7 +3,11 @@
 
 Autori: Garić Jelena, Lazarević Tamara, Tomić Ana
 
+Funkcionalnosti: login i logout, registracija, pretraga knjiga, pregled tagova knjiga, pregled korisnika, pregled detalja o knjizi, recenzije
+Pravila : pravila za proveru validnosti članarina, pravila za pametnu pretragu knjiga
+
 Projekat iz predmeta Sistemi bazirani na znanju. Rule-based aplikacija za upravljanje bibliotečkim sistemom. 
 
 ![GitHub Logo](https://github.com/TLazarevic/Bookinator/blob/master/Frontend/src/assets/images/robot.png)
+robot clipart PNG Designed By Essie from <a href="https://pngtree.com/">Pngtree.com</a>
 
