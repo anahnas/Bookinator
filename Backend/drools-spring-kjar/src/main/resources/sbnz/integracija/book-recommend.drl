@@ -1,0 +1,93 @@
+//created on: 28.05.2020.
+package sbnz.integracija
+
+import sbnz.integracija.example.facts.Book;
+import sbnz.integracija.example.facts.BookRating;
+import sbnz.integracija.example.facts.User;
+import DTO.UserDTO;
+import DTO.RecommendDTO;
+import java.io.File;
+import java.util.List;
+import org.apache.mahout.cf.taste.impl.model.file.FileDataModel;
+import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
+import org.apache.mahout.cf.taste.impl.neighborhood.ThresholdUserNeighborhood;
+import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;
+import org.apache.mahout.cf.taste.impl.similarity.CityBlockSimilarity;
+import org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;
+import org.apache.mahout.cf.taste.model.DataModel;
+import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
+import org.apache.mahout.cf.taste.recommender.RecommendedItem;
+import org.apache.mahout.cf.taste.recommender.UserBasedRecommender;
+import org.apache.mahout.cf.taste.similarity.UserSimilarity;
+
+
+query "getRecommendResults"
+    $result: RecommendDTO() from entry-point "recommend"
+end
+
+//collaborative filtering
+rule "recommend"
+agenda-group "recommendRules"
+salience 2
+	when
+		$userRecommend : UserDTO() from entry-point "recommend"
+	then
+		
+		try {
+			DataModel model = new FileDataModel(new File("C:\\data.csv"));
+			UserSimilarity similarity = new PearsonCorrelationSimilarity(model);
+			UserNeighborhood neighborhood = new ThresholdUserNeighborhood(0.1, similarity, model);
+			UserBasedRecommender recommender = new GenericUserBasedRecommender(model, neighborhood, similarity);
+
+			// The First argument is the userID and the Second parameter is 'HOW MANY'
+			List<RecommendedItem> recommendations = recommender.recommend($userRecommend.getId(), 3);
+			
+			for (RecommendedItem recommendation : recommendations) {
+				System.out.println(recommendation);
+			}
+			drools.getEntryPoint("recommend").insert(new RecommendDTO(recommendations));
+		} catch (Exception e) {
+			System.out.println("Exception occured !");
+		}
+end
+
+//rule "recommendation size check"
+//agenda-group "recommendRules"
+//salience 1
+	//when 
+		//RecommendDTO($rec:recommendations) from entry-point "recommend"
+	//then
+		//if ($rec.size()<3){
+			//System.out.println($rec.size());
+		//}
+//end
+
+//function double cosineSimilarity(double[] vectorA, double[] vectorB) {
+//    double dotProduct = 0.0;
+//    double normA = 0.0;
+//    double normB = 0.0;
+ //   for (int i = 0; i < vectorA.length; i++) {
+ //       dotProduct += vectorA[i] * vectorB[i];
+ //       normA += Math.pow(vectorA[i], 2);
+ //       normB += Math.pow(vectorB[i], 2);
+ //   }   
+ //   return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+//}
+
+//rule "User similarity"
+
+   // when
+       //$userRecommend : UserDTO() from entry-point "recommend"
+      // $user : User($id:id) from entry-point "recommend"
+      // $rating : BookRating(user.getId()==$id) from entry-point "recommend"
+   // then
+   //    double[] user1;
+    //   double[] user2;
+       
+    //   if ($userRecommend.getId() != $user.getId()){
+     //  	   System.out.println($book.getId());
+	//       System.out.println($id);
+	 //      System.out.println($rating.getRating());
+    //   }
+
+//end

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$USER_HOME$/Downloads/cart/cart.iml" filepath="$USER_HOME$/Downloads/cart/cart.iml" />
+      <module fileurl="file://$USER_HOME$/Downloads/catalogue/catalogue.iml" filepath="$USER_HOME$/Downloads/catalogue/catalogue.iml" />
+      <module fileurl="file://$USER_HOME$/Downloads/eureka/eureka.iml" filepath="$USER_HOME$/Downloads/eureka/eureka.iml" />
+      <module fileurl="file://$USER_HOME$/Downloads/location/location.iml" filepath="$USER_HOME$/Downloads/location/location.iml" />
+      <module fileurl="file://$USER_HOME$/Downloads/message/message.iml" filepath="$USER_HOME$/Downloads/message/message.iml" />
+      <module fileurl="file://$USER_HOME$/Downloads/pricelist/pricelist.iml" filepath="$USER_HOME$/Downloads/pricelist/pricelist.iml" />
+      <module fileurl="file://$USER_HOME$/Downloads/report/report.iml" filepath="$USER_HOME$/Downloads/report/report.iml" />
+      <module fileurl="file://$USER_HOME$/Downloads/request/request.iml" filepath="$USER_HOME$/Downloads/request/request.iml" />
+      <module fileurl="file://$USER_HOME$/Downloads/review/review.iml" filepath="$USER_HOME$/Downloads/review/review.iml" />
+      <module fileurl="file://$USER_HOME$/Downloads/user/user.iml" filepath="$USER_HOME$/Downloads/user/user.iml" />
+      <module fileurl="file://$USER_HOME$/Downloads/vehicle/vehicle.iml" filepath="$USER_HOME$/Downloads/vehicle/vehicle.iml" />
+      <module fileurl="file://$USER_HOME$/Downloads/zuul/zuul.iml" filepath="$USER_HOME$/Downloads/zuul/zuul.iml" />
+    </modules>
+  </component>
+</project>
