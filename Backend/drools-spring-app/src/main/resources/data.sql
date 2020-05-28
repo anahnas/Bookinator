@@ -1,6 +1,15 @@
 insert into user_table(username, password, first_name, last_name, email, user_type) values('guest', 'guest', 'guest', 'guest','guest', 0);
 insert into member(member_pkey, banned, membership_expired, wrong_tags) values(1, false, true, 0);
 
+insert into user_table(username, password, first_name, last_name, email, user_type) values('guest2', 'guest2', 'guest2', 'guest2','guest2', 0);
+insert into member(member_pkey, banned, membership_expired, wrong_tags) values(2, false, true, 0);
+
+insert into user_table(username, password, first_name, last_name, email, user_type) values('guest3', 'guest3', 'guest3', 'guest3','guest3', 0);
+insert into member(member_pkey, banned, membership_expired, wrong_tags) values(3, false, true, 0);
+
+insert into user_table(username, password, first_name, last_name, email, user_type) values('guest4', 'guest3', 'guest3', 'guest3','guest3', 0);
+insert into member(member_pkey, banned, membership_expired, wrong_tags) values(4, false, true, 0);
+
 insert into user_table(username, password, first_name, last_name, email, user_type) values('admin', 'admin', 'admin', 'admin','admin', 1);
 
 insert into tag(tag_name, tag_approved) values ('author', true);
@@ -39,3 +48,48 @@ insert into book_tag(book_id,tag_key,tag_value) values (5,2,'The Bridge on the D
 insert into book_tag(book_id,tag_key,tag_value) values (5,1,'Ivo Andric');
 insert into book_tag(book_id,tag_key,tag_value) values (5,4,'turk');
 insert into book_tag(book_id,tag_key,tag_value) values (5,3,'The Bridge on the Drina is a historical novel by the Yugoslav writer Ivo Andrić. It revolves around the Mehmed Paša Sokolović Bridge in Višegrad, which spans the Drina River and stands as a silent witness to history from its construction by the Ottomans in the mid-16th century until its partial destruction during World War I. The story spans about four centuries and covers the Ottoman and Austro-Hungarian occupations of the region, with a particular emphasis on the lives, destinies and relations of the local inhabitants, especially Serbs and Bosnian Muslims. .');
+
+insert into book(avaivable_no,rating,search_match) values(3,0,0);
+insert into book(avaivable_no,rating,search_match) values(3,0,0);
+insert into book(avaivable_no,rating,search_match) values(3,0,0);
+insert into book(avaivable_no,rating,search_match) values(3,0,0);
+
+
+insert into book_rating values(1,1,1);
+insert into book_rating values(2,1,2);
+insert into book_rating values(6,1,5);
+insert into book_rating values(7,1,4.5);
+insert into book_rating values(8,1,1);
+insert into book_rating values(9,1,5);
+
+insert into book_rating values(1,2,1);
+insert into book_rating values(2,2,2);
+insert into book_rating values(3,2,5);
+insert into book_rating values(4,2,5);
+insert into book_rating values(5,2,5);
+insert into book_rating values(6,2,4);
+insert into book_rating values(7,2,5);
+insert into book_rating values(8,2,1);
+insert into book_rating values(9,2,5);
+
+
+insert into book_rating values(2,3,2.5);
+insert into book_rating values(3,3,4.5);
+insert into book_rating values(4,3,4);
+insert into book_rating values(5,3,3);
+insert into book_rating values(6,3,3.5);
+insert into book_rating values(7,3,4.5);
+insert into book_rating values(8,3,4);
+insert into book_rating values(9,3,5);
+
+insert into book_rating values(1,4,5);
+insert into book_rating values(2,4,5);
+insert into book_rating values(3,4,5);
+insert into book_rating values(4,4,1);
+insert into book_rating values(5,4,2);
+insert into book_rating values(6,4,3);
+insert into book_rating values(7,4,1);
+insert into book_rating values(8,4,4);
+insert into book_rating values(9,4,1);
+
+

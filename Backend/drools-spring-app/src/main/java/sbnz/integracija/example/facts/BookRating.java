@@ -1,5 +1,6 @@
 package sbnz.integracija.example.facts;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -9,68 +10,68 @@ import javax.persistence.MapsId;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties({"hibernateLazyInitializer"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer" })
 @Entity
 public class BookRating {
-	
-	  	@EmbeddedId
-	    BookRatingKey id;
-	    
-	    @JsonIgnore
-	    @ManyToOne
-	    @MapsId("book_id")
-	    @JoinColumn(name="book_id")
-	    Book book;
-	    
-	    @JsonIgnore
-	    @ManyToOne
-	    @MapsId("user_id")
-	    @JoinColumn(name="user_id")
-	    User user;
 
-	    float rating;
-	    
-	    
+	@EmbeddedId
+	BookRatingKey id;
 
-		public BookRating(Book book, User user, float rating) {
-			super();
-			this.book = book;
-			this.user = user;
-			this.rating = rating;
-		}
+	@JsonIgnore
+	@ManyToOne
+	@MapsId("book_id")
+	@JoinColumn(name = "book_id")
+	Book book;
 
-		public BookRatingKey getId() {
-			return id;
-		}
+	@JsonIgnore
+	@ManyToOne
+	@MapsId("user_id")
+	@JoinColumn(name = "user_id")
+	User user;
 
-		public void setId(BookRatingKey id) {
-			this.id = id;
-		}
+	float rating;
 
-		public Book getBook() {
-			return book;
-		}
+	public BookRating() {
+		super();
+	}
 
-		public void setBook(Book book) {
-			this.book = book;
-		}
+	public BookRating(Book book, User user, float rating) {
+		super();
+		this.book = book;
+		this.user = user;
+		this.rating = rating;
+	}
 
-		public User getUser() {
-			return user;
-		}
+	public BookRatingKey getId() {
+		return id;
+	}
 
-		public void setUser(User user) {
-			this.user = user;
-		}
+	public void setId(BookRatingKey id) {
+		this.id = id;
+	}
 
-		public float getRating() {
-			return rating;
-		}
+	public Book getBook() {
+		return book;
+	}
 
-		public void setRating(float rating) {
-			this.rating = rating;
-		}
-	    
-	    
+	public void setBook(Book book) {
+		this.book = book;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public float getRating() {
+		return rating;
+	}
+
+	public void setRating(float rating) {
+		this.rating = rating;
+	}
 
 }
