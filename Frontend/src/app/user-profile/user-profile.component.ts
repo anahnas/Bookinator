@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Book } from '../model/book';
+import { BookInfoDialogComponent } from '../book-info-dialog/book-info-dialog.component';
+import { BooksService } from './books.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  styleUrls: ['./user-profile.component.css'],
+  providers: [BooksService]
 })
 export class UserProfileComponent implements OnInit {
 
@@ -12,10 +17,16 @@ export class UserProfileComponent implements OnInit {
   lastName:String;
   username:String;
   email:String;
-  
+
+  books : Book [] = [];
+  temp:Book;
+  selectedBook:Book;
+
+  errorMessage : string;
+
   loggedInUser: any;
 
-  constructor() { }
+  constructor(private _booksService: BooksService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.loggedInUser = JSON.parse(localStorage.getItem('loggedIn'));
@@ -27,4 +38,50 @@ export class UserProfileComponent implements OnInit {
     
   }
 
+  getWishlist(){
+    event.preventDefault();
+    this.books = [];
+    
+  
+    this._booksService.getWishlist(this.loggedInUser.id).subscribe(
+      books => {
+        for(let b of books){
+          this.temp = new Book();
+          this.temp.match = b.match;
+          this.temp.availableNo = b.availableNo;
+          for(let tag of b.tags){
+            if(tag.tagKey == '2'){
+              this.temp.name = tag.tagValue;
+            }
+
+            if(tag.tagKey == '1'){
+              this.temp.author = tag.tagValue;
+            }
+            
+            if(tag.tagKey == '3'){
+              this.temp.description = tag.tagValue;
+            }
+          }
+          this.books.push(this.temp);
+          
+        
+        }
+      },
+      error => this.errorMessage = <any>error
+    );
+  }
+
+  onSelect(book: Book): void {
+    this.selectedBook = book;
+    this.openDialog();
+  }
+
+  openDialog(){
+    const dialogRef = this.dialog.open(BookInfoDialogComponent, {
+      width: '250px',
+    
+      data: {book: this.selectedBook}
+    });
+
+  }
 }

@@ -4,16 +4,19 @@ import { Observable } from 'rxjs';
 import { User } from '../model/user';
 import {  catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { Book } from '../model/book';
+import { BookDTO } from '../model/bookDTO';
 
 @Injectable()
-export class UserProfileService{
+export class BooksService{
 
-    private _whoamiUrl = 'http://localhost:8080/whoami';
+    private _bookHistoryUrl = 'http://localhost:8080/books/';
+    private _wishlistUrl = 'http://localhost:8080/wishlist/';
     constructor(private _http: HttpClient){ }
 
 
-    whoami(user : User) : Observable<User>{
-        return this._http.post<User>(this._whoamiUrl, user).pipe(
+    getWishlist(userId : String) : Observable<BookDTO[]>{
+        return this._http.post<BookDTO[]>(this._wishlistUrl, userId).pipe(
                     catchError(this.handleError));
     }
 
