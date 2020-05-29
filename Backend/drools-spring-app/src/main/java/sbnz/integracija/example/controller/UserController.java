@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import DTO.BookDTO;
+import DTO.BookLoanRequestDTO;
 import DTO.BookTagDTO;
 import sbnz.integracija.example.SampleAppService;
 import sbnz.integracija.example.facts.BookTag;
@@ -114,6 +115,13 @@ public class UserController {
 	public ResponseEntity<String> deleteTag(@RequestBody String name) {
 
 		sampleService.deleteJustTag(name);
+		return new ResponseEntity<>("", HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value = "/bookLoan", method = RequestMethod.POST)
+	public ResponseEntity<String> bookLoan(@RequestBody BookLoanRequestDTO bookLoanRequestDTO) {
+		sampleService.makeBookLoan(bookLoanRequestDTO.getUserId(), bookLoanRequestDTO.getBookId());
 		return new ResponseEntity<>("", HttpStatus.OK);
 
 	}

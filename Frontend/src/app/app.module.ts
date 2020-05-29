@@ -24,6 +24,8 @@ import { UserListComponent } from './user-list/user-list.component';
 import { ToppyModule } from 'toppy';
 import { WelcomeSpeechComponent } from './virtual-assistant/welcome-speech/welcome-speech.component'
 import { TagListComponent } from './tag-list/tag-list.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { TagListComponent } from './tag-list/tag-list.component';
     BookInfoDialogComponent,
     UserListComponent,
     WelcomeSpeechComponent,
-    TagListComponent
+    TagListComponent,
+    WishlistComponent,
+    UserProfileComponent
     ],
   imports: [
     BrowserModule,
@@ -57,7 +61,7 @@ import { TagListComponent } from './tag-list/tag-list.component';
       { path: 'registration', component: RegistrationComponent},
       { path: 'review', component: BookReviewFormComponent},
       { path: 'welcome', component: WelcomeComponent},
-
+      { path: 'profile', component: UserProfileComponent},
       { path: 'userList', component: UserListComponent },
       { path: 'tagList', component: TagListComponent },
       { path: '', redirectTo:'welcome', pathMatch: 'full' },

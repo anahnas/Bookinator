@@ -14,6 +14,8 @@ public class BookLoan implements Serializable{
 
 	@Column
 	private Book book;
+	@Column
+	private Long userId;
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
@@ -21,12 +23,21 @@ public class BookLoan implements Serializable{
 	private Date expiryDate;
 	@Column
 	private boolean returned;
+	@Column
+	private boolean expired;
 	
 	public Book getBook() {
 		return book;
 	}
 	public void setBook(Book book) {
 		this.book = book;
+	}
+	
+	public Long getUserId() {
+		return userId;
+	}
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 	public Long getId() {
 		return id;
@@ -46,12 +57,20 @@ public class BookLoan implements Serializable{
 	public void setReturned(boolean returned) {
 		this.returned = returned;
 	}
-	public BookLoan(Book book, Long id, Date expiryDate, boolean returned) {
+	
+	public BookLoan(Book book, Long userId, Date expiryDate, boolean returned, boolean expired) {
 		super();
 		this.book = book;
-		this.id = id;
+		this.userId = userId;
 		this.expiryDate = expiryDate;
 		this.returned = returned;
+		this.expired = expired;
+	}
+	public boolean isExpired() {
+		return expired;
+	}
+	public void setExpired(boolean expired) {
+		this.expired = expired;
 	}
 	public BookLoan() {
 	}

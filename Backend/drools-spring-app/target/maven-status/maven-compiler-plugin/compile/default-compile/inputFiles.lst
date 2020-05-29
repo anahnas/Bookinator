@@ -20,6 +20,7 @@ D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integ
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\BookRating.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\Discount.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\Member.java
+D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\repository\BookLoanRepository.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\Penalty.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\enumeration\RoleEnum.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\SearchResult.java
@@ -27,8 +28,11 @@ D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integ
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\SampleApp.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\repository\MemberRepository.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\repository\TagRepository.java
+D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\events\BookLoanExpiredEvent.java
+D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\events\BookLoanMade.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\BookTagStatus.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\User.java
+D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\DTO\BookLoanRequestDTO.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\repository\BookRatingRepository.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\repository\BookRepository.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\SampleAppService.java

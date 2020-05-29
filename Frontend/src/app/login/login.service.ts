@@ -14,7 +14,7 @@ export class LoginService{
 
     login(user : User) : Observable<User>{
         return this._http.post<User>(this._loginUrl, user).pipe(
-                    catchError(this.handleError));
+            catchError(this.handleError));
     }
 
     private handleError(err: HttpErrorResponse){

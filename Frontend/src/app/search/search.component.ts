@@ -82,6 +82,7 @@ export class SearchComponent implements OnInit {
         for(let b of books){
           this.temp = new Book();
           this.temp.match = b.match;
+          this.temp.availableNo = b.availableNo;
           for(let tag of b.tags){
             if(tag.tagKey == '2'){
               this.temp.name = tag.tagValue;
@@ -97,8 +98,8 @@ export class SearchComponent implements OnInit {
           }
           this.books.push(this.temp);
           
+        
         }
-                
       },
       error => this.errorMessage = <any>error
     );
@@ -112,7 +113,7 @@ export class SearchComponent implements OnInit {
   openDialog(){
     const dialogRef = this.dialog.open(BookInfoDialogComponent, {
       width: '250px',
-      
+    
       data: {book: this.selectedBook}
     });
 

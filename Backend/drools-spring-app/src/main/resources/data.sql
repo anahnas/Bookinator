@@ -1,5 +1,5 @@
 insert into user_table(username, password, first_name, last_name, email, user_type) values('guest', 'guest', 'guest', 'guest','guest', 0);
-insert into member(member_pkey, banned, membership_expired, wrong_tags) values(1, false, true, 0);
+insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent) values(1, false, true, 0, true);
 
 insert into user_table(username, password, first_name, last_name, email, user_type) values('admin', 'admin', 'admin', 'admin','admin', 1);
 
@@ -34,7 +34,7 @@ insert into book_tag(book_id,tag_key,tag_value) values (4,1,'Franz Kafka');
 insert into book_tag(book_id,tag_key,tag_value) values (4,3,'The Trial is a novel written by Franz Kafka between 1914 and 1915 and published posthumously in 1925. One of his best-known works, it tells the story of Josef K., a man arrested and prosecuted by a remote, inaccessible authority, with the nature of his crime revealed neither to him nor to the reader.');
 
 
-insert into book(avaivable_no,rating,search_match) values(3,0,0);
+insert into book(avaivable_no,rating,search_match) values(0,0,0);
 insert into book_tag(book_id,tag_key,tag_value) values (5,2,'The Bridge on the Drina');
 insert into book_tag(book_id,tag_key,tag_value) values (5,1,'Ivo Andric');
 insert into book_tag(book_id,tag_key,tag_value) values (5,4,'turk');

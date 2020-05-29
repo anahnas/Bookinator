@@ -4,6 +4,7 @@ sbnz\integracija\example\facts\SearchRequestDTO.class
 sbnz\integracija\example\SampleAppService$1.class
 sbnz\integracija\example\controller\SearchController.class
 sbnz\integracija\example\repository\BookTagRepository.class
+events\BookLoanMade.class
 events\TransactionEvent.class
 sbnz\integracija\example\facts\Penalty.class
 sbnz\integracija\example\repository\BookRepository.class
@@ -16,9 +17,11 @@ sbnz\integracija\example\facts\BookTag.class
 sbnz\integracija\example\facts\SearchRequest.class
 sbnz\integracija\example\repository\BookRatingRepository.class
 sbnz\integracija\example\facts\Discount.class
+sbnz\integracija\example\repository\BookLoanRepository.class
 sbnz\integracija\example\facts\BookRating.class
 sbnz\integracija\example\SampleApp.class
 sbnz\integracija\example\facts\Member.class
+DTO\BookLoanRequestDTO.class
 sbnz\integracija\example\repository\MemberRepository.class
 sbnz\integracija\example\repository\TagRepository.class
 sbnz\integracija\example\facts\User.class
@@ -29,7 +32,9 @@ DTO\BookTagDTO.class
 sbnz\integracija\example\facts\BookLoan.class
 sbnz\integracija\example\repository\userRepository.class
 sbnz\integracija\example\facts\BookTagStatus.class
+sbnz\integracija\example\SampleAppService$2.class
 enumeration\RoleEnum.class
+events\BookLoanExpiredEvent.class
 sbnz\integracija\example\facts\SearchResult.class
 sbnz\integracija\example\SampleHomeController.class
 sbnz\integracija\example\controller\UserController.class

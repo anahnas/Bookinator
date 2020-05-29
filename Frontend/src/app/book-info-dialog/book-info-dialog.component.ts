@@ -24,10 +24,16 @@ export class BookInfoDialogComponent implements OnInit {
   ngOnInit(): void {
     this.tag = new BookTag();
     this.tags = new Set<BookTag>();
+   
+  
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
+  notify(): void {
+    alert("Added to wishlist.")
+    this.dialogRef.close();
+  }
 }

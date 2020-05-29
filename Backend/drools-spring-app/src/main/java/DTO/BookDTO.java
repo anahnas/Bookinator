@@ -11,12 +11,7 @@ public class BookDTO {
 	private Long id;
 	private ArrayList<BookTag> tags = new ArrayList<>();
 	private double match;
-	
-	public BookDTO(Long id, ArrayList<BookTag> tags) {
-		super();
-		this.id = id;
-		this.tags = tags;
-	}
+	private int availableNo;
 
 	public BookDTO() {
 		super();
@@ -25,6 +20,7 @@ public class BookDTO {
 	public BookDTO(Book b) {
 		this.id = b.getId();
 		this.match = b.getMatch();
+		this.availableNo = b.getAvaivableNo();
 	}
 	
 	public Long getId() {
@@ -57,5 +53,14 @@ public class BookDTO {
 		this.match = match;
 	}
 
+	public int getAvailableNo() {
+		return availableNo;
+	}
+
+	public void setAvailableNo(int availableNo) {
+		this.availableNo = availableNo;
+	}
+
+	
 	
 }

@@ -4,11 +4,19 @@ package integracija
 //list any import classes here.
 import events.TransactionEvent;
 import events.MembershipExpiredEvent;
+import events.BookLoanExpiredEvent;
+import events.BookLoanMade;
 //declare any global variables here
 
 declare MembershipPaid
 	@role(event)
     userId: Long
+end
+
+declare BookLoanEvent
+	@role(event)
+    userId: Long
+    bookLoanId: Long
 end
 
 rule "Membership-expired"
@@ -34,3 +42,23 @@ rule "Membership-paid"
         insert(new MembershipPaid($uId));
 end
 
+rule "BookLoan-expired"
+    when
+    	BookLoanEvent($uId: userId, $bId: bookLoanId)
+        not(
+            BookLoanMade(userId == $uId, bookLoanId == $bId)
+            over window:time(10s)
+        )
+    then
+        System.out.println("book loan expired__________________________________________________________________" );
+        insert(new BookLoanExpiredEvent($uId, $bId));
+        drools.halt();
+end
+
+rule "BookLoan-made"
+    when
+    	$e1:BookLoanMade($uId: userId, $bId: bookLoanId) 
+    then
+        System.out.println("made book loan__________________________________________________________________" + $uId );
+        insert(new BookLoanEvent($uId, $bId));
+end

@@ -6,13 +6,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.drools.core.ClockType;
 import org.kie.api.KieBase;
 import org.kie.api.KieBaseConfiguration;
 import org.kie.api.KieServices;
-import org.kie.api.builder.KieScanner;
 import org.kie.api.conf.EventProcessingOption;
 import org.kie.api.runtime.ClassObjectFilter;
 import org.kie.api.runtime.KieContainer;
@@ -28,19 +26,21 @@ import org.springframework.stereotype.Service;
 
 import DTO.BookDTO;
 import enumeration.RoleEnum;
+import events.BookLoanExpiredEvent;
+import events.BookLoanMade;
 import events.MembershipExpiredEvent;
 import events.TransactionEvent;
-import DTO.BookTagDTO;
 import sbnz.integracija.example.facts.Book;
+import sbnz.integracija.example.facts.BookLoan;
 import sbnz.integracija.example.facts.BookRating;
 import sbnz.integracija.example.facts.BookTag;
 import sbnz.integracija.example.facts.BookTagStatus;
 import sbnz.integracija.example.facts.Member;
 import sbnz.integracija.example.facts.ReviewRequest;
-import sbnz.integracija.example.facts.SearchRequest;
 import sbnz.integracija.example.facts.SearchRequestDTO;
 import sbnz.integracija.example.facts.Tag;
 import sbnz.integracija.example.facts.User;
+import sbnz.integracija.example.repository.BookLoanRepository;
 import sbnz.integracija.example.repository.BookRatingRepository;
 import sbnz.integracija.example.repository.BookRepository;
 import sbnz.integracija.example.repository.BookTagRepository;
@@ -61,6 +61,9 @@ public class SampleAppService {
 	
 	@Autowired
 	BookRatingRepository ratingRepo;
+	
+	@Autowired
+	BookLoanRepository bookLoanRepository;
 	
 	@Autowired
 	userRepository userRepo;
@@ -101,7 +104,7 @@ public class SampleAppService {
 
 		return null;
 	}
-
+	
 	public User register(User user) {
 		User u = this.userRepo.findByUsername(user.getUsername());
 		if(u != null) {
@@ -199,7 +202,7 @@ public class SampleAppService {
 			for(BookTag bt : bookTags) {
 				bookDTO.getTags().add(bt);
 			}
-			
+
 			bookDTOs.add(bookDTO);	
 		}		
 
@@ -297,6 +300,75 @@ public class SampleAppService {
 		bookTag.setStatus(BookTagStatus.APPROVED);
 		this.bookTagRepository.save(bookTag);
 	}
+	
+	public void returnBookLoan(Long id) {
+		BookLoan bookLoan = this.bookLoanRepository.getOne(id);
+		Member member = this.memberRepo.getOne(bookLoan.getUserId());
+		member.setLoan(null);
+		bookLoan.setReturned(true);
+		bookLoanRepository.save(bookLoan);
+		member.setCanRent(true);
+		memberRepo.save(member);
+	}
+	
+	public void makeBookLoan(Long userId, Long bookId) {
+		Member member = this.memberRepo.getOne(userId);
+		Book book = this.bookRepository.getOne(bookId);
+		BookLoan bookLoan = new BookLoan();
+		bookLoan.setReturned(false);
+		bookLoan.setBook(book);
+		bookLoanRepository.save(bookLoan);
+		member.setLoan(bookLoan);
+		member.setCanRent(false);
+		memberRepo.save(member);
+		
+		System.out.println("Initializing book loan rule...............................");
+		
+		KieServices ks = KieServices.Factory.get();
+		KieBaseConfiguration kbconf = ks.newKieBaseConfiguration();
+        kbconf.setOption(EventProcessingOption.STREAM);		
+		KieBase kbase = kieContainer.newKieBase(kbconf);
+		
+		KieSessionConfiguration ksconf1 = ks.newKieSessionConfiguration();
+	    ksconf1.setOption(ClockTypeOption.get(ClockType.REALTIME_CLOCK.getId()));
+	    KieSession kSession1 = kbase.newKieSession(ksconf1, null);
+	        
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+            	BookLoanMade e1 = new BookLoanMade(member.getId(), bookLoan.getBook().getId());
+            	kSession1.insert(e1);
+            	
+                kSession1.fireUntilHalt();
+
+                Collection<?> newEvents = kSession1.getObjects(new ClassObjectFilter(BookLoanExpiredEvent.class));
+        	    for(Object o : newEvents) {
+        	    	if(o instanceof BookLoanExpiredEvent) {
+        	    		BookLoanExpiredEvent b = (BookLoanExpiredEvent) o;
+        	    		BookLoan bl = bookLoanRepository.getOne(b.getBookLoanId());
+        	    		bl.setExpired(true);
+        	    		bookLoanRepository.save(bl);
+        	    		Member m = memberRepo.getOne(b.getUserId());
+        	    		m.setCanRent(false);
+        	    		memberRepo.save(member);
+        	    		
+        	    	}
+        	    		
+        	    }
+            }
+        };
+        t.setDaemon(true);
+        t.start();
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            //do nothing
+        }
+		
+	}
+	
+	
+
 	
 	public void approveJustTag(String name) {
 		Tag tag = tagRepo.findByTagName(name);

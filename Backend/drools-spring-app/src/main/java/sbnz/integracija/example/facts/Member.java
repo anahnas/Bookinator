@@ -32,7 +32,9 @@ public class Member extends User implements Serializable{
 	@Column
 	private cathegory cathegory;
 	@Column
-	private boolean banned = false;
+	private boolean banned = false;	
+	@Column
+	private boolean canRent = true;
 	@Column
 	private Date banExpiry;
 	@Column
@@ -163,5 +165,14 @@ public class Member extends User implements Serializable{
 	public void setDiscounts(Set<Discount> discounts) {
 		this.discounts = discounts;
 	}
+
+	public boolean isCanRent() {
+		return canRent;
+	}
+
+	public void setCanRent(boolean canRent) {
+		this.canRent = canRent;
+	}
+	
 
 }
