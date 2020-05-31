@@ -16,7 +16,7 @@ export class BooksService{
 
 
     getWishlist(userId : String) : Observable<BookDTO[]>{
-        return this._http.post<BookDTO[]>(this._wishlistUrl, userId).pipe(
+        return this._http.get<BookDTO[]>(this._wishlistUrl+"/"+ userId).pipe(
                     catchError(this.handleError));
     }
 

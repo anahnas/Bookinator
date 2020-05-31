@@ -35,16 +35,17 @@ export class UserProfileComponent implements OnInit {
     this.lastName = this.loggedInUser.lastName;
     this.username = this.loggedInUser.username;
     this.email = this.loggedInUser.email;
-    
+    this.getWishlist();
   }
 
   getWishlist(){
-    event.preventDefault();
     this.books = [];
     
   
     this._booksService.getWishlist(this.loggedInUser.id).subscribe(
       books => {
+        console.log("wishlist :")
+        console.log(books)
         for(let b of books){
           this.temp = new Book();
           this.temp.match = b.match;

@@ -14,5 +14,5 @@ export class Book{
     style:String
     description:String
     match:String
-   
+    id:String
 }

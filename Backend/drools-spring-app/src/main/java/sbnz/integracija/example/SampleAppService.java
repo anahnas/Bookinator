@@ -402,5 +402,29 @@ public class SampleAppService {
 	public List<Tag> findTags() {
 		return tagRepo.findTags();
 	}
-		
+
+	public boolean addToWishlist(Long uId, Long bookId) {
+		try
+		{
+			Member member = this.memberRepo.getOne(uId);
+			member.getWishlist().add(this.bookRepository.getOne(bookId));
+			this.memberRepo.save(member);
+		} catch (Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	public ArrayList<BookDTO> getWishlist(Long uId) {
+		Member m = this.memberRepo.getOne(uId);
+		ArrayList<BookDTO> bookDTOs = new ArrayList<>();
+		for(Book b : m.getWishlist()) {
+			BookDTO bDTO = new BookDTO(b);
+			ArrayList<BookTag> tags = this.bookTagRepository.findTagsByBookId(b.getId());
+			bDTO.setTags(tags);
+			bookDTOs.add(bDTO);
+		}
+		return bookDTOs;
+	}
 }

@@ -144,10 +144,30 @@ public class UserController {
 		return new ResponseEntity<>(tag, HttpStatus.OK);
 	}
 	
-	
+
 	@RequestMapping(value = "/payMembership/{uId}", method = RequestMethod.GET)
 	public ResponseEntity payMembership(@PathVariable("uId") Long uId) {
 		this.sampleService.payMembership(uId);
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+
+	@RequestMapping(value = "/addToWishlist/{uId}/{bId}", method = RequestMethod.GET)
+	public ResponseEntity<String> addToWishslist(@PathVariable("uId") Long uId, @PathVariable("bId") Long bId) {
+		System.out.println("Uslo u wishlist");
+		if(sampleService.addToWishlist(uId, bId))
+			return new ResponseEntity<>("Succes.", HttpStatus.OK);
+		
+		return new ResponseEntity<>("Error.", HttpStatus.BAD_REQUEST);
+
+	}
+	
+	@RequestMapping(value = "/wishlist/{uId}", method = RequestMethod.GET)
+	public ResponseEntity<ArrayList<BookDTO>> getWishlist(@PathVariable("uId") Long uId) {
+		ArrayList<BookDTO> wishlist = this.sampleService.getWishlist(uId);
+		for(BookDTO b:wishlist) {
+			System.out.println("from wishlist - " + b.getId());
+		}
+		return new ResponseEntity<>(wishlist, HttpStatus.OK);
 	}
 }

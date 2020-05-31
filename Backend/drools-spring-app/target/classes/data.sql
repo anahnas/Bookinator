@@ -10,7 +10,6 @@ insert into tag(tag_name, tag_approved) values ('character', true);
 insert into employee_table(employee_pkey) values (2);
 
 
-
 insert into book(avaivable_no,rating,search_match) values(1,0,0);
 insert into book_tag(book_id,tag_key,tag_value) values (1,2,'The kite runner');
 insert into book_tag(book_id,tag_key,tag_value) values (1,1,'Khaled Hosseini');

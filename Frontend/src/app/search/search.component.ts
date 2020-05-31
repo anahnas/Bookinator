@@ -75,12 +75,12 @@ export class SearchComponent implements OnInit {
     for(let lik of this.likovi){
       searchRequest.searchCriteria["character"] = lik;
     }
-    console.log(searchRequest)
 
     this._searchService.getFilteredBooks(searchRequest).subscribe(
       books => {
         for(let b of books){
           this.temp = new Book();
+          this.temp.id = b.id;
           this.temp.match = b.match;
           this.temp.availableNo = b.availableNo;
           for(let tag of b.tags){
@@ -97,8 +97,6 @@ export class SearchComponent implements OnInit {
             }
           }
           this.books.push(this.temp);
-          
-        
         }
       },
       error => this.errorMessage = <any>error
@@ -107,13 +105,16 @@ export class SearchComponent implements OnInit {
 
   onSelect(book: Book): void {
     this.selectedBook = book;
+
     this.openDialog();
   }
 
   openDialog(){
+    console.log(this.selectedBook)
+
     const dialogRef = this.dialog.open(BookInfoDialogComponent, {
       width: '250px',
-    
+
       data: {book: this.selectedBook}
     });
 
