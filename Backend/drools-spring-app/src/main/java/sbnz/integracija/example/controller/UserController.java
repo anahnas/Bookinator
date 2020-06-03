@@ -47,6 +47,14 @@ public class UserController {
 		return new ResponseEntity<>(retVal, HttpStatus.OK);
 	}
 	
+
+	@RequestMapping(value = "/books/{uId}", method = RequestMethod.GET)
+	public ResponseEntity<ArrayList<BookDTO>> bookHistory(@PathVariable("uId") Long uId) {		
+		
+	    ArrayList<BookDTO> retVal = sampleService.getBookHistory(uId);
+		return new ResponseEntity<>(retVal, HttpStatus.OK);
+	}
+	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<?> login(@RequestBody  User u) {
 		User user = sampleService.login(u);

@@ -35,6 +35,17 @@ export class BookInfoDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  rent(): void {
+    this.user = JSON.parse(localStorage.getItem('loggedIn'));
+    this._searchService.rent(this.book.id, this.user.id).subscribe(
+      response =>{
+        alert("Rented.");
+        this.dialogRef.close();
+      }
+    );
+  
+  }
+
   notify(): void {
     this.user = JSON.parse(localStorage.getItem('loggedIn'));
     this._searchService.addToWishlist(this.book.id, this.user.id).subscribe(

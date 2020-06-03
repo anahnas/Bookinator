@@ -15,4 +15,5 @@ export class Book{
     description:String
     match:String
     id:String
+    returned:Boolean
 }

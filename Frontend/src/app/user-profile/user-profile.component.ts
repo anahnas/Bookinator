@@ -18,7 +18,8 @@ export class UserProfileComponent implements OnInit {
   username:String;
   email:String;
 
-  books : Book [] = [];
+  booksHistory : Book [] = [];
+  booksWishlist : Book [] = [];
   temp:Book;
   selectedBook:Book;
 
@@ -35,16 +36,15 @@ export class UserProfileComponent implements OnInit {
     this.lastName = this.loggedInUser.lastName;
     this.username = this.loggedInUser.username;
     this.email = this.loggedInUser.email;
+    this.getBookHistory();
     this.getWishlist();
   }
 
-  getWishlist(){
-    this.books = [];
-    
-  
-    this._booksService.getWishlist(this.loggedInUser.id).subscribe(
+  getBookHistory(){
+    this.booksHistory = [];
+    this._booksService.getBookHistory(this.loggedInUser.id).subscribe(
       books => {
-        console.log("wishlist :")
+        console.log("history :")
         console.log(books)
         for(let b of books){
           this.temp = new Book();
@@ -63,7 +63,38 @@ export class UserProfileComponent implements OnInit {
               this.temp.description = tag.tagValue;
             }
           }
-          this.books.push(this.temp);
+          this.booksHistory.push(this.temp);
+          
+        
+        }
+      },
+      error => this.errorMessage = <any>error
+    );
+  }
+
+  getWishlist(){
+    this.booksWishlist = [];
+    
+    this._booksService.getWishlist(this.loggedInUser.id).subscribe(
+      books => {
+        for(let b of books){
+          this.temp = new Book();
+          this.temp.match = b.match;
+          this.temp.availableNo = b.availableNo;
+          for(let tag of b.tags){
+            if(tag.tagKey == '2'){
+              this.temp.name = tag.tagValue;
+            }
+
+            if(tag.tagKey == '1'){
+              this.temp.author = tag.tagValue;
+            }
+            
+            if(tag.tagKey == '3'){
+              this.temp.description = tag.tagValue;
+            }
+          }
+          this.booksWishlist.push(this.temp);
           
         
         }

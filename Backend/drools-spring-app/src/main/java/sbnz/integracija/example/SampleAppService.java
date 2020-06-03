@@ -210,6 +210,26 @@ public class SampleAppService {
 		return bookDTOs;
 	}
 	
+	public ArrayList<BookDTO> getBookHistory(Long uId) {
+		ArrayList<BookLoan> bookLoans = this.bookLoanRepository.findByUserId(uId);
+		ArrayList<BookDTO> bookDTOs = new ArrayList<>();
+		//Collections.sort(books, Collections.reverseOrder());
+		
+		for(BookLoan bookLoan : bookLoans) {
+			System.out.println(bookLoan.getBook().getId());
+			BookDTO bookDTO = new BookDTO(bookRepository.getOne(bookLoan.getBook().getId()));
+			ArrayList<BookTag> bookTags = this.bookTagRepository.findTagsByBookId(bookLoan.getBook().getId());
+			for(BookTag bt : bookTags) {
+				bookDTO.getTags().add(bt);
+			}
+
+			bookDTOs.add(bookDTO);	
+		}		
+
+		
+		return bookDTOs;
+	}
+	
 	public ArrayList<Book> startSearch(SearchRequestDTO searchRequestDTO) {
 		System.out.println("Initializing virtual assisant...............................");
 		
@@ -317,6 +337,7 @@ public class SampleAppService {
 		BookLoan bookLoan = new BookLoan();
 		bookLoan.setReturned(false);
 		bookLoan.setBook(book);
+		bookLoan.setUserId(userId);
 		bookLoanRepository.save(bookLoan);
 		member.setLoan(bookLoan);
 		member.setCanRent(false);

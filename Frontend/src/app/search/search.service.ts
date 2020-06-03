@@ -20,6 +20,7 @@ export class SearchService{
     private _bookSearchUrl = 'http://localhost:8080/book';
     private _booksUrl = 'http://localhost:8080/books';
     private _addToWishlistUrl = 'http://localhost:8080/addToWishlist/';
+    private _rentUrl = 'http://localhost:8080/bookLoan';
 
     constructor(private _http: HttpClient){ }
 
@@ -55,6 +56,11 @@ export class SearchService{
 
     getFilteredBooks(searchRequest : any) : Observable<BookDTO[]>{
         return this._http.post<BookDTO[]>(this._bookSearchUrl, searchRequest, httpOptions).pipe(
+                    catchError(this.handleError));
+    }
+
+    rent(bookId:String, userId:String) : any{
+        return this._http.post(this._rentUrl, JSON.stringify({bookId,userId}), httpOptions).pipe(
                     catchError(this.handleError));
     }
 

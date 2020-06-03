@@ -1,5 +1,6 @@
 package sbnz.integracija.example.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -15,4 +16,6 @@ public interface BookLoanRepository extends JpaRepository<BookLoan, Long>{
 	List<BookLoan> findAll();
 	@Query("SELECT bookLoan FROM BookLoan bookLoan WHERE ?1 = bookLoan.book.id")
 	BookLoan findByBookId(Long bookId);
+	@Query("SELECT bookLoan FROM BookLoan bookLoan WHERE ?1 = bookLoan.userId")
+	ArrayList<BookLoan> findByUserId(Long userId);
 }

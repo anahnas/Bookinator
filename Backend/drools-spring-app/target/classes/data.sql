@@ -38,3 +38,4 @@ insert into book_tag(book_id,tag_key,tag_value) values (5,2,'The Bridge on the D
 insert into book_tag(book_id,tag_key,tag_value) values (5,1,'Ivo Andric');
 insert into book_tag(book_id,tag_key,tag_value) values (5,4,'turk');
 insert into book_tag(book_id,tag_key,tag_value) values (5,3,'The Bridge on the Drina is a historical novel by the Yugoslav writer Ivo Andrić. It revolves around the Mehmed Paša Sokolović Bridge in Višegrad, which spans the Drina River and stands as a silent witness to history from its construction by the Ottomans in the mid-16th century until its partial destruction during World War I. The story spans about four centuries and covers the Ottoman and Austro-Hungarian occupations of the region, with a particular emphasis on the lives, destinies and relations of the local inhabitants, especially Serbs and Bosnian Muslims. .');
+

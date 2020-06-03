@@ -14,6 +14,10 @@ export class BooksService{
     private _wishlistUrl = 'http://localhost:8080/wishlist/';
     constructor(private _http: HttpClient){ }
 
+    getBookHistory(userId : String) : Observable<BookDTO[]>{
+        return this._http.get<BookDTO[]>(this._bookHistoryUrl+ userId).pipe(
+                    catchError(this.handleError));
+    }
 
     getWishlist(userId : String) : Observable<BookDTO[]>{
         return this._http.get<BookDTO[]>(this._wishlistUrl+"/"+ userId).pipe(
