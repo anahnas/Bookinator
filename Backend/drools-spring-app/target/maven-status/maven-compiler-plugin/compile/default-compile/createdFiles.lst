@@ -10,6 +10,7 @@ sbnz\integracija\example\repository\BookRepository.class
 DTO\BookDTO.class
 sbnz\integracija\example\facts\Book.class
 sbnz\integracija\example\SampleAppService.class
+sbnz\integracija\example\facts\TagNo.class
 sbnz\integracija\example\facts\enumeration\RoleEnum.class
 sbnz\integracija\example\facts\ReviewRequest.class
 sbnz\integracija\example\facts\BookTag.class

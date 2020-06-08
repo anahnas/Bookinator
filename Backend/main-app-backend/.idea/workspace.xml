@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ee936964-d520-46a0-a6d5-a62fd711733b" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="cart" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\main-app-backend\.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1cETlXiX1KQZdnyaDL1Ok7u8sws" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ExpandSpringBootJavaOptionsPanel" value="true" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../.project" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.general" />
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.CartApplication">
+    <configuration name="CartApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" singleton="false">
+      <module name="cart" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.cart.CartApplication" />
+      <option name="VM_PARAMETERS" value="-Dserver.port=9094" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CatalogueApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" singleton="false">
+      <module name="catalogue" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.catalogue.CatalogueApplication" />
+      <option name="VM_PARAMETERS" value="-Dserver.port=9095" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EurekaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" singleton="false">
+      <module name="eureka" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.eureka.EurekaApplication" />
+      <option name="VM_PARAMETERS" value="-Dserver.port=9096" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LocationApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" singleton="false">
+      <module name="location" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.location.LocationApplication" />
+      <option name="VM_PARAMETERS" value="-Dserver.port=9090" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MessageApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" singleton="false">
+      <module name="message" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.message.MessageApplication" />
+      <option name="VM_PARAMETERS" value="-Dserver.port=9097" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PricelistApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" singleton="false">
+      <module name="pricelist" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.pricelist.PricelistApplication" />
+      <option name="VM_PARAMETERS" value="-Dserver.port=9091" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReportApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" singleton="false">
+      <module name="report" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.report.ReportApplication" />
+      <option name="VM_PARAMETERS" value="-Dserver.port=9098" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RequestApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" singleton="false">
+      <module name="request" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.request.RequestApplication" />
+      <option name="VM_PARAMETERS" value="-Dserver.port=9092" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReviewApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" singleton="false">
+      <module name="review" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.review.ReviewApplication" />
+      <option name="VM_PARAMETERS" value="-Dserver.port=9099" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" singleton="false">
+      <module name="user" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.user.UserApplication" />
+      <option name="VM_PARAMETERS" value="-Dserver.port=9089" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="VehicleApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" singleton="false">
+      <module name="vehicle" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.vehicle.VehicleApplication" />
+      <option name="VM_PARAMETERS" value="-Dserver.port=9088" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ZuulApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" singleton="false">
+      <module name="zuul" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.zuul.ZuulApplication" />
+      <option name="VM_PARAMETERS" value="-Dserver.port=9093" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Spring Boot.CartApplication" />
+      <item itemvalue="Spring Boot.CatalogueApplication" />
+      <item itemvalue="Spring Boot.EurekaApplication" />
+      <item itemvalue="Spring Boot.LocationApplication" />
+      <item itemvalue="Spring Boot.MessageApplication" />
+      <item itemvalue="Spring Boot.PricelistApplication" />
+      <item itemvalue="Spring Boot.ReportApplication" />
+      <item itemvalue="Spring Boot.RequestApplication" />
+      <item itemvalue="Spring Boot.ReviewApplication" />
+      <item itemvalue="Spring Boot.UserApplication" />
+      <item itemvalue="Spring Boot.VehicleApplication" />
+      <item itemvalue="Spring Boot.ZuulApplication" />
+    </list>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="Spring Boot" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="Spring Boot" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="Not Started" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+            </expand>
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ee936964-d520-46a0-a6d5-a62fd711733b" name="Default Changelist" comment="" />
+      <created>1590092905743</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1590092905743</updated>
+      <workItem from="1590092909328" duration="2317000" />
+      <workItem from="1590095281062" duration="371000" />
+      <workItem from="1590932756685" duration="345000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="458" y="0" width="697" height="860" key="#CartApplication" timestamp="1590094634671">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="458" y="0" width="697" height="860" key="#CartApplication/0.0.1600.860@0.0.1600.860" timestamp="1590094634671" />
+    <state x="458" y="0" width="697" height="860" key="#CatalogueApplication" timestamp="1590933089141">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="458" y="0" width="697" height="860" key="#CatalogueApplication/0.0.1600.860@0.0.1600.860" timestamp="1590933089141" />
+    <state x="458" y="0" width="697" height="860" key="#EurekaApplication" timestamp="1590094645826">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="458" y="0" width="697" height="860" key="#EurekaApplication/0.0.1600.860@0.0.1600.860" timestamp="1590094645826" />
+    <state x="458" y="69" key="#LocationApplication" timestamp="1590094601781">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="458" y="69" key="#LocationApplication/0.0.1600.860@0.0.1600.860" timestamp="1590094601781" />
+    <state x="458" y="0" width="697" height="860" key="#MessageApplication" timestamp="1590094651422">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="458" y="0" width="697" height="860" key="#MessageApplication/0.0.1600.860@0.0.1600.860" timestamp="1590094651422" />
+    <state x="458" y="0" width="697" height="860" key="#PricelistApplication" timestamp="1590094611045">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="458" y="0" width="697" height="860" key="#PricelistApplication/0.0.1600.860@0.0.1600.860" timestamp="1590094611045" />
+    <state x="392" y="87" key="#Project_Structure" timestamp="1590092923787">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="392" y="87" key="#Project_Structure/0.0.1600.860@0.0.1600.860" timestamp="1590092923787" />
+    <state x="458" y="0" width="697" height="860" key="#ReportApplication" timestamp="1590094657285">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="458" y="0" width="697" height="860" key="#ReportApplication/0.0.1600.860@0.0.1600.860" timestamp="1590094657285" />
+    <state x="458" y="0" width="697" height="860" key="#RequestApplication" timestamp="1590094617036">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="458" y="0" width="697" height="860" key="#RequestApplication/0.0.1600.860@0.0.1600.860" timestamp="1590094617036" />
+    <state x="458" y="0" width="697" height="860" key="#ReviewApplication" timestamp="1590094666162">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="458" y="0" width="697" height="860" key="#ReviewApplication/0.0.1600.860@0.0.1600.860" timestamp="1590094666162" />
+    <state x="458" y="0" width="697" height="860" key="#UserApplication" timestamp="1590094673925">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="458" y="0" width="697" height="860" key="#UserApplication/0.0.1600.860@0.0.1600.860" timestamp="1590094673925" />
+    <state x="458" y="0" width="697" height="860" key="#VehicleApplication" timestamp="1590094680871">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="458" y="0" width="697" height="860" key="#VehicleApplication/0.0.1600.860@0.0.1600.860" timestamp="1590094680871" />
+    <state x="458" y="0" width="697" height="860" key="#ZuulApplication" timestamp="1590094625687">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="458" y="0" width="697" height="860" key="#ZuulApplication/0.0.1600.860@0.0.1600.860" timestamp="1590094625687" />
+    <state x="254" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590094305635">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="254" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860@0.0.1600.860" timestamp="1590094305634" />
+    <state x="580" y="122" key="FileChooserDialogImpl" timestamp="1590933072017">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="580" y="122" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1590933072017" />
+    <state width="917" height="199" key="GridCell.Tab.0.bottom" timestamp="1590095242755">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="917" height="199" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1590095242755" />
+    <state width="917" height="199" key="GridCell.Tab.0.center" timestamp="1590095242755">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="917" height="199" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1590095242755" />
+    <state width="917" height="199" key="GridCell.Tab.0.left" timestamp="1590095242754">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="917" height="199" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1590095242754" />
+    <state width="917" height="199" key="GridCell.Tab.0.right" timestamp="1590095242755">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="917" height="199" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1590095242755" />
+    <state width="917" height="199" key="GridCell.Tab.1.bottom" timestamp="1590095242755">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="917" height="199" key="GridCell.Tab.1.bottom/0.0.1600.860@0.0.1600.860" timestamp="1590095242755" />
+    <state width="917" height="199" key="GridCell.Tab.1.center" timestamp="1590095242755">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="917" height="199" key="GridCell.Tab.1.center/0.0.1600.860@0.0.1600.860" timestamp="1590095242755" />
+    <state width="917" height="199" key="GridCell.Tab.1.left" timestamp="1590095242755">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="917" height="199" key="GridCell.Tab.1.left/0.0.1600.860@0.0.1600.860" timestamp="1590095242755" />
+    <state width="917" height="199" key="GridCell.Tab.1.right" timestamp="1590095242755">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="917" height="199" key="GridCell.Tab.1.right/0.0.1600.860@0.0.1600.860" timestamp="1590095242755" />
+    <state x="465" y="128" key="NewModule_or_Project.wizard" timestamp="1590933048181">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="465" y="128" key="NewModule_or_Project.wizard/0.0.1600.860@0.0.1600.860" timestamp="1590933048181" />
+    <state x="280" y="4" key="SettingsEditor" timestamp="1590095239311">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="280" y="4" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1590095239311" />
+    <state x="495" y="252" key="com.intellij.ide.util.TipDialog" timestamp="1590932787773">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="495" y="252" key="com.intellij.ide.util.TipDialog/0.0.1600.860@0.0.1600.860" timestamp="1590932787773" />
+    <state x="182" y="49" key="new project wizard" timestamp="1590933100721">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="182" y="49" key="new project wizard/0.0.1600.860@0.0.1600.860" timestamp="1590933100721" />
+  </component>
+</project>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/eureka/pom.xml" />
+        <option value="$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/request/pom.xml" />
+        <option value="$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/vehicle/pom.xml" />
+        <option value="$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/user/pom.xml" />
+        <option value="$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/catalogue/pom.xml" />
+        <option value="$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/pricelist/pom.xml" />
+        <option value="$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/location/pom.xml" />
+        <option value="$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/message/pom.xml" />
+        <option value="$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/review/pom.xml" />
+        <option value="$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/report/pom.xml" />
+        <option value="$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/zuul/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_13" default="false" project-jdk-name="14" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
