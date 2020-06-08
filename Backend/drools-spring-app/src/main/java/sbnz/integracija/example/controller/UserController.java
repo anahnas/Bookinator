@@ -21,6 +21,7 @@ import DTO.BookDTO;
 import DTO.BookLoanRequestDTO;
 import DTO.BookTagDTO;
 import sbnz.integracija.example.SampleAppService;
+import sbnz.integracija.example.facts.BookLoan;
 import sbnz.integracija.example.facts.BookTag;
 import sbnz.integracija.example.facts.BookTagStatus;
 import sbnz.integracija.example.facts.ReviewRequest;
@@ -134,6 +135,12 @@ public class UserController {
 
 	}
 
+	@RequestMapping(value = "/bookLoan/all/{uId}", method = RequestMethod.GET)
+	public ResponseEntity<ArrayList<BookLoan>> getBookLoans(@PathVariable ("uId") Long uId) {
+		return new ResponseEntity<>(sampleService.getBookLoans(uId), HttpStatus.OK);
+
+	}
+	
 	@RequestMapping(value="/getTags", method = RequestMethod.GET)
 	public ResponseEntity<List<BookTag>> getTags() {
 		List<BookTag> bookTag = sampleService.findAllTags();
@@ -161,12 +168,11 @@ public class UserController {
 	
 
 	@RequestMapping(value = "/addToWishlist/{uId}/{bId}", method = RequestMethod.GET)
-	public ResponseEntity<String> addToWishslist(@PathVariable("uId") Long uId, @PathVariable("bId") Long bId) {
-		System.out.println("Uslo u wishlist");
+	public ResponseEntity addToWishslist(@PathVariable("uId") Long uId, @PathVariable("bId") Long bId) {
 		if(sampleService.addToWishlist(uId, bId))
-			return new ResponseEntity<>("Succes.", HttpStatus.OK);
+			return new ResponseEntity(HttpStatus.OK);
 		
-		return new ResponseEntity<>("Error.", HttpStatus.BAD_REQUEST);
+		return new ResponseEntity(HttpStatus.BAD_REQUEST);
 
 	}
 	

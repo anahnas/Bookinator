@@ -76,11 +76,5 @@ public class BookTag {
 		this.tagValue = tagValue;
 		this.status = status;
 	}
-	public BookTag(Long tagKey, String tagValue) {
-		super();
-		this.tagKey = tagKey;
-		this.tagValue = tagValue;
-	}
-
 
 }

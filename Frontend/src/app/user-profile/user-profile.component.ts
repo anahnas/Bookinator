@@ -19,6 +19,7 @@ export class UserProfileComponent implements OnInit {
   email:String;
 
   booksHistory : Book [] = [];
+  bookLoans : any[] = [];
   booksWishlist : Book [] = [];
   temp:Book;
   selectedBook:Book;
@@ -41,7 +42,17 @@ export class UserProfileComponent implements OnInit {
   }
 
   getBookHistory(){
+    this._booksService.getBookLoans(this.loggedInUser.id).subscribe(
+      response => {
+        console.log("loans")
+        console.log(response)
+        for(let loan of response)
+          this.bookLoans.push(loan);
+      }
+    );
+
     this.booksHistory = [];
+
     this._booksService.getBookHistory(this.loggedInUser.id).subscribe(
       books => {
         console.log("history :")
@@ -63,9 +74,16 @@ export class UserProfileComponent implements OnInit {
               this.temp.description = tag.tagValue;
             }
           }
+
+          for(let loan of this.bookLoans){
+            if(loan.returned)
+              this.temp.returned = true;
+            else
+              this.temp.returned = false;
+          }
+
           this.booksHistory.push(this.temp);
           
-        
         }
       },
       error => this.errorMessage = <any>error

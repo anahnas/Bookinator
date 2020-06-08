@@ -34,7 +34,7 @@
                                 <tr *ngFor="let book of booksHistory">
                                     <td>{{book.name}}</td>
                                     <td>{{book.author}}</td>
-                                    <td>{{book.returned}}</td>
+                                    <td>{{book.returned | yesNo }}</td>
                                 </tr>
                             </tbody>
                         </table>

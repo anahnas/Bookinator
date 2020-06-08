@@ -13,7 +13,7 @@ import javax.persistence.Id;
 public class BookLoan implements Serializable{
 
 	@Column
-	private Book book;
+	private Long bookId;
 	@Column
 	private Long userId;
 	@Id
@@ -25,14 +25,14 @@ public class BookLoan implements Serializable{
 	private boolean returned;
 	@Column
 	private boolean expired;
-	
-	public Book getBook() {
-		return book;
+
+
+	public Long getBookId() {
+		return bookId;
 	}
-	public void setBook(Book book) {
-		this.book = book;
+	public void setBookId(Long bookId) {
+		this.bookId = bookId;
 	}
-	
 	public Long getUserId() {
 		return userId;
 	}
@@ -58,9 +58,9 @@ public class BookLoan implements Serializable{
 		this.returned = returned;
 	}
 	
-	public BookLoan(Book book, Long userId, Date expiryDate, boolean returned, boolean expired) {
+	public BookLoan(Long bookId, Long userId, Date expiryDate, boolean returned, boolean expired) {
 		super();
-		this.book = book;
+		this.bookId = bookId;
 		this.userId = userId;
 		this.expiryDate = expiryDate;
 		this.returned = returned;

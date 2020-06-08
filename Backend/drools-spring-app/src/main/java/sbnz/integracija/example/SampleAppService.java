@@ -216,9 +216,9 @@ public class SampleAppService {
 		//Collections.sort(books, Collections.reverseOrder());
 		
 		for(BookLoan bookLoan : bookLoans) {
-			System.out.println(bookLoan.getBook().getId());
-			BookDTO bookDTO = new BookDTO(bookRepository.getOne(bookLoan.getBook().getId()));
-			ArrayList<BookTag> bookTags = this.bookTagRepository.findTagsByBookId(bookLoan.getBook().getId());
+			System.out.println(bookLoan.getBookId());
+			BookDTO bookDTO = new BookDTO(bookRepository.getOne(bookLoan.getBookId()));
+			ArrayList<BookTag> bookTags = this.bookTagRepository.findTagsByBookId(bookLoan.getBookId());
 			for(BookTag bt : bookTags) {
 				bookDTO.getTags().add(bt);
 			}
@@ -336,7 +336,7 @@ public class SampleAppService {
 		Book book = this.bookRepository.getOne(bookId);
 		BookLoan bookLoan = new BookLoan();
 		bookLoan.setReturned(false);
-		bookLoan.setBook(book);
+		bookLoan.setBookId(book.getId());
 		bookLoan.setUserId(userId);
 		bookLoanRepository.save(bookLoan);
 		member.setLoan(bookLoan);
@@ -357,7 +357,7 @@ public class SampleAppService {
         Thread t = new Thread() {
             @Override
             public void run() {
-            	BookLoanMade e1 = new BookLoanMade(member.getId(), bookLoan.getBook().getId());
+            	BookLoanMade e1 = new BookLoanMade(member.getId(), bookLoan.getBookId());
             	kSession1.insert(e1);
             	
                 kSession1.fireUntilHalt();
@@ -388,7 +388,10 @@ public class SampleAppService {
 		
 	}
 	
-	
+
+	public ArrayList<BookLoan> getBookLoans(Long uId) {
+		return bookLoanRepository.findByUserId(uId);
+	}
 
 	
 	public void approveJustTag(String name) {

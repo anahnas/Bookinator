@@ -26,6 +26,7 @@ import { WelcomeSpeechComponent } from './virtual-assistant/welcome-speech/welco
 import { TagListComponent } from './tag-list/tag-list.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { YesNoPipe } from './yes-no.pipe';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     WelcomeSpeechComponent,
     TagListComponent,
     WishlistComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    YesNoPipe
     ],
   imports: [
     BrowserModule,
