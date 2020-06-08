@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$USER_HOME$/Downloads/cart/src/main/java" charset="UTF-8" />
+    <file url="file://$USER_HOME$/Downloads/catalogue/src/main/java" charset="UTF-8" />
+    <file url="file://$USER_HOME$/Downloads/eureka/src/main/java" charset="UTF-8" />
+    <file url="file://$USER_HOME$/Downloads/location/src/main/java" charset="UTF-8" />
+    <file url="file://$USER_HOME$/Downloads/message/src/main/java" charset="UTF-8" />
+    <file url="file://$USER_HOME$/Downloads/pricelist/src/main/java" charset="UTF-8" />
+    <file url="file://$USER_HOME$/Downloads/report/src/main/java" charset="UTF-8" />
+    <file url="file://$USER_HOME$/Downloads/request/src/main/java" charset="UTF-8" />
+    <file url="file://$USER_HOME$/Downloads/review/src/main/java" charset="UTF-8" />
+    <file url="file://$USER_HOME$/Downloads/user/src/main/java" charset="UTF-8" />
+    <file url="file://$USER_HOME$/Downloads/vehicle/src/main/java" charset="UTF-8" />
+    <file url="file://$USER_HOME$/Downloads/zuul/src/main/java" charset="UTF-8" />
+  </component>
+</project>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$USER_HOME$/Downloads/zuul/pom.xml" />
+        <option value="$USER_HOME$/Downloads/eureka/pom.xml" />
+        <option value="$USER_HOME$/Downloads/user/pom.xml" />
+        <option value="$USER_HOME$/Downloads/review/pom.xml" />
+        <option value="$USER_HOME$/Downloads/request/pom.xml" />
+        <option value="$USER_HOME$/Downloads/report/pom.xml" />
+        <option value="$USER_HOME$/Downloads/pricelist/pom.xml" />
+        <option value="$USER_HOME$/Downloads/message/pom.xml" />
+        <option value="$USER_HOME$/Downloads/catalogue/pom.xml" />
+        <option value="$USER_HOME$/Downloads/location/pom.xml" />
+        <option value="$USER_HOME$/Downloads/vehicle/pom.xml" />
+        <option value="$USER_HOME$/Downloads/cart/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_13" default="false" project-jdk-name="14" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

@@ -1,4 +1,4 @@
-<<<<<<< Updated upstream
+
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\BookRatingKey.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\BookTag.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\DTO\BookTagDTO.java
@@ -33,14 +33,14 @@ D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integ
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\repository\BookRatingRepository.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\repository\BookRepository.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\SampleAppService.java
-=======
+
 C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\BookLoan.java
 C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\BookRatingKey.java
 C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\repository\MemberRepository.java
 C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\Book.java
 C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\BookTagStatus.java
 C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\SampleApp.java
-C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\TagNo.java
+
 C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\events\TransactionEvent.java
 C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\SearchResult.java
 C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\repository\TagRepository.java
@@ -72,4 +72,3 @@ C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\mai
 C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\repository\userRepository.java
 C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\ReviewRequest.java
 C:\Users\HP\Documents\Tamara faks\SBZ\Projekat\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\Penalty.java
->>>>>>> Stashed changes

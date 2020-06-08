@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import DTO.BookDTO;
+import DTO.BookRecommendDTO;
 import DTO.BookTagDTO;
 import sbnz.integracija.example.SampleAppService;
 import sbnz.integracija.example.facts.BookTag;
@@ -141,5 +145,11 @@ public class UserController {
 	public ResponseEntity payMembership(@PathVariable("uId") Long uId) {
 		this.sampleService.payMembership(uId);
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/recommend/{uId}", method = RequestMethod.GET)
+	public ResponseEntity<ArrayList<BookRecommendDTO>> recommendBook(@PathVariable("uId") Long uId) {
+		 ArrayList<BookRecommendDTO> retVal = sampleService.getRecommendedBooks(uId);
+		return new ResponseEntity<>(retVal, HttpStatus.OK);
 	}
 }

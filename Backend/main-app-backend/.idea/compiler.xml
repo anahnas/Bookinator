@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="user" />
+        <module name="zuul" />
+        <module name="cart" />
+        <module name="report" />
+        <module name="message" />
+        <module name="review" />
+        <module name="eureka" />
+        <module name="pricelist" />
+        <module name="location" />
+        <module name="catalogue" />
+        <module name="request" />
+        <module name="vehicle" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="cart" target="1.8" />
+      <module name="catalogue" target="1.8" />
+      <module name="eureka" target="1.8" />
+      <module name="location" target="1.8" />
+      <module name="message" target="1.8" />
+      <module name="pricelist" target="1.8" />
+      <module name="report" target="1.8" />
+      <module name="request" target="1.8" />
+      <module name="review" target="1.8" />
+      <module name="user" target="1.8" />
+      <module name="vehicle" target="1.8" />
+      <module name="zuul" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="cart" options="-parameters" />
+      <module name="catalogue" options="-parameters" />
+      <module name="eureka" options="-parameters" />
+      <module name="location" options="-parameters" />
+      <module name="message" options="-parameters" />
+      <module name="pricelist" options="-parameters" />
+      <module name="report" options="-parameters" />
+      <module name="request" options="-parameters" />
+      <module name="review" options="-parameters" />
+      <module name="user" options="-parameters" />
+      <module name="vehicle" options="-parameters" />
+      <module name="zuul" options="-parameters" />
+    </option>
+  </component>
+</project>

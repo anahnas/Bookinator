@@ -1,11 +1,7 @@
 package sbnz.integracija.example;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
+import org.apache.mahout.cf.taste.model.JDBCDataModel;
 import org.kie.api.KieBase;
 import org.kie.api.KieBaseConfiguration;
 import org.kie.api.KieServices;
@@ -17,22 +13,28 @@ import org.kie.api.runtime.rule.QueryResults;
 import org.kie.api.runtime.rule.QueryResultsRow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-
+import DTO.UserDTO;
 import sbnz.integracija.example.facts.Book;
+import sbnz.integracija.example.facts.BookRating;
 import sbnz.integracija.example.facts.BookTag;
 import sbnz.integracija.example.facts.SearchRequestDTO;
 import sbnz.integracija.example.facts.Tag;
+import sbnz.integracija.example.facts.User;
+import sbnz.integracija.example.repository.BookRatingRepository;
 
 @SpringBootApplication
 public class SampleApp {
 
 	private static Logger log = LoggerFactory.getLogger(SampleApp.class);
-
+	
 	public static void main(String[] args) {
+		
+		
 		ApplicationContext ctx = SpringApplication.run(SampleApp.class, args);
 
 		String[] beanNames = ctx.getBeanDefinitionNames();
@@ -62,8 +64,8 @@ public class SampleApp {
 
 
 //		
-//		KieBase kbase = kContainer.newKieBase(kbconf);
-//		KieSession kSession = kbase.newKieSession();
+		KieBase kbase = kContainer.newKieBase(kbconf);
+		KieSession kSession = kbase.newKieSession();
 //		
 //		 kSession.getEntryPoint("search").insert(new Book((long)5));
 //		 kSession.getEntryPoint("search").insert(new Tag((long)4,"character"));
@@ -75,11 +77,25 @@ public class SampleApp {
 //		 SearchRequestDTO s=new SearchRequestDTO();
 //		 s.getSearchCriteria().put("author", "Ivo Andric");
 //		 s.getSearchCriteria().put("character","Turci");
-//		 kSession.getEntryPoint("search").insert(s);
-//		 // can be commented out
-//		 kSession.getAgenda().getAgendaGroup( "startSearch" ).setFocus();
-//		 //
-//		 kSession.fireAllRules();
+//		 kSession.getEntryPoint("recommend").insert(new UserDTO((long)1));
+//		 User user= new User();
+//		 user.setId((long)2);
+//		 User user1= new User();
+//		 user1.setId((long)1);
+//		 User user3= new User();
+//		 user1.setId((long)3);
+//		 Book book=new Book();
+//		 book.setId((long)1);
+//		 kSession.getEntryPoint("recommend").insert(user);
+//		 kSession.getEntryPoint("recommend").insert(user1);
+//		 kSession.getEntryPoint("recommend").insert(new BookRating(book,user,(float)5));
+//		 kSession.getEntryPoint("recommend").insert(new BookRating(book,user,(float)5));
+//		 kSession.getEntryPoint("recommend").insert(new UserDTO((long)1));
+		 
+		 // can be commented out
+		// kSession.getAgenda().getAgendaGroup( "startSearch" ).setFocus();
+		 //
+		// kSession.fireAllRules();
 //		 List<Book> searchResults=new ArrayList<>();
 //		 QueryResults results = kSession.getQueryResults( "getSearchResults" ); 
 //		 for ( QueryResultsRow row : results ) {
