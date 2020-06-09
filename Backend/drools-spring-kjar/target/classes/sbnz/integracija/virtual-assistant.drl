@@ -173,7 +173,6 @@ agenda-group "searchGroup"
 	     //match the book with its tags, and tags with tag names and names with search req params
 	     $bt:BookTag(bookId==$b.id && tagKey ==$t.id) from entry-point "search"
     then
-		System.out.println($entry);
 		try{
 			Integer.parseInt( $entry.getValue().toString());
 			}
@@ -202,7 +201,6 @@ agenda-group "searchGroup"
 	     $bt:BookTag(bookId==$b.id && tagKey ==$t.id) from entry-point "search"
     then
     
-    	System.out.println($entry);
 		try{
 			
 				Integer.parseInt( $entry.getValue().toString());

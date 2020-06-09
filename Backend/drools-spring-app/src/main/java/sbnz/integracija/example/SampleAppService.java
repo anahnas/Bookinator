@@ -66,10 +66,10 @@ public class SampleAppService {
 	private static Logger log = LoggerFactory.getLogger(SampleAppService.class);
 
 	@Autowired
-	private final BookRepository bookRepository;
+	BookRepository bookRepository;
 
 	@Autowired
-	private final BookTagRepository bookTagRepository;
+	BookTagRepository bookTagRepository;
 
 	@Autowired
 	BookRatingRepository ratingRepo;
@@ -83,17 +83,13 @@ public class SampleAppService {
 	@Autowired
 	TagRepository tagRepo;
 
-	private final KieContainer kieContainer;
+	@Autowired
+	KieContainer kieContainer;
 
 	private String CSV_FILE_NAME = "C:\\data.csv";
 
-	@Autowired
-	public SampleAppService(KieContainer kieContainer, BookRepository bookRepository,
-			BookTagRepository bookTagRepository) {
+	public SampleAppService() {
 		log.info("Initialising a new example session.");
-		this.kieContainer = kieContainer;
-		this.bookRepository = bookRepository;
-		this.bookTagRepository = bookTagRepository;
 	}
 
 //	public Item getClassifiedItem(Item i) {
@@ -257,6 +253,7 @@ public class SampleAppService {
 		for (Book b : searchResults)
 			System.out.println(b.getMatch() + " : " + b.toString());
 
+		kSession.dispose();
 		return (ArrayList<Book>) searchResults;
 	}
 
