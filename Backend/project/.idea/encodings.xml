@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/catalogue/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/catalogue/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/eureka/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/eureka/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/location/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/location/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/message/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/message/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/pricelist/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/pricelist/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/report/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/report/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/request/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/request/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/review/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/review/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/user/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/user/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/vehicle/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/vehicle/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/zuul/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/zuul/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

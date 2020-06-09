@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/catalogue/catalogue.iml" filepath="$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/catalogue/catalogue.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/eureka/eureka.iml" filepath="$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/eureka/eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/location/location.iml" filepath="$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/location/location.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/message/message.iml" filepath="$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/message/message.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/pricelist/pricelist.iml" filepath="$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/pricelist/pricelist.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/report/report.iml" filepath="$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/report/report.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/request/request.iml" filepath="$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/request/request.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/review/review.iml" filepath="$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/review/review.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/user/user.iml" filepath="$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/user/user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/vehicle/vehicle.iml" filepath="$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/vehicle/vehicle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/zuul/zuul.iml" filepath="$PROJECT_DIR$/../../../../XML/main-app-rent-a-car/back/zuul/zuul.iml" />
+    </modules>
+  </component>
+</project>
