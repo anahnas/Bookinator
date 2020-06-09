@@ -5,10 +5,10 @@
 Garić Jelena, Lazarević Tamara, Tomić Ana
 <br>
 ### Funkcionalnosti:
-login i logout, registracija, pretraga knjiga, pregled tagova knjiga, pregled korisnika, pregled detalja o knjizi, recenzije
+login i logout, registracija, pretraga knjiga, pregled tagova knjiga, pregled korisnika, pregled detalja o knjizi, recenzije, preporuka knjiga
 <br> 
 ### Pravila: 
-pravila za proveru validnosti članarina, pravila za pametnu pretragu knjiga
+pravila za proveru validnosti članarina, pravila za pametnu pretragu knjiga, pravila za preporuku knjiga na osnovu ocena sličnih korisnika
 <br>
 ### Pokretanje:
 <br>
