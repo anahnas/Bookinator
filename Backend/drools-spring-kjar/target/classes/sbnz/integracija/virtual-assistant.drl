@@ -11,6 +11,8 @@ import sbnz.integracija.example.facts.TagNo;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.lang.Exception;
+import java.util.Map;
+import java.util.Map.Entry;
 
 query "getSearchResults"
     $result: Book() from entry-point "search"
@@ -81,6 +83,7 @@ salience -1
 	then
 		System.out.println("starting search");
 		drools.setFocus("searchGroup");
+		drools.getEntryPoint("search").insert(new Levenshtein());
 end
 
 
@@ -89,6 +92,7 @@ salience 9
 lock-on-active
 agenda-group "searchGroup"
     when
+     l : Levenshtein() from entry-point "search"
      $sr:SearchResult() from entry-point "search"
      $s:SearchRequestDTO(searchCriteria.containsKey("author")) from entry-point "search"
      $b:Book() from entry-point "search"
@@ -96,8 +100,6 @@ agenda-group "searchGroup"
      //match the book with its tags, and tags with tag names and names with search req params
      $bt:BookTag(bookId==$b.id && tagKey ==$t.id) from entry-point "search"
     then
-   
-    Levenshtein l = new Levenshtein();
     
     String author=$s.getSearchCriteria().get("author");
 	int len1=author.length();
@@ -119,18 +121,16 @@ salience 8
 lock-on-active
 agenda-group "searchGroup"
     when
-    $sr:SearchResult() from entry-point "search"
+     l : Levenshtein() from entry-point "search"
+     $sr:SearchResult() from entry-point "search"
      $s:SearchRequestDTO(searchCriteria.containsKey("name")) from entry-point "search"
      $b:Book() from entry-point "search"
      $t:Tag(tagName=="name") from entry-point "search"
     //match the book with its tags, and tags with tag names and names with search req params
     $bt:BookTag(bookId==$b.id && tagKey ==$t.id) from entry-point "search"
     then
-   
-    Levenshtein l = new Levenshtein();
     
     String name=$s.getSearchCriteria().get("name");
-
 	int len1=name.length();
 	int len2=$bt.getTagValue().length();
 	int longestString=Math.max(len1,len2);
@@ -145,14 +145,13 @@ salience 7
 lock-on-active
 agenda-group "searchGroup"
     when
+     l : Levenshtein() from entry-point "search"
      $sr:SearchResult() from entry-point "search"
      $s:SearchRequestDTO(searchCriteria.containsKey("genre")) from entry-point "search"
      $b:Book() from entry-point "search"
      $t:Tag(tagName=="genre") from entry-point "search"
      $bt:BookTag(bookId==$b.id && tagKey ==$t.id) from entry-point "search"
     then
-   
-    Levenshtein l = new Levenshtein();
     
      String genre=$s.getSearchCriteria().get("genre");
 	 int len1=genre.length();
@@ -170,36 +169,28 @@ salience 6
 lock-on-active
 agenda-group "searchGroup"
     when
-    $sr:SearchResult() from entry-point "search"
-     $s:SearchRequestDTO() from entry-point "search"
-     $b:Book() from entry-point "search"
-     $t:Tag() from entry-point "search"
-     //match the book with its tags, and tags with tag names and names with search req params
-     $bt:BookTag(bookId==$b.id && tagKey ==$t.id) from entry-point "search"
+	     l : Levenshtein() from entry-point "search"
+	     $sr:SearchResult() from entry-point "search"
+	     SearchRequestDTO($map:searchCriteria) from entry-point "search"
+	     $entry : Entry(key!="author" && key!="genre" && key!="name") from $map.entrySet()
+	     $b:Book() from entry-point "search"
+	     $t:Tag(tagName==$entry.getKey()) from entry-point "search"
+	     //match the book with its tags, and tags with tag names and names with search req params
+	     $bt:BookTag(bookId==$b.id && tagKey ==$t.id) from entry-point "search"
     then
-   
-    Levenshtein l = new Levenshtein();
-    
-    	 Iterator it = $s.getSearchCriteria().entrySet().iterator();
-	    while (it.hasNext()) {
-	        HashMap.Entry pair = (HashMap.Entry)it.next();
-	        if(pair.getKey().equals($t.getTagName())){     //only compare the same tags
-		        if(!(pair.getKey().equals("name") || pair.getKey().equals("author") || pair.getKey().equals("genre"))){
-		        System.out.println( pair.getValue().toString()+" "+ $bt.getTagValue());
-		        	try{
-		        		Integer.parseInt( pair.getValue().toString());}
-		        		catch(Exception e){
-		        		int len1=pair.getValue().toString().length();
-		        		int len2=$bt.getTagValue().length();
-		        		int longestString=Math.max(len1,len2);
-		        		  double match=$b.getMatch();
-	        			  $b.setMatch(match+(1-(l.distance( pair.getValue().toString().toUpperCase(), $bt.getTagValue().toUpperCase())/longestString))*100/ $sr.getSearchTagNo());
-	        		 	  update($b);
-		        		 } 
-		        	}
-		    }
-	    }
-    
+		System.out.println($entry);
+		try{
+			Integer.parseInt( $entry.getValue().toString());
+			}
+		catch(Exception e){
+			int len1=$entry.getValue().toString().length();
+			int len2=$bt.getTagValue().length();
+			int longestString=Math.max(len1,len2);
+			  double match=$b.getMatch();
+			  $b.setMatch(match+(1-(l.distance(  $entry.getValue().toString().toUpperCase(), $bt.getTagValue().toUpperCase())/longestString))*100/ $sr.getSearchTagNo());
+		 	  update($b);
+		 } 
+
 end
 
 rule "Number-tags"
@@ -207,34 +198,27 @@ salience 6
 lock-on-active
 agenda-group "searchGroup"
     when
-    $sr:SearchResult() from entry-point "search"
-     $s:SearchRequestDTO() from entry-point "search"
-     $b:Book() from entry-point "search"
-     $t:Tag() from entry-point "search"
-     //match the book with its tags, and tags with tag names and names with search req params
-     $bt:BookTag(bookId==$b.id && tagKey ==$t.id) from entry-point "search"
+         l : Levenshtein() from entry-point "search"
+	     $sr:SearchResult() from entry-point "search"
+	     SearchRequestDTO($map:searchCriteria) from entry-point "search"
+	     $entry : Entry(key!="author" && key!="genre" && key!="name") from $map.entrySet()
+	     $b:Book() from entry-point "search"
+	     $t:Tag(tagName==$entry.getKey()) from entry-point "search"
+	     //match the book with its tags, and tags with tag names and names with search req params
+	     $bt:BookTag(bookId==$b.id && tagKey ==$t.id) from entry-point "search"
     then
-   
-    Levenshtein l = new Levenshtein();
     
-    	 Iterator it = $s.getSearchCriteria().entrySet().iterator();
-	    while (it.hasNext()) {
-	        HashMap.Entry pair = (HashMap.Entry)it.next();
-	        if(pair.getKey().equals($t.getTagName())){     //only compare the same tags
-		        if(!(pair.getKey().equals("name") || pair.getKey().equals("author") || pair.getKey().equals("genre"))){
-		        System.out.println( pair.getValue().toString()+" "+ $bt.getTagValue());
-		        	try{
-		        		Integer.parseInt( pair.getValue().toString());
-		        		double match=$b.getMatch();
-		        		$b.setMatch(match-java.lang.Math.abs(Integer.parseInt(pair.getValue().toString())- Integer.parseInt($bt.getTagValue()))/100);
-	        		 	update($b);	
-		        		}
-		        		catch(Exception e){
-		        			
-		        		 } 
-		        	}
-		    }
-	    }
+    	System.out.println($entry);
+		try{
+			
+				Integer.parseInt( pair.getValue().toString());
+        		double match=$b.getMatch();
+        		$b.setMatch(match-java.lang.Math.abs(Integer.parseInt(pair.getValue().toString())- Integer.parseInt($bt.getTagValue()))/100);
+    		 	update($b);	
+			}
+		catch(Exception e){
+			
+		 } 
     
 end
 

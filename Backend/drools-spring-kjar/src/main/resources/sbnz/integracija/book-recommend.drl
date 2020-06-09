@@ -31,16 +31,12 @@ agenda-group "recommendRules"
 salience 2
 	when
 		$userRecommend : UserDTO() from entry-point "recommend"
+		$recommender : UserBasedRecommender() from entry-point "recommend"
 	then
 		
 		try {
-			DataModel model = new FileDataModel(new File("C:\\data.csv"));
-			UserSimilarity similarity = new PearsonCorrelationSimilarity(model);
-			UserNeighborhood neighborhood = new ThresholdUserNeighborhood(0.1, similarity, model);
-			UserBasedRecommender recommender = new GenericUserBasedRecommender(model, neighborhood, similarity);
-
 			// The First argument is the userID and the Second parameter is 'HOW MANY'
-			List<RecommendedItem> recommendations = recommender.recommend($userRecommend.getId(), 3);
+			List<RecommendedItem> recommendations = $recommender.recommend($userRecommend.getId(), 3);
 			
 			for (RecommendedItem recommendation : recommendations) {
 				System.out.println(recommendation);
@@ -50,6 +46,14 @@ salience 2
 			System.out.println("Exception occured !");
 		}
 end
+
+
+
+
+
+
+
+
 
 //rule "recommendation size check"
 //agenda-group "recommendRules"
