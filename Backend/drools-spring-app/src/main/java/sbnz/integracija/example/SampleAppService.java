@@ -58,6 +58,8 @@ import sbnz.integracija.example.repository.userRepository;
 
 import java.io.File;
 import java.util.List;
+
+import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.impl.model.file.FileDataModel;
 import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
 import org.apache.mahout.cf.taste.impl.neighborhood.ThresholdUserNeighborhood;
@@ -369,17 +371,28 @@ public class SampleAppService {
 				csvWriter.append(String.join(",", rowData));
 				csvWriter.append("\n");
 			}
-
+			
 			csvWriter.flush();
 			csvWriter.close();
+			
+			DataModel model = new FileDataModel(new File("C:\\data.csv"));
+			UserSimilarity similarity = new PearsonCorrelationSimilarity(model);
+			UserNeighborhood neighborhood = new ThresholdUserNeighborhood(0.1, similarity, model);
+			UserBasedRecommender recommender = new GenericUserBasedRecommender(model, neighborhood, similarity);
+			
+			kSession.getEntryPoint("recommend").insert(recommender);
+			kSession.getEntryPoint("recommend").insert(new UserDTO(uId));
+			kSession.getAgenda().getAgendaGroup("recommendRules").setFocus();
+			kSession.fireAllRules();
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (TasteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
-		kSession.getEntryPoint("recommend").insert(new UserDTO(uId));
-		kSession.getAgenda().getAgendaGroup("recommendRules").setFocus();
-		kSession.fireAllRules();
+		
 
 		RecommendDTO recommendResults = new RecommendDTO();
 		QueryResults results = kSession.getQueryResults("getRecommendResults");
