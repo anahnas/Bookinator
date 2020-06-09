@@ -6,6 +6,9 @@ import events.TransactionEvent;
 import events.MembershipExpiredEvent;
 import events.BookLoanExpiredEvent;
 import events.BookLoanMade;
+import events.BookLoanReturnedEvent;
+import events.PenaltyEvent;
+
 //declare any global variables here
 
 declare MembershipPaid
@@ -15,6 +18,19 @@ end
 
 declare BookLoanEvent
 	@role(event)
+    userId: Long
+    bookLoanId: Long
+end
+
+declare BookLoanReturned
+	@role(event)
+    userId: Long
+    bookLoanId: Long
+end
+
+declare Penalty
+	@role(event)
+	//@expires( 23h59m )
     userId: Long
     bookLoanId: Long
 end
@@ -52,8 +68,26 @@ rule "BookLoan-expired"
     then
         System.out.println("book loan expired__________________________________________________________________" );
         insert(new BookLoanExpiredEvent($uId, $bId));
+        insert(new PenaltyEvent($uId, $bId));
+        System.out.println("first penalty made");
+        //drools.halt();
+end
+
+
+
+rule "Penalty"
+    when
+    	$p1:PenaltyEvent($uId: userId, $bId: bookLoanId)
+        not(
+            BookLoanReturnedEvent(userId == $uId, bookLoanId == $bId)
+            over window:time(13s)
+        )
+    then
+        System.out.println("penalty for book loan for user with id " + $uId );
+        insert(new PenaltyEvent($uId, $bId));
         drools.halt();
 end
+
 
 rule "BookLoan-made"
     when
@@ -61,4 +95,12 @@ rule "BookLoan-made"
     then
         System.out.println("made book loan__________________________________________________________________" + $uId );
         insert(new BookLoanEvent($uId, $bId));
+end
+
+rule "BookLoan-returned"
+	when
+		$e1:BookLoanReturnedEvent($uId: userId, $bId: bookLoanId)
+	then
+		System.out.println("book loan returned________________________________________________________________" + $uId );
+        insert(new BookLoanReturned($uId, $bId));
 end

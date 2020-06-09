@@ -134,10 +134,23 @@ public class UserController {
 		return new ResponseEntity<>("", HttpStatus.OK);
 
 	}
+	
+	@RequestMapping(value = "/bookLoan/return/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<String> returnBookLoan(@PathVariable ("id") Long bookLoanId) {
+		sampleService.returnBookLoan(bookLoanId);
+		return new ResponseEntity<>("", HttpStatus.OK);
+
+	}
 
 	@RequestMapping(value = "/bookLoan/all/{uId}", method = RequestMethod.GET)
 	public ResponseEntity<ArrayList<BookLoan>> getBookLoans(@PathVariable ("uId") Long uId) {
 		return new ResponseEntity<>(sampleService.getBookLoans(uId), HttpStatus.OK);
+
+	}
+	
+	@RequestMapping(value = "/bookLoan/{uId}", method = RequestMethod.GET)
+	public ResponseEntity<BookDTO> getBookLoan(@PathVariable ("uId") Long uId) {
+		return new ResponseEntity<>(sampleService.getBookLoan(uId), HttpStatus.OK);
 
 	}
 	

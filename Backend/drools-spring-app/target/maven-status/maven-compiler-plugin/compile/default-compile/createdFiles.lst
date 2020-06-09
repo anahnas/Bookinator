@@ -1,6 +1,7 @@
 sbnz\integracija\example\facts\Employee.class
 sbnz\integracija\example\repository\EmployeeRepository.class
 sbnz\integracija\example\facts\SearchRequestDTO.class
+events\PenaltyEvent.class
 sbnz\integracija\example\SampleAppService$1.class
 sbnz\integracija\example\controller\SearchController.class
 sbnz\integracija\example\repository\BookTagRepository.class
@@ -8,6 +9,7 @@ events\BookLoanMade.class
 events\TransactionEvent.class
 sbnz\integracija\example\facts\Penalty.class
 sbnz\integracija\example\repository\BookRepository.class
+sbnz\integracija\example\SampleAppService$3.class
 DTO\BookDTO.class
 sbnz\integracija\example\facts\Book.class
 sbnz\integracija\example\SampleAppService.class
@@ -25,7 +27,9 @@ DTO\BookLoanRequestDTO.class
 sbnz\integracija\example\repository\MemberRepository.class
 sbnz\integracija\example\repository\TagRepository.class
 sbnz\integracija\example\facts\User.class
+events\BookLoanReturnedEvent.class
 sbnz\integracija\example\facts\BookRatingKey.class
+DTO\BookLoanDTO.class
 sbnz\integracija\example\facts\Tag.class
 events\MembershipExpiredEvent.class
 DTO\BookTagDTO.class

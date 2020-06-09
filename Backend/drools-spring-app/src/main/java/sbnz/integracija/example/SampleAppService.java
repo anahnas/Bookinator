@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.drools.core.ClockType;
 import org.kie.api.KieBase;
@@ -29,6 +30,7 @@ import enumeration.RoleEnum;
 import events.BookLoanExpiredEvent;
 import events.BookLoanMade;
 import events.MembershipExpiredEvent;
+import events.PenaltyEvent;
 import events.TransactionEvent;
 import sbnz.integracija.example.facts.Book;
 import sbnz.integracija.example.facts.BookLoan;
@@ -36,6 +38,7 @@ import sbnz.integracija.example.facts.BookRating;
 import sbnz.integracija.example.facts.BookTag;
 import sbnz.integracija.example.facts.BookTagStatus;
 import sbnz.integracija.example.facts.Member;
+import sbnz.integracija.example.facts.Penalty;
 import sbnz.integracija.example.facts.ReviewRequest;
 import sbnz.integracija.example.facts.SearchRequestDTO;
 import sbnz.integracija.example.facts.Tag;
@@ -320,16 +323,7 @@ public class SampleAppService {
 		bookTag.setStatus(BookTagStatus.APPROVED);
 		this.bookTagRepository.save(bookTag);
 	}
-	
-	public void returnBookLoan(Long id) {
-		BookLoan bookLoan = this.bookLoanRepository.getOne(id);
-		Member member = this.memberRepo.getOne(bookLoan.getUserId());
-		member.setLoan(null);
-		bookLoan.setReturned(true);
-		bookLoanRepository.save(bookLoan);
-		member.setCanRent(true);
-		memberRepo.save(member);
-	}
+
 	
 	public void makeBookLoan(Long userId, Long bookId) {
 		Member member = this.memberRepo.getOne(userId);
@@ -371,8 +365,13 @@ public class SampleAppService {
         	    		bookLoanRepository.save(bl);
         	    		Member m = memberRepo.getOne(b.getUserId());
         	    		m.setCanRent(false);
-        	    		memberRepo.save(member);
         	    		
+        	    		Penalty penalty = new Penalty();
+        	    		penalty.setAmount(10L);
+        	    		m.setPenalty(penalty);
+        	    		memberRepo.save(m);
+        	    		System.out.println("Penalty for member " + m.getUsername() + " is " + penalty.getAmount() );
+        	    		runPenaltyClock(m.getId(), bl.getId());
         	    	}
         	    		
         	    }
@@ -388,9 +387,105 @@ public class SampleAppService {
 		
 	}
 	
+	public void runPenaltyClock(Long uId, Long blId) {
+		System.out.println("Initializing penalty rule...............................");
+		
+		KieServices ks = KieServices.Factory.get();
+		KieBaseConfiguration kbconf = ks.newKieBaseConfiguration();
+        kbconf.setOption(EventProcessingOption.STREAM);		
+		KieBase kbase = kieContainer.newKieBase(kbconf);
+		
+		KieSessionConfiguration ksconf1 = ks.newKieSessionConfiguration();
+	    ksconf1.setOption(ClockTypeOption.get(ClockType.REALTIME_CLOCK.getId()));
+	    KieSession kSession1 = kbase.newKieSession(ksconf1, null);
+	        
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+            	PenaltyEvent penaltyEvent = new PenaltyEvent(uId, blId);
+            	kSession1.insert(penaltyEvent);
+            	BookLoan bl = bookLoanRepository.getOne(blId);
+            	Member m = memberRepo.getOne(uId);
+	    		Penalty penalty = m.getPenalty();
+            	do {
+	                kSession1.fireUntilHalt();
+	
+	                Collection<?> newEvents = kSession1.getObjects(new ClassObjectFilter(PenaltyEvent.class));
+	        	    for(Object o : newEvents) {
+	        	    	if(o instanceof PenaltyEvent) {
+	        	    		//PenaltyEvent p = (PenaltyEvent) o;
+	        	    		
+	        	    		bl.setExpired(true);
+	        	    		bookLoanRepository.save(bl);
+	        	    		
+	        	    		m.setCanRent(false);
+	        	    		penalty.setAmount(penalty.getAmount()+10);
+	        	    		m.setPenalty(penalty);
+	        	    		memberRepo.save(m);
+	        	    	}
+	        	    		
+	        	    }
+	        	    try {
+	                    Thread.sleep(10000);
+	                } catch (InterruptedException e) {
+	                    //do nothing
+	                }
+	        	    System.out.println("Penalty for member " + m.getUsername() + " is " + penalty.getAmount() );
+        	    } while (isBookLoanExpired(blId));
+            }
+        };
+        t.setDaemon(true);
+        t.start();
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            //do nothing
+        }
+	}
 
+	public boolean isBookLoanExpired(Long blId) {
+		return this.bookLoanRepository.getOne(blId).isExpired();
+	}
+	
+	public void returnBookLoan(Long id) {
+		BookLoan bookLoan = this.bookLoanRepository.getOne(id);
+		Member member = this.memberRepo.getOne(bookLoan.getUserId());
+		System.out.println(member.getUsername() + " returned book with id: " + bookLoan.getBookId());
+		member.setLoan(null);
+		bookLoan.setReturned(true);
+		bookLoan.setExpired(false);
+		bookLoanRepository.save(bookLoan);
+		member.setCanRent(true);
+		memberRepo.save(member);
+	}
+	
+	
 	public ArrayList<BookLoan> getBookLoans(Long uId) {
 		return bookLoanRepository.findByUserId(uId);
+	}
+
+
+	public BookDTO getBookLoan(Long uId) {
+		try {
+			Member m = this.memberRepo.getOne(uId);
+			if(m.getLoan() == null) {
+				return null;
+			}
+			else {
+				System.out.println(m.getUsername() + " has loan - ");
+				BookLoan bookLoan = this.bookLoanRepository.getOne(m.getLoan().getId());
+				BookDTO bookDTO = new BookDTO(bookRepository.getOne(bookLoan.getBookId()));
+				ArrayList<BookTag> bookTags = this.bookTagRepository.findTagsByBookId(bookLoan.getBookId());
+				for(BookTag bt : bookTags) {
+					bookDTO.getTags().add(bt);
+				}
+				return bookDTO;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 
 	

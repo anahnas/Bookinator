@@ -5,11 +5,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { User } from '../model/user';
 import { first } from 'rxjs/operators';
 import { UserListService} from './user-list.service';
+import { BooksService } from '../user-profile/books.service';
+import { BookLoan } from '../model/bookLoan';
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css'],
-  providers:[UserListService]
+  providers:[UserListService, BooksService]
 
 })
 export class UserListComponent implements OnInit {
@@ -17,17 +19,32 @@ export class UserListComponent implements OnInit {
   users: User [] = [];
   createUser: FormGroup;
 
-  constructor(private router: Router, private route: ActivatedRoute, private service: UserListService,
-    private formBuilder: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private service: UserListService, 
+    private bookService: BooksService, private formBuilder: FormBuilder) {
     this.user = new User();
     this.users = [];
   }
 
   ngOnInit(): void {
+
     this.service.getUsers().subscribe(data => {
       this.users = data;
+      for(let u of this.users){
+        this.bookService.getBookLoan(u.id).subscribe(bookLoan => {
+          console.log(bookLoan)
+          if(bookLoan === null || bookLoan === undefined)
+            u.loan = '';
+          else{
+              for(let tag of bookLoan.tags){
+                if(tag.tagKey == '2'){
+                  u.loan = tag.tagValue;
+                }
+              }
+    
+          }
+        });
+      }
     });
-
     this.createForm();
   }
 
@@ -40,13 +57,21 @@ export class UserListComponent implements OnInit {
 
   }
 
+  returnLoan(uId:String){
+    this.service.returnLoan(uId).subscribe( result =>{
+        window.location.reload();
+      },
+      error => alert("Error.")
+    );
+
+  }
   onSubmit() {
 
     this.service.saveUser(this.user).subscribe(result => {
       alert('You have added an user.');
       this.router.navigate(['/userList']);
     });
-    }
+  }
 
 
   private createForm() {

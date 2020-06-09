@@ -13,6 +13,7 @@ export class BooksService{
     private _bookHistoryUrl = 'http://localhost:8080/books/';
     private _wishlistUrl = 'http://localhost:8080/wishlist/';
     private _getBookLoansUrl = 'http://localhost:8080/bookLoan/all/';
+    private _getBookLoanUrl = 'http://localhost:8080/bookLoan/';
 
     constructor(private _http: HttpClient){ }
 
@@ -33,6 +34,11 @@ export class BooksService{
     
     getBookLoans(uId : String) : Observable<any[]>{
         return this._http.get<any[]>(this._getBookLoansUrl + uId).pipe(
+                    catchError(this.handleError));
+    }
+
+    getBookLoan(uId : String) : Observable<BookDTO>{
+        return this._http.get<BookDTO>(this._getBookLoanUrl + uId).pipe(
                     catchError(this.handleError));
     }
 }

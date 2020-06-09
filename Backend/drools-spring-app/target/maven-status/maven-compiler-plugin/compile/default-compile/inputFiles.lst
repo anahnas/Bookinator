@@ -1,3 +1,4 @@
+D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\events\BookLoanReturnedEvent.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\BookRatingKey.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\BookTag.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\DTO\BookTagDTO.java
@@ -16,6 +17,7 @@ D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\events\Tra
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\events\MembershipExpiredEvent.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\Employee.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\enumeration\RoleEnum.java
+D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\events\PenaltyEvent.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\controller\UserController.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\BookRating.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\Discount.java
@@ -36,3 +38,4 @@ D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\DTO\BookLo
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\repository\BookRatingRepository.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\repository\BookRepository.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\SampleAppService.java
+D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\DTO\BookLoanDTO.java

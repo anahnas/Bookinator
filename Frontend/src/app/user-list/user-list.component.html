@@ -42,6 +42,7 @@
     <th scope="col">First name</th>
     <th scope="col">Last name</th>
     <th scope="col">Membership</th>
+    <th scope="col">Loans</th>
   </tr>
 
   </thead>
@@ -51,8 +52,12 @@
 
     <td>{{u.firstName}}</td>
     <td>{{u.lastName}}</td>
-    <div *ngIf="u.membershipExpired; else elseBlock"><button (click)='payMembership(u.id)'>Pay membership</button></div>
-    <ng-template #elseBlock>Paid</ng-template>
+    <td><div *ngIf="u.membershipExpired; else elseBlock"><button (click)='payMembership(u.id)'>Pay membership</button></div>
+    <ng-template #elseBlock>Paid</ng-template></td>
+    <td>
+      <div *ngIf="u.loan != ''; else elseBlockLoans">{{u.loan}}<button (click)='returnLoan(u.id)'>Return</button></div>
+    <ng-template #elseBlockLoans>No loan</ng-template>
+    </td>
   </tr>
   </tbody>
   </table>
