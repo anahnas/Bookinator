@@ -3,21 +3,27 @@ package sbnz.integracija.example;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
+
+import org.apache.mahout.cf.taste.common.TasteException;
+import org.apache.mahout.cf.taste.impl.model.file.FileDataModel;
+import org.apache.mahout.cf.taste.impl.neighborhood.ThresholdUserNeighborhood;
+import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;
+import org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;
+import org.apache.mahout.cf.taste.model.DataModel;
+import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
-import org.apache.commons.csv.writer.CSVWriter;
+import org.apache.mahout.cf.taste.recommender.UserBasedRecommender;
+import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 import org.drools.core.ClockType;
 import org.kie.api.KieBase;
 import org.kie.api.KieBaseConfiguration;
 import org.kie.api.KieServices;
-import org.kie.api.builder.KieScanner;
 import org.kie.api.conf.EventProcessingOption;
 import org.kie.api.runtime.ClassObjectFilter;
 import org.kie.api.runtime.KieContainer;
@@ -33,19 +39,17 @@ import org.springframework.stereotype.Service;
 
 import DTO.BookDTO;
 import DTO.BookRecommendDTO;
+import DTO.RecommendDTO;
+import DTO.UserDTO;
 import enumeration.RoleEnum;
 import events.MembershipExpiredEvent;
 import events.TransactionEvent;
-import DTO.BookTagDTO;
-import DTO.RecommendDTO;
-import DTO.UserDTO;
 import sbnz.integracija.example.facts.Book;
 import sbnz.integracija.example.facts.BookRating;
 import sbnz.integracija.example.facts.BookTag;
 import sbnz.integracija.example.facts.BookTagStatus;
 import sbnz.integracija.example.facts.Member;
 import sbnz.integracija.example.facts.ReviewRequest;
-import sbnz.integracija.example.facts.SearchRequest;
 import sbnz.integracija.example.facts.SearchRequestDTO;
 import sbnz.integracija.example.facts.Tag;
 import sbnz.integracija.example.facts.User;
@@ -55,22 +59,6 @@ import sbnz.integracija.example.repository.BookTagRepository;
 import sbnz.integracija.example.repository.MemberRepository;
 import sbnz.integracija.example.repository.TagRepository;
 import sbnz.integracija.example.repository.userRepository;
-
-import java.io.File;
-import java.util.List;
-
-import org.apache.mahout.cf.taste.common.TasteException;
-import org.apache.mahout.cf.taste.impl.model.file.FileDataModel;
-import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
-import org.apache.mahout.cf.taste.impl.neighborhood.ThresholdUserNeighborhood;
-import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;
-import org.apache.mahout.cf.taste.impl.similarity.CityBlockSimilarity;
-import org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;
-import org.apache.mahout.cf.taste.model.DataModel;
-import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
-import org.apache.mahout.cf.taste.recommender.RecommendedItem;
-import org.apache.mahout.cf.taste.recommender.UserBasedRecommender;
-import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 
 @Service
 public class SampleAppService {
@@ -371,15 +359,15 @@ public class SampleAppService {
 				csvWriter.append(String.join(",", rowData));
 				csvWriter.append("\n");
 			}
-			
+
 			csvWriter.flush();
 			csvWriter.close();
-			
+
 			DataModel model = new FileDataModel(new File("C:\\data.csv"));
 			UserSimilarity similarity = new PearsonCorrelationSimilarity(model);
 			UserNeighborhood neighborhood = new ThresholdUserNeighborhood(0.1, similarity, model);
 			UserBasedRecommender recommender = new GenericUserBasedRecommender(model, neighborhood, similarity);
-			
+
 			kSession.getEntryPoint("recommend").insert(recommender);
 			kSession.getEntryPoint("recommend").insert(new UserDTO(uId));
 			kSession.getAgenda().getAgendaGroup("recommendRules").setFocus();
@@ -392,7 +380,6 @@ public class SampleAppService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 
 		RecommendDTO recommendResults = new RecommendDTO();
 		QueryResults results = kSession.getQueryResults("getRecommendResults");
@@ -413,7 +400,6 @@ public class SampleAppService {
 			bookDTO.setRecommended(true);
 			bookDTOs.add(bookDTO);
 		}
-		
 
 		if (bookDTOs.size() == 2) {
 
