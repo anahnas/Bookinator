@@ -21,7 +21,6 @@ end
 rule "Check-for-special-tags"
 agenda-group "startSearch"
 auto-focus true
-	 salience 1
 	when 
 		$s:SearchRequestDTO() from entry-point "search"
 	then
@@ -88,7 +87,6 @@ end
 
 
 rule "Author-match"
-salience 9
 lock-on-active
 agenda-group "searchGroup"
     when
@@ -117,7 +115,6 @@ agenda-group "searchGroup"
 end
 
 rule "Name-match"
-salience 8
 lock-on-active
 agenda-group "searchGroup"
     when
@@ -141,7 +138,6 @@ agenda-group "searchGroup"
 end
 
 rule "Genre-match"
-salience 7
 lock-on-active
 agenda-group "searchGroup"
     when
@@ -165,7 +161,6 @@ agenda-group "searchGroup"
 end
 
 rule "String-tags"
-salience 6
 lock-on-active
 agenda-group "searchGroup"
     when
@@ -178,7 +173,6 @@ agenda-group "searchGroup"
 	     //match the book with its tags, and tags with tag names and names with search req params
 	     $bt:BookTag(bookId==$b.id && tagKey ==$t.id) from entry-point "search"
     then
-		System.out.println($entry);
 		try{
 			Integer.parseInt( $entry.getValue().toString());
 			}
@@ -194,7 +188,6 @@ agenda-group "searchGroup"
 end
 
 rule "Number-tags"
-salience 6
 lock-on-active
 agenda-group "searchGroup"
     when
@@ -208,12 +201,11 @@ agenda-group "searchGroup"
 	     $bt:BookTag(bookId==$b.id && tagKey ==$t.id) from entry-point "search"
     then
     
-    	System.out.println($entry);
 		try{
 			
-				Integer.parseInt( pair.getValue().toString());
+				Integer.parseInt( $entry.getValue().toString());
         		double match=$b.getMatch();
-        		$b.setMatch(match-java.lang.Math.abs(Integer.parseInt(pair.getValue().toString())- Integer.parseInt($bt.getTagValue()))/100);
+        		$b.setMatch(match-java.lang.Math.abs(Integer.parseInt($entry.getValue().toString())- Integer.parseInt($bt.getTagValue()))/100);
     		 	update($b);	
 			}
 		catch(Exception e){
