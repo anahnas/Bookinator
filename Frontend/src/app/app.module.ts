@@ -25,6 +25,9 @@ import { ToppyModule } from 'toppy';
 import { WelcomeSpeechComponent } from './virtual-assistant/welcome-speech/welcome-speech.component'
 import { TagListComponent } from './tag-list/tag-list.component';
 import { BookRecommendComponent } from './book-recommend/book-recommend.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { YesNoPipe } from './yes-no.pipe';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import { BookRecommendComponent } from './book-recommend/book-recommend.componen
     UserListComponent,
     WelcomeSpeechComponent,
     TagListComponent,
-    BookRecommendComponent
+    BookRecommendComponent,
+    WishlistComponent,
+    UserProfileComponent,
+    YesNoPipe
     ],
   imports: [
     BrowserModule,
@@ -60,6 +66,7 @@ import { BookRecommendComponent } from './book-recommend/book-recommend.componen
       { path: 'review', component: BookReviewFormComponent},
       { path: 'welcome', component: WelcomeComponent},
       {path: 'recommend',component: BookRecommendComponent},
+      { path: 'profile', component: UserProfileComponent},
       { path: 'userList', component: UserListComponent },
       { path: 'tagList', component: TagListComponent },
       { path: '', redirectTo:'welcome', pathMatch: 'full' },

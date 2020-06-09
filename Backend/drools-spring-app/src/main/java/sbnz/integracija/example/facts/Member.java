@@ -29,10 +29,14 @@ public class Member extends User implements Serializable{
 	private BookLoan loan;
 	 @OneToMany()
 	private Set<BookLoan> history;
+	 @OneToMany
+	private Set<Book> wishlist;
 	@Column
 	private cathegory cathegory;
 	@Column
-	private boolean banned = false;
+	private boolean banned = false;	
+	@Column
+	private boolean canRent = true;
 	@Column
 	private Date banExpiry;
 	@Column
@@ -81,7 +85,7 @@ public class Member extends User implements Serializable{
 	public Member(String username, String password, String firstName, String lastName, String email, RoleEnum userType,
 			Date joinDate, boolean membershipExpired, Penalty penalty, BookLoan loan, Set<BookLoan> history,
 			sbnz.integracija.example.facts.Member.cathegory cathegory, boolean banned, Date banExpiry, int wrongTags,
-			Set<Discount> discounts) {
+			Set<Discount> discounts, Set<Book> wishlist) {
 		super(username, password, firstName, lastName, email, userType);
 		this.joinDate = joinDate;
 		this.membershipExpired = membershipExpired;
@@ -93,6 +97,7 @@ public class Member extends User implements Serializable{
 		this.banExpiry = banExpiry;
 		this.wrongTags = wrongTags;
 		this.discounts = discounts;
+		this.wishlist = wishlist;
 	}
 
 	public Date getJoinDate() {
@@ -164,4 +169,20 @@ public class Member extends User implements Serializable{
 		this.discounts = discounts;
 	}
 
+	public boolean isCanRent() {
+		return canRent;
+	}
+
+	public void setCanRent(boolean canRent) {
+		this.canRent = canRent;
+	}
+
+	public Set<Book> getWishlist() {
+		return wishlist;
+	}
+
+	public void setWishlist(Set<Book> wishlist) {
+		this.wishlist = wishlist;
+	}
+	
 }

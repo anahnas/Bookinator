@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   providers: [LoginService]
 })
 export class HeadingComponent implements OnInit {
+  loggedInUser : any;
   private loggedInUsername: String;
   user: User;
   user1: User;
@@ -20,18 +21,13 @@ export class HeadingComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private service: LoginService) {
     this.user = new User();
     this.user1 = new User();
+    
   }
 
   ngOnInit(): void {
-    this.loggedInUsername = "EMPLOYEE";
+    this.loggedInUser = JSON.parse(localStorage.getItem('loggedIn'));
   }
-    /*his.service.login(this.user).subscribe(
-      response => {
-        localStorage.setItem('username', JSON.stringify(response.username));
-        this.loggedInUsername = this.user.username;
-
-
-    });/*
+   
 
     /*if(localStorage.getItem('username') == null) {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -57,7 +53,11 @@ export class HeadingComponent implements OnInit {
 
 
     get employee() {
-      if(this.loggedInUsername === 'EMPLOYEE') { //username po ulozi dobaviti, a ne ovako
+      if(this.loggedInUser === null || this.loggedInUser === undefined){
+        return false;
+      }
+
+      if(this.loggedInUser.userType === 'EMPLOYEE') { //username po ulozi dobaviti, a ne ovako
         return true;
       } else {
         return false;
@@ -75,7 +75,11 @@ export class HeadingComponent implements OnInit {
     }
 
     get member() {
-      if(this.loggedInUsername === 'guest') { //username po ulozi dobaviti, a ne ovako
+      if(this.loggedInUser === null || this.loggedInUser === undefined){
+        return false;
+      }
+
+      if(this.loggedInUser.userType === 'MEMBER') { //username po ulozi dobaviti, a ne ovako
         return true;
       } else {
         return false;
@@ -89,7 +93,6 @@ export class HeadingComponent implements OnInit {
         return true;
       }
     }
-
 
 
   logout(){

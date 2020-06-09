@@ -12,11 +12,11 @@ export class WelcomeComponent implements OnInit {
   _toppyControl2: ToppyControl;
   _toppyControlSpeech:ToppyControl;
 
-  constructor(private toppy: Toppy) { }
+  constructor(private toppy: Toppy) { 
+  }
 
   ngOnInit(): void {
 
-    console.log(localStorage.getItem("loggedIn"))
 
     this._toppyControl2 = this.toppy
       .position(
@@ -73,7 +73,6 @@ export class WelcomeComponent implements OnInit {
         this.openSpeech();
       }
      
-
   }
 
   openImage() {

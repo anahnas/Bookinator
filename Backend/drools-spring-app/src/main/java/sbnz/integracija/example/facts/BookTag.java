@@ -77,5 +77,4 @@ public class BookTag {
 		this.status = status;
 	}
 
-
 }

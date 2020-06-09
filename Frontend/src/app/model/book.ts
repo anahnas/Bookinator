@@ -1,4 +1,5 @@
 export class Book{
+    availableNo:String
     name:String
     genre:String[]
     author:String
@@ -13,4 +14,6 @@ export class Book{
     style:String
     description:String
     match:String
+    id:String
+    returned:Boolean
 }

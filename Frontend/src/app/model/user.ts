@@ -8,4 +8,5 @@ export class User{
     email:String
     userType:String
     membershipExpired:boolean
+    loan:String
 }

@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import DTO.BookDTO;
 import DTO.BookRecommendDTO;
+import DTO.BookLoanRequestDTO;
 import DTO.BookTagDTO;
 import sbnz.integracija.example.SampleAppService;
+import sbnz.integracija.example.facts.BookLoan;
 import sbnz.integracija.example.facts.BookTag;
 import sbnz.integracija.example.facts.BookTagStatus;
 import sbnz.integracija.example.facts.ReviewRequest;
@@ -47,6 +49,14 @@ public class UserController {
 	public ResponseEntity<ArrayList<BookDTO>> bookSearch(@RequestBody  SearchRequestDTO searchRequestDTO) {		
 		
 	    ArrayList<BookDTO> retVal = sampleService.getFilteredBooks(searchRequestDTO);
+		return new ResponseEntity<>(retVal, HttpStatus.OK);
+	}
+	
+
+	@RequestMapping(value = "/books/{uId}", method = RequestMethod.GET)
+	public ResponseEntity<ArrayList<BookDTO>> bookHistory(@PathVariable("uId") Long uId) {		
+		
+	    ArrayList<BookDTO> retVal = sampleService.getBookHistory(uId);
 		return new ResponseEntity<>(retVal, HttpStatus.OK);
 	}
 	
@@ -122,6 +132,32 @@ public class UserController {
 
 	}
 
+	@RequestMapping(value = "/bookLoan", method = RequestMethod.POST)
+	public ResponseEntity<String> bookLoan(@RequestBody BookLoanRequestDTO bookLoanRequestDTO) {
+		sampleService.makeBookLoan(bookLoanRequestDTO.getUserId(), bookLoanRequestDTO.getBookId());
+		return new ResponseEntity<>("", HttpStatus.OK);
+
+	}
+	
+	@RequestMapping(value = "/bookLoan/return/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<String> returnBookLoan(@PathVariable ("id") Long bookLoanId) {
+		sampleService.returnBookLoan(bookLoanId);
+		return new ResponseEntity<>("", HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value = "/bookLoan/all/{uId}", method = RequestMethod.GET)
+	public ResponseEntity<ArrayList<BookLoan>> getBookLoans(@PathVariable ("uId") Long uId) {
+		return new ResponseEntity<>(sampleService.getBookLoans(uId), HttpStatus.OK);
+
+	}
+	
+	@RequestMapping(value = "/bookLoan/{uId}", method = RequestMethod.GET)
+	public ResponseEntity<BookDTO> getBookLoan(@PathVariable ("uId") Long uId) {
+		return new ResponseEntity<>(sampleService.getBookLoan(uId), HttpStatus.OK);
+
+	}
+	
 	@RequestMapping(value="/getTags", method = RequestMethod.GET)
 	public ResponseEntity<List<BookTag>> getTags() {
 		List<BookTag> bookTag = sampleService.findAllTags();
@@ -140,7 +176,7 @@ public class UserController {
 		return new ResponseEntity<>(tag, HttpStatus.OK);
 	}
 	
-	
+
 	@RequestMapping(value = "/payMembership/{uId}", method = RequestMethod.GET)
 	public ResponseEntity payMembership(@PathVariable("uId") Long uId) {
 		this.sampleService.payMembership(uId);
@@ -151,5 +187,22 @@ public class UserController {
 	public ResponseEntity<ArrayList<BookRecommendDTO>> recommendBook(@PathVariable("uId") Long uId) {
 		 ArrayList<BookRecommendDTO> retVal = sampleService.getRecommendedBooks(uId);
 		return new ResponseEntity<>(retVal, HttpStatus.OK);
+
+	@RequestMapping(value = "/addToWishlist/{uId}/{bId}", method = RequestMethod.GET)
+	public ResponseEntity addToWishslist(@PathVariable("uId") Long uId, @PathVariable("bId") Long bId) {
+		if(sampleService.addToWishlist(uId, bId))
+			return new ResponseEntity(HttpStatus.OK);
+		
+		return new ResponseEntity(HttpStatus.BAD_REQUEST);
+
+	}
+	
+	@RequestMapping(value = "/wishlist/{uId}", method = RequestMethod.GET)
+	public ResponseEntity<ArrayList<BookDTO>> getWishlist(@PathVariable("uId") Long uId) {
+		ArrayList<BookDTO> wishlist = this.sampleService.getWishlist(uId);
+		for(BookDTO b:wishlist) {
+			System.out.println("from wishlist - " + b.getId());
+		}
+		return new ResponseEntity<>(wishlist, HttpStatus.OK);
 	}
 }
