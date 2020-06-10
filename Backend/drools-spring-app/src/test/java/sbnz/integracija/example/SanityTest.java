@@ -2,9 +2,12 @@
 package sbnz.integracija.example;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
+import org.drools.core.ClassObjectFilter;
+import org.drools.core.ClockType;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +17,8 @@ import org.kie.api.KieServices;
 import org.kie.api.conf.EventProcessingOption;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.KieSessionConfiguration;
+import org.kie.api.runtime.conf.ClockTypeOption;
 import org.kie.api.runtime.rule.QueryResults;
 import org.kie.api.runtime.rule.QueryResultsRow;
 import org.mockito.InjectMocks;
@@ -21,8 +26,12 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import events.MembershipExpiredEvent;
+import events.TransactionEvent;
 import sbnz.integracija.example.facts.Book;
 import sbnz.integracija.example.facts.BookTag;
+import sbnz.integracija.example.facts.Member;
 import sbnz.integracija.example.facts.SearchRequestDTO;
 import sbnz.integracija.example.facts.Tag;
 import sbnz.integracija.example.repository.BookRepository;
@@ -62,6 +71,7 @@ public class SanityTest {
 	Tag tag2 = new Tag((long) 1, "genre");
 	BookTag bt1;
 	BookTag bt2;
+	Member m = new Member();
 
 	@Before
 	public void initialise() {
@@ -76,6 +86,10 @@ public class SanityTest {
 
 		bookTags.add(bt1);
 		bookTags2.add(bt2);
+		
+		m.setId((long)1);
+		m.setUsername("test");
+		m.setMembershipExpired(false);
 
 	}
 
@@ -115,6 +129,41 @@ public class SanityTest {
 
 		assert (searchResults.get(0).getId().equals(((long) 1))); // best match is book 1
 
+	}
+	
+	@Test
+	public void testMembershipRule() {
+		Long uId = 1L;
+		KieServices ks = KieServices.Factory.get();
+		KieBaseConfiguration kbconf = ks.newKieBaseConfiguration();
+		kbconf.setOption(EventProcessingOption.STREAM);
+		KieBase kbase = kieContainer.newKieBase(kbconf);
+		KieSessionConfiguration ksconf1 = ks.newKieSessionConfiguration();
+		ksconf1.setOption(ClockTypeOption.get(ClockType.REALTIME_CLOCK.getId()));
+		KieSession kSession1 = kbase.newKieSession(ksconf1, null);
+		Thread t = new Thread() {
+			@Override
+			public void run() {
+				TransactionEvent t1 = new TransactionEvent(uId); 	//member paying membership
+				kSession1.insert(t1);
+				kSession1.fireUntilHalt();
+				Collection<?> newEvents = kSession1.getObjects(new ClassObjectFilter(MembershipExpiredEvent.class));
+				for (Object o : newEvents) {
+					if (o instanceof MembershipExpiredEvent) {
+						MembershipExpiredEvent e = (MembershipExpiredEvent) o;
+						assert (e.getUserId().equals(m.getId()));	//assert that membership-expired event triggered for test user	
+						m.setMembershipExpired(true);
+					}
+				}
+			}
+		};
+		t.setDaemon(true);
+		t.start();
+		try {
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			// do nothing
+		}
 	}
 
 //	@Test
