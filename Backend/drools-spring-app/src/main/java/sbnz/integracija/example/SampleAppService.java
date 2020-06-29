@@ -18,7 +18,6 @@ import org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
-import org.apache.commons.csv.writer.CSVWriter;
 import java.util.Map;
 
 import org.apache.mahout.cf.taste.recommender.UserBasedRecommender;

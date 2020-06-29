@@ -187,6 +187,7 @@ public class UserController {
 	public ResponseEntity<ArrayList<BookRecommendDTO>> recommendBook(@PathVariable("uId") Long uId) {
 		 ArrayList<BookRecommendDTO> retVal = sampleService.getRecommendedBooks(uId);
 		return new ResponseEntity<>(retVal, HttpStatus.OK);
+	}
 
 	@RequestMapping(value = "/addToWishlist/{uId}/{bId}", method = RequestMethod.GET)
 	public ResponseEntity addToWishslist(@PathVariable("uId") Long uId, @PathVariable("bId") Long bId) {
