@@ -14,18 +14,18 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 	void deleteById(Long id);
 
 	Book save(Book book);
-	
+
 	Optional<Book> findById(Long id);
-	
-	@Query(nativeQuery = true, value="select * from Book order by random() limit 1")
+
+	@Query(nativeQuery = true, value = "select * from Book order by random() limit 1")
 	Book random();
-	
-	@Query(nativeQuery = true, value="select * from Book order by random() limit 1")
+
+	@Query(nativeQuery = true, value = "select * from Book order by random() limit 1")
 	Book random1();
-	
-	@Query(nativeQuery = true, value="select * from Book order by random() limit 2")
+
+	@Query(nativeQuery = true, value = "select * from Book order by random() limit 2")
 	Book random2();
-	
-	@Query(nativeQuery = true, value="select * from Book order by random() limit 3")
+
+	@Query(nativeQuery = true, value = "select * from Book order by random() limit 3")
 	Book random3();
 }

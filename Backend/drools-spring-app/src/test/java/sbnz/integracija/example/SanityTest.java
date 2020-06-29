@@ -72,7 +72,6 @@ public class SanityTest {
 	BookTag bt1;
 	BookTag bt2;
 	Member m = new Member();
-	
 
 	@Before
 	public void initialise() {
@@ -88,7 +87,7 @@ public class SanityTest {
 		bookTags.add(bt1);
 		bookTags2.add(bt2);
 		
-		m.setId(1L);
+		m.setId((long)1);
 		m.setUsername("test");
 		m.setMembershipExpired(false);
 
@@ -134,35 +133,27 @@ public class SanityTest {
 	
 	@Test
 	public void testMembershipRule() {
-		
 		Long uId = 1L;
-		
 		KieServices ks = KieServices.Factory.get();
 		KieBaseConfiguration kbconf = ks.newKieBaseConfiguration();
 		kbconf.setOption(EventProcessingOption.STREAM);
 		KieBase kbase = kieContainer.newKieBase(kbconf);
-
 		KieSessionConfiguration ksconf1 = ks.newKieSessionConfiguration();
 		ksconf1.setOption(ClockTypeOption.get(ClockType.REALTIME_CLOCK.getId()));
 		KieSession kSession1 = kbase.newKieSession(ksconf1, null);
-
 		Thread t = new Thread() {
 			@Override
 			public void run() {
 				TransactionEvent t1 = new TransactionEvent(uId); 	//member paying membership
 				kSession1.insert(t1);
-
 				kSession1.fireUntilHalt();
-
 				Collection<?> newEvents = kSession1.getObjects(new ClassObjectFilter(MembershipExpiredEvent.class));
 				for (Object o : newEvents) {
 					if (o instanceof MembershipExpiredEvent) {
 						MembershipExpiredEvent e = (MembershipExpiredEvent) o;
-						
 						assert (e.getUserId().equals(m.getId()));	//assert that membership-expired event triggered for test user	
 						m.setMembershipExpired(true);
 					}
-
 				}
 			}
 		};
