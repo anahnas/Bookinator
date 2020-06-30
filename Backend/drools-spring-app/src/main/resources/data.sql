@@ -16,7 +16,7 @@ insert into tag(tag_name, tag_approved) values ('author', true);
 insert into tag(tag_name, tag_approved) values ('name', true);
 insert into tag(tag_name, tag_approved) values ('description', true);
 insert into tag(tag_name, tag_approved) values ('character', true);
-insert into tag(tag_name, tag_approved) values ('forAge', true);
+insert into tag(tag_name, tag_approved) values ('targetAgeGroup', true);
 insert into employee_table(employee_pkey) values (2);
 
 
