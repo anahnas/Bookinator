@@ -1,8 +1,6 @@
 package DTO;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import sbnz.integracija.example.facts.Book;
 import sbnz.integracija.example.facts.BookTag;
 

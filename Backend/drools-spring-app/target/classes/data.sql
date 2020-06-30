@@ -16,12 +16,14 @@ insert into tag(tag_name, tag_approved) values ('author', true);
 insert into tag(tag_name, tag_approved) values ('name', true);
 insert into tag(tag_name, tag_approved) values ('description', true);
 insert into tag(tag_name, tag_approved) values ('character', true);
+insert into tag(tag_name, tag_approved) values ('forAge', true);
 insert into employee_table(employee_pkey) values (2);
 
 
 insert into book(avaivable_no,rating,search_match) values(1,0,0);
 insert into book_tag(book_id,tag_key,tag_value) values (1,2,'The kite runner');
 insert into book_tag(book_id,tag_key,tag_value) values (1,1,'Khaled Hosseini');
+insert into book_tag(book_id,tag_key,tag_value) values (1,5,50);
 insert into book_tag(book_id,tag_key,tag_value) values (1,3,'The Kite Runner is the first novel by Afghan-American author Khaled Hosseini.[1] Published in 2003 by Riverhead Books, it tells the story of Amir, a young boy from the Wazir Akbar Khan district of Kabul, whose closest friend is Hassan. The story is set against a backdrop of tumultuous events, from the fall of Afghanistans monarchy through the Soviet military intervention, the exodus of refugees to Pakistan and the United States, and the rise of the Taliban regime.');
 
 insert into book(avaivable_no,rating,search_match) values(4,0,0);

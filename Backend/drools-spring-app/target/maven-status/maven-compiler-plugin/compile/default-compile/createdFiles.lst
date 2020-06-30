@@ -36,6 +36,7 @@ events\MembershipStartedEvent.class
 sbnz\integracija\example\facts\ReviewRequest.class
 sbnz\integracija\example\facts\SearchRequest.class
 sbnz\integracija\example\repository\BookRatingRepository.class
+sbnz\integracija\example\facts\Value.class
 sbnz\integracija\example\facts\BookRating.class
 sbnz\integracija\example\SampleApp.class
 DTO\BookLoanRequestDTO.class
