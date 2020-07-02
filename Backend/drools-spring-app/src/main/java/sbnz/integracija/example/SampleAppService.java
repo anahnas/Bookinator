@@ -18,22 +18,23 @@ import org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
-import java.util.Map;
-
 import org.apache.mahout.cf.taste.recommender.UserBasedRecommender;
 import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 import org.drools.core.ClockType;
 import org.kie.api.KieBase;
 import org.kie.api.KieBaseConfiguration;
 import org.kie.api.KieServices;
+import org.kie.api.command.Command;
 import org.kie.api.conf.EventProcessingOption;
 import org.kie.api.runtime.ClassObjectFilter;
+import org.kie.api.runtime.ExecutionResults;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.KieSessionConfiguration;
 import org.kie.api.runtime.conf.ClockTypeOption;
 import org.kie.api.runtime.rule.QueryResults;
 import org.kie.api.runtime.rule.QueryResultsRow;
+import org.kie.internal.command.CommandFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,7 @@ import org.springframework.stereotype.Service;
 
 import DTO.BookDTO;
 import DTO.BookRecommendDTO;
+import DTO.MemberlistDTO;
 import DTO.RecommendDTO;
 import DTO.UserDTO;
 import enumeration.RoleEnum;
@@ -673,5 +675,77 @@ public class SampleAppService {
 			bookDTOs.add(bDTO);
 		}
 		return bookDTOs;
+	}
+	
+	public HashMap<Long, Integer> recommendFromWishlist() {
+		ArrayList<BookDTO> bookDTOs = new ArrayList<>();
+		
+		MemberlistDTO memberlistDTO = new MemberlistDTO();
+		memberlistDTO.setMembers(this.memberRepo.findAll());
+		for(Member m : memberlistDTO.getMembers()) {
+			System.out.println(m);
+		}
+		
+
+		KieServices ks = KieServices.Factory.get();
+		KieBaseConfiguration kbconf = ks.newKieBaseConfiguration();
+		kbconf.setOption(EventProcessingOption.STREAM);
+		KieBase kbase = kieContainer.newKieBase(kbconf);
+
+		KieSession kSession = kbase.newKieSession();
+
+		kSession.getEntryPoint("wishlist-recommend").insert(memberlistDTO);
+	
+		kSession.getAgenda().getAgendaGroup("wishlistRecommendRules").setFocus();
+
+		kSession.fireAllRules();
+		
+//		List<Command> cmds = new ArrayList<Command>();
+//		cmds.add( CommandFactory.newInsert( memberlistDTO, "memberlistDTO" ));
+		//ExecutionResults results = kSession.execute( CommandFactory.newBatchExecution( cmds ) );
+		
+		//HashMap<Long, Integer> occurences = (HashMap<Long, Integer>) results.getValue();
+		HashMap<Long, Integer> occurences = new HashMap<>();
+		QueryResults results = kSession.getQueryResults("getWishlistRecommendResults");
+		for (QueryResultsRow row : results) {
+			occurences = (HashMap<Long, Integer>) row.get("$result");
+			System.out.println(row.get("$result"));
+		}
+
+		return occurences;
+		/*ArrayList<Book> books = new ArrayList<>();
+
+		QueryResults results = kSession.getQueryResults("getWishlistRecommendResults");
+		for (QueryResultsRow row : results) {
+			books = (ArrayList<Book>) row.get("$result");
+		}
+		
+		HashMap<Long, Integer> occurences = new HashMap<Long, Integer>();
+		
+		for(Book b: books) {
+			if(occurences.containsKey(b.getId())) {
+				occurences.replace(b.getId(), occurences.get(b.getId()), occurences.get(b.getId()) + 1);
+			} else {
+				occurences.put(b.getId(), 1);
+			}
+		}
+
+		return occurences;*/
+//		HashMap<BookDTO, Integer> retVal = new HashMap<BookDTO, Integer>();
+//		for(Book b: occurences.keySet()) {
+//			BookDTO bDTO = new BookDTO(b);
+//			ArrayList<BookTag> tags = this.bookTagRepository.findTagsByBookId(b.getId());
+//			bDTO.setTags(tags);
+//			retVal.put(bDTO, occurences.get(b));
+//		}
+//		return retVal;
+	}
+	
+	public BookDTO getBook(Long id) {
+		Book book = this.bookRepository.getOne(id);
+		BookDTO bDTO = new BookDTO(book);
+		ArrayList<BookTag> tags = this.bookTagRepository.findTagsByBookId(book.getId());
+		bDTO.setTags(tags);
+		return bDTO;
 	}
 }

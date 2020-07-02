@@ -28,6 +28,8 @@ import { BookRecommendComponent } from './book-recommend/book-recommend.componen
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { YesNoPipe } from './yes-no.pipe';
+import { WelcomeAdminComponent } from './welcome-admin/welcome-admin.component';
+import { BookOrderDialogComponent } from './book-order-dialog/book-order-dialog.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { YesNoPipe } from './yes-no.pipe';
     BookRecommendComponent,
     WishlistComponent,
     UserProfileComponent,
-    YesNoPipe
+    YesNoPipe,
+    WelcomeAdminComponent,
+    BookOrderDialogComponent
     ],
   imports: [
     BrowserModule,
@@ -69,6 +73,7 @@ import { YesNoPipe } from './yes-no.pipe';
       { path: 'profile', component: UserProfileComponent},
       { path: 'userList', component: UserListComponent },
       { path: 'tagList', component: TagListComponent },
+      { path: 'employee', component: WelcomeAdminComponent },
       { path: '', redirectTo:'welcome', pathMatch: 'full' },
       { path: '**', redirectTo:'welcome', pathMatch: 'full' }
     ])

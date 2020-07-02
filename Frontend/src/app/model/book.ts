@@ -16,4 +16,5 @@ export class Book{
     match:String
     id:String
     returned:Boolean
+    timesWished:number
 }

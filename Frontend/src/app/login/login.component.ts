@@ -31,8 +31,10 @@ export class LoginComponent implements OnInit {
       user => {
         this.user = user;
         localStorage.setItem("loggedIn", JSON.stringify(this.user));
-
-        this.router.navigate(['']);
+        if(this.user.userType == "EMPLOYEE")
+          this.router.navigate(['employee']);
+        else
+          this.router.navigate(['']);
       },
       error => alert("Wrong username or password.")
     );

@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>{{book.name}}, {{book.author}}</h1>
+<div mat-dialog-content>
+  <p >Informacije</p>
+  
+    <label>{{book.name}}</label>
+    <label >{{book.author}}</label>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data">Order</button>
+</div>

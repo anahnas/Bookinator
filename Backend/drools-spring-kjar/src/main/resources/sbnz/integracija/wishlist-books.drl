@@ -1,0 +1,55 @@
+//created on: Jun 29, 2020
+package integracija
+
+//list any import classes here.
+import DTO.MemberlistDTO;
+import sbnz.integracija.example.facts.Member;
+import sbnz.integracija.example.facts.Book;
+import sbnz.integracija.example.facts.BookLoan;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.LinkedHashSet;
+
+//declare any global variables here
+
+
+query "getWishlistRecommendResults"
+    $result: HashMap() from entry-point "wishlist-recommend"
+end
+
+rule "Books from wishlist"
+agenda-group "wishlistRecommendRules"
+	when
+        $memberlist: MemberlistDTO($members: members) from entry-point "wishlist-recommend"
+        
+        $books: List( size >= 0 ) from accumulate ( 
+        $member: Member( $wishlist: wishlist ) from $members
+        and
+        $book: Book( avaivableNo == 0 ) from $wishlist,
+        collectList( $book )
+    	)
+    	
+    	
+		$list: List(size > 0) from accumulate ($b: Book( ) from $books, 
+               init(HashMap<Long, Integer> $occurences = new HashMap();)
+               action( 
+				System.out.println("Hi");
+				if($occurences.containsKey($b)) {
+					$occurences.replace($b.getId(), $occurences.get($b), $occurences.get($b) + 1);
+				} else {
+					$occurences.put($b.getId(), 1);
+				}
+				System.out.println("occurences: " + $occurences.size());
+			   ),
+               result($occurences)
+               
+               )
+        eval($books.size() >= 0)
+        
+    then
+		//drools.getEntryPoint("wishlist-recommend").insert(new ArrayList($books));
+		System.out.println("done " +$list.size() );
+end

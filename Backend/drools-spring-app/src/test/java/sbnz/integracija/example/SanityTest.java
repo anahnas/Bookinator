@@ -25,6 +25,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import events.MembershipExpiredEvent;
@@ -41,6 +42,7 @@ import sbnz.integracija.example.repository.TagRepository;
 @SpringBootTest // tells spring boot to look for a main config class (annotated with
 				// @SpringBootApplication to start a Spring app context)
 @RunWith(SpringRunner.class)
+
 public class SanityTest {
 
 	@Mock

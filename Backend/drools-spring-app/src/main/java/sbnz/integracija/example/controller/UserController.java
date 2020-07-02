@@ -1,6 +1,7 @@
 package sbnz.integracija.example.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -20,6 +21,7 @@ import DTO.BookLoanRequestDTO;
 import DTO.BookRecommendDTO;
 import DTO.BookTagDTO;
 import sbnz.integracija.example.SampleAppService;
+import sbnz.integracija.example.facts.Book;
 import sbnz.integracija.example.facts.BookLoan;
 import sbnz.integracija.example.facts.BookTag;
 import sbnz.integracija.example.facts.ReviewRequest;
@@ -194,5 +196,19 @@ public class UserController {
 			System.out.println("from wishlist - " + b.getId());
 		}
 		return new ResponseEntity<>(wishlist, HttpStatus.OK);
+	}
+	
+
+	@RequestMapping(value = "/recommended/wishlist", method = RequestMethod.GET)
+	public ResponseEntity<?> getRecommendedFromWishlist() {
+		HashMap<Long, Integer> wishlistRecommendations = this.sampleService.recommendFromWishlist();
+		
+		return new ResponseEntity<>(wishlistRecommendations, HttpStatus.OK);
+	}
+	
+
+	@RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> getBook(@PathVariable("id") Long id) {
+		return new ResponseEntity<>(this.sampleService.getBook(id), HttpStatus.OK);
 	}
 }

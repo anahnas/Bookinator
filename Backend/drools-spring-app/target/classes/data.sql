@@ -2,13 +2,16 @@ insert into user_table(username, password, first_name, last_name, email, user_ty
 insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent) values(1, false, true, 0, true);
 
 insert into user_table(username, password, first_name, last_name, email, user_type) values('guest2', 'guest2', 'guest2', 'guest2','guest2', 0);
-insert into member(member_pkey, banned, membership_expired, wrong_tags) values(2, false, true, 0);
+insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent) values(2, false, true, 0, true);
 
 insert into user_table(username, password, first_name, last_name, email, user_type) values('guest3', 'guest3', 'guest3', 'guest3','guest3', 0);
-insert into member(member_pkey, banned, membership_expired, wrong_tags) values(3, false, true, 0);
+insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent) values(3, false, true, 0, true);
 
-insert into user_table(username, password, first_name, last_name, email, user_type) values('guest4', 'guest3', 'guest3', 'guest3','guest3', 0);
-insert into member(member_pkey, banned, membership_expired, wrong_tags) values(4, false, true, 0);
+insert into user_table(username, password, first_name, last_name, email, user_type) values('guest4', 'guest', 'guest', 'guest','guest', 0);
+insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent) values(4, false, true, 0, true);
+
+insert into user_table(username, password, first_name, last_name, email, user_type) values('guest5', 'guest', 'guest', 'guest','guest', 0);
+insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent) values(5, false, true, 0, true);
 
 insert into user_table(username, password, first_name, last_name, email, user_type) values('admin', 'admin', 'admin', 'admin','admin', 1);
 
@@ -19,7 +22,7 @@ insert into tag(tag_name, tag_approved) values ('character', true);
 insert into employee_table(employee_pkey) values (2);
 
 
-insert into book(avaivable_no,rating,search_match) values(1,0,0);
+insert into book(avaivable_no,rating,search_match) values(0,0,0);
 insert into book_tag(book_id,tag_key,tag_value) values (1,2,'The kite runner');
 insert into book_tag(book_id,tag_key,tag_value) values (1,1,'Khaled Hosseini');
 insert into book_tag(book_id,tag_key,tag_value) values (1,3,'The Kite Runner is the first novel by Afghan-American author Khaled Hosseini.[1] Published in 2003 by Riverhead Books, it tells the story of Amir, a young boy from the Wazir Akbar Khan district of Kabul, whose closest friend is Hassan. The story is set against a backdrop of tumultuous events, from the fall of Afghanistans monarchy through the Soviet military intervention, the exodus of refugees to Pakistan and the United States, and the rise of the Taliban regime.');
@@ -46,13 +49,16 @@ insert into book(avaivable_no,rating,search_match) values(0,0,0);
 insert into book_tag(book_id,tag_key,tag_value) values (5,2,'The Bridge on the Drina');
 insert into book_tag(book_id,tag_key,tag_value) values (5,1,'Ivo Andric');
 insert into book_tag(book_id,tag_key,tag_value) values (5,4,'turk');
-insert into book_tag(book_id,tag_key,tag_value) values (5,3,'The Bridge on the Drina is a historical novel by the Yugoslav writer Ivo Andrić. It revolves around the Mehmed Paša Sokolović Bridge in Višegrad, which spans the Drina River and stands as a silent witness to history from its construction by the Ottomans in the mid-16th century until its partial destruction during World War I. The story spans about four centuries and covers the Ottoman and Austro-Hungarian occupations of the region, with a particular emphasis on the lives, destinies and relations of the local inhabitants, especially Serbs and Bosnian Muslims. .');
+insert into book_tag(book_id,tag_key,tag_value) values (5,3,'The Bridge on the Drina is a historical novel by the Yugoslav writer Ivo AndriÄ‡. It revolves around the Mehmed PaÅ¡a SokoloviÄ‡ Bridge in ViÅ¡egrad, which spans the Drina River and stands as a silent witness to history from its construction by the Ottomans in the mid-16th century until its partial destruction during World War I. The story spans about four centuries and covers the Ottoman and Austro-Hungarian occupations of the region, with a particular emphasis on the lives, destinies and relations of the local inhabitants, especially Serbs and Bosnian Muslims. .');
 
 insert into book(avaivable_no,rating,search_match) values(3,0,0);
 insert into book(avaivable_no,rating,search_match) values(3,0,0);
 insert into book(avaivable_no,rating,search_match) values(3,0,0);
 insert into book(avaivable_no,rating,search_match) values(3,0,0);
 
+insert into member_wishlist(member_member_pkey, wishlist_id) values (1, 5);
+insert into member_wishlist(member_member_pkey, wishlist_id) values (2, 5);
+insert into member_wishlist(member_member_pkey, wishlist_id) values (2, 1);
 
 insert into book_rating values(1,1,1);
 insert into book_rating values(2,1,2);

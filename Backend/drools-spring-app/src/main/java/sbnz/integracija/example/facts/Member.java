@@ -2,10 +2,12 @@ package sbnz.integracija.example.facts;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
@@ -29,8 +31,8 @@ public class Member extends User implements Serializable{
 	private BookLoan loan;
 	 @OneToMany()
 	private Set<BookLoan> history;
-	 @OneToMany
-	private Set<Book> wishlist;
+	 @ManyToMany
+	private Set<Book> wishlist = new HashSet<>();
 	@Column
 	private cathegory cathegory;
 	@Column
@@ -183,6 +185,11 @@ public class Member extends User implements Serializable{
 
 	public void setWishlist(Set<Book> wishlist) {
 		this.wishlist = wishlist;
+	}
+
+	@Override
+	public String toString() {
+		return "Member [username=" + this.getUsername()+"]";
 	}
 	
 }
