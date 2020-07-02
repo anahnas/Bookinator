@@ -32,13 +32,14 @@ agenda-group "wishlistRecommendRules"
         collectList( $book )
     	)
     	
+        eval($books.size() >= 0)
     	
-		$list: List(size > 0) from accumulate ($b: Book( ) from $books, 
+		$list: HashMap() from accumulate ($b: Book( ) from $books, 
                init(HashMap<Long, Integer> $occurences = new HashMap();)
                action( 
 				System.out.println("Hi");
-				if($occurences.containsKey($b)) {
-					$occurences.replace($b.getId(), $occurences.get($b), $occurences.get($b) + 1);
+				if($occurences.containsKey($b.getId())) {
+					$occurences.replace($b.getId(), $occurences.get($b.getId()), $occurences.get($b.getId()) + 1);
 				} else {
 					$occurences.put($b.getId(), 1);
 				}
@@ -47,9 +48,8 @@ agenda-group "wishlistRecommendRules"
                result($occurences)
                
                )
-        eval($books.size() >= 0)
         
     then
-		//drools.getEntryPoint("wishlist-recommend").insert(new ArrayList($books));
+		drools.getEntryPoint("wishlist-recommend").insert(new HashMap($list));
 		System.out.println("done " +$list.size() );
 end

@@ -15,22 +15,27 @@ public class Penalty implements Serializable{
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	@Column
-	private Long amount=(long) 0;
+	private Double amount;
 	
 	public Penalty() {
+		this.amount = 0.0;
 	}
 	
-	public Penalty(Long amount) {
-		super();
-		this.amount = amount;
+	public Long getId() {
+		return id;
 	}
 
-	public Long getAmount() {
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Long amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
 
+	
 }

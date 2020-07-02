@@ -30,19 +30,22 @@ export class UserListComponent implements OnInit {
     this.service.getUsers().subscribe(data => {
       this.users = data;
       for(let u of this.users){
-        this.bookService.getBookLoan(u.id).subscribe(bookLoan => {
-          console.log(bookLoan)
-          if(bookLoan === null || bookLoan === undefined)
-            u.loan = '';
-          else{
-              for(let tag of bookLoan.tags){
-                if(tag.tagKey == '2'){
-                  u.loan = tag.tagValue;
+        if(u.userType != "EMPLOYEE"){
+          this.bookService.getBookLoan(u.id).subscribe(bookLoan => {
+            if(bookLoan === null || bookLoan === undefined)
+              u.loan = '';
+            else{
+                for(let tag of bookLoan.tags){
+                  if(tag.tagKey == '2'){
+                    u.loan = tag.tagValue;
+                  }
                 }
-              }
-    
-          }
-        });
+      
+            }
+          });
+        } else {
+          u.loan = '';
+        }
       }
     });
     this.createForm();

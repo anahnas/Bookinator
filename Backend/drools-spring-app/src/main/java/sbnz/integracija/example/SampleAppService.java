@@ -365,7 +365,7 @@ public class SampleAppService {
 		Thread t = new Thread() {
 			@Override
 			public void run() {
-				BookLoanMade e1 = new BookLoanMade(member.getId(), bookLoan.getBookId());
+				BookLoanMade e1 = new BookLoanMade(member.getId(), bookLoan.getId());
 				kSession1.insert(e1);
 
 				kSession1.fireUntilHalt();
@@ -373,18 +373,16 @@ public class SampleAppService {
 				Collection<?> newEvents = kSession1.getObjects(new ClassObjectFilter(BookLoanExpiredEvent.class));
 				for (Object o : newEvents) {
 					if (o instanceof BookLoanExpiredEvent) {
+
 						BookLoanExpiredEvent b = (BookLoanExpiredEvent) o;
+
+						System.out.println("book loan - " + b.getBookLoanId());
+						
 						BookLoan bl = bookLoanRepository.getOne(b.getBookLoanId());
 						bl.setExpired(true);
 						bookLoanRepository.save(bl);
 						Member m = memberRepo.getOne(b.getUserId());
 						m.setCanRent(false);
-
-						Penalty penalty = new Penalty();
-						penalty.setAmount(10L);
-						m.setPenalty(penalty);
-						memberRepo.save(m);
-						System.out.println("Penalty for member " + m.getUsername() + " is " + penalty.getAmount());
 						runPenaltyClock(m.getId(), bl.getId());
 					}
 
@@ -421,9 +419,13 @@ public class SampleAppService {
 				BookLoan bl = bookLoanRepository.getOne(blId);
 				Member m = memberRepo.getOne(uId);
 				Penalty penalty = m.getPenalty();
-				do {
+				if(penalty == null) {
+					penalty = new Penalty();
+				}
+				while(isBookLoanExpired(blId)) {
+					System.out.println("book loan - " + blId);
 					kSession1.fireUntilHalt();
-
+					
 					Collection<?> newEvents = kSession1.getObjects(new ClassObjectFilter(PenaltyEvent.class));
 					for (Object o : newEvents) {
 						if (o instanceof PenaltyEvent) {
@@ -433,6 +435,13 @@ public class SampleAppService {
 							bookLoanRepository.save(bl);
 
 							m.setCanRent(false);
+							/*Double p;
+							try {
+								p = penalty.getAmount();
+							} catch (Exception e) {
+								e.printStackTrace();
+								p = 0.0;
+							}*/
 							penalty.setAmount(penalty.getAmount() + 10);
 							m.setPenalty(penalty);
 							memberRepo.save(m);
@@ -445,7 +454,7 @@ public class SampleAppService {
 						// do nothing
 					}
 					System.out.println("Penalty for member " + m.getUsername() + " is " + penalty.getAmount());
-				} while (isBookLoanExpired(blId));
+				}
 			}
 		};
 		t.setDaemon(true);
