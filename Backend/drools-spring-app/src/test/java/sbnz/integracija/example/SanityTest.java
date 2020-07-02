@@ -114,7 +114,7 @@ public class SanityTest {
 		kSession.getEntryPoint("search").insert(bt2);
 
 		SearchRequestDTO searchRequest = new SearchRequestDTO();
-		HashMap<String, String> map = new HashMap<>();
+		HashMap<String, Object> map = new HashMap<>();
 		map.put("author", "Ivo");
 		searchRequest.setSearchCriteria(map);
 		kSession.getEntryPoint("search").insert(searchRequest);

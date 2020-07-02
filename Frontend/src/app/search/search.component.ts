@@ -71,11 +71,12 @@ export class SearchComponent implements OnInit {
     Object.keys(this.bookSearchForm.controls).forEach(key => {
       if(this.bookSearchForm.get(key).value!="" && this.bookSearchForm.get(key).value!=null)
       searchRequest.searchCriteria[key] = this.bookSearchForm.get(key).value;
+      if (this.likovi.length!=0)
+      searchRequest.searchCriteria["character"] = this.likovi[0]
     });
-    for(let lik of this.likovi){
-      searchRequest.searchCriteria["character"] = lik;
-    }
 
+    console.log(this.likovi)
+    console.log(searchRequest)
     this._searchService.getFilteredBooks(searchRequest).subscribe(
       books => {
         for(let b of books){

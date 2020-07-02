@@ -99,18 +99,12 @@ agenda-group "searchGroup"
      $bt:BookTag(bookId==$b.id && tagKey ==$t.id) from entry-point "search"
     then
     
-    String author=$s.getSearchCriteria().get("author");
+    String author=(String)$s.getSearchCriteria().get("author");
 	int len1=author.length();
-	int len2=$bt.getTagValue().length();
+	int len2=((String)$bt.getTagValue()).length();
 	int longestString=Math.max(len1,len2);
 	double match=$b.getMatch();
-	$b.setMatch(match+(1-(l.distance( author.toUpperCase(), $bt.getTagValue().toUpperCase())/longestString))*200/ $sr.getSearchTagNo());\\
-	//System.out.println("-----------------------------------");
-	//System.out.println($bt.getTagValue());
-	//System.out.println(longestString);
-	//System.out.println(l.distance( author.toUpperCase(), $bt.getTagValue().toUpperCase()));
-	//System.out.println((l.distance( author.toUpperCase(), $bt.getTagValue().toUpperCase())/longestString));
-	//System.out.println("-----------------------------------");
+	$b.setMatch(match+(1-(l.distance( author.toUpperCase(), ((String)$bt.getTagValue()).toUpperCase())/longestString))*200/ $sr.getSearchTagNo());
 	update($b);
 end
 
@@ -127,12 +121,12 @@ agenda-group "searchGroup"
     $bt:BookTag(bookId==$b.id && tagKey ==$t.id) from entry-point "search"
     then
     
-    String name=$s.getSearchCriteria().get("name");
+    String name=(String)$s.getSearchCriteria().get("name").toString();
 	int len1=name.length();
-	int len2=$bt.getTagValue().length();
+	int len2=((String)$bt.getTagValue()).length();
 	int longestString=Math.max(len1,len2);
 	double match=$b.getMatch();
-	$b.setMatch(match+(1-(l.distance( name.toUpperCase(), $bt.getTagValue().toUpperCase())/longestString))*200/ $sr.getSearchTagNo());
+	$b.setMatch(match+(1-(l.distance( name.toUpperCase(), ((String)$bt.getTagValue()).toUpperCase())/longestString))*200/ $sr.getSearchTagNo());
 	update($b);
   
 end
@@ -149,12 +143,12 @@ agenda-group "searchGroup"
      $bt:BookTag(bookId==$b.id && tagKey ==$t.id) from entry-point "search"
     then
     
-     String genre=$s.getSearchCriteria().get("genre");
+     String genre=(String)$s.getSearchCriteria().get("genre").toString();
 	 int len1=genre.length();
-	 int len2=$bt.getTagValue().length();
+	 int len2=((String)$bt.getTagValue()).length();
 	 int longestString=Math.max(len1,len2);
 	 double match=$b.getMatch();
-	 $b.setMatch(match+(1-(l.distance( genre.toUpperCase(), $bt.getTagValue().toUpperCase())/longestString))*200/ $sr.getSearchTagNo());
+	 $b.setMatch(match+(1-(l.distance( genre.toUpperCase(),((String)$bt.getTagValue()).toUpperCase())/longestString))*200/ $sr.getSearchTagNo());
 	 update($b);
 
 
@@ -167,25 +161,21 @@ agenda-group "searchGroup"
 	     l : Levenshtein() from entry-point "search"
 	     $sr:SearchResult() from entry-point "search"
 	     SearchRequestDTO($map:searchCriteria) from entry-point "search"
-	     $entry : Entry(key!="author" && key!="genre" && key!="name") from $map.entrySet()
+	     $entry : Entry(key!="author" && key!="genre" && key!="name" && this.getValue.class == String.class) from $map.entrySet()
 	     $b:Book() from entry-point "search"
 	     $t:Tag(tagName==$entry.getKey()) from entry-point "search"
 	     //match the book with its tags, and tags with tag names and names with search req params
 	     $bt:BookTag(bookId==$b.id && tagKey ==$t.id) from entry-point "search"
     then
-		try{
-			Integer.parseInt( $entry.getValue().toString());
-			}
-		catch(Exception e){
-			int len1=$entry.getValue().toString().length();
-			int len2=$bt.getTagValue().length();
-			int longestString=Math.max(len1,len2);
-			  double match=$b.getMatch();
-			  $b.setMatch(match+(1-(l.distance(  $entry.getValue().toString().toUpperCase(), $bt.getTagValue().toUpperCase())/longestString))*100/ $sr.getSearchTagNo());
-		 	  update($b);
-		 } 
-
+    	System.out.println((String)$entry.getValue()+$entry.getKey()+" string tag");		
+		int len1=$entry.getValue().toString().length();
+		int len2=((String)$bt.getTagValue()).length();
+		int longestString=Math.max(len1,len2);
+		double match=$b.getMatch();
+		$b.setMatch(match+(1-(l.distance(  $entry.getValue().toString().toUpperCase(), ((String)$bt.getTagValue()).toUpperCase())/longestString))*100/ $sr.getSearchTagNo());
+	 	update($b);
 end
+
 
 rule "Number-tags"
 lock-on-active
@@ -194,23 +184,35 @@ agenda-group "searchGroup"
          l : Levenshtein() from entry-point "search"
 	     $sr:SearchResult() from entry-point "search"
 	     SearchRequestDTO($map:searchCriteria) from entry-point "search"
-	     $entry : Entry(key!="author" && key!="genre" && key!="name") from $map.entrySet()
+	     $entry : Entry(key!="author" && key!="genre" && key!="name" && this.getValue.class == Integer.class) from $map.entrySet()
+	     $b:Book() from entry-point "search"
+	     $t:Tag(tagName==$entry.getKey()) from entry-point "search"
+	     //match the book with its tags, and tags with tag names and names with search req params
+	     $bt:BookTag(bookId==$b.id && tagKey ==$t.id) from entry-point "search"
+	     //$entry.getValue().class == Integer.class
+    then
+    	System.out.println($entry.getKey()+" number tag");		
+		double match=$b.getMatch();
+		$b.setMatch(match+java.lang.Math.max((100-java.lang.Math.abs((Integer)$entry.getValue()- (Integer.parseInt((String)$bt.getTagValue())))),0));
+	 	update($b);	
+end
+
+//TODO
+
+rule "List-tags"
+lock-on-active
+agenda-group "searchGroup"
+    when
+	     l : Levenshtein() from entry-point "search"
+	     $sr:SearchResult() from entry-point "search"
+	     SearchRequestDTO($map:searchCriteria) from entry-point "search"
+	     $entry : Entry(key!="author" && key!="genre" && key!="name" && this.getValue.class == Object.class) from $map.entrySet()
 	     $b:Book() from entry-point "search"
 	     $t:Tag(tagName==$entry.getKey()) from entry-point "search"
 	     //match the book with its tags, and tags with tag names and names with search req params
 	     $bt:BookTag(bookId==$b.id && tagKey ==$t.id) from entry-point "search"
     then
-    
-		try{
-			
-				Integer.parseInt( $entry.getValue().toString());
-        		double match=$b.getMatch();
-        		$b.setMatch(match-java.lang.Math.abs(Integer.parseInt($entry.getValue().toString())- Integer.parseInt($bt.getTagValue()))/100);
-    		 	update($b);	
-			}
-		catch(Exception e){
-			
-		 } 
-    
+		//List<String> list=(List<String>)$entry.getValue();
+		System.out.println($entry.getValue());
 end
 

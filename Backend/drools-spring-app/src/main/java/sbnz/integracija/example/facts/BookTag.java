@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+
 @Entity
 public class BookTag {
 	
@@ -16,6 +17,7 @@ public class BookTag {
 	private Long bookId;
 	@Column
 	private Long tagKey; //foreign key from Tag table
+	
 	@Column(length=1500)
 	private String tagValue;
 	
@@ -40,7 +42,7 @@ public class BookTag {
 	public void setTagKey(Long tagKey) {
 		this.tagKey = tagKey;
 	}
-	public String getTagValue() {
+	public Object getTagValue() {
 		return tagValue;
 	}
 	public void setTagValue(String tagValue) {

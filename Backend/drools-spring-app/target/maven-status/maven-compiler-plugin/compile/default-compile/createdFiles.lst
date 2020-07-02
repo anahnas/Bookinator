@@ -34,6 +34,8 @@ sbnz\integracija\example\SampleHomeController.class
 sbnz\integracija\example\facts\SearchRequestDTO.class
 sbnz\integracija\example\SampleAppService.class
 sbnz\integracija\example\facts\SearchRequest.class
+sbnz\integracija\example\repository\BookRatingRepository.class
+sbnz\integracija\example\facts\Value.class
 sbnz\integracija\example\facts\BookRating.class
 events\MembershipStartedEvent.class
 sbnz\integracija\example\repository\TagRepository.class

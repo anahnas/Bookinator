@@ -269,6 +269,10 @@ public class SampleAppService {
 		for (BookTag bookTag : bookTags) {
 			kSession.getEntryPoint("search").insert(bookTag);
 		}
+		
+		for (Object o : searchRequestDTO.getSearchCriteria().values()) {
+			System.out.println(o.getClass());
+		}
 
 		kSession.getEntryPoint("search").insert(searchRequestDTO);
 		kSession.getAgenda().getAgendaGroup("startSearch").setFocus();

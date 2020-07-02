@@ -4,13 +4,13 @@ import java.util.HashMap;
 
 public class SearchRequestDTO {
 
-	private HashMap<String,String> searchCriteria = new HashMap<String, String>();
+	private HashMap<String,Object> searchCriteria = new HashMap<String, Object>();
 
-	public HashMap<String, String> getSearchCriteria() {
+	public HashMap<String, Object> getSearchCriteria() {
 		return searchCriteria;
 	}
 
-	public void setSearchCriteria(HashMap<String, String> searchCriteria) {
+	public void setSearchCriteria(HashMap<String, Object> searchCriteria) {
 		this.searchCriteria = searchCriteria;
 	}
 	
