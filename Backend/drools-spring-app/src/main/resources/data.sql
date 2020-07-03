@@ -2,16 +2,16 @@ insert into user_table(username, password, first_name, last_name, email, user_ty
 insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent) values(1, false, true, 0, true);
 
 insert into user_table(username, password, first_name, last_name, email, user_type) values('guest2', 'guest2', 'guest2', 'guest2','guest2', 0);
-insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent) values(2, false, true, 0, true);
+insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent, rented) values(2, false, true, 0, true, 1);
 
 insert into user_table(username, password, first_name, last_name, email, user_type) values('guest3', 'guest3', 'guest3', 'guest3','guest3', 0);
-insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent) values(3, false, true, 0, true);
+insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent, rented) values(3, false, true, 0, true, 2);
 
 insert into user_table(username, password, first_name, last_name, email, user_type) values('guest4', 'guest', 'guest', 'guest','guest', 0);
-insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent) values(4, false, true, 0, true);
+insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent, rented) values(4, false, true, 0, true, 3);
 
 insert into user_table(username, password, first_name, last_name, email, user_type) values('guest5', 'guest', 'guest', 'guest','guest', 0);
-insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent) values(5, false, true, 0, true);
+insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent, rented) values(5, false, true, 0, true, 4);
 
 insert into user_table(username, password, first_name, last_name, email, user_type) values('admin', 'admin', 'admin', 'admin','admin', 1);
 

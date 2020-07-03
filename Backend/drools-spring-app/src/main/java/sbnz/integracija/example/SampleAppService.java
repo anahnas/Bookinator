@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.impl.model.file.FileDataModel;
@@ -54,6 +55,7 @@ import events.TransactionEvent;
 import sbnz.integracija.example.facts.Book;
 import sbnz.integracija.example.facts.BookLoan;
 import sbnz.integracija.example.facts.BookRating;
+import sbnz.integracija.example.facts.BookRent;
 import sbnz.integracija.example.facts.BookTag;
 import sbnz.integracija.example.facts.BookTagStatus;
 import sbnz.integracija.example.facts.Member;
@@ -64,6 +66,7 @@ import sbnz.integracija.example.facts.Tag;
 import sbnz.integracija.example.facts.User;
 import sbnz.integracija.example.repository.BookLoanRepository;
 import sbnz.integracija.example.repository.BookRatingRepository;
+import sbnz.integracija.example.repository.BookRentRepository;
 import sbnz.integracija.example.repository.BookRepository;
 import sbnz.integracija.example.repository.BookTagRepository;
 import sbnz.integracija.example.repository.MemberRepository;
@@ -98,6 +101,9 @@ public class SampleAppService {
 
 	@Autowired
 	KieContainer kieContainer;
+	
+	@Autowired
+	BookRentRepository bookRentRepository;
 
 	private String CSV_FILE_NAME = "C:\\data.csv";
 
@@ -131,7 +137,6 @@ public class SampleAppService {
 		}
 		user.setUserType(RoleEnum.MEMBER);
 		Member member = new Member(user);
-
 		this.memberRepo.save(member);
 		payMembership(member.getId());
 		return this.memberRepo.getOne(member.getId());
@@ -752,4 +757,60 @@ public class SampleAppService {
 		bDTO.setTags(tags);
 		return bDTO;
 	}
+	
+	 public BookRent save(BookRent bookRent){
+		 	KieServices ks = KieServices.Factory.get();
+			KieBaseConfiguration kbconf = ks.newKieBaseConfiguration();
+			kbconf.setOption(EventProcessingOption.STREAM);
+			KieBase kbase = kieContainer.newKieBase(kbconf);
+			KieSession kSession = kbase.newKieSession();	
+	       
+	    
+	        double maxRented = 1.0;
+	        for(Member m: memberRepo.findAll()){
+	            if(maxRented < m.getRented()){
+	                maxRented = m.getRented();
+	            }
+	        }
+
+	        kSession.setGlobal("maxRented", maxRented);
+	        kSession.getAgenda().getAgendaGroup("rented-books").setFocus();
+	        kSession.insert(bookRent);
+
+	        Member member = memberRepo.getOne(bookRent.getMember().getId());
+	        memberRepo.save(member);
+	        
+
+	        bookRentRepository.save(bookRent);
+	        
+	        /*if(bookRent.getMember().getRented() >= maxRented){
+	            maxRented = bookRent.getMember().getRented();
+	            kSession.setGlobal("maxRented", maxRented);
+
+	            kSession.getAgenda().getAgendaGroup("member-frequency").setFocus();
+
+	            List<Member> memberList = memberRepo.findAll();
+	            for(Member m: memberList){
+	                kSession.insert(m);
+	            }*/
+
+	            kSession.fireAllRules();
+
+	           /* for(Member m : memberList) {
+	                memberRepo.save(m);
+	            }
+	        }*/
+	        return bookRent;
+
+	    }
+
+	public Member findMember(Long userId) {
+		Member m = memberRepo.getOne(userId);
+		return m;
+	}
+	public Book findBook(Long bookId) {
+		Book b = bookRepository.getOne(bookId);
+		return b;
+	}
+	
 }

@@ -16,7 +16,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 	Book save(Book book);
 
 	Optional<Book> findById(Long id);
-
+	
 	@Query(nativeQuery = true, value = "select * from Book order by random() limit 1")
 	Book random();
 

@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 import DTO.BookDTO;
 import DTO.BookLoanRequestDTO;
 import DTO.BookRecommendDTO;
+import DTO.BookRentDTO;
 import DTO.BookTagDTO;
 import sbnz.integracija.example.SampleAppService;
 import sbnz.integracija.example.facts.Book;
 import sbnz.integracija.example.facts.BookLoan;
+import sbnz.integracija.example.facts.BookRent;
 import sbnz.integracija.example.facts.BookTag;
 import sbnz.integracija.example.facts.ReviewRequest;
 import sbnz.integracija.example.facts.SearchRequestDTO;
@@ -211,4 +213,15 @@ public class UserController {
 	public ResponseEntity<?> getBook(@PathVariable("id") Long id) {
 		return new ResponseEntity<>(this.sampleService.getBook(id), HttpStatus.OK);
 	}
-}
+	
+	@RequestMapping(value="/addBookRent", method = RequestMethod.POST)
+	public ResponseEntity<?> addBookRent(@RequestBody BookRentDTO bookRentDTO) {
+		 	BookRent bookRent = new BookRent();
+	        bookRent.setMember(this.sampleService.findMember(bookRentDTO.getUserId()));
+	        bookRent.setBook(this.sampleService.findBook(bookRentDTO.getBookId()));
+	        bookRent = this.sampleService.save(bookRent);
+	        return ResponseEntity.ok(bookRent.getMember());
+	}
+		
+		
+	}

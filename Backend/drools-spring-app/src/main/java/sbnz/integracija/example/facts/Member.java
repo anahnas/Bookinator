@@ -19,7 +19,7 @@ import enumeration.RoleEnum;
 @PrimaryKeyJoinColumn(name = "member_pkey")
 public class Member extends User implements Serializable{
 	
-	enum cathegory{NONE,SILVER,GOLD,PLATINUM};
+	public enum cathegory{NA,BRONZE,SILVER,GOLD};
 	
 	@Column
 	private Date joinDate;
@@ -43,9 +43,15 @@ public class Member extends User implements Serializable{
 	private Date banExpiry;
 	@Column
 	private int wrongTags;
+	@Column(nullable=true, name="rented")
+	private Integer rented;
+	
+	/*@Column
+	private double frequency;*/
 
 	 @OneToMany()
 	private Set<Discount> discounts ;
+	
 	
 	public Member(String username, String password, Long id) {
 		super(username, password, id);
@@ -53,9 +59,13 @@ public class Member extends User implements Serializable{
 		joinDate=new Date();
 		penalty=new Penalty();
 		loan=new BookLoan();
-		cathegory=cathegory.NONE;
+		cathegory=cathegory.NA;
 		banned=false;
 		
+	}
+	
+	public Member(Integer i) {
+		this.rented = i;
 	}
 	
 	public Member(String username, String password, String firstName, String lastName, String email,
@@ -74,7 +84,7 @@ public class Member extends User implements Serializable{
 	
 	public Member(String username, String password, Long id, Date joinDate, Penalty penalty,
 			BookLoan loan, Set<BookLoan> history, sbnz.integracija.example.facts.Member.cathegory cathegory,
-			boolean banned) {
+			boolean banned, Integer rented) {
 		super(username, password, id);
 		this.joinDate = joinDate;
 		this.penalty = penalty;
@@ -82,12 +92,13 @@ public class Member extends User implements Serializable{
 		this.history = history;
 		this.cathegory = cathegory;
 		this.banned = banned;
+		this.rented = rented;
 	}
 	
 	public Member(String username, String password, String firstName, String lastName, String email, RoleEnum userType,
 			Date joinDate, boolean membershipExpired, Penalty penalty, BookLoan loan, Set<BookLoan> history,
 			sbnz.integracija.example.facts.Member.cathegory cathegory, boolean banned, Date banExpiry, int wrongTags,
-			Set<Discount> discounts, Set<Book> wishlist) {
+			Set<Discount> discounts, Set<Book> wishlist, Integer rented) {
 		super(username, password, firstName, lastName, email, userType);
 		this.joinDate = joinDate;
 		this.membershipExpired = membershipExpired;
@@ -100,7 +111,17 @@ public class Member extends User implements Serializable{
 		this.wrongTags = wrongTags;
 		this.discounts = discounts;
 		this.wishlist = wishlist;
+		this.rented = rented;
 	}
+
+	
+	/*public double getFrequency() {
+		return frequency;
+	}
+
+	public void setFrequency(double frequency) {
+		this.frequency = frequency;
+	}*/
 
 	public Date getJoinDate() {
 		return joinDate;
@@ -185,6 +206,16 @@ public class Member extends User implements Serializable{
 
 	public void setWishlist(Set<Book> wishlist) {
 		this.wishlist = wishlist;
+	}
+	
+	
+
+	public Integer getRented() {
+		return rented;
+	}
+
+	public void setRented(Integer rented) {
+		this.rented = rented;
 	}
 
 	@Override
