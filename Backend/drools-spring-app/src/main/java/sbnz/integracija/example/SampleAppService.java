@@ -813,4 +813,20 @@ public class SampleAppService {
 		return b;
 	}
 	
+	public Member setMembershipDiscount(Member m) {
+		// Member m = memberRepo.getOne(1L);
+		KieServices ks = KieServices.Factory.get();
+		KieBaseConfiguration kbconf = ks.newKieBaseConfiguration();
+		kbconf.setOption(EventProcessingOption.STREAM);
+		KieBase kbase = kieContainer.newKieBase(kbconf);
+		KieSession kSession = kbase.newKieSession();	
+		kSession.insert(m);
+		kSession.getAgenda().getAgendaGroup("membership-discount").setFocus();
+		kSession.fireAllRules();
+		kSession.dispose();
+		this.memberRepo.save(m);
+		return m;
+		
+	}
+	
 }

@@ -26,6 +26,7 @@ import sbnz.integracija.example.facts.Book;
 import sbnz.integracija.example.facts.BookLoan;
 import sbnz.integracija.example.facts.BookRent;
 import sbnz.integracija.example.facts.BookTag;
+import sbnz.integracija.example.facts.Member;
 import sbnz.integracija.example.facts.ReviewRequest;
 import sbnz.integracija.example.facts.SearchRequestDTO;
 import sbnz.integracija.example.facts.Tag;
@@ -221,6 +222,14 @@ public class UserController {
 	        bookRent.setBook(this.sampleService.findBook(bookRentDTO.getBookId()));
 	        bookRent = this.sampleService.save(bookRent);
 	        return ResponseEntity.ok(bookRent.getMember());
+	}
+	
+	@RequestMapping(value = "/discount", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<?> membershipDiscount() {
+		
+				Member m = this.sampleService.findMember(1L);
+				Member retVal = this.sampleService.setMembershipDiscount(m);		
+				return new ResponseEntity<>(retVal,HttpStatus.ACCEPTED);
 	}
 		
 		

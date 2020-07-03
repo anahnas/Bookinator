@@ -45,6 +45,8 @@ public class Member extends User implements Serializable{
 	private int wrongTags;
 	@Column(nullable=true, name="rented")
 	private Integer rented;
+	private double discount;
+	private double membership;
 	
 	/*@Column
 	private double frequency;*/
@@ -222,5 +224,25 @@ public class Member extends User implements Serializable{
 	public String toString() {
 		return "Member [username=" + this.getUsername()+"]";
 	}
+
+	public double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(double discount) {
+		this.discount = discount;
+	}
+
+	public double getMembership() {
+		return membership;
+	}
+
+	public void setMembership(double membership) {
+		this.membership = membership;
+	}
+	
+	
+	
+	
 	
 }
