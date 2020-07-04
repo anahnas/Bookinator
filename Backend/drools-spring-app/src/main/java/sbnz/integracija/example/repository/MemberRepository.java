@@ -14,4 +14,5 @@ public interface MemberRepository extends JpaRepository<Member,Long> {
 	Member save(Member member);
 	List<Member> findAll();
 	
+	Member findByUsername(String username);
 }

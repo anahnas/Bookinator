@@ -1,17 +1,17 @@
 insert into user_table(username, password, first_name, last_name, email, user_type) values('guest', 'guest', 'guest', 'guest','guest', 0);
-insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent, rented, discount, membership) values(1, false, true, 0, true, 10, 0, 100);
+insert into member(member_pkey, banned, membership_expired, can_rent, rented, discount, membership) values(1, false, true, true, 10, 0, 100);
 
 insert into user_table(username, password, first_name, last_name, email, user_type) values('guest2', 'guest2', 'guest2', 'guest2','guest2', 0);
-insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent, rented, discount, membership) values(2, false, true, 0, true, 1, 0, 150);
+insert into member(member_pkey, banned, membership_expired, can_rent, rented, discount, membership) values(2, false, true, true, 1, 0, 150);
 
 insert into user_table(username, password, first_name, last_name, email, user_type) values('guest3', 'guest3', 'guest3', 'guest3','guest3', 0);
-insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent, rented, discount, membership) values(3, false, true, 0, true, 2, 0, 200);
+insert into member(member_pkey, banned, membership_expired, can_rent, rented, discount, membership) values(3, false, true, true, 2, 0, 200);
 
 insert into user_table(username, password, first_name, last_name, email, user_type) values('guest4', 'guest', 'guest', 'guest','guest', 0);
-insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent, rented, discount, membership) values(4, false, true, 0, true, 3, 0, 250);
+insert into member(member_pkey, banned, membership_expired, can_rent, rented, discount, membership) values(4, false, true, true, 3, 0, 250);
 
 insert into user_table(username, password, first_name, last_name, email, user_type) values('guest5', 'guest', 'guest', 'guest','guest', 0);
-insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent, rented, discount, membership) values(5, false, true, 0, true, 14, 0, 300);
+insert into member(member_pkey, banned, membership_expired, can_rent, rented, discount, membership) values(5, false, true, true, 14, 0, 300);
 
 insert into user_table(username, password, first_name, last_name, email, user_type) values('admin', 'admin', 'admin', 'admin','admin', 1);
 
@@ -59,8 +59,18 @@ insert into book(avaivable_no,rating,search_match) values(3,0,0);
 insert into book(avaivable_no,rating,search_match) values(3,0,0);
 
 insert into member_wishlist(member_member_pkey, wishlist_id) values (1, 5);
-insert into member_wishlist(member_member_pkey, wishlist_id) values (2, 5);
+insert into member_wishlist(member_member_pkey, wishlist_id) values (1, 4);
+insert into member_wishlist(member_member_pkey, wishlist_id) values (1, 1);
 insert into member_wishlist(member_member_pkey, wishlist_id) values (2, 1);
+insert into member_wishlist(member_member_pkey, wishlist_id) values (2, 4);
+insert into member_wishlist(member_member_pkey, wishlist_id) values (3, 5);
+insert into member_wishlist(member_member_pkey, wishlist_id) values (3, 4);
+insert into member_wishlist(member_member_pkey, wishlist_id) values (3, 1);
+
+insert into tag(tag_name, tag_approved) values ('deaths', false);
+insert into book_tag(book_id,tag_key,tag_value) values (5,6,'Main character');
+insert into member_wrong_tags(member_member_pkey, wrong_tags_id) values (1, 6);
+
 
 insert into book_rating values(1,1,1);
 insert into book_rating values(2,1,2);
@@ -98,5 +108,3 @@ insert into book_rating values(6,4,3);
 insert into book_rating values(7,4,1);
 insert into book_rating values(8,4,4);
 insert into book_rating values(9,4,1);
-
-

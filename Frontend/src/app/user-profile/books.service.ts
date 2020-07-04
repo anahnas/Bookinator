@@ -16,6 +16,7 @@ export class BooksService{
     private _getBookLoanUrl = 'http://localhost:8080/bookLoan/';
     private _getRecommendationsUrl = 'http://localhost:8080/recommended/wishlist';
     private _getBookUrl = 'http://localhost:8080/book/';
+    private _getSimilarWishlistsUrl = 'http://localhost:8080/wishlist/users/';
 
     constructor(private _http: HttpClient){ }
 
@@ -49,6 +50,11 @@ export class BooksService{
                     catchError(this.handleError));
     }
 
+    getSimilarWishlists(id : String) : Observable<User>{
+        return this._http.get<User>(this._getSimilarWishlistsUrl + id).pipe(
+                    catchError(this.handleError));
+    }
+    
     private handleError(err: HttpErrorResponse){
         console.log(err.message);
         return throwError(err.message);

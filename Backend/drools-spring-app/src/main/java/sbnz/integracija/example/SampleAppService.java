@@ -45,6 +45,7 @@ import DTO.BookDTO;
 import DTO.BookRecommendDTO;
 import DTO.MemberlistDTO;
 import DTO.RecommendDTO;
+import DTO.TagListDTO;
 import DTO.UserDTO;
 import enumeration.RoleEnum;
 import events.BookLoanExpiredEvent;
@@ -338,15 +339,14 @@ public class SampleAppService {
 		System.out.println("Book updated!");
 	}
 
-	public void approveTag(Long id) {
-		BookTag bookTag = bookTagRepository.getOne(id);
-		bookTag.setStatus(BookTagStatus.APPROVED);
-		this.bookTagRepository.save(bookTag);
-	}
-
-	public void makeBookLoan(Long userId, Long bookId) {
+	public boolean makeBookLoan(Long userId, Long bookId) {
+	
 		Member member = this.memberRepo.getOne(userId);
+		if(!member.isCanRent())
+			return false;
 		Book book = this.bookRepository.getOne(bookId);
+		book.setAvaivableNo(book.getAvaivableNo()-1);
+
 		BookLoan bookLoan = new BookLoan();
 		bookLoan.setReturned(false);
 		bookLoan.setBookId(book.getId());
@@ -355,7 +355,9 @@ public class SampleAppService {
 		member.setLoan(bookLoan);
 		member.setCanRent(false);
 		memberRepo.save(member);
-
+		
+		bookRepository.save(book);
+		
 		System.out.println("Initializing book loan rule...............................");
 
 		KieServices ks = KieServices.Factory.get();
@@ -401,7 +403,7 @@ public class SampleAppService {
 		} catch (InterruptedException e) {
 			// do nothing
 		}
-
+		return true;
 	}
 
 	public void runPenaltyClock(Long uId, Long blId) {
@@ -428,7 +430,6 @@ public class SampleAppService {
 					penalty = new Penalty();
 				}
 				while(isBookLoanExpired(blId)) {
-					System.out.println("book loan - " + blId);
 					kSession1.fireUntilHalt();
 					
 					Collection<?> newEvents = kSession1.getObjects(new ClassObjectFilter(PenaltyEvent.class));
@@ -440,13 +441,6 @@ public class SampleAppService {
 							bookLoanRepository.save(bl);
 
 							m.setCanRent(false);
-							/*Double p;
-							try {
-								p = penalty.getAmount();
-							} catch (Exception e) {
-								e.printStackTrace();
-								p = 0.0;
-							}*/
 							penalty.setAmount(penalty.getAmount() + 10);
 							m.setPenalty(penalty);
 							memberRepo.save(m);
@@ -477,6 +471,9 @@ public class SampleAppService {
 
 	public void returnBookLoan(Long id) {
 		BookLoan bookLoan = this.bookLoanRepository.getOne(id);
+		Book book = this.bookRepository.getOne(bookLoan.getBookId());
+		book.setAvaivableNo(book.getAvaivableNo()+1);
+		bookRepository.save(book);
 		Member member = this.memberRepo.getOne(bookLoan.getUserId());
 		System.out.println(member.getUsername() + " returned book with id: " + bookLoan.getBookId());
 		member.setLoan(null);
@@ -513,6 +510,12 @@ public class SampleAppService {
 
 	}
 
+	public void approveTag(Long id) {
+		BookTag bookTag = bookTagRepository.getOne(id);
+		bookTag.setStatus(BookTagStatus.APPROVED);
+		this.bookTagRepository.save(bookTag);
+	}
+
 	public void approveJustTag(String name) {
 		Tag tag = tagRepo.findByTagName(name);
 		tag.setApproved(true);
@@ -546,7 +549,7 @@ public class SampleAppService {
 	public List<Tag> findTags() {
 		return tagRepo.findTags();
 	}
-
+	
 	public ArrayList<BookRecommendDTO> getRecommendedBooks(Long uId) {
 
 		System.out.println("Recommendation initiated");
@@ -697,16 +700,50 @@ public class SampleAppService {
 		}
 		return bookDTOs;
 	}
+
+
+	public Member usersWithSimilarWishlists(Long uId) {
+		Member m = this.memberRepo.getOne(uId);
+
+		MemberlistDTO memberlistDTO = new MemberlistDTO();
+		memberlistDTO.setMembers(this.memberRepo.findAll());
+		
+		KieServices ks = KieServices.Factory.get();
+		KieBaseConfiguration kbconf = ks.newKieBaseConfiguration();
+		kbconf.setOption(EventProcessingOption.STREAM);
+		KieBase kbase = kieContainer.newKieBase(kbconf);
+
+		KieSession kSession = kbase.newKieSession();
+
+		kSession.getEntryPoint("similar-wishlists").insert(uId);
+		for(Member member : memberlistDTO.getMembers()) {
+			kSession.getEntryPoint("similar-wishlists").insert(member);
+		}
+		//kSession.getEntryPoint("similar-wishlists").insert(memberlistDTO);
+	
+		kSession.getAgenda().getAgendaGroup("wishlistSimilarityRules").setFocus();
+
+		kSession.fireAllRules();
+		QueryResults results = kSession.getQueryResults("getSimilarWishlistsResults");
+
+		Member similarMember = null;
+		MemberlistDTO memberlistDTO2 = new MemberlistDTO();
+		for (QueryResultsRow row : results) {
+			similarMember = (Member) row.get("$result");
+		}
+		for(Member mem : memberlistDTO2.getMembers()) {
+			System.out.println(mem.getUsername());
+		}
+		similarMember = memberRepo.findByUsername(similarMember.getUsername());
+		return similarMember;
+	}
+	
 	
 	public HashMap<Long, Integer> recommendFromWishlist() {
 		ArrayList<BookDTO> bookDTOs = new ArrayList<>();
 		
 		MemberlistDTO memberlistDTO = new MemberlistDTO();
 		memberlistDTO.setMembers(this.memberRepo.findAll());
-		for(Member m : memberlistDTO.getMembers()) {
-			System.out.println(m);
-		}
-		
 
 		KieServices ks = KieServices.Factory.get();
 		KieBaseConfiguration kbconf = ks.newKieBaseConfiguration();
@@ -720,46 +757,13 @@ public class SampleAppService {
 		kSession.getAgenda().getAgendaGroup("wishlistRecommendRules").setFocus();
 
 		kSession.fireAllRules();
-		
-//		List<Command> cmds = new ArrayList<Command>();
-//		cmds.add( CommandFactory.newInsert( memberlistDTO, "memberlistDTO" ));
-		//ExecutionResults results = kSession.execute( CommandFactory.newBatchExecution( cmds ) );
-		
-		//HashMap<Long, Integer> occurences = (HashMap<Long, Integer>) results.getValue();
 		HashMap<Long, Integer> occurences = new HashMap<>();
 		QueryResults results = kSession.getQueryResults("getWishlistRecommendResults");
 		for (QueryResultsRow row : results) {
 			occurences = (HashMap<Long, Integer>) row.get("$result");
-			System.out.println(row.get("$result"));
 		}
 
 		return occurences;
-		/*ArrayList<Book> books = new ArrayList<>();
-
-		QueryResults results = kSession.getQueryResults("getWishlistRecommendResults");
-		for (QueryResultsRow row : results) {
-			books = (ArrayList<Book>) row.get("$result");
-		}
-		
-		HashMap<Long, Integer> occurences = new HashMap<Long, Integer>();
-		
-		for(Book b: books) {
-			if(occurences.containsKey(b.getId())) {
-				occurences.replace(b.getId(), occurences.get(b.getId()), occurences.get(b.getId()) + 1);
-			} else {
-				occurences.put(b.getId(), 1);
-			}
-		}
-
-		return occurences;*/
-//		HashMap<BookDTO, Integer> retVal = new HashMap<BookDTO, Integer>();
-//		for(Book b: occurences.keySet()) {
-//			BookDTO bDTO = new BookDTO(b);
-//			ArrayList<BookTag> tags = this.bookTagRepository.findTagsByBookId(b.getId());
-//			bDTO.setTags(tags);
-//			retVal.put(bDTO, occurences.get(b));
-//		}
-//		return retVal;
 	}
 	
 	public BookDTO getBook(Long id) {
@@ -843,10 +847,6 @@ public class SampleAppService {
 	}
 	
 	public Member setMemberCategory(Member m) {
-		KieServices ks = KieServices.Factory.get();
-		KieBaseConfiguration kbconf = ks.newKieBaseConfiguration();
-		kbconf.setOption(EventProcessingOption.STREAM);
-		KieBase kbase = kieContainer.newKieBase(kbconf);
 		KieSession kSession = kbase.newKieSession();
 		List<BookRent> rented = bookRentRepository.findAll();
 		for(BookRent br : rented) {
@@ -862,5 +862,41 @@ public class SampleAppService {
 		return m;
 	}
 
+	public int checkWrongTags(Long uId) {
+		int retVal = 0;
+		
+		Member member = this.memberRepo.getOne(uId);
+		for(Tag t: member.getWrongTags()) {
+			System.out.println(t);
+		}
+		TagListDTO tagListDTO = new TagListDTO();
+		tagListDTO.setTags((ArrayList<Tag>) this.tagRepo.findAll());
+		for(Tag t: tagListDTO.getTags()) {
+			if(t.getTagName().equals("deaths"))
+				System.out.println(t);
+		}
+		KieServices ks = KieServices.Factory.get();
+		KieBaseConfiguration kbconf = ks.newKieBaseConfiguration();
+		kbconf.setOption(EventProcessingOption.STREAM);
+		KieBase kbase = kieContainer.newKieBase(kbconf);
+
+		KieSession kSession = kbase.newKieSession();
+		
+		kSession.getEntryPoint("wrong-tags").insert(member);
+
+		kSession.getEntryPoint("wrong-tags").insert(tagListDTO);
+	
+		kSession.getAgenda().getAgendaGroup("wrongTagRules").setFocus();
+		
+		kSession.fireAllRules();
+
+		QueryResults results = kSession.getQueryResults("getWrongTags");
+		
+		for (QueryResultsRow row : results) {
+			retVal = (int) row.get("$result");
+		}
+		
+		return retVal;
+	}
 	
 }
