@@ -4,6 +4,7 @@ import { Book } from '../model/book';
 import { BookInfoDialogComponent } from '../book-info-dialog/book-info-dialog.component';
 import { BooksService } from './books.service';
 import { MatDialog } from '@angular/material/dialog';
+import { User } from '../model/user';
 
 @Component({
   selector: 'app-user-profile',
@@ -23,6 +24,7 @@ export class UserProfileComponent implements OnInit {
   booksWishlist : Book [] = [];
   temp:Book;
   selectedBook:Book;
+  similarUser : User;
 
   errorMessage : string;
 
@@ -32,31 +34,37 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.loggedInUser = JSON.parse(localStorage.getItem('loggedIn'));
-    console.log(this.loggedInUser)
     this.firstName = this.loggedInUser.firstName;
     this.lastName = this.loggedInUser.lastName;
     this.username = this.loggedInUser.username;
     this.email = this.loggedInUser.email;
     this.getBookHistory();
     this.getWishlist();
+    this.getSimilarUsers();
+  }
+
+  getSimilarUsers(){
+    this._booksService.getSimilarWishlists(this.loggedInUser.id).subscribe(
+      response => {
+        console.log("similar users")
+        console.log(response)
+        this.similarUser = response;
+        }
+      );   
   }
 
   getBookHistory(){
     this._booksService.getBookLoans(this.loggedInUser.id).subscribe(
       response => {
-        console.log("loans")
-        console.log(response)
         for(let loan of response)
           this.bookLoans.push(loan);
-      }
-    );
+        }
+      );
 
     this.booksHistory = [];
 
     this._booksService.getBookHistory(this.loggedInUser.id).subscribe(
       books => {
-        console.log("history :")
-        console.log(books)
         for(let b of books){
           this.temp = new Book();
           this.temp.match = b.match;

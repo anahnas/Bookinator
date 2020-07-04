@@ -1,0 +1,28 @@
+//created on: Jul 3, 2020
+package integracija
+
+//list any import classes here.
+
+import sbnz.integracija.example.facts.Member;
+import sbnz.integracija.example.facts.Tag;
+import DTO.TagListDTO;
+
+
+query "getWrongTags"
+    $result: Integer() from entry-point "wrong-tags"
+end
+
+rule "Wrong tags"
+agenda-group "wrongTagRules"
+    when
+        $taglist: TagListDTO($tags: tags) from entry-point "wrong-tags"
+        $m: Member( $wrongTags: wrongTags) from entry-point "wrong-tags"
+        Number($value: intValue >= 0) from accumulate(
+        	Tag($t:this, this memberOf $tags) from $wrongTags,
+        	count($t)
+        )
+    then
+    	System.out.println("Wrong tags: " + $value + "/" + $tags.size());
+    	drools.getEntryPoint("wrong-tags").insert($value);
+
+end

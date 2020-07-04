@@ -41,6 +41,9 @@ export class BookInfoDialogComponent implements OnInit {
       response =>{
         alert("Rented.");
         this.dialogRef.close();
+      }, error =>{
+        alert("You have no permission to rent.");
+        this.dialogRef.close();
       }
     );
   

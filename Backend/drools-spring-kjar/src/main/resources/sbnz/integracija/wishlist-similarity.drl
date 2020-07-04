@@ -1,0 +1,37 @@
+package integracija
+
+//list any import classes here.
+import DTO.MemberlistDTO;
+import sbnz.integracija.example.facts.Member;
+import sbnz.integracija.example.facts.Book;
+
+//declare any global variables here
+
+query "getSimilarWishlistsResults"
+    $result: Member() from entry-point "similar-wishlists"
+end
+
+rule "Similar wishlists" 
+agenda-group "wishlistSimilarityRules"
+    when
+        $userId: Long() from entry-point "similar-wishlists"
+        $m1: Member(id == $userId, $wishlist1: wishlist) from entry-point "similar-wishlists"
+        $m2: Member($id2: id, $wishlist2: wishlist) from entry-point "similar-wishlists"
+        Number($value: intValue >= ($wishlist1.size()/2)+1) from accumulate(
+       	Book($b:this, this memberOf $wishlist1) from $wishlist2,
+       	count($b)
+        )
+        not (
+        	Member(id == $userId) from $m2
+        )
+        not(
+        	Member(banned == true) from $m2
+        )
+        
+        not(
+        	Member(id == null) from $m2
+        )
+    then
+    	drools.getEntryPoint("similar-wishlists").insert(new Member($m2));
+    	System.out.println("User with id: " + $userId + ", and user with id " + $id2 + " have " +$value + " of similar books in wishlists.");
+end

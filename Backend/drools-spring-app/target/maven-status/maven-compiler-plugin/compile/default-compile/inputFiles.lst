@@ -38,6 +38,7 @@ D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integ
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\repository\TagRepository.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\events\BookLoanExpiredEvent.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\events\BookLoanMade.java
+D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\DTO\TagListDTO.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\BookTagStatus.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\sbnz\integracija\example\facts\User.java
 D:\sbnz\Bookinator\Bookinator\Backend\drools-spring-app\src\main\java\DTO\BookLoanRequestDTO.java

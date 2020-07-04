@@ -29,9 +29,9 @@ public class Member extends User implements Serializable{
 	private Penalty penalty;
 	@Column
 	private BookLoan loan;
-	 @OneToMany()
+	@OneToMany
 	private Set<BookLoan> history;
-	 @ManyToMany
+	@ManyToMany
 	private Set<Book> wishlist = new HashSet<>();
 	@Column
 	private cathegory cathegory;
@@ -41,8 +41,8 @@ public class Member extends User implements Serializable{
 	private boolean canRent = true;
 	@Column
 	private Date banExpiry;
-	@Column
-	private int wrongTags;
+	@OneToMany
+	private Set<Tag> wrongTags;
 
 	 @OneToMany()
 	private Set<Discount> discounts ;
@@ -67,6 +67,10 @@ public class Member extends User implements Serializable{
 		super(u.getUsername(), u.getPassword(), u.getFirstName(), u.getLastName(), u.getEmail(), u.getUserType());
 	}
 	
+	public Member(Member u) {
+		super(u.getUsername(), u.getPassword(), u.getFirstName(), u.getLastName(), u.getEmail(), u.getUserType());
+	}
+	
 	public Member() {
 		super();
 	}
@@ -86,7 +90,7 @@ public class Member extends User implements Serializable{
 	
 	public Member(String username, String password, String firstName, String lastName, String email, RoleEnum userType,
 			Date joinDate, boolean membershipExpired, Penalty penalty, BookLoan loan, Set<BookLoan> history,
-			sbnz.integracija.example.facts.Member.cathegory cathegory, boolean banned, Date banExpiry, int wrongTags,
+			sbnz.integracija.example.facts.Member.cathegory cathegory, boolean banned, Date banExpiry, Set<Tag> wrongTags,
 			Set<Discount> discounts, Set<Book> wishlist) {
 		super(username, password, firstName, lastName, email, userType);
 		this.joinDate = joinDate;
@@ -155,11 +159,11 @@ public class Member extends User implements Serializable{
 		this.banExpiry = banExpiry;
 	}
 
-	public int getWrongTags() {
+	public Set<Tag> getWrongTags() {
 		return wrongTags;
 	}
 
-	public void setWrongTags(int wrongTags) {
+	public void setWrongTags(Set<Tag> wrongTags) {
 		this.wrongTags = wrongTags;
 	}
 

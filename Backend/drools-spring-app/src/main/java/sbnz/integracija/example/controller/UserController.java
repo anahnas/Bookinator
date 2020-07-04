@@ -24,6 +24,7 @@ import sbnz.integracija.example.SampleAppService;
 import sbnz.integracija.example.facts.Book;
 import sbnz.integracija.example.facts.BookLoan;
 import sbnz.integracija.example.facts.BookTag;
+import sbnz.integracija.example.facts.Member;
 import sbnz.integracija.example.facts.ReviewRequest;
 import sbnz.integracija.example.facts.SearchRequestDTO;
 import sbnz.integracija.example.facts.Tag;
@@ -126,8 +127,10 @@ public class UserController {
 
 	@RequestMapping(value = "/bookLoan", method = RequestMethod.POST)
 	public ResponseEntity<String> bookLoan(@RequestBody BookLoanRequestDTO bookLoanRequestDTO) {
-		sampleService.makeBookLoan(bookLoanRequestDTO.getUserId(), bookLoanRequestDTO.getBookId());
-		return new ResponseEntity<>("", HttpStatus.OK);
+		if(sampleService.makeBookLoan(bookLoanRequestDTO.getUserId(), bookLoanRequestDTO.getBookId()))
+			return new ResponseEntity<>("", HttpStatus.OK);
+		else
+			return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
 
 	}
 
@@ -198,6 +201,12 @@ public class UserController {
 		return new ResponseEntity<>(wishlist, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/wishlist/users/{uId}", method = RequestMethod.GET)
+	public ResponseEntity<?> usersWithSimilarWishlists(@PathVariable("uId") Long uId) {
+		Member member = this.sampleService.usersWithSimilarWishlists(uId);
+		
+		return new ResponseEntity<>(member, HttpStatus.OK);
+	}
 
 	@RequestMapping(value = "/recommended/wishlist", method = RequestMethod.GET)
 	public ResponseEntity<?> getRecommendedFromWishlist() {
@@ -211,4 +220,11 @@ public class UserController {
 	public ResponseEntity<?> getBook(@PathVariable("id") Long id) {
 		return new ResponseEntity<>(this.sampleService.getBook(id), HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/user/wrongTags/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> getWrongTags(@PathVariable("id") Long id) {
+		return new ResponseEntity<>(this.sampleService.checkWrongTags(id), HttpStatus.OK);
+	}
+	
+	
 }

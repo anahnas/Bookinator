@@ -48,3 +48,4 @@ sbnz\integracija\example\SampleApp.class
 DTO\BookLoanRequestDTO.class
 events\BookLoanReturnedEvent.class
 events\MembershipExpiredEvent.class
+DTO\TagListDTO.class
