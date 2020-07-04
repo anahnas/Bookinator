@@ -17,6 +17,7 @@ rule "book-rent-increment"
         $br: BookRent($member: member)
     then
         $member.setRented($member.getRented() + 1);
+        System.out.println("****BOOK RENT TIMES: " + $member.getRented());
 end
 
 //rule "member-frequency-in-renting"

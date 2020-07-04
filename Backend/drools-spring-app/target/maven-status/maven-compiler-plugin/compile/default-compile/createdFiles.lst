@@ -35,6 +35,7 @@ events\PenaltyEvent.class
 sbnz\integracija\example\repository\BookTagRepository.class
 enumeration\RoleEnum.class
 sbnz\integracija\example\SampleHomeController.class
+sbnz\integracija\example\NewRuleService.class
 sbnz\integracija\example\facts\SearchRequestDTO.class
 sbnz\integracija\example\SampleAppService.class
 sbnz\integracija\example\facts\SearchRequest.class
@@ -45,6 +46,7 @@ DTO\BookRentDTO.class
 sbnz\integracija\example\facts\SearchResult.class
 sbnz\integracija\example\facts\Employee.class
 sbnz\integracija\example\facts\Book.class
+sbnz\integracija\example\facts\BookRent$Status.class
 sbnz\integracija\example\facts\BookLoan.class
 sbnz\integracija\example\facts\Penalty.class
 sbnz\integracija\example\facts\enumeration\RoleEnum.class

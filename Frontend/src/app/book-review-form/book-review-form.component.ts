@@ -57,11 +57,10 @@ export class BookReviewFormComponent implements OnInit {
   makeBookReview(){
     event.preventDefault();
     if(this.critique == '' || this.rate == ''){
-      alert("Forma nije dobro popunjena.");
+      alert("Form not valid.");
       return;
     }
     
-    //pravljenje hesmape
     for(let el of this.content.nativeElement.querySelectorAll('#tag')){
       this.keys.push(el.value)
     }

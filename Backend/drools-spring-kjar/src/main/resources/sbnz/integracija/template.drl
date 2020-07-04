@@ -1,0 +1,40 @@
+package sbnz.integracija.template;
+import sbnz.integracija.example.facts.Member;
+
+rule "Categorize Members_GOLD"
+no-loop true
+when
+	$m: Member($m.getRented >= 999,
+		   $m.getRented <= 1000)
+then
+	modify ($m){ setCathegory(Member.cathegory.GOLD)};
+end
+
+rule "Categorize Members_SILVER"
+no-loop true
+when
+	$m: Member($m.getRented >= 666,
+		   $m.getRented <= 777)
+then
+	modify ($m){ setCathegory(Member.cathegory.SILVER)};
+end
+
+rule "Categorize Members_BRONZE"
+no-loop true
+when
+	$m: Member($m.getRented >= 444,
+		   $m.getRented <= 445)
+then
+	modify ($m){ setCathegory(Member.cathegory.BRONZE)};
+end
+
+rule "Categorize Members_NA"
+no-loop true
+when
+	$m: Member($m.getRented >= 33,
+		   $m.getRented <= 333)
+then
+	modify ($m){ setCathegory(Member.cathegory.NA)};
+end
+
+

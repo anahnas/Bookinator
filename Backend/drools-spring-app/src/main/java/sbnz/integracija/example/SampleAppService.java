@@ -518,9 +518,12 @@ public class SampleAppService {
 	}
 
 	public void deleteJustTag(String name) {
+		BookTag bookTag = bookTagRepository.findByTagKey(name);
 		Tag tag = tagRepo.findByTagName(name);
 		tag.setApproved(false);
 		this.tagRepo.delete(tag);
+		bookTag.setStatus(BookTagStatus.REFUSED);
+		this.bookTagRepository.delete(bookTag);
 	}
 
 	public List<BookTag> findAllTags() {
@@ -778,6 +781,7 @@ public class SampleAppService {
 	        kSession.insert(bookRent);
 
 	        Member member = memberRepo.getOne(bookRent.getMember().getId());
+	        System.out.println("*** id of member who rented a book: " + bookRent.getMember().getId() );
 	        memberRepo.save(member);
 	        
 
@@ -828,5 +832,26 @@ public class SampleAppService {
 		return m;
 		
 	}
+	
+	public Member setMemberCategory(Member m) {
+		KieServices ks = KieServices.Factory.get();
+		KieBaseConfiguration kbconf = ks.newKieBaseConfiguration();
+		kbconf.setOption(EventProcessingOption.STREAM);
+		KieBase kbase = kieContainer.newKieBase(kbconf);
+		KieSession kSession = kbase.newKieSession();
+		List<BookRent> rented = bookRentRepository.findAll();
+		for(BookRent br : rented) {
+			kSession.insert(br);
+		}
+		kSession.insert(m);
+		kSession.getAgenda().getAgendaGroup("template").setFocus();
+		kSession.fireAllRules();
+		kSession.dispose();
+		
+		memberRepo.save(m);
+		System.out.println("***Category: " + m.getCathegory());
+		return m;
+	}
+
 	
 }

@@ -10,6 +10,7 @@ export class UserListService {
   private readonly addUserURL: string;
   private readonly payMembershipURL: string;
   private readonly returnLoanURL: string;
+  private readonly discountURL: string;
 
   constructor(private http: HttpClient) {
     this.allUsersURL = 'http://localhost:8080/allUsers';

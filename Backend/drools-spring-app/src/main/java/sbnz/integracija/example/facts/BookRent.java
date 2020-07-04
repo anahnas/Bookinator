@@ -15,6 +15,8 @@ import javax.persistence.OneToOne;
 @Entity
 public class BookRent implements Serializable{
 	
+	public enum Status {RENTED, RETURNED, REJECTED};
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

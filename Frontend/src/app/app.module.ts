@@ -30,6 +30,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { YesNoPipe } from './yes-no.pipe';
 import { WelcomeAdminComponent } from './welcome-admin/welcome-admin.component';
 import { BookOrderDialogComponent } from './book-order-dialog/book-order-dialog.component';
+import { TemplateCategoryComponent } from './template-category/template-category.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { BookOrderDialogComponent } from './book-order-dialog/book-order-dialog.
     UserProfileComponent,
     YesNoPipe,
     WelcomeAdminComponent,
-    BookOrderDialogComponent
+    BookOrderDialogComponent,
+    TemplateCategoryComponent
     ],
   imports: [
     BrowserModule,
@@ -74,6 +76,7 @@ import { BookOrderDialogComponent } from './book-order-dialog/book-order-dialog.
       { path: 'userList', component: UserListComponent },
       { path: 'tagList', component: TagListComponent },
       { path: 'employee', component: WelcomeAdminComponent },
+      { path: 'category', component: TemplateCategoryComponent },
       { path: '', redirectTo:'welcome', pathMatch: 'full' },
       { path: '**', redirectTo:'welcome', pathMatch: 'full' }
     ])

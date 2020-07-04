@@ -37,6 +37,7 @@ export class TagListComponent implements OnInit {
 
   approveTag(tagName: String) {
     this.service.approveTag(tagName).subscribe(result => this.router.navigate(['/tagList']));
+    window.location.reload();
   }
 
 }

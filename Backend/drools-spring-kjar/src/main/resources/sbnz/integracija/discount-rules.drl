@@ -15,7 +15,7 @@ rule "Discount 10%"
 
     when
     
-        $m: Member(rented == 10, membership: membership, discount: discount)
+        $m: Member(rented >= 10, membership: membership, discount: discount)
     then
         modify($m){setDiscount(membership*0.1);}
         discount = $m.getDiscount();

@@ -121,8 +121,11 @@ public class UserController {
 
 	@RequestMapping(value = "/deleteTag", method = RequestMethod.POST)
 	public ResponseEntity<String> deleteTag(@RequestBody String name) {
+//	public ResponseEntity<String> deleteTag(@RequestBody Long id) {
+
 
 		sampleService.deleteJustTag(name);
+		//sampleService.deleteTag(id);
 		return new ResponseEntity<>("", HttpStatus.OK);
 
 	}
@@ -231,6 +234,16 @@ public class UserController {
 				Member retVal = this.sampleService.setMembershipDiscount(m);		
 				return new ResponseEntity<>(retVal,HttpStatus.ACCEPTED);
 	}
+	
+	@RequestMapping(value = "/memberCategory", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<?> MemberCategory() {
+		
+				Member m = this.sampleService.findMember(1L);
+				Member retVal = this.sampleService.setMemberCategory(m);
+		
+				return new ResponseEntity<>(retVal, HttpStatus.ACCEPTED);
+	}
+	
 		
 		
 	}

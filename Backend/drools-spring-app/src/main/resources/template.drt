@@ -1,0 +1,22 @@
+template header
+minRent
+maxRent
+newCategory
+
+package sbnz.integracija.template;
+
+import sbnz.integracija.example.facts.Member;
+
+template "category-rules"
+
+rule "Categorize Members_@{newCategory}"
+no-loop true
+when
+	$m: Member($m.getRented >= @{minRent},
+		   $m.getRented <= @{maxRent})
+       
+then
+	modify ($m){ setCathegory(Member.cathegory.@{newCategory})};
+end
+
+end template

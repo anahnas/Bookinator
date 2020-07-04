@@ -11,7 +11,7 @@ insert into user_table(username, password, first_name, last_name, email, user_ty
 insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent, rented, discount, membership) values(4, false, true, 0, true, 3, 0, 250);
 
 insert into user_table(username, password, first_name, last_name, email, user_type) values('guest5', 'guest', 'guest', 'guest','guest', 0);
-insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent, rented, discount, membership) values(5, false, true, 0, true, 4, 0, 300);
+insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent, rented, discount, membership) values(5, false, true, 0, true, 14, 0, 300);
 
 insert into user_table(username, password, first_name, last_name, email, user_type) values('admin', 'admin', 'admin', 'admin','admin', 1);
 
