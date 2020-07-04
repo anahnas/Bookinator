@@ -1,0 +1,26 @@
+//created on: Jul 3, 2020
+package integracija
+
+//list any import classes here.
+import sbnz.integracija.example.facts.Member;
+
+//declare any global variables here
+
+
+
+
+rule "Discount 10%"
+	agenda-group "membership-discount"
+	lock-on-active true
+
+    when
+    
+        $m: Member(rented >= 10, membership: membership, discount: discount)
+    then
+        modify($m){setDiscount(membership*0.1);}
+        discount = $m.getDiscount();
+        modify($m){setMembership(membership-discount);}
+        System.out.println("*******DISCOUNT*********" + $m.getDiscount() + "\n*********MEMBERSHIP*********" + $m.getMembership());
+
+end
+

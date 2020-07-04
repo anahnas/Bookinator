@@ -1,0 +1,32 @@
+//created on: Jul 3, 2020
+package integracija
+
+//list any import classes here.
+import sbnz.integracija.example.facts.Member;
+import sbnz.integracija.example.facts.BookRent;
+
+
+//declare any global variables here
+global Double maxRented
+
+
+
+rule "book-rent-increment"
+    agenda-group "rented-books"
+    when
+        $br: BookRent($member: member)
+    then
+        $member.setRented($member.getRented() + 1);
+        System.out.println("****BOOK RENT TIMES: " + $member.getRented());
+end
+
+//rule "member-frequency-in-renting"
+//   agenda-group "member-frequency"
+//    no-loop
+//    when
+//       $m: Member()
+//    then
+//    	$m.setFrequency($m.getRented()/maxRented);
+//        System.out.println($m.getRented() + " " + $m.getFrequency());
+
+//end

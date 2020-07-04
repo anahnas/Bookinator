@@ -4,12 +4,13 @@ import { Book } from '../model/book';
 import { BookInfoDialogComponent } from '../book-info-dialog/book-info-dialog.component';
 import { BooksService } from './books.service';
 import { MatDialog } from '@angular/material/dialog';
+import { UserProfileService } from './user-profile.service';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css'],
-  providers: [BooksService]
+  providers: [BooksService, UserProfileService]
 })
 export class UserProfileComponent implements OnInit {
 
@@ -17,6 +18,7 @@ export class UserProfileComponent implements OnInit {
   lastName:String;
   username:String;
   email:String;
+  discount:number;
 
   booksHistory : Book [] = [];
   bookLoans : any[] = [];
@@ -28,7 +30,7 @@ export class UserProfileComponent implements OnInit {
 
   loggedInUser: any;
 
-  constructor(private _booksService: BooksService, public dialog: MatDialog) { }
+  constructor(private _booksService: BooksService, private _userProfileService: UserProfileService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.loggedInUser = JSON.parse(localStorage.getItem('loggedIn'));
@@ -37,6 +39,7 @@ export class UserProfileComponent implements OnInit {
     this.lastName = this.loggedInUser.lastName;
     this.username = this.loggedInUser.username;
     this.email = this.loggedInUser.email;
+    this.discount = this.loggedInUser.discount;
     this.getBookHistory();
     this.getWishlist();
   }
@@ -50,6 +53,8 @@ export class UserProfileComponent implements OnInit {
           this.bookLoans.push(loan);
       }
     );
+
+    
 
     this.booksHistory = [];
 
@@ -89,6 +94,7 @@ export class UserProfileComponent implements OnInit {
       error => this.errorMessage = <any>error
     );
   }
+
 
   getWishlist(){
     this.booksWishlist = [];

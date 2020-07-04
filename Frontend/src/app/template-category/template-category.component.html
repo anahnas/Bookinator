@@ -1,0 +1,57 @@
+<section id="main" class="wrapper">
+    <div class="inner">
+        <div class="content">
+            <h3 style="font-weight: bold;">Change rent range for specific categories</h3>
+                <form (ngSubmit)="setCategory()" [formGroup]="templateForm">
+                    <div class="row gtr-uniform">
+                            
+                        <!--<div class="form-group">
+                            <input type="text"
+                                   [(ngModel)]="template.minRent"
+                                  formControlName="minRent"
+                                    required
+                            />
+                          </div>-->
+                        <div class="col-6 col-12-xsmall">
+                            <label>NA min</label>
+                            <input type="text" formControlName="minRent">
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <label>NA max</label>
+                            <input type="text" formControlName="maxRent">
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <label>Bronze min</label>
+                            <input type="text" formControlName="bronzeMinRent">
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <label>Bronze max</label>
+                            <input type="text" formControlName="bronzeMaxRent">
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <label>Silver min</label>
+                            <input type="text" formControlName="silverMinRent">
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <label>Silver max</label>
+                            <input type="text" formControlName="silverMaxRent">
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <label>Gold min</label>
+                            <input type="text" formControlName="goldMinRent">
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <label>Gold max</label>
+                            <input type="text" formControlName="goldMaxRent">
+                        </div>
+                        
+
+                       </div>
+                       </form>
+                       <div>
+                        <button class="primary" type="submit" (click)="setCategory()">Submit</button>
+                    </div>
+                       </div>
+                       </div>
+                       </section>
+                       

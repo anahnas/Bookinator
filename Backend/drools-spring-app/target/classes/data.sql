@@ -1,17 +1,17 @@
 insert into user_table(username, password, first_name, last_name, email, user_type) values('guest', 'guest', 'guest', 'guest','guest', 0);
-insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent) values(1, false, true, 0, true);
+insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent, rented, discount, membership) values(1, false, true, 0, true, 10, 0, 100);
 
 insert into user_table(username, password, first_name, last_name, email, user_type) values('guest2', 'guest2', 'guest2', 'guest2','guest2', 0);
-insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent) values(2, false, true, 0, true);
+insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent, rented, discount, membership) values(2, false, true, 0, true, 1, 0, 150);
 
 insert into user_table(username, password, first_name, last_name, email, user_type) values('guest3', 'guest3', 'guest3', 'guest3','guest3', 0);
-insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent) values(3, false, true, 0, true);
+insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent, rented, discount, membership) values(3, false, true, 0, true, 2, 0, 200);
 
 insert into user_table(username, password, first_name, last_name, email, user_type) values('guest4', 'guest', 'guest', 'guest','guest', 0);
-insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent) values(4, false, true, 0, true);
+insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent, rented, discount, membership) values(4, false, true, 0, true, 3, 0, 250);
 
 insert into user_table(username, password, first_name, last_name, email, user_type) values('guest5', 'guest', 'guest', 'guest','guest', 0);
-insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent) values(5, false, true, 0, true);
+insert into member(member_pkey, banned, membership_expired, wrong_tags, can_rent, rented, discount, membership) values(5, false, true, 0, true, 14, 0, 300);
 
 insert into user_table(username, password, first_name, last_name, email, user_type) values('admin', 'admin', 'admin', 'admin','admin', 1);
 

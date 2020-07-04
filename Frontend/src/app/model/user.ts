@@ -9,4 +9,5 @@ export class User{
     userType:String
     membershipExpired:boolean
     loan:String
+    discount:number
 }

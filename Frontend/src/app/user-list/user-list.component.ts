@@ -72,6 +72,7 @@ export class UserListComponent implements OnInit {
 
     this.service.saveUser(this.user).subscribe(result => {
       alert('You have added an user.');
+      window.location.reload();
       this.router.navigate(['/userList']);
     });
   }
