@@ -108,5 +108,3 @@ insert into book_rating values(6,4,3);
 insert into book_rating values(7,4,1);
 insert into book_rating values(8,4,4);
 insert into book_rating values(9,4,1);
-
-

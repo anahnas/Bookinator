@@ -4,8 +4,8 @@ import sbnz.integracija.example.facts.Member;
 rule "Categorize Members_GOLD"
 no-loop true
 when
-	$m: Member($m.getRented >= 999,
-		   $m.getRented <= 1000)
+	$m: Member($m.getRented >= 555,
+		   $m.getRented <= 6666)
 then
 	modify ($m){ setCathegory(Member.cathegory.GOLD)};
 end
@@ -13,8 +13,8 @@ end
 rule "Categorize Members_SILVER"
 no-loop true
 when
-	$m: Member($m.getRented >= 666,
-		   $m.getRented <= 777)
+	$m: Member($m.getRented >= 333,
+		   $m.getRented <= 444)
 then
 	modify ($m){ setCathegory(Member.cathegory.SILVER)};
 end
@@ -22,8 +22,8 @@ end
 rule "Categorize Members_BRONZE"
 no-loop true
 when
-	$m: Member($m.getRented >= 444,
-		   $m.getRented <= 445)
+	$m: Member($m.getRented >= 22,
+		   $m.getRented <= 222)
 then
 	modify ($m){ setCathegory(Member.cathegory.BRONZE)};
 end
@@ -31,8 +31,8 @@ end
 rule "Categorize Members_NA"
 no-loop true
 when
-	$m: Member($m.getRented >= 33,
-		   $m.getRented <= 333)
+	$m: Member($m.getRented >= 3,
+		   $m.getRented <= 34)
 then
 	modify ($m){ setCathegory(Member.cathegory.NA)};
 end

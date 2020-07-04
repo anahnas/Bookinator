@@ -847,6 +847,12 @@ public class SampleAppService {
 	}
 	
 	public Member setMemberCategory(Member m) {
+
+		KieServices ks = KieServices.Factory.get();
+		KieBaseConfiguration kbconf = ks.newKieBaseConfiguration();
+		kbconf.setOption(EventProcessingOption.STREAM);
+		KieBase kbase = kieContainer.newKieBase(kbconf);
+
 		KieSession kSession = kbase.newKieSession();
 		List<BookRent> rented = bookRentRepository.findAll();
 		for(BookRent br : rented) {
