@@ -54,9 +54,29 @@ insert into book_tag(book_id,tag_key,tag_value) values (5,4,'turk');
 insert into book_tag(book_id,tag_key,tag_value) values (5,3,'The Bridge on the Drina is a historical novel by the Yugoslav writer Ivo AndriÄ‡. It revolves around the Mehmed PaÅ¡a SokoloviÄ‡ Bridge in ViÅ¡egrad, which spans the Drina River and stands as a silent witness to history from its construction by the Ottomans in the mid-16th century until its partial destruction during World War I. The story spans about four centuries and covers the Ottoman and Austro-Hungarian occupations of the region, with a particular emphasis on the lives, destinies and relations of the local inhabitants, especially Serbs and Bosnian Muslims. .');
 
 insert into book(avaivable_no,rating,search_match) values(3,0,0);
+insert into book_tag(book_id,tag_key,tag_value) values (6,2,'The unbearable lightness of being');
+insert into book_tag(book_id,tag_key,tag_value) values (6,1,'Milan Kundera');
+insert into book_tag(book_id,tag_key,tag_value) values (6,4,'Sabine');
+insert into book_tag(book_id,tag_key,tag_value) values (6,3,'Successful surgeon Tomas (Daniel Day-Lewis) leaves Prague for an operation, meets a young photographer named Tereza (Juliette Binoche), and brings her back with him. Tereza is surprised to learn that Tomas is already having an affair with the bohemian Sabina (Lena Olin), but when the Soviet invasion occurs, all three flee to Switzerland. Sabina begins an affair, Tom continues womanizing, and Tereza, disgusted, returns to Czechoslovakia. Realizing his mistake, Tomas decides to chase after her.');
+
 insert into book(avaivable_no,rating,search_match) values(3,0,0);
+insert into book_tag(book_id,tag_key,tag_value) values (7,2,'The Hitchhiker Guide to the Galaxy');
+insert into book_tag(book_id,tag_key,tag_value) values (7,1,'Douglas Adams');
+insert into book_tag(book_id,tag_key,tag_value) values (7,4,'Ford Prefect');
+insert into book_tag(book_id,tag_key,tag_value) values (7,3,'The Hitchhiker Guide to the Galaxy is a comedy science fiction series created by Douglas Adams. Originally a radio comedy broadcast on BBC Radio 4 in 1978, it was later adapted to other formats, including stage shows, novels, comic books, a 1981 TV series, a 1984 video game, and 2005 feature film.');
+
 insert into book(avaivable_no,rating,search_match) values(3,0,0);
+insert into book_tag(book_id,tag_key,tag_value) values (7,2,'The Hitchhiker Guide to the Galaxy');
+insert into book_tag(book_id,tag_key,tag_value) values (7,1,'Douglas Adams');
+insert into book_tag(book_id,tag_key,tag_value) values (7,4,'Ford Prefect');
+insert into book_tag(book_id,tag_key,tag_value) values (7,3,'The Hitchhiker Guide to the Galaxy is a comedy science fiction series created by Douglas Adams. Originally a radio comedy broadcast on BBC Radio 4 in 1978, it was later adapted to other formats, including stage shows, novels, comic books, a 1981 TV series, a 1984 video game, and 2005 feature film.');
+
 insert into book(avaivable_no,rating,search_match) values(3,0,0);
+insert into book_tag(book_id,tag_key,tag_value) values (8,2,'Steppenwolf');
+insert into book_tag(book_id,tag_key,tag_value) values (8,1,'Hermann Hesse');
+insert into book_tag(book_id,tag_key,tag_value) values (8,4,'Harry Haller');
+insert into book_tag(book_id,tag_key,tag_value) values (8,3,'Steppenwolf is the tenth novel by German-Swiss author Hermann Hesse. Originally published in Germany in 1927, it was first translated into English in 1929. The novel was named after the German name for the steppe wolf');
+
 
 insert into member_wishlist(member_member_pkey, wishlist_id) values (1, 5);
 insert into member_wishlist(member_member_pkey, wishlist_id) values (1, 4);

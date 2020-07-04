@@ -75,12 +75,7 @@ public class TemplateController {
 			try {
 				String s = System.getProperty("user.dir");
 				s = s.substring(0, s.length() - 17);
-				System.out.println(
-						"***OPA: " + s + "drools-spring-kjar\\src\\main\\resources\\sbnz\\integracija\\template.drl");
-				// System.out.println(System.getProperty("user.dir") +
-				// "/drools-spring-kjar/src/main/resources/sbnz/integracija/template.drl");
-				// File file = new File(System.getProperty("user.dir") +
-				// "/drools-spring-kjar/src/main/resources/sbnz/integracija/template.drl");
+				
 				File file = new File(s + "drools-spring-kjar\\src\\main\\resources\\sbnz\\integracija\\template.drl");
 				FileWriter fwr = null;
 				fwr = new FileWriter(file, false);
