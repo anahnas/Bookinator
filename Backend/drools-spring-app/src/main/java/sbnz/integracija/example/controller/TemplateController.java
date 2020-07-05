@@ -42,11 +42,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @CrossOrigin(origins = "http://localhost:4200")
 public class TemplateController {
 
-	@Autowired
-	private SampleAppService service;
-
-	@Autowired
-	private MemberRepository memberRepo;
 
 	@PostMapping(value = "", consumes = APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> newRuleTemplate(@RequestBody TemplateDRLDTO drldto) throws IOException {
@@ -70,17 +65,12 @@ public class TemplateController {
 			ObjectDataCompiler converter = new ObjectDataCompiler();
 
 			String drl2 = converter.compile(dataProvider2, template);
-			System.out.println("IMA LI TE" + drl2);
+			System.out.println("***DRL FILE: " + drl2);
 
 			try {
 				String s = System.getProperty("user.dir");
 				s = s.substring(0, s.length() - 17);
-				System.out.println(
-						"***OPA: " + s + "drools-spring-kjar\\src\\main\\resources\\sbnz\\integracija\\template.drl");
-				// System.out.println(System.getProperty("user.dir") +
-				// "/drools-spring-kjar/src/main/resources/sbnz/integracija/template.drl");
-				// File file = new File(System.getProperty("user.dir") +
-				// "/drools-spring-kjar/src/main/resources/sbnz/integracija/template.drl");
+				
 				File file = new File(s + "drools-spring-kjar\\src\\main\\resources\\sbnz\\integracija\\template.drl");
 				FileWriter fwr = null;
 				fwr = new FileWriter(file, false);
@@ -89,13 +79,12 @@ public class TemplateController {
 				} finally {
 					if (fwr != null) {
 						fwr.close();
-						// IOUtils.closeQuietly(fwr);
 					}
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			KieSession ksession = createKieSessionFromDRL(drl2);
+			// KieSession ksession = createKieSessionFromDRL(drl2);
 
 		} catch (IOException e) {
 			System.out.println("***exception***");

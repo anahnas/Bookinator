@@ -235,18 +235,21 @@ public class UserController {
 	        return ResponseEntity.ok(bookRent.getMember());
 	}
 	
-	@RequestMapping(value = "/discount", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<?> membershipDiscount() {
+	@RequestMapping(value = "/discount/{id}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<?> membershipDiscount(@PathVariable("id") Long id) {
 		
-				Member m = this.sampleService.findMember(1L);
-				Member retVal = this.sampleService.setMembershipDiscount(m);		
+				//Member m = this.sampleService.findMember(1L);
+				/*List<Member> members = ;
+				for(Member m : members) {*/
+				Member retVal = this.sampleService.setMembershipDiscount(id);
+				
 				return new ResponseEntity<>(retVal,HttpStatus.ACCEPTED);
 	}
 	
-	@RequestMapping(value = "/memberCategory", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<?> MemberCategory() {
+	@RequestMapping(value = "/memberCategory/{id}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<?> MemberCategory(@PathVariable("id") Long id) {
 		
-				Member m = this.sampleService.findMember(1L);
+				Member m = this.sampleService.findMember(id);
 				Member retVal = this.sampleService.setMemberCategory(m);
 		
 				return new ResponseEntity<>(retVal, HttpStatus.ACCEPTED);

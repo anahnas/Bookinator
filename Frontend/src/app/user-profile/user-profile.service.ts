@@ -9,7 +9,7 @@ import { throwError } from 'rxjs';
 export class UserProfileService{
 
     private _whoamiUrl = 'http://localhost:8080/whoami';
-    private _discountUrl = 'http://localhost:8080/discount'
+    private _discountUrl = 'http://localhost:8080/discount/'
     constructor(private _http: HttpClient){ }
 
 
@@ -17,10 +17,11 @@ export class UserProfileService{
         return this._http.post<User>(this._whoamiUrl, user).pipe(
                     catchError(this.handleError));
     }
-    getDiscount() {
-        return this._http.get(this._discountUrl).pipe(
+    getDiscount(id: number) {
+        return this._http.get(this._discountUrl + id).pipe(
             catchError(this.handleError));
     }
+
 
 
     private handleError(err: HttpErrorResponse){
