@@ -21,9 +21,9 @@ agenda-group "wrongTagRules"
         	Tag($t:this, this memberOf $tags) from $wrongTags,
         	count($t)
         ) 
-        not(
-        	Tag($date: datePosted, $date.isAfter(LocalDate.now().minusDays(60)) from $t
-        )
+        //not(
+        	//Tag($date: datePosted, $date.isAfter(LocalDate.now().minusDays(60)) from $t
+       // )
     then
     	System.out.println("Wrong tags: " + $value + "/" + $tags.size());
     	drools.getEntryPoint("wrong-tags").insert($value);

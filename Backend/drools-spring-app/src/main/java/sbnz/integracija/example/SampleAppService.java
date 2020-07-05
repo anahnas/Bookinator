@@ -747,8 +747,6 @@ public class SampleAppService {
 	}
 
 	public HashMap<Long, Integer> recommendFromWishlist() {
-		ArrayList<BookDTO> bookDTOs = new ArrayList<>();
-
 		MemberlistDTO memberlistDTO = new MemberlistDTO();
 		memberlistDTO.setMembers(this.memberRepo.findAll());
 

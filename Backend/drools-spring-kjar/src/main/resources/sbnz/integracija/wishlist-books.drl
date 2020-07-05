@@ -42,7 +42,7 @@ agenda-group "wishlistRecommendRules"
 				} else {
 					$occurences.put($b.getId(), 1);
 				}
-				System.out.println("occurences: " + $occurences.size());
+				System.out.println("occurences: " + $occurences.size() + " for book id " + $b.getId());
 			   ),
                result($occurences)
                
