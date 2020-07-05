@@ -2,24 +2,36 @@
     <div class="inner">
         <div class="content">
             <h2>Profile</h2>
+            <h4 style="font-weight: bold;">Category - {{cathegory}} </h4>
                 <form name="userForm">
                     <div class="row gtr-uniform">
                         <div class="col-6 col-12-xsmall">
                             <label>First name</label>
-                            <input type="text" [(ngModel)] = "firstName" name="firstName" value= "{{firstName}}">
+                            <input type="text" [(ngModel)] = "firstName" name="firstName" value= "{{firstName}}" readonly>
                         </div>
                         <div class="col-6 col-12-xsmall">
                             <label>Last name</label>
-                            <input type="text" [(ngModel)] = "lastName" name="lastName" value= "{{lastName}}">
+                            <input type="text" [(ngModel)] = "lastName" name="lastName" value= "{{lastName}}" readonly>
                         </div>
                         <div class="col-6 col-12-xsmall">
                             <label>Username</label>
-                            <input type="text" [(ngModel)] = "username" name="username" value= "{{username}}">
+                            <input type="text" [(ngModel)] = "username" name="username" value= "{{username}}" readonly>
                         </div>
                         <div class="col-6 col-12-xsmall">
                             <label>Email</label>
-                            <input type="email" [(ngModel)] = "email" name="email" value= "{{email}}">
+                            <input type="email" [(ngModel)] = "email" name="email" value= "{{email}}" readonly>
                         </div>
+                        <div class="col-6 col-12-xsmall">
+                            <label>Membership in $</label>
+                            <input id="a" type="text" [(ngModel)] = "membership" name="membership" value= "{{membership}}" readonly> 
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <label>Discount in %</label>
+                            <input id = "b" type="text" [(ngModel)] = "discount" name="discount" value= "{{discount}}" readonly >
+                            <output name="$" for="a b" value="$"></output>
+
+                        </div>
+
                        
                         
                         

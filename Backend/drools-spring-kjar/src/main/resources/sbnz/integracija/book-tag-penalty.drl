@@ -6,7 +6,7 @@ package integracija
 import sbnz.integracija.example.facts.Member;
 import sbnz.integracija.example.facts.Tag;
 import DTO.TagListDTO;
-
+import java.time.LocalDate;
 
 query "getWrongTags"
     $result: Integer() from entry-point "wrong-tags"
@@ -17,9 +17,12 @@ agenda-group "wrongTagRules"
     when
         $taglist: TagListDTO($tags: tags) from entry-point "wrong-tags"
         $m: Member( $wrongTags: wrongTags) from entry-point "wrong-tags"
-        Number($value: intValue >= 0) from accumulate(
+        Number($value: intValue >= 3) from accumulate(
         	Tag($t:this, this memberOf $tags) from $wrongTags,
         	count($t)
+        ) 
+        not(
+        	Tag($date: datePosted, $date.isAfter(LocalDate.now().minusDays(60)) from $t
         )
     then
     	System.out.println("Wrong tags: " + $value + "/" + $tags.size());

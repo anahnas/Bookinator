@@ -20,6 +20,8 @@ export class UserProfileComponent implements OnInit {
   username:String;
   email:String;
   discount:number;
+  membership:number;
+  cathegory:string;
 
   booksHistory : Book [] = [];
   bookLoans : any[] = [];
@@ -41,6 +43,8 @@ export class UserProfileComponent implements OnInit {
     this.username = this.loggedInUser.username;
     this.email = this.loggedInUser.email;
     this.discount = this.loggedInUser.discount;
+    this.membership = this.loggedInUser.membership;
+    this.cathegory = this.loggedInUser.cathegory;
     this.getBookHistory();
     this.getWishlist();
     this.getSimilarUsers();

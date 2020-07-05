@@ -11,15 +11,19 @@ import sbnz.integracija.example.facts.Member;
 
 rule "Discount 10%"
 	agenda-group "membership-discount"
-	lock-on-active true
-
+	no-loop
     when
     
-        $m: Member(rented >= 10, membership: membership, discount: discount)
+        $m: Member($history: history, $membership: membership, $discount: discount) from entry-point "discount"
+        Number($value: intValue >= 1) from accumulate(
+        	BookRent($br:this) from $history,
+        	count($br)
+        ) 
     then
-        modify($m){setDiscount(membership*0.1);}
-        discount = $m.getDiscount();
-        modify($m){setMembership(membership-discount);}
+    	System.out.println("****VALUE: " + $value);
+        modify($m){setDiscount($membership*0.1);}
+        $discount = $m.getDiscount();
+        modify($m){setMembership($membership-$discount);}
         System.out.println("*******DISCOUNT*********" + $m.getDiscount() + "\n*********MEMBERSHIP*********" + $m.getMembership());
 
 end

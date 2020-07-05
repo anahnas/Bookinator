@@ -30,7 +30,7 @@ public class Member extends User implements Serializable{
 	@Column
 	private BookLoan loan;
 	@OneToMany
-	private Set<BookLoan> history;
+	private Set<BookRent> history = new HashSet<BookRent>();
 	@ManyToMany
 	private Set<Book> wishlist = new HashSet<>();
 	@Column
@@ -89,7 +89,7 @@ public class Member extends User implements Serializable{
 	
 	
 	public Member(String username, String password, Long id, Date joinDate, Penalty penalty,
-			BookLoan loan, Set<BookLoan> history, sbnz.integracija.example.facts.Member.cathegory cathegory,
+			BookLoan loan, Set<BookRent> history, sbnz.integracija.example.facts.Member.cathegory cathegory,
 			boolean banned, Integer rented) {
 		super(username, password, id);
 		this.joinDate = joinDate;
@@ -102,7 +102,7 @@ public class Member extends User implements Serializable{
 	}
 	
 	public Member(String username, String password, String firstName, String lastName, String email, RoleEnum userType,
-			Date joinDate, boolean membershipExpired, Penalty penalty, BookLoan loan, Set<BookLoan> history,
+			Date joinDate, boolean membershipExpired, Penalty penalty, BookLoan loan, Set<BookRent> history,
 			sbnz.integracija.example.facts.Member.cathegory cathegory, boolean banned, Date banExpiry,  Set<Tag> wrongTags,
 			Set<Discount> discounts, Set<Book> wishlist, Integer rented) {
 				
@@ -148,10 +148,10 @@ public class Member extends User implements Serializable{
 	public void setLoan(BookLoan loan) {
 		this.loan = loan;
 	}
-	public Set<BookLoan> getHistory() {
+	public Set<BookRent> getHistory() {
 		return history;
 	}
-	public void setHistory(Set<BookLoan> history) {
+	public void setHistory(Set<BookRent> history) {
 		this.history = history;
 	}
 	public cathegory getCathegory() {

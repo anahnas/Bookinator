@@ -102,7 +102,7 @@ public class SampleAppService {
 
 	@Autowired
 	KieContainer kieContainer;
-	
+
 	@Autowired
 	BookRentRepository bookRentRepository;
 
@@ -275,7 +275,7 @@ public class SampleAppService {
 		for (BookTag bookTag : bookTags) {
 			kSession.getEntryPoint("search").insert(bookTag);
 		}
-		
+
 		for (Object o : searchRequestDTO.getSearchCriteria().values()) {
 			System.out.println(o.getClass());
 		}
@@ -340,24 +340,32 @@ public class SampleAppService {
 	}
 
 	public boolean makeBookLoan(Long userId, Long bookId) {
-	
+
 		Member member = this.memberRepo.getOne(userId);
-		if(!member.isCanRent())
+		if (!member.isCanRent())
 			return false;
 		Book book = this.bookRepository.getOne(bookId);
-		book.setAvaivableNo(book.getAvaivableNo()-1);
+		book.setAvaivableNo(book.getAvaivableNo() - 1);
+		bookRepository.save(book);
 
 		BookLoan bookLoan = new BookLoan();
 		bookLoan.setReturned(false);
 		bookLoan.setBookId(book.getId());
 		bookLoan.setUserId(userId);
 		bookLoanRepository.save(bookLoan);
+
+		bookRepository.save(book);
+
+		BookRent bookRent = new BookRent();
+		bookRent.setMember(member);
+		bookRent.setBook(book);
+
+		bookRent = save(bookRent);
+
 		member.setLoan(bookLoan);
 		member.setCanRent(false);
 		memberRepo.save(member);
-		
-		bookRepository.save(book);
-		
+
 		System.out.println("Initializing book loan rule...............................");
 
 		KieServices ks = KieServices.Factory.get();
@@ -384,7 +392,7 @@ public class SampleAppService {
 						BookLoanExpiredEvent b = (BookLoanExpiredEvent) o;
 
 						System.out.println("book loan - " + b.getBookLoanId());
-						
+
 						BookLoan bl = bookLoanRepository.getOne(b.getBookLoanId());
 						bl.setExpired(true);
 						bookLoanRepository.save(bl);
@@ -426,12 +434,12 @@ public class SampleAppService {
 				BookLoan bl = bookLoanRepository.getOne(blId);
 				Member m = memberRepo.getOne(uId);
 				Penalty penalty = m.getPenalty();
-				if(penalty == null) {
+				if (penalty == null) {
 					penalty = new Penalty();
 				}
-				while(isBookLoanExpired(blId)) {
+				while (isBookLoanExpired(blId)) {
 					kSession1.fireUntilHalt();
-					
+
 					Collection<?> newEvents = kSession1.getObjects(new ClassObjectFilter(PenaltyEvent.class));
 					for (Object o : newEvents) {
 						if (o instanceof PenaltyEvent) {
@@ -472,7 +480,7 @@ public class SampleAppService {
 	public void returnBookLoan(Long id) {
 		BookLoan bookLoan = this.bookLoanRepository.getOne(id);
 		Book book = this.bookRepository.getOne(bookLoan.getBookId());
-		book.setAvaivableNo(book.getAvaivableNo()+1);
+		book.setAvaivableNo(book.getAvaivableNo() + 1);
 		bookRepository.save(book);
 		Member member = this.memberRepo.getOne(bookLoan.getUserId());
 		System.out.println(member.getUsername() + " returned book with id: " + bookLoan.getBookId());
@@ -481,6 +489,7 @@ public class SampleAppService {
 		bookLoan.setExpired(false);
 		bookLoanRepository.save(bookLoan);
 		member.setCanRent(true);
+		setMembershipDiscount(member.getId());
 		memberRepo.save(member);
 	}
 
@@ -549,7 +558,7 @@ public class SampleAppService {
 	public List<Tag> findTags() {
 		return tagRepo.findTags();
 	}
-	
+
 	public ArrayList<BookRecommendDTO> getRecommendedBooks(Long uId) {
 
 		System.out.println("Recommendation initiated");
@@ -701,13 +710,12 @@ public class SampleAppService {
 		return bookDTOs;
 	}
 
-
 	public Member usersWithSimilarWishlists(Long uId) {
 		Member m = this.memberRepo.getOne(uId);
 
 		MemberlistDTO memberlistDTO = new MemberlistDTO();
 		memberlistDTO.setMembers(this.memberRepo.findAll());
-		
+
 		KieServices ks = KieServices.Factory.get();
 		KieBaseConfiguration kbconf = ks.newKieBaseConfiguration();
 		kbconf.setOption(EventProcessingOption.STREAM);
@@ -716,11 +724,11 @@ public class SampleAppService {
 		KieSession kSession = kbase.newKieSession();
 
 		kSession.getEntryPoint("similar-wishlists").insert(uId);
-		for(Member member : memberlistDTO.getMembers()) {
+		for (Member member : memberlistDTO.getMembers()) {
 			kSession.getEntryPoint("similar-wishlists").insert(member);
 		}
-		//kSession.getEntryPoint("similar-wishlists").insert(memberlistDTO);
-	
+		// kSession.getEntryPoint("similar-wishlists").insert(memberlistDTO);
+
 		kSession.getAgenda().getAgendaGroup("wishlistSimilarityRules").setFocus();
 
 		kSession.fireAllRules();
@@ -731,17 +739,16 @@ public class SampleAppService {
 		for (QueryResultsRow row : results) {
 			similarMember = (Member) row.get("$result");
 		}
-		for(Member mem : memberlistDTO2.getMembers()) {
+		for (Member mem : memberlistDTO2.getMembers()) {
 			System.out.println(mem.getUsername());
 		}
 		similarMember = memberRepo.findByUsername(similarMember.getUsername());
 		return similarMember;
 	}
-	
-	
+
 	public HashMap<Long, Integer> recommendFromWishlist() {
 		ArrayList<BookDTO> bookDTOs = new ArrayList<>();
-		
+
 		MemberlistDTO memberlistDTO = new MemberlistDTO();
 		memberlistDTO.setMembers(this.memberRepo.findAll());
 
@@ -753,7 +760,7 @@ public class SampleAppService {
 		KieSession kSession = kbase.newKieSession();
 
 		kSession.getEntryPoint("wishlist-recommend").insert(memberlistDTO);
-	
+
 		kSession.getAgenda().getAgendaGroup("wishlistRecommendRules").setFocus();
 
 		kSession.fireAllRules();
@@ -765,7 +772,7 @@ public class SampleAppService {
 
 		return occurences;
 	}
-	
+
 	public BookDTO getBook(Long id) {
 		Book book = this.bookRepository.getOne(id);
 		BookDTO bDTO = new BookDTO(book);
@@ -773,79 +780,62 @@ public class SampleAppService {
 		bDTO.setTags(tags);
 		return bDTO;
 	}
-	
-	 public BookRent save(BookRent bookRent){
-		 	KieServices ks = KieServices.Factory.get();
-			KieBaseConfiguration kbconf = ks.newKieBaseConfiguration();
-			kbconf.setOption(EventProcessingOption.STREAM);
-			KieBase kbase = kieContainer.newKieBase(kbconf);
-			KieSession kSession = kbase.newKieSession();	
-	       
-	    
-	        double maxRented = 1.0;
-	        for(Member m: memberRepo.findAll()){
-	            if(maxRented < m.getRented()){
-	                maxRented = m.getRented();
-	            }
-	        }
 
-	        kSession.setGlobal("maxRented", maxRented);
-	        kSession.getAgenda().getAgendaGroup("rented-books").setFocus();
-	        kSession.insert(bookRent);
+	public BookRent save(BookRent bookRent) {
+		KieServices ks = KieServices.Factory.get();
+		KieBaseConfiguration kbconf = ks.newKieBaseConfiguration();
+		kbconf.setOption(EventProcessingOption.STREAM);
+		KieBase kbase = kieContainer.newKieBase(kbconf);
+		KieSession kSession = kbase.newKieSession();
 
-	        Member member = memberRepo.getOne(bookRent.getMember().getId());
-	        System.out.println("*** id of member who rented a book: " + bookRent.getMember().getId() );
-	        memberRepo.save(member);
-	        
+		kSession.getAgenda().getAgendaGroup("rented-books").setFocus();
+		kSession.insert(bookRent);
 
-	        bookRentRepository.save(bookRent);
-	        
-	        /*if(bookRent.getMember().getRented() >= maxRented){
-	            maxRented = bookRent.getMember().getRented();
-	            kSession.setGlobal("maxRented", maxRented);
+		Member member = memberRepo.getOne(bookRent.getMember().getId());
+		System.out.println("*** id of member who rented a book: " + bookRent.getMember().getId());
 
-	            kSession.getAgenda().getAgendaGroup("member-frequency").setFocus();
+		kSession.insert(member);
+		kSession.fireAllRules();
 
-	            List<Member> memberList = memberRepo.findAll();
-	            for(Member m: memberList){
-	                kSession.insert(m);
-	            }*/
+		bookRentRepository.save(bookRent);
 
-	            kSession.fireAllRules();
+		memberRepo.save(member);
 
-	           /* for(Member m : memberList) {
-	                memberRepo.save(m);
-	            }
-	        }*/
-	        return bookRent;
+		return bookRent;
 
-	    }
+	}
 
 	public Member findMember(Long userId) {
 		Member m = memberRepo.getOne(userId);
 		return m;
 	}
+
 	public Book findBook(Long bookId) {
 		Book b = bookRepository.getOne(bookId);
 		return b;
 	}
-	
-	public Member setMembershipDiscount(Member m) {
-		// Member m = memberRepo.getOne(1L);
+
+	public Member setMembershipDiscount(Long id) {
+		Member m = memberRepo.getOne(id);
+		// List<Member> members = memberRepo.findAll();
+		// for (Member m : members) {
 		KieServices ks = KieServices.Factory.get();
 		KieBaseConfiguration kbconf = ks.newKieBaseConfiguration();
 		kbconf.setOption(EventProcessingOption.STREAM);
 		KieBase kbase = kieContainer.newKieBase(kbconf);
-		KieSession kSession = kbase.newKieSession();	
-		kSession.insert(m);
+		KieSession kSession = kbase.newKieSession();
+		kSession.getEntryPoint("discount").insert(m);
+
+		// kSession.insert(m);
 		kSession.getAgenda().getAgendaGroup("membership-discount").setFocus();
 		kSession.fireAllRules();
 		kSession.dispose();
 		this.memberRepo.save(m);
-		return m;
-		
+		// }
+		return this.memberRepo.getOne(id);
+
 	}
-	
+
 	public Member setMemberCategory(Member m) {
 
 		KieServices ks = KieServices.Factory.get();
@@ -855,14 +845,14 @@ public class SampleAppService {
 
 		KieSession kSession = kbase.newKieSession();
 		List<BookRent> rented = bookRentRepository.findAll();
-		for(BookRent br : rented) {
+		for (BookRent br : rented) {
 			kSession.insert(br);
 		}
 		kSession.insert(m);
 		kSession.getAgenda().getAgendaGroup("template").setFocus();
 		kSession.fireAllRules();
 		kSession.dispose();
-		
+
 		memberRepo.save(m);
 		System.out.println("***Category: " + m.getCathegory());
 		return m;
@@ -870,15 +860,15 @@ public class SampleAppService {
 
 	public int checkWrongTags(Long uId) {
 		int retVal = 0;
-		
+
 		Member member = this.memberRepo.getOne(uId);
-		for(Tag t: member.getWrongTags()) {
+		for (Tag t : member.getWrongTags()) {
 			System.out.println(t);
 		}
 		TagListDTO tagListDTO = new TagListDTO();
 		tagListDTO.setTags((ArrayList<Tag>) this.tagRepo.findAll());
-		for(Tag t: tagListDTO.getTags()) {
-			if(t.getTagName().equals("deaths"))
+		for (Tag t : tagListDTO.getTags()) {
+			if (t.getTagName().equals("deaths"))
 				System.out.println(t);
 		}
 		KieServices ks = KieServices.Factory.get();
@@ -887,22 +877,22 @@ public class SampleAppService {
 		KieBase kbase = kieContainer.newKieBase(kbconf);
 
 		KieSession kSession = kbase.newKieSession();
-		
+
 		kSession.getEntryPoint("wrong-tags").insert(member);
 
 		kSession.getEntryPoint("wrong-tags").insert(tagListDTO);
-	
+
 		kSession.getAgenda().getAgendaGroup("wrongTagRules").setFocus();
-		
+
 		kSession.fireAllRules();
 
 		QueryResults results = kSession.getQueryResults("getWrongTags");
-		
+
 		for (QueryResultsRow row : results) {
 			retVal = (int) row.get("$result");
 		}
-		
+
 		return retVal;
 	}
-	
+
 }

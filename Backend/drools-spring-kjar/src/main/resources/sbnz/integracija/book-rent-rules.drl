@@ -4,6 +4,8 @@ package integracija
 //list any import classes here.
 import sbnz.integracija.example.facts.Member;
 import sbnz.integracija.example.facts.BookRent;
+import java.util.Set;
+
 
 
 //declare any global variables here
@@ -14,10 +16,13 @@ global Double maxRented
 rule "book-rent-increment"
     agenda-group "rented-books"
     when
-        $br: BookRent($member: member)
+        $br: BookRent($member: member) and
+        Member(canRent == true) from $member
     then
-        $member.setRented($member.getRented() + 1);
-        System.out.println("****BOOK RENT TIMES: " + $member.getRented());
+    	modify($member) {setRented($member.getRented() + 1)}
+    	modify($member) { getHistory().add($br)}
+        
+        System.out.println("***Book history: " + $member.getHistory().size());
 end
 
 //rule "member-frequency-in-renting"

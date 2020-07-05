@@ -25,19 +25,18 @@ agenda-group "wishlistRecommendRules"
 	when
         $memberlist: MemberlistDTO($members: members) from entry-point "wishlist-recommend"
         
-        $books: List( size >= 0 ) from accumulate ( 
+        $books: List( size > 0 ) from accumulate ( 
         $member: Member( $wishlist: wishlist ) from $members
         and
         $book: Book( avaivableNo == 0 ) from $wishlist,
         collectList( $book )
     	)
     	
-        eval($books.size() >= 0)
+        eval($books.size() > 0)
     	
 		$list: HashMap() from accumulate ($b: Book( ) from $books, 
                init(HashMap<Long, Integer> $occurences = new HashMap();)
                action( 
-				System.out.println("Hi");
 				if($occurences.containsKey($b.getId())) {
 					$occurences.replace($b.getId(), $occurences.get($b.getId()), $occurences.get($b.getId()) + 1);
 				} else {

@@ -91,6 +91,13 @@ insert into tag(tag_name, tag_approved) values ('deaths', false);
 insert into book_tag(book_id,tag_key,tag_value) values (5,6,'Main character');
 insert into member_wrong_tags(member_member_pkey, wrong_tags_id) values (1, 6);
 
+insert into tag(tag_name, tag_approved) values ('deaths', false);
+insert into book_tag(book_id,tag_key,tag_value) values (3,7,'Main character');
+insert into member_wrong_tags(member_member_pkey, wrong_tags_id) values (1, 7);
+
+insert into tag(tag_name, tag_approved) values ('deaths', false);
+insert into book_tag(book_id,tag_key,tag_value) values (1,8,'Main character');
+insert into member_wrong_tags(member_member_pkey, wrong_tags_id) values (1, 8);
 
 insert into book_rating values(1,1,1);
 insert into book_rating values(2,1,2);
